@@ -1,0 +1,14 @@
+Git reset http://stackoverflow.com/questions/9683279/how-do-i-remove-all-version-history-for-a-git-github-repository
+
+Step 1: remove all history
+
+rm -rf .git
+Step 2: reconstruct the Git repo with only the current content
+
+git init
+git add .
+git commit -m "Initial commit"
+Step 3: push to GitHub.
+
+git remote add origin https://github.com/Wikzo/P6_CouchGaming
+git push -u --force origin master
