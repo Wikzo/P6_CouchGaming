@@ -12,3 +12,7 @@ Step 3: push to GitHub.
 
 git remote add origin https://github.com/Wikzo/P6_CouchGaming
 git push -u --force origin master
+
+
+// garbage trigger...
+git gc
