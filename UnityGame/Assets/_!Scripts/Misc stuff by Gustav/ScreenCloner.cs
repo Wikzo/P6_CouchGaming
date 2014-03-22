@@ -78,7 +78,11 @@ public class ScreenCloner : MonoBehaviour
 
         // show clone
         if (OnlyScreenWrapNoClone)
+        {
+            if (Clone != null)
+                Clone.transform.position = transform.position;
             return;
+        }
 
         standingAtScreenEdgeRightNow = false; // default = clone follows
 

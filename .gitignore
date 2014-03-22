@@ -7,4 +7,9 @@
 *.unityproj
 *.sln
 *.exe
-Log_*
+*.svd
+*.pidb
+*.suo
+*.user
+_Logs*
+_Builds*

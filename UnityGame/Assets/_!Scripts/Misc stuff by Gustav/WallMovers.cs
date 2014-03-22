@@ -4,7 +4,7 @@ using XInputDotNetPure;
 
 public class WallMovers : MonoBehaviour
 {
-    Vector3 speed = new Vector3(-1, 0, 0);
+    private float speed = 5f;
     private GamePadState state;
 
 
@@ -12,11 +12,13 @@ public class WallMovers : MonoBehaviour
     {
         state = GamePad.GetState(PlayerIndex.One);
 
-        if (state.Triggers.Right > 0.2f)
-            transform.Translate(-speed * Time.deltaTime);
-        else if (state.Triggers.Left > 0.2f)
-            transform.Translate(Vector3.down * 3 * Time.deltaTime);
-        else
-            transform.Translate(speed * Time.deltaTime);
+        if (state.Triggers.Right > 0.2f && state.Triggers.Left > 0.2f) // move downwards
+            transform.Translate(Vector3.down * speed * state.Triggers.Right * Time.deltaTime);
+        else if (state.Triggers.Right > 0.2f) // move right
+            transform.Translate(Vector3.right * speed * state.Triggers.Right * Time.deltaTime);
+        else if (state.Triggers.Left > 0.2f) // move left
+            transform.Translate(Vector3.left * speed * state.Triggers.Left * Time.deltaTime);
+        
+
     }
 }
