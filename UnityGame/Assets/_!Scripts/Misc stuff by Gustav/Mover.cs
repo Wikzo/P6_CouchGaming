@@ -41,6 +41,28 @@ public class Mover : MonoBehaviour
                 rigidbody2D.AddForce(Vector2.up * 500);
         }
 
+        if (state.Buttons.RightShoulder == ButtonState.Pressed && prevState.Buttons.RightShoulder == ButtonState.Released)
+        {
+            print("force");
+            prevState = state;
+
+            // from http://answers.unity3d.com/questions/574864/rigidbody2d-and-forcemodeaddvelocity.html
+            // http://docs.unity3d.com/Documentation/ScriptReference/ForceMode.html
+
+            Vector2 v = new Vector2(inputX, inputY);
+            v.Normalize();
+            
+            // impulse
+            //rigidbody2D.AddForce(v * 5 / Time.fixedDeltaTime);
+
+
+            // velocity change
+            rigidbody2D.AddForce(v * 50 * rigidbody2D.mass / Time.fixedDeltaTime);
+
+            print(v * 50 * rigidbody2D.mass / Time.fixedDeltaTime);
+
+        }
+
         prevState = state;
 
     }
@@ -61,6 +83,14 @@ public class Mover : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "floor")
+        {
+            isGrounded = true;
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D col)
     {
         if (col.gameObject.tag == "floor")
         {
