@@ -36,5 +36,9 @@ public class ObjectiveControl : MonoBehaviour {
 		{
 			objFour.GetComponent<MeshRenderer>().enabled = !objFour.GetComponent<MeshRenderer>().enabled;
 		}
+		if(Input.GetKeyDown(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
 	}
 }

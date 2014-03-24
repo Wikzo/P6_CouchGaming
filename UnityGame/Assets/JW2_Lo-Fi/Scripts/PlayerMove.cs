@@ -40,7 +40,8 @@ public class PlayerMove : MonoBehaviour
 
 		if(currentState.Triggers.Right == 1)
 		{
-			pTran.Translate(Vector3.up*Time.deltaTime*6, Space.World);
+			//pTran.Translate(Vector3.up*Time.deltaTime*6, Space.World);
+			rigidbody.AddForce(Vector2.up * 50);
 		}
 	}
 }
