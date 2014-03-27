@@ -6,9 +6,9 @@ public class MissionKill : MissionBase
     // specific KillMission fields
     private bool targetWasAliveWhenMissionBegan;
 
-    public override void InitializeMission(GameObject player, GameObject target)
+    public override void InitializeMission(GameObject player, GameObject target, MissionBase Template)
     {
-        base.InitializeMission(player, target);
+        base.InitializeMission(player, target, Template);
         
         if (target != null)
             targetWasAliveWhenMissionBegan = true;

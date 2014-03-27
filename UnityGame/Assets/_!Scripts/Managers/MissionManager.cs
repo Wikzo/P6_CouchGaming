@@ -4,8 +4,9 @@ using System.Collections;
 
 public class MissionManager : MonoBehaviour
 {
-    public MissionBase[] AvailableMissions;
-    public MissionBase[] ChosenMissions;
+    public MissionBase[] MissionPool;
+    [HideInInspector] public MissionBase[] ChosenMissions; // templates
+    [HideInInspector] public MissionBase[] InstantiatedMissions; // actual missions on players
 
     public GameObject[] Players;
     public GameObject[] Targets;
@@ -14,9 +15,10 @@ public class MissionManager : MonoBehaviour
     private void Start()
     {
         ChosenMissions = new MissionBase[4];
+        InstantiatedMissions = new MissionBase[4];
         
         // choose from set
-        /*ChosenMissions = ChooseMissionsFromSet(4, AvailableMissions);
+        /*ChosenMissions = ChooseMissionsFromSet(4, MissionPool);
         for (int i = 0; i < 4; i++)
         {
             ChosenMissions[i].InitializeMission(Players[i], Targets[i]);            
@@ -25,12 +27,23 @@ public class MissionManager : MonoBehaviour
         // choose randomly
         for (int i = 0; i < 4; i++)
         {
-            ChosenMissions[i] = ChooseRandomMission(AvailableMissions);
-            ChosenMissions[i].InitializeMission(Players[i], Targets[i]);
+            ChosenMissions[i] = ChooseRandomMission(MissionPool);
+
+            string scriptName = ChosenMissions[i].ToString();
+            Players[i].AddComponent(scriptName);
+            Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], Targets[i], ChosenMissions[i]);
+            InstantiatedMissions[i] = Players[i].GetComponent<MissionBase>();
         }
 
-        ChosenMissions[1].name = ChosenMissions[1].ToString();
+    }
 
+    void Update()
+    {
+        foreach (MissionBase m in InstantiatedMissions)
+        {
+            if (m.MissionAccomplished())
+                Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+        }
     }
 
     void ShuffleMissions(MissionBase[] missions)

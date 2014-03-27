@@ -85,6 +85,7 @@ GameObject:
   - 33: {fileID: 10212257}
   - 65: {fileID: 10212256}
   - 23: {fileID: 10212255}
+  - 114: {fileID: 10212259}
   m_Layer: 0
   m_Name: Target3
   m_TagString: Untagged
@@ -143,6 +144,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &10212259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10212254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 0
+  Id: 0
+  IsAlive: 1
 --- !u!1 &83409964
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +199,6 @@ MonoBehaviour:
   Score: 0
   Id: 0
   IsAlive: 0
-  MyMission: {fileID: 0}
 --- !u!1 &107133772
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +210,7 @@ GameObject:
   - 33: {fileID: 107133775}
   - 65: {fileID: 107133774}
   - 23: {fileID: 107133773}
+  - 114: {fileID: 107133777}
   m_Layer: 0
   m_Name: Target1
   m_TagString: Untagged
@@ -254,6 +269,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &107133777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 107133772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 0
+  Id: 0
+  IsAlive: 1
 --- !u!1 &177646113
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +338,7 @@ GameObject:
   - 33: {fileID: 357390566}
   - 65: {fileID: 357390565}
   - 23: {fileID: 357390564}
+  - 114: {fileID: 357390568}
   m_Layer: 0
   m_Name: Target4
   m_TagString: Untagged
@@ -367,6 +397,20 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &357390568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 357390563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 0
+  Id: 0
+  IsAlive: 1
 --- !u!1 &453361671
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,12 +438,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fea511f1cbbb7a4ba6de20ccc597f20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AvailableMissions:
+  MissionPool:
   - {fileID: 941274200}
   - {fileID: 605391744}
   - {fileID: 2117821204}
   - {fileID: 1065852326}
   ChosenMissions: []
+  InstantiatedMissions: []
   Players:
   - {fileID: 454680988}
   - {fileID: 83409964}
@@ -451,7 +496,6 @@ MonoBehaviour:
   Score: 0
   Id: 0
   IsAlive: 0
-  MyMission: {fileID: 0}
 --- !u!4 &454680990
 Transform:
   m_ObjectHideFlags: 0
@@ -495,9 +539,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   Target: {fileID: 0}
   MissionType: 2
-  text: 
-  name: 
-  PPtr<Object>: {fileID: 0}
+  TargetBase: {fileID: 1279730079}
 --- !u!4 &605391745
 Transform:
   m_ObjectHideFlags: 0
@@ -552,8 +594,6 @@ MonoBehaviour:
   Player: {fileID: 0}
   Target: {fileID: 0}
   MissionType: 0
-  text: 
-  name: 
 --- !u!1 &1065852325
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,13 +621,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c91c03ed88b695419e51ff116edf898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 10
+  Points: 2
   MissionIsActive: 0
   Player: {fileID: 0}
   Target: {fileID: 0}
-  MissionType: 0
-  text: 
-  name: 
+  MissionType: 1
 --- !u!4 &1065852328
 Transform:
   m_ObjectHideFlags: 0
@@ -610,6 +648,7 @@ GameObject:
   - 33: {fileID: 1170261573}
   - 65: {fileID: 1170261572}
   - 23: {fileID: 1170261571}
+  - 114: {fileID: 1170261575}
   m_Layer: 0
   m_Name: Target2
   m_TagString: Untagged
@@ -668,6 +707,89 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!114 &1170261575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1170261570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Score: 0
+  Id: 0
+  IsAlive: 1
+--- !u!1 &1279730079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1279730083}
+  - 33: {fileID: 1279730082}
+  - 65: {fileID: 1279730081}
+  - 23: {fileID: 1279730080}
+  m_Layer: 0
+  m_Name: TargetBase_testTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1279730080
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1279730079}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!65 &1279730081
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1279730079}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1279730082
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1279730079}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1279730083
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1279730079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.32778072, y: 1.50269175, z: -3.71173573}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1288712605
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,7 +820,6 @@ MonoBehaviour:
   Score: 0
   Id: 0
   IsAlive: 0
-  MyMission: {fileID: 0}
 --- !u!4 &1288712607
 Transform:
   m_ObjectHideFlags: 0
@@ -740,7 +861,6 @@ MonoBehaviour:
   Score: 0
   Id: 0
   IsAlive: 0
-  MyMission: {fileID: 0}
 --- !u!4 &1449901423
 Transform:
   m_ObjectHideFlags: 0
@@ -841,7 +961,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2016019857}
   m_Layer: 0
-  m_Name: _Missions
+  m_Name: _MissionTemplates
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -900,10 +1020,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec3a90ed372322408a035c0482bc495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 10
+  Points: 15
   MissionIsActive: 0
   Player: {fileID: 0}
   Target: {fileID: 0}
   MissionType: 0
-  text: 
-  name: 

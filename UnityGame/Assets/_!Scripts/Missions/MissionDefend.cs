@@ -8,7 +8,7 @@ public class MissionDefend : MissionBase
     public override bool MissionAccomplished()
     {
         if (!Target.GetComponent<Player>().IsAlive)
-            return false;
+            return true;
 
         return false;
     }

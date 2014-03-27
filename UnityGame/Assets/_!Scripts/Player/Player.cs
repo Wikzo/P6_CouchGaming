@@ -7,7 +7,6 @@ public class Player : MonoBehaviour {
 	public int Score;
 	public int Id;
 	public bool IsAlive;
-    public MissionBase MyMission;
 
 	//public PlayerIndex ControllerNum;
 
@@ -24,11 +23,6 @@ public class Player : MonoBehaviour {
 		//else if(Id == 3)
 		//	ControllerNum = PlayerIndex.Four;
 	}
-
-    public void TestIvoke(MissionBase m)
-    {
-        m.text += transform.name;
-    }
 	
 	// Update is called once per frame
 	void Update () 
