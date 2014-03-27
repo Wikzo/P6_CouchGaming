@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 // Required in C#
 
-public class Player
+public class PlayerRumble
 {
     // fields
     public PlayerIndex index;
@@ -26,7 +26,7 @@ public class Player
     private bool ButtonUp;
 
     // constructor
-    public Player(int index)
+    public PlayerRumble(int index)
     {
         switch (index)
         {
@@ -132,7 +132,7 @@ public class Player
 
 public class RandomRumble : MonoBehaviour
 {
-    private List<Player> Players;
+    private List<PlayerRumble> Players;
     private GameObject textObject;
     private string controllers;
 
@@ -144,11 +144,11 @@ public class RandomRumble : MonoBehaviour
         textObject = GameObject.Find("textObject");
         LoggingManager.CreateTextFile();
 
-        Players = new List<Player>(4);
+        Players = new List<PlayerRumble>(4);
 
         for (int i = 1; i < 5; i++)
         {
-            Player p = new Player(i);
+            PlayerRumble p = new PlayerRumble(i);
             p.state = GamePad.GetState(p.index);
 
             Players.Add(p);
@@ -185,7 +185,7 @@ public class RandomRumble : MonoBehaviour
 
         // check current ontrollers
         controllers = "";
-        foreach (Player p in Players)
+        foreach (PlayerRumble p in Players)
         {
             p.UpdatePlayer();
 
@@ -202,7 +202,7 @@ public class RandomRumble : MonoBehaviour
 
         textObject.guiText.text = controllers;        
 
-        foreach (Player p in Players)
+        foreach (PlayerRumble p in Players)
         {
             if (p.state.IsConnected)
                 p.prevState = p.state;
@@ -212,7 +212,7 @@ public class RandomRumble : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        foreach (Player p in Players)
+        foreach (PlayerRumble p in Players)
         {
             if (p.state.IsConnected)
                 GamePad.SetVibration(p.index, 0, 0);
