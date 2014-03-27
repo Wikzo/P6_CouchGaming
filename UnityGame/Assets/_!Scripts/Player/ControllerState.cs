@@ -4,8 +4,9 @@ using XInputDotNetPure;
 
 public class ControllerState : MonoBehaviour {
 
+	public GamePadState PreviousState;
 	private GamePadState currentState;
-	private GamePadState previousState;
+
 	private PlayerIndex playerIndex;
 	private int id = 0;
 
@@ -15,27 +16,27 @@ public class ControllerState : MonoBehaviour {
 		id = GetComponent<Player>().Id;
 
 		//Choose a controller matching the ID
-		if(id == 0)
+		switch(id)
+		{
+			case 0:
 			playerIndex = PlayerIndex.One;
-		else if(id == 1)
+			break;
+			case 2:
 			playerIndex = PlayerIndex.Two;
-		else if(id == 2)
+			break;
+			case 3:
 			playerIndex = PlayerIndex.Three;
-		else if(id == 3)
+			break;
+			case 4:
 			playerIndex = PlayerIndex.Four;
+			break;
+		}
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
 		currentState = GamePad.GetState(playerIndex);
-
-		if(currentState.Buttons.X == ButtonState.Pressed && previousState.Buttons.X != ButtonState.Pressed)
-		{
-			print("Down");
-		}
-
-		previousState = currentState;
 	}
 
 	public GamePadState GetCurrentState()
@@ -43,13 +44,15 @@ public class ControllerState : MonoBehaviour {
 		return currentState;
 	}
 
-	//public bool ButtonDown()
-	//{
-
-	//}
-
-	//public bool ButtonUp()
-	//{
-		 //buttonLBDown = (state.Buttons.LeftShoulder == ButtonState.Pressed && prevState.Buttons.LeftShoulder != ButtonState.Pressed);
-	//}
+	public bool ButtonDownA()
+	{
+		if(GetCurrentState().Buttons.A == ButtonState.Pressed && PreviousState.Buttons.A != ButtonState.Pressed)
+		{	
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

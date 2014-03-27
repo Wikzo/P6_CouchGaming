@@ -25,19 +25,21 @@ public class PlayerMove : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		if(canMove)
 		{
 			if(controllerState.GetCurrentState().ThumbSticks.Left.X < 0)
 			{
-				pTran.Translate(Vector3.left*Time.deltaTime*3, Space.World);
+				//pTran.Translate(Vector3.left*Time.deltaTime*3, Space.World);
+				rigidbody.MovePosition(rigidbody.position + Vector3.left*Time.deltaTime*3);
 				pTran.forward = Vector3.left;
 				//pTran.rotation = Quaternion.Lerp(pTran.rotation, rotLeft, Time.deltaTime*50);
 			}
 			else if(controllerState.GetCurrentState().ThumbSticks.Left.X > 0)
 			{
-				pTran.Translate(Vector3.right*Time.deltaTime*3, Space.World);
+				//pTran.Translate(Vector3.right*Time.deltaTime*3, Space.World);
+				rigidbody.MovePosition(rigidbody.position + Vector3.right*Time.deltaTime*3);
 				pTran.forward = Vector3.right;
 				//pTran.rotation = Quaternion.Lerp(pTran.rotation, rotRight, Time.deltaTime*50);
 			}
