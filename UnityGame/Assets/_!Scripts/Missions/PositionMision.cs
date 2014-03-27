@@ -1,24 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KillMission : MonoBehaviour, IMission
+public class PositionMision : MonoBehaviour, IMission
 {
-    // default IMission fields
+
     public int Points { get; set; }
     public GameObject Player { get; set; }
     public bool MissionIsActive { get; set; }
     public GameObject Target { get; set; }
     public MissionType MissionType { get; set; }
-
-    // specific KillMission fields
-    private bool targetWasAliveWhenMissionBegan;
-
-    // constructor
-    public void Start()
-    {
-        
-    }
-
     public void InitializeMission(GameObject player, GameObject target, int points)
     {
         this.Points = points;
@@ -28,28 +18,17 @@ public class KillMission : MonoBehaviour, IMission
         this.MissionIsActive = true;
         this.MissionType = MissionType.PlayerToPlayerMission;
 
-
         Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
-
-        if (target != null)
-            targetWasAliveWhenMissionBegan = true;
     }
 
-    
     public bool MissionAccomplished()
     {
-        if (!this.MissionIsActive) // mission not active
-            return false;
-
-        if (!this.targetWasAliveWhenMissionBegan) // no target
-            return false;
-
-        if (this.Target == null) // target has died
+        if (this.Player.transform.position.y > 5)
         {
-            this.MissionIsActive = false;
+            MissionIsActive = false;
             return true;
         }
 
-        return false; // nothing
+        return false;
     }
 }
