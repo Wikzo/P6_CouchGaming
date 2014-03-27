@@ -2,7 +2,7 @@
 using System.Collections;
 using XInputDotNetPure;
 
-public class PlayerMove : MonoBehaviour 
+public class PlayerMove_LoFi : MonoBehaviour 
 {
 	public PlayerIndex pIndex;
 

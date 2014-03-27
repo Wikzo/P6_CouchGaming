@@ -2,12 +2,11 @@
 using System.Collections;
 using XInputDotNetPure;
 
-public class Move : MonoBehaviour 
+public class PlayerMove : MonoBehaviour 
 {
-
-	private GamePadState currentState;
-
 	private Transform pTran;
+
+	private ControllerState controllerState;
 
 	private bool canMove = true;
 
@@ -19,6 +18,8 @@ public class Move : MonoBehaviour
 	{
 		pTran = transform;
 
+		controllerState = GetComponent<ControllerState>();
+
 		rotRight = Quaternion.FromToRotation(pTran.forward, Vector3.back);
 		rotLeft = Quaternion.FromToRotation(pTran.forward, Vector3.forward);
 	}
@@ -26,23 +27,22 @@ public class Move : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		currentState = GamePad.GetState(PlayerIndex.One);
-
 		if(canMove)
 		{
-			if(currentState.ThumbSticks.Left.X < 0)
+			if(controllerState.GetCurrentState().ThumbSticks.Left.X < 0)
 			{
 				pTran.Translate(Vector3.left*Time.deltaTime*3, Space.World);
+				pTran.forward = Vector3.left;
 				//pTran.rotation = Quaternion.Lerp(pTran.rotation, rotLeft, Time.deltaTime*50);
 			}
-			else if(currentState.ThumbSticks.Left.X > 0)
+			else if(controllerState.GetCurrentState().ThumbSticks.Left.X > 0)
 			{
 				pTran.Translate(Vector3.right*Time.deltaTime*3, Space.World);
+				pTran.forward = Vector3.right;
 				//pTran.rotation = Quaternion.Lerp(pTran.rotation, rotRight, Time.deltaTime*50);
 			}
 		}
 	}
-
 	void CanMove(bool messageBool)
 	{
 		canMove = messageBool;	
