@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum MissionType
+public enum MissionTypeOld
 {
     PlayerToPlayerMission,
     EnvironmentalMission,
@@ -20,7 +20,7 @@ public interface IMission
     bool MissionIsActive { get; set; }
     GameObject Player { get; set; }
     GameObject Target { get; set; } // TODO: not sure if this should be Player type or GameObject type
-    MissionType MissionType { get; set; }
+    MissionTypeOld MissionType { get; set; }
 
     void InitializeMission(GameObject player, GameObject target, int points);
     bool MissionAccomplished();

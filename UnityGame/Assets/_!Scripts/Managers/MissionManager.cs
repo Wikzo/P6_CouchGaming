@@ -7,22 +7,30 @@ public class MissionManager : MonoBehaviour
     public MissionBase[] AvailableMissions;
     public MissionBase[] ChosenMissions;
 
-    public WallMovers m;
+    public GameObject[] Players;
+    public GameObject[] Targets;
 
- 
     // Use this for initialization
     private void Start()
     {
-        ChosenMissions = new MissionBase[10];
-        for (int i = 0; i < 10; i++)
+        ChosenMissions = new MissionBase[4];
+        
+        // choose from set
+        /*ChosenMissions = ChooseMissionsFromSet(4, AvailableMissions);
+        for (int i = 0; i < 4; i++)
+        {
+            ChosenMissions[i].InitializeMission(Players[i], Targets[i]);            
+        }*/
+        
+        // choose randomly
+        for (int i = 0; i < 4; i++)
         {
             ChosenMissions[i] = ChooseRandomMission(AvailableMissions);
+            ChosenMissions[i].InitializeMission(Players[i], Targets[i]);
         }
-    }
 
-    // Update is called once per frame
-    private void Update()
-    {
+        ChosenMissions[1].name = ChosenMissions[1].ToString();
+
     }
 
     void ShuffleMissions(MissionBase[] missions)
@@ -38,6 +46,8 @@ public class MissionManager : MonoBehaviour
 
     MissionBase ChooseRandomMission(MissionBase[] missions)
     {
+        Random.seed = (int)System.DateTime.Now.Ticks;
+
         return missions[Random.Range(0, missions.Length)];
 
         // TODO: implement probability into Missions
@@ -59,8 +69,10 @@ public class MissionManager : MonoBehaviour
         return cards[cards.Length - 1];*/
     }
 
-    MissionBase[] ChooseCardsFromSet(int howManyToChoose, MissionBase[] availableMissions)
+    MissionBase[] ChooseMissionsFromSet(int howManyToChoose, MissionBase[] availableMissions)
     {
+        Random.seed = (int)System.DateTime.Now.Ticks;
+
         // Example: have 10 available cards to choose from, but only needs to choose 5
         // The probability of the first item being chosen will be 5 / 10 or 0.5
         // If it's chosen then the probability for the second item will be 4 / 9 or 0.44 (ie, four items still needed, nine left to choose from)

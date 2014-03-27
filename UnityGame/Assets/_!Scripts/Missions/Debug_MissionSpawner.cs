@@ -9,7 +9,7 @@ public class Debug_MissionSpawner : MonoBehaviour
 
     private List<IMission> Missions;
 
-    private List<KillMission> kill; 
+    private List<MissionKill> kill; 
 
     // Use this for initialization
     private void Start()

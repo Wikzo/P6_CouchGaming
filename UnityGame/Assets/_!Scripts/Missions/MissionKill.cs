@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KillMission : MissionBase
+public class MissionKill : MissionBase
 {
     // specific KillMission fields
     private bool targetWasAliveWhenMissionBegan;
 
-    public override void InitializeMission(GameObject player, GameObject target, int points)
+    public override void InitializeMission(GameObject player, GameObject target)
     {
-        base.InitializeMission(player, target, points);
+        base.InitializeMission(player, target);
         
         if (target != null)
             targetWasAliveWhenMissionBegan = true;

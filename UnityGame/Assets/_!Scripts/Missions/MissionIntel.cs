@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PositionMision : MissionBase
+public class MissionIntel : MissionBase
 {
+
+    public GameObject Base;
+
     public override bool MissionAccomplished()
     {
-        if (this.Player.transform.position.y > 5)
-        {
-            MissionIsActive = false;
+
+        if (Target.transform.position.x > base.transform.position.x)
             return true;
-        }
 
         return false;
     }
