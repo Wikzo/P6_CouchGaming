@@ -4,27 +4,16 @@ using System.Collections;
 
 public class MissionManager : MonoBehaviour
 {
-    public GameObject[] AvailableMissions;
-    public GameObject[] ChosenMissions;
+    public MissionBase[] AvailableMissions;
+    public MissionBase[] ChosenMissions;
 
-    public IMission[] IAvailableMissions;
-    public KillMission[] kills;
+    public WallMovers m;
 
  
     // Use this for initialization
     private void Start()
     {
-        IAvailableMissions = new IMission[10];
-        
-
-        foreach (var m in GetComponents(typeof(IMission)))
-        {
-            print(m);
-        }
-
-        //ChosenMissions = ChooseCardsFromSet(5, AvailableMissions);
-
-        ChosenMissions = new GameObject[10];
+        ChosenMissions = new MissionBase[10];
         for (int i = 0; i < 10; i++)
         {
             ChosenMissions[i] = ChooseRandomMission(AvailableMissions);
@@ -36,18 +25,18 @@ public class MissionManager : MonoBehaviour
     {
     }
 
-    void ShuffleMissions(GameObject[] missions)
+    void ShuffleMissions(MissionBase[] missions)
     {
         for (int i = 0; i < missions.Length; i++)
         {
-            GameObject temp = missions[i];
+            MissionBase temp = missions[i];
             int random = Random.Range(0, missions.Length);
             missions[i] = missions[random];
             missions[random] = temp;
         }
     }
 
-    GameObject ChooseRandomMission(GameObject[] missions)
+    MissionBase ChooseRandomMission(MissionBase[] missions)
     {
         return missions[Random.Range(0, missions.Length)];
 
@@ -70,7 +59,7 @@ public class MissionManager : MonoBehaviour
         return cards[cards.Length - 1];*/
     }
 
-    GameObject[] ChooseCardsFromSet(int howManyToChoose, GameObject[] availableMissions)
+    MissionBase[] ChooseCardsFromSet(int howManyToChoose, MissionBase[] availableMissions)
     {
         // Example: have 10 available cards to choose from, but only needs to choose 5
         // The probability of the first item being chosen will be 5 / 10 or 0.5
@@ -78,7 +67,7 @@ public class MissionManager : MonoBehaviour
         // However, if the first was not chosen then the probability for the second will be 5 / 9 or 0.56 (ie, five still needed, nine left to choose from)
         // This continues until the set contains the five items required.
 
-        GameObject[] result = new GameObject[howManyToChoose];
+        MissionBase[] result = new MissionBase[howManyToChoose];
 
         int numToChoose = howManyToChoose;
 
@@ -106,3 +95,4 @@ public class MissionManager : MonoBehaviour
         return result;
     }
 }
+
