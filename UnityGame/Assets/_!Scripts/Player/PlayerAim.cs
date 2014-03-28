@@ -50,6 +50,11 @@ public class PlayerAim : MonoBehaviour
 		{
 			aimTran.forward = pTran.forward;
 		}
+
+		if(controllerState.ButtonUpX)
+		{
+			print("SHOOT");
+		}
 	}
 
 	void CanAim(bool messageBool)
