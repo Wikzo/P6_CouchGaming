@@ -4,18 +4,70 @@ using System.Collections;
 
 public class MissionManager : MonoBehaviour
 {
-    public MissionBase[] MissionPool;
-    [HideInInspector] public MissionBase[] ChosenMissions; // templates
+    // Singleton itself
+    private static MissionManager _instance;
+
+    // Fields
+    //public MissionBase[] MissionPool;
+
+    
+    private List<MissionBase> MissionPoolList;
+    
+    [HideInInspector]
+    public MissionBase[] ChosenMissions; // templates
     [HideInInspector] public MissionBase[] InstantiatedMissions; // actual missions on players
 
-    public GameObject[] Players;
+    GameObject[] Players;
     public GameObject[] Targets;
+
+    //  public static Instance  
+    public static MissionManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+                _instance = GameObject.FindObjectOfType(typeof(MissionManager)) as MissionManager;
+
+            return _instance;
+        }
+    }
+
+    void OnApplicationQuit()
+    {
+        _instance = null; // release on exit
+    }
+
+    private void Awake()
+    {
+        // http://clearcutgames.net/home/?p=437
+        // First we check if there are any other instances conflicting
+        if (_instance != null && _instance != this)
+        {
+            // If that is the case, we destroy other instances
+            Destroy(gameObject);
+        }
+
+        // Here we save our singleton instance
+        _instance = this;
+
+        // Furthermore we make sure that we don't destroy between scenes (this is optional)
+        DontDestroyOnLoad(gameObject);
+    }
 
     // Use this for initialization
     private void Start()
     {
         ChosenMissions = new MissionBase[4];
         InstantiatedMissions = new MissionBase[4];
+        Players = new GameObject[4];
+
+        MissionPoolList = new List<MissionBase>();
+
+        MissionBase[] allChildren = GetComponentsInChildren<MissionBase>();
+        foreach (MissionBase mission in allChildren)
+        {
+            MissionPoolList.Add(mission);
+        }
         
         // choose from set
         /*ChosenMissions = ChooseMissionsFromSet(4, MissionPool);
@@ -27,7 +79,9 @@ public class MissionManager : MonoBehaviour
         // choose randomly
         for (int i = 0; i < 4; i++)
         {
-            ChosenMissions[i] = ChooseRandomMission(MissionPool);
+            Players[i] = GameManager.Instance.Players[i];
+
+            ChosenMissions[i] = ChooseRandomMission(MissionPoolList);
 
             string scriptName = ChosenMissions[i].ToString();
             Players[i].AddComponent(scriptName);
@@ -41,7 +95,10 @@ public class MissionManager : MonoBehaviour
     {
         foreach (MissionBase m in InstantiatedMissions)
         {
-            if (m.MissionAccomplished())
+            if (!m.MissionIsActive) // dont look into inactive missions
+                return;
+
+            if (m.MissionAccomplished()) // look if mission has been accomplished
                 Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
         }
     }
@@ -57,11 +114,11 @@ public class MissionManager : MonoBehaviour
         }
     }
 
-    MissionBase ChooseRandomMission(MissionBase[] missions)
+    MissionBase ChooseRandomMission(List<MissionBase> missions)
     {
         Random.seed = (int)System.DateTime.Now.Ticks;
 
-        return missions[Random.Range(0, missions.Length)];
+        return missions[Random.Range(0, missions.Count-1)];
 
         // TODO: implement probability into Missions
         /*float total = 0;

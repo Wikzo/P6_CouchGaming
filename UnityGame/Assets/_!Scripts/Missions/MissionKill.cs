@@ -16,15 +16,12 @@ public class MissionKill : MissionBase
     
     public override bool MissionAccomplished()
     {
-        if (!this.MissionIsActive) // mission not active
-            return false;
-
         if (!this.targetWasAliveWhenMissionBegan) // no target
             return false;
 
         if (this.Target == null) // target has died
         {
-            this.MissionIsActive = false;
+            this._missionIsActive = false;
             return true;
         }
 

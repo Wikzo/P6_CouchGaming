@@ -5,9 +5,9 @@ public class MissionPosition : MissionBase
 {
     public override bool MissionAccomplished()
     {
-        if (this.Player.transform.position.y > 5)
+        if (this.Target.transform.position.y > 5)
         {
-            MissionIsActive = false;
+            _missionIsActive = false;
             return true;
         }
 

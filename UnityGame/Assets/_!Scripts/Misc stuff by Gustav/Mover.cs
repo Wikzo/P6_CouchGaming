@@ -17,7 +17,6 @@ public class Mover : MonoBehaviour
     {
         state = GamePad.GetState(PlayerIndex.One);
         prevState = state;
-
     }
 
     // Update is called once per frame
