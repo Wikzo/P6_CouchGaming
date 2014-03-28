@@ -15,11 +15,10 @@ public class PlayerJump : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		if(canJump && controllerState.ButtonDownA())
+		if(canJump && controllerState.ButtonDownA)
 		{
 			rigidbody.AddForce(Vector3.up * 350);
 		}
-		controllerState.PreviousState = controllerState.GetCurrentState();
 	}
 
 	void OnCollisionStay(Collision collision)
