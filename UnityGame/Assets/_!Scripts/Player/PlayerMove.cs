@@ -4,9 +4,11 @@ using XInputDotNetPure;
 
 public class PlayerMove : MonoBehaviour 
 {
+	public int MoveSpeed = 1;
+
 	[HideInInspector]
-	public bool MovingLeft = false;
-	public bool MovingRight = false;
+	public bool movingLeft = false;
+	public bool movingRight = false;
 
 	private Transform pTran;
 
@@ -14,13 +16,21 @@ public class PlayerMove : MonoBehaviour
 
 	private bool canMove = true;
 
-	private Quaternion rotRight;
-	private Quaternion rotLeft;
 
 	public bool CanMove
 	{
 		get{return canMove;}
 		set{canMove = value;}	
+	}
+	public bool MovingLeft
+	{
+		get{return movingLeft;}
+		set{movingLeft = value;}	
+	}
+	public bool MovingRight
+	{
+		get{return movingRight;}
+		set{movingRight = value;}	
 	}
 
 	// Use this for initialization
@@ -29,31 +39,22 @@ public class PlayerMove : MonoBehaviour
 		pTran = transform;
 
 		controllerState = GetComponent<ControllerState>();
-
-		rotRight = Quaternion.FromToRotation(pTran.forward, Vector3.back);
-		rotLeft = Quaternion.FromToRotation(pTran.forward, Vector3.forward);
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void Update () 
 	{
 		if(CanMove)
 		{
 			if(controllerState.GetCurrentState().ThumbSticks.Left.X < 0)
 			{
-				//pTran.Translate(Vector3.left*Time.deltaTime*3, Space.World);
-				rigidbody.MovePosition(rigidbody.position + Vector3.left*Time.deltaTime*3);
-				pTran.forward = Vector3.left;
+				Move(Vector3.left);
 				MovingLeft = true;
-				//pTran.rotation = Quaternion.Lerp(pTran.rotation, rotLeft, Time.deltaTime*50);
 			}
 			else if(controllerState.GetCurrentState().ThumbSticks.Left.X > 0)
 			{
-				//pTran.Translate(Vector3.right*Time.deltaTime*3, Space.World);
-				rigidbody.MovePosition(rigidbody.position + Vector3.right*Time.deltaTime*3);
-				pTran.forward = Vector3.right;
+				Move(Vector3.right);
 				MovingRight = true;
-				//pTran.rotation = Quaternion.Lerp(pTran.rotation, rotRight, Time.deltaTime*50);
 			}
 			else
 			{
@@ -61,5 +62,12 @@ public class PlayerMove : MonoBehaviour
 				MovingRight = false;
 			}
 		}
+	}
+
+	//MAYBE THIS SHOULD BE CALLED FROM FIXED UPDATE:
+	public void Move(Vector3 direction)
+	{
+		rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*MoveSpeed);
+		pTran.forward = direction;
 	}
 }

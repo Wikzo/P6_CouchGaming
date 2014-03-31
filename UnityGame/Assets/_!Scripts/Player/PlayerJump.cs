@@ -3,7 +3,9 @@ using System.Collections;
 
 public class PlayerJump : MonoBehaviour {
 
-	private bool canJump = false;
+	public int JumpForce = 350;
+
+	private bool canJump = true;
 	private ControllerState controllerState;
 
 	public bool CanJump
@@ -19,11 +21,11 @@ public class PlayerJump : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void Update () 
 	{
 		if(CanJump && controllerState.ButtonDownA)
 		{
-			rigidbody.AddForce(Vector3.up * 350);
+			rigidbody.AddForce(Vector3.up*JumpForce);
 		}
 	}
 

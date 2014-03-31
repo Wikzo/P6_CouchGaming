@@ -20,6 +20,7 @@ public class PlayerAim : MonoBehaviour
 	private Transform chargeBar;
 
 	private PlayerMove playerMove;
+
 	private PlayerJump playerJump;
 
 	private ControllerState controllerState;
@@ -45,15 +46,10 @@ public class PlayerAim : MonoBehaviour
 	{
 		if(controllerState.GetCurrentState().Buttons.X == ButtonState.Pressed)
 		{
-			//FIND A BETTER SOLUTION FOR THIS:
 			if(playerMove.MovingLeft && !playerJump.CanJump)
-			{
-				rigidbody.MovePosition(rigidbody.position + Vector3.left*Time.deltaTime*3);
-			}
+				playerMove.Move(Vector3.left);
 			else if(playerMove.MovingRight && !playerJump.CanJump)
-			{
-				rigidbody.MovePosition(rigidbody.position + Vector3.right*Time.deltaTime*3);
-			}
+				playerMove.Move(Vector3.right);
 
 			playerMove.CanMove = false;
 
@@ -64,9 +60,7 @@ public class PlayerAim : MonoBehaviour
 			Quaternion rotation = Quaternion.LookRotation(direction, Vector3.forward);
 
 			if(direction != Vector3.zero)
-			{
 				aimPivotTran.rotation = rotation;
-			}
 
 			if(chargeTimer < maxChargeTime)
 			{
@@ -91,5 +85,10 @@ public class PlayerAim : MonoBehaviour
 
 			playerMove.CanMove = true;
 		}
+	}
+
+	void FixedUpdate()
+	{
+
 	}
 }
