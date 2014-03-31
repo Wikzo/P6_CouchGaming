@@ -4,6 +4,8 @@
 TagManager:
   tags:
   - floor
+  - IntelBase
+  - IntelProp
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

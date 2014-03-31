@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using System.Collections;
 
 public class MissionIntel : MissionBase
 {
 
-    public GameObject[] IntelBasePool;
-    public GameObject[] IntelPropPool;
+    public List<GameObject> IntelBasePool;
+    public List<GameObject> IntelPropPool;
 
     public GameObject IntelBase;
     public GameObject IntelProp;
@@ -13,30 +14,28 @@ public class MissionIntel : MissionBase
     public override void InitializeMission(GameObject player, GameObject target, MissionBase Template)
     {
         base.InitializeMission(player, target, Template);
-        SetTargetBaseAndIntel(Template as MissionIntel);
+        this.Target = null;
+        SetTargetBaseAndIntel(Template);
     }
 
-    void SetTargetBaseAndIntel(MissionIntel template)
+    void SetTargetBaseAndIntel(MissionBase template)
     {
-        this.IntelBase = template.IntelBase;
-        this.IntelProp = template.IntelProp;
-    }
-
-    void Awake()
-    {
-        IntelBase = ChooseRandom(IntelBasePool);
-        IntelProp = ChooseRandom(IntelPropPool);
-    }
-
-    GameObject ChooseRandom(GameObject[] g)
-    {
-        Random.seed = (int)System.DateTime.Now.Ticks;
-
-        return g[Random.Range(0, g.Length)];
+        if (template is MissionIntel)
+        {
+            MissionIntel intel = (MissionIntel)template;
+            this.IntelBase = intel.IntelBase;
+            this.IntelProp = intel.IntelProp;
+            Debug.Log("Successfully casted from MissionBase to MissionIntel");
+        }
+        else
+            Debug.Log("ERROR - could not cast from MissionBase to MissionIntel!");
     }
 
     public override bool MissionAccomplished()
     {
+        _missionIsActive = false;
+
+        return false;
         if (IntelProp.transform.position.x > IntelBase.transform.position.x)
         {
             _missionIsActive = false;

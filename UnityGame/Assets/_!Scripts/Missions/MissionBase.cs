@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
+
 public enum MissionType
 {
     PlayerToPlayerMission,
@@ -9,6 +10,7 @@ public enum MissionType
     PropMission,
     MiscMission
 }
+
 public enum HowToChooseTarget
 {
     ChooseTargetBasedOnChildren,
@@ -16,6 +18,7 @@ public enum HowToChooseTarget
     ChooseTargetAmongAllPlayersExceptMe,
     Other
 }
+
 public abstract class MissionBase : MonoBehaviour
 {
     public int Points;
@@ -32,8 +35,8 @@ public abstract class MissionBase : MonoBehaviour
     public GameObject Target;
     
     public MissionType MissionType;
-    public HowToChooseTarget ChooseTargetType;
-    public Texture2D Texture;
+    public HowToChooseTarget HowToChooseTarget;
+    //public Texture2D Texture;
     
     [HideInInspector]
     public int MissionRumbleCount;
@@ -53,80 +56,55 @@ public abstract class MissionBase : MonoBehaviour
         if (Template == null)
             Debug.Log("ERROR, Mission Templates have not been assigned!");
 
-        IsTemplateMission = false;
+        IsTemplateMission = false; // this function is not called on template missions, anyway
+
+        // Use specific values
+        this.Player = player;
+        this._missionIsActive = true;
+        this.Target = ChooseRandomTarget(Template);
 
         // Use template values
         this.MissionType = Template.MissionType;
         this.Points = Template.Points;
-        this.Target = Template.Target;
 
-        // Use specific values
-        this.Player = player;
-
-        this._missionIsActive = true;
 
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
     }
 
-    void Start()
+    public GameObject ChooseRandomTarget(MissionBase Template)
     {
-        if (!IsTemplateMission) // only templates do this
-            return;
+        if (Template.Target == null)
+            return null;
 
-        switch (this.ChooseTargetType)
+        System.Random random = new System.Random();
+
+        switch (Template.HowToChooseTarget)
         {
-            case HowToChooseTarget.ChooseTargetBasedOnChildren:
-                ChooseTargetFromPool();
+                case HowToChooseTarget.ChooseTargetBasedOnChildren:
+                case HowToChooseTarget.ChooseTargetAmongAllPlayers:
+                    return Template.TargetPool[random.Next(0, Template.TargetPool.Count)];
                 break;
-            case HowToChooseTarget.ChooseTargetAmongAllPlayers:
-                SetTargetsToAllPlayers(true);
-                break;
+
             case HowToChooseTarget.ChooseTargetAmongAllPlayersExceptMe:
-                SetTargetsToAllPlayers(false);
+                int counter = 0;
+                GameObject target = Template.TargetPool[random.Next(0, Template.TargetPool.Count)];
+
+                if (Template.HowToChooseTarget == HowToChooseTarget.ChooseTargetAmongAllPlayersExceptMe) // try to avoid myself
+                {
+                    while (this.Target == this.Player && counter < 100) // try to pick a new target
+                    {
+                        target = Template.TargetPool[random.Next(0, Template.TargetPool.Count)];
+                        counter++;
+                    }
+                }
+                return target;
                 break;
-            case HowToChooseTarget.Other:
-                break;
-        }       
-    }
-
-    public virtual void ChooseTargetFromPool()
-    {
-        TargetPool = new List<GameObject>();
-
-        Transform[] allChildren = gameObject.GetComponentsInChildren<Transform>();
-
-        foreach (Transform transform in allChildren)
-        {
-            TargetPool.Add(transform.gameObject);
-            print(transform + " was added");
-        }
-
-        
-
-        Random.seed = (int)System.DateTime.Now.Ticks;
-
-        if (TargetPool.Count <= 0)
-            Debug.Log("ERROR - mission needs to have some potential targets!");
-
-        this.Target = TargetPool[Random.Range(0, TargetPool.Count-1)];
-    }
-
-    public void SetTargetsToAllPlayers(bool canChooseMyself)
-    {
-        TargetPool = new List<GameObject>();
-
-        if (canChooseMyself)
-            TargetPool = GameManager.Instance.Players; // all players
-        else // everybody except myself
-        {
-            TargetPool = new List<GameObject>(GameManager.Instance.Players.Count - 1);
-
-            for (int i = 0; i < GameManager.Instance.Players.Count; i++)
-            {
-                if (GameManager.Instance.Players[i] != this.Player)
-                    TargetPool[i] = GameManager.Instance.Players[i];
-            }
             
+            default:
+                print("default");
+                return null;
+                break;
+
         }
     }
 
