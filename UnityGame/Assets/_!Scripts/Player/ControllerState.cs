@@ -7,7 +7,7 @@ public class ControllerState : MonoBehaviour {
 	private GamePadState previousState;
 	private GamePadState currentState;
 
-	private PlayerIndex playerIndex;
+	private PlayerIndex playerController;
 	private int id = 0;
 
 	private bool buttonDownA = false;
@@ -59,29 +59,13 @@ public class ControllerState : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		id = GetComponent<Player>().Id;
-
-		switch(id)
-		{
-			case 0:
-			playerIndex = PlayerIndex.One;
-			break;
-			case 1:
-			playerIndex = PlayerIndex.Two;
-			break;
-			case 2:
-			playerIndex = PlayerIndex.Three;
-			break;
-			case 3:
-			playerIndex = PlayerIndex.Four;
-			break;
-		}
+		playerController = GetComponent<Player>().PlayerController;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		currentState = GamePad.GetState(playerIndex);
+		currentState = GamePad.GetState(playerController);
 
 		if(GetCurrentState().Buttons.A == ButtonState.Pressed && previousState.Buttons.A != ButtonState.Pressed){ButtonDownA = true; canRelease = true;}else ButtonDownA = false;
 		if(GetCurrentState().Buttons.B == ButtonState.Pressed && previousState.Buttons.B != ButtonState.Pressed){ButtonDownB = true; canRelease = true;}else ButtonDownB = false;

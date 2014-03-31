@@ -3,6 +3,14 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour 
 {
+	private string owner;
+
+	public string Owner
+	{
+		get{return owner;}
+		set{owner = value;}
+	}
+
 
 	// Use this for initialization
 	void Start () 
@@ -13,14 +21,14 @@ public class Bullet : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-	
+		
 	}
 
 	void OnTriggerEnter(Collider collider)
 	{
-		if(collider.gameObject.GetComponent<Damage>())
+		if(collider.gameObject.GetComponent<PlayerDamage>())
 		{
-			collider.gameObject.GetComponent<Damage>().CalculateDeath(gameObject.name);
+			collider.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, owner);
 		}
 		Destroy(gameObject);
 	}
