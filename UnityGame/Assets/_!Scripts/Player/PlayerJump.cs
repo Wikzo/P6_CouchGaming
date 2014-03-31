@@ -3,8 +3,16 @@ using System.Collections;
 
 public class PlayerJump : MonoBehaviour {
 
-	private bool canJump = false;
+	public int JumpForce = 350;
+
+	private bool canJump = true;
 	private ControllerState controllerState;
+
+	public bool CanJump
+	{
+		get{return canJump;}
+		set{canJump = value;}	
+	}
 
 	// Use this for initialization
 	void Start () 
@@ -13,25 +21,20 @@ public class PlayerJump : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void Update () 
 	{
-		if(canJump && controllerState.ButtonDownA)
+		if(CanJump && controllerState.ButtonDownA)
 		{
-			rigidbody.AddForce(Vector3.up * 350);
+			rigidbody.AddForce(Vector3.up*JumpForce);
 		}
 	}
 
 	void OnCollisionStay(Collision collision)
 	{
-		CanJump(true);
+		CanJump = true;
 	}
 	void OnCollisionExit(Collision collision)
 	{
-		CanJump(false);
-	}
-
-	void CanJump(bool messageBool)
-	{
-		canJump = messageBool;	
+		CanJump = false;
 	}
 }

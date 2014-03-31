@@ -4,8 +4,12 @@
 TagManager:
   tags:
   - floor
+<<<<<<< HEAD
   - IntelBase
   - IntelProp
+=======
+  - LaserBullet
+>>>>>>> fe89d74b8b691037d0d64f49846f1fdf804e34b7
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

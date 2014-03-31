@@ -4,14 +4,34 @@ using XInputDotNetPure;
 
 public class PlayerMove : MonoBehaviour 
 {
+	public int MoveSpeed = 1;
+
+	[HideInInspector]
+	public bool movingLeft = false;
+	public bool movingRight = false;
+
 	private Transform pTran;
 
 	private ControllerState controllerState;
 
 	private bool canMove = true;
 
-	private Quaternion rotRight;
-	private Quaternion rotLeft;
+
+	public bool CanMove
+	{
+		get{return canMove;}
+		set{canMove = value;}	
+	}
+	public bool MovingLeft
+	{
+		get{return movingLeft;}
+		set{movingLeft = value;}	
+	}
+	public bool MovingRight
+	{
+		get{return movingRight;}
+		set{movingRight = value;}	
+	}
 
 	// Use this for initialization
 	void Start () 
@@ -19,34 +39,35 @@ public class PlayerMove : MonoBehaviour
 		pTran = transform;
 
 		controllerState = GetComponent<ControllerState>();
-
-		rotRight = Quaternion.FromToRotation(pTran.forward, Vector3.back);
-		rotLeft = Quaternion.FromToRotation(pTran.forward, Vector3.forward);
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () 
+	void Update () 
 	{
-		if(canMove)
+		if(CanMove)
 		{
 			if(controllerState.GetCurrentState().ThumbSticks.Left.X < 0)
 			{
-				//pTran.Translate(Vector3.left*Time.deltaTime*3, Space.World);
-				rigidbody.MovePosition(rigidbody.position + Vector3.left*Time.deltaTime*3);
-				pTran.forward = Vector3.left;
-				//pTran.rotation = Quaternion.Lerp(pTran.rotation, rotLeft, Time.deltaTime*50);
+				Move(Vector3.left);
+				MovingLeft = true;
 			}
 			else if(controllerState.GetCurrentState().ThumbSticks.Left.X > 0)
 			{
-				//pTran.Translate(Vector3.right*Time.deltaTime*3, Space.World);
-				rigidbody.MovePosition(rigidbody.position + Vector3.right*Time.deltaTime*3);
-				pTran.forward = Vector3.right;
-				//pTran.rotation = Quaternion.Lerp(pTran.rotation, rotRight, Time.deltaTime*50);
+				Move(Vector3.right);
+				MovingRight = true;
+			}
+			else
+			{
+				MovingLeft = false;
+				MovingRight = false;
 			}
 		}
 	}
-	void CanMove(bool messageBool)
+
+	//MAYBE THIS SHOULD BE CALLED FROM FIXED UPDATE:
+	public void Move(Vector3 direction)
 	{
-		canMove = messageBool;	
+		rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*MoveSpeed);
+		pTran.forward = direction;
 	}
 }
