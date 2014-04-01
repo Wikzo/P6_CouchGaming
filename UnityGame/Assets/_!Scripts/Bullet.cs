@@ -30,6 +30,10 @@ public class Bullet : MonoBehaviour
 		{
 			collider.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, owner);
 		}
-		Destroy(gameObject);
+		if(collider.gameObject.tag != "NotCollidable")
+		{
+			Destroy(gameObject);
+		}
+		
 	}
 }

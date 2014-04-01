@@ -4,10 +4,11 @@ using XInputDotNetPure;
 
 public class PlayerMove : MonoBehaviour 
 {
-	public int MoveSpeed = 1;
+	public int MoveSpeed = 3;
 
 	[HideInInspector]
 	public bool movingLeft = false;
+	[HideInInspector]
 	public bool movingRight = false;
 
 	private Transform pTran;

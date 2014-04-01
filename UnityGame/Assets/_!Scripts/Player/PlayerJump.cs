@@ -21,7 +21,7 @@ public class PlayerJump : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void FixedUpdate () 
 	{
 		if(CanJump && controllerState.ButtonDownA)
 		{

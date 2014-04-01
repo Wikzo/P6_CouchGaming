@@ -16,11 +16,13 @@ public class Player : MonoBehaviour {
 	public int DeathTime = 5;
 	public int RespawnTime = 3;
 	public GameObject[] SpawnPoints = new GameObject[4];
+	public Material[] Materials = new Material[4];
 
 	[HideInInspector]
 	public PlayerState PState;
+	[HideInInspector]
 	public string KilledBy;
-
+	[HideInInspector]
 	public PlayerIndex PlayerController;
 	private Transform pTran;
 	private GameObject spawnPoint;
@@ -35,18 +37,22 @@ public class Player : MonoBehaviour {
 			case 0:
 			PlayerController = PlayerIndex.One;
 			spawnPoint = SpawnPoints[0];
+			renderer.material = Materials[0];
 			break;
 			case 1:
 			PlayerController = PlayerIndex.Two;
 			spawnPoint = SpawnPoints[1];
+			renderer.material = Materials[1];
 			break;
 			case 2:
 			PlayerController = PlayerIndex.Three;
 			spawnPoint = SpawnPoints[2];
+			renderer.material = Materials[2];
 			break;
 			case 3:
 			PlayerController = PlayerIndex.Four;
 			spawnPoint = SpawnPoints[3];
+			renderer.material = Materials[3];
 			break;
 		}
 	}

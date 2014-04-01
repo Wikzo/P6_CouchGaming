@@ -677,6 +677,10 @@ Prefab:
       propertyPath: localVelocity.y
       value: .239999995
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
+      propertyPath: m_TagString
+      value: NotCollidable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   m_RootGameObject: {fileID: 2022804172}
@@ -816,8 +820,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 567528501}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.46733236, y: 8.52460861, z: 2.29026985}
-  m_LocalScale: {x: 14.3528519, y: .373655021, z: 13.9803295}
+  m_LocalPosition: {x: -1.46733236, y: 8.1807251, z: 2.29026985}
+  m_LocalScale: {x: 23.5030289, y: .373655021, z: 13.9803295}
   m_Children: []
   m_Father: {fileID: 1659399089}
 --- !u!1001 &588212259
@@ -899,6 +903,26 @@ Prefab:
       propertyPath: SpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1770021591}
+    - target: {fileID: 11400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: MoveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -988,6 +1012,10 @@ Prefab:
       propertyPath: localVelocity.y
       value: .239999995
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
+      propertyPath: m_TagString
+      value: NotCollidable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   m_RootGameObject: {fileID: 2013474450}
@@ -1058,7 +1086,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 643583291}
   m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: 8.26003838, y: 1.96752274, z: 2.29026985}
+  m_LocalPosition: {x: 7.71186113, y: 1.96752274, z: 2.29026985}
   m_LocalScale: {x: 14.3528519, y: .457352728, z: 13.9803295}
   m_Children: []
   m_Father: {fileID: 1659399089}
@@ -1379,7 +1407,7 @@ GameObject:
   - 26: {fileID: 841117697}
   m_Layer: 0
   m_Name: Fluffy Smoke
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1856,7 +1884,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1130285505}
   m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106829}
-  m_LocalPosition: {x: -11.4084606, y: 1.9675225, z: 2.29026985}
+  m_LocalPosition: {x: -10.5435467, y: 1.9675225, z: 2.29026985}
   m_LocalScale: {x: 14.3528519, y: .373655021, z: 13.9803295}
   m_Children: []
   m_Father: {fileID: 1659399089}
@@ -1890,7 +1918,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: ce61045b339bac644b6f73501d456619, type: 2}
+  - {fileID: 2100000, guid: c0f00141533fcce419c3e0ad5f363b9d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1926,7 +1954,7 @@ Transform:
   m_GameObject: {fileID: 1168155009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3.85827351, z: 0}
-  m_LocalScale: {x: 17.4154358, y: .373655021, z: 3.96306348}
+  m_LocalScale: {x: 20.2446842, y: .373655021, z: 3.96306348}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1001 &1213624457
@@ -2004,6 +2032,26 @@ Prefab:
       propertyPath: SpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1770021591}
+    - target: {fileID: 11400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: MoveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2093,6 +2141,10 @@ Prefab:
       propertyPath: localVelocity.y
       value: .239999995
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
+      propertyPath: m_TagString
+      value: NotCollidable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
   m_RootGameObject: {fileID: 1536235477}
@@ -2180,6 +2232,10 @@ Prefab:
     - target: {fileID: 1500000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
       propertyPath: localVelocity.y
       value: .239999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
+      propertyPath: m_TagString
+      value: NotCollidable
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44b3febaf5142a5429938ef0a0de2395, type: 2}
@@ -2362,6 +2418,11 @@ MonoBehaviour:
   - {fileID: 1662069004}
   - {fileID: 1425006099}
   - {fileID: 1770021591}
+  Materials:
+  - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
+  - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
+  - {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
+  - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -2562,6 +2623,26 @@ Prefab:
       propertyPath: SpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1770021591}
+    - target: {fileID: 11400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: MoveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2766,6 +2847,11 @@ MonoBehaviour:
   - {fileID: 1662069004}
   - {fileID: 1425006099}
   - {fileID: 1770021591}
+  Materials:
+  - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
+  - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
+  - {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
+  - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -2921,7 +3007,7 @@ GameObject:
   - 26: {fileID: 1536235478}
   m_Layer: 0
   m_Name: Fluffy Smoke
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3154,6 +3240,11 @@ MonoBehaviour:
   - {fileID: 1662069004}
   - {fileID: 1425006099}
   - {fileID: 1770021591}
+  Materials:
+  - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
+  - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
+  - {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
+  - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -3550,6 +3641,11 @@ MonoBehaviour:
   - {fileID: 1662069004}
   - {fileID: 1425006099}
   - {fileID: 1770021591}
+  Materials:
+  - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
+  - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
+  - {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
+  - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -3700,6 +3796,26 @@ Prefab:
       propertyPath: SpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 1770021591}
+    - target: {fileID: 11400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: MoveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -3732,7 +3848,7 @@ Transform:
   m_GameObject: {fileID: 1913795747}
   m_LocalRotation: {x: .5, y: .5, z: .5, w: .5}
   m_LocalPosition: {x: -1.59224606, y: 1.96752262, z: 4.59856892}
-  m_LocalScale: {x: 14.3528557, y: .373654991, z: 16.7856503}
+  m_LocalScale: {x: 16.5149879, y: .373654991, z: 20.5620995}
   m_Children: []
   m_Father: {fileID: 1659399089}
 --- !u!23 &1913795749
@@ -3890,7 +4006,7 @@ GameObject:
   - 26: {fileID: 2013474451}
   m_Layer: 0
   m_Name: Fluffy Smoke
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4010,7 +4126,7 @@ GameObject:
   - 26: {fileID: 2022804173}
   m_Layer: 0
   m_Name: Fluffy Smoke
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
