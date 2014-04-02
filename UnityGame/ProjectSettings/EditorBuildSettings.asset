@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/_Scenes/Misc scenes by Gustav/ScreenWrapping.unity
   - enabled: 0
     path: Assets/_Scenes/rumble_test.unity
-  - enabled: 1
-    path: Assets/JW2_Lo-Fi/JW2_Lo-Fi.unity
   - enabled: 0
-    path: Assets/JW2_Lo-Fi/JW2_Lo-Fi_Eye.unity
+    path: Assets/JW2_Lo-Fi/JW2_Lo-Fi.unity
+  - enabled: 1
+    path: Assets/JW2_Lo-Fi/JW2_Lo-Fi_Modalities.unity

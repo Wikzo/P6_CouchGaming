@@ -407,10 +407,10 @@ Transform:
   - {fileID: 888454969}
   - {fileID: 1602780291}
   - {fileID: 2040284494}
-  - {fileID: 841117700}
-  - {fileID: 2013474454}
   - {fileID: 2022804176}
+  - {fileID: 2013474454}
   - {fileID: 1536235481}
+  - {fileID: 841117700}
   - {fileID: 215310387}
   - {fileID: 1989518769}
   - {fileID: 1319696169}
@@ -515,7 +515,7 @@ GameObject:
   - 114: {fileID: 281371092}
   - 114: {fileID: 281371091}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,6 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionSound: {fileID: 0}
 --- !u!114 &281371092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,10 +615,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoFi: 0
   Score: 0
   Id: 3
   DeathTime: 5
-  RespawnTime: 3
+  RespawnTime: 1.5
   SpawnPoints:
   - {fileID: 960418177}
   - {fileID: 826504684}
@@ -956,7 +958,7 @@ GameObject:
   - 114: {fileID: 413831647}
   - 114: {fileID: 413831646}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -987,6 +989,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionSound: {fileID: 0}
 --- !u!114 &413831647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1055,10 +1058,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoFi: 0
   Score: 0
   Id: 1
   DeathTime: 5
-  RespawnTime: 3
+  RespawnTime: 1.5
   SpawnPoints:
   - {fileID: 960418177}
   - {fileID: 826504684}
@@ -1218,8 +1222,9 @@ GameObject:
   - 114: {fileID: 506517932}
   - 114: {fileID: 506517931}
   - 114: {fileID: 506517930}
+  - 82: {fileID: 506517940}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1237,6 +1242,7 @@ Transform:
   m_Children:
   - {fileID: 13624821}
   - {fileID: 832021417}
+  - {fileID: 1358441349}
   m_Father: {fileID: 0}
 --- !u!114 &506517930
 MonoBehaviour:
@@ -1250,6 +1256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionSound: {fileID: 8300000, guid: 6755f364363b66d4882084e1c6a33ade, type: 3}
 --- !u!114 &506517931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1318,10 +1325,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoFi: 1
   Score: 0
   Id: 0
   DeathTime: 5
-  RespawnTime: 3
+  RespawnTime: 1.5
   SpawnPoints:
   - {fileID: 960418177}
   - {fileID: 826504684}
@@ -1394,6 +1402,64 @@ MeshFilter:
   m_PrefabInternal: {fileID: 750610409}
   m_GameObject: {fileID: 506517928}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!82 &506517940
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 506517928}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 6755f364363b66d4882084e1c6a33ade, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1 &567528501
 GameObject:
   m_ObjectHideFlags: 0
@@ -1829,6 +1895,26 @@ Prefab:
       propertyPath: SpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 983992970}
+    - target: {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LoFi
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LoFi
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: RespawnTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: missionSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6755f364363b66d4882084e1c6a33ade, type: 3}
+    - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Name
+      value: Player1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 506517928}
@@ -2350,7 +2436,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 960418177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.41706276, y: 4.66901207, z: 0}
+  m_LocalPosition: {x: -5.41706276, y: 3.44775391, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 370689759}
@@ -2596,6 +2682,14 @@ Prefab:
       propertyPath: SpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 983992970}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: RespawnTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Name
+      value: Player2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 413831644}
@@ -2774,6 +2868,14 @@ Prefab:
       propertyPath: SpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 983992970}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: RespawnTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Name
+      value: Player3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 1459672823}
@@ -3368,6 +3470,75 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eye: 
+--- !u!1 &1358441348
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1358441349}
+  - 33: {fileID: 1358441352}
+  - 135: {fileID: 1358441351}
+  - 23: {fileID: 1358441350}
+  m_Layer: 9
+  m_Name: Shield
+  m_TagString: NotCollidable
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1358441349
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1358441348}
+  m_LocalRotation: {x: 0, y: -.719943523, z: 0, w: .694032729}
+  m_LocalPosition: {x: -1.65727031, y: .0112190247, z: -.0517671481}
+  m_LocalScale: {x: 1.89375269, y: 1.89375269, z: 1.89375269}
+  m_Children: []
+  m_Father: {fileID: 506517929}
+--- !u!23 &1358441350
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1358441348}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 29fe475ec7884254da9668bb893d47a7, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!135 &1358441351
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1358441348}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1358441352
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1358441348}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &1360314657
 Prefab:
   m_ObjectHideFlags: 0
@@ -3447,6 +3618,14 @@ Prefab:
       propertyPath: Score
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: RespawnTime
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Name
+      value: Player4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 281371089}
@@ -3471,7 +3650,7 @@ GameObject:
   - 114: {fileID: 1459672825}
   - 114: {fileID: 1459672824}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3489,6 +3668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missionSound: {fileID: 0}
 --- !u!114 &1459672825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3557,10 +3737,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LoFi: 0
   Score: 0
   Id: 2
   DeathTime: 5
-  RespawnTime: 3
+  RespawnTime: 1.5
   SpawnPoints:
   - {fileID: 960418177}
   - {fileID: 826504684}

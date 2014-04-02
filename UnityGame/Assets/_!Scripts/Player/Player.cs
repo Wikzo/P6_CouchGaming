@@ -11,10 +11,12 @@ public enum PlayerState
 
 public class Player : MonoBehaviour {
 
+	public bool LoFi = false;
+
 	public int Score;
 	public int Id;
 	public int DeathTime = 5;
-	public int RespawnTime = 3;
+	public float RespawnTime = 3;
 	public GameObject[] SpawnPoints = new GameObject[4];
 	public Material[] Materials = new Material[4];
 
