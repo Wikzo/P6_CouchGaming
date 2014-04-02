@@ -572,8 +572,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 100
-  chargeSpeed: 3
+  shotForce: 200
+  chargeSpeed: 5
   maxChargeTime: 10
 --- !u!114 &281371094
 MonoBehaviour:
@@ -588,6 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 350
+  GroundDetectLength: .5
 --- !u!114 &281371095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,6 +621,7 @@ MonoBehaviour:
   Id: 3
   DeathTime: 5
   RespawnTime: 1.5
+  RespawnBlinkRate: .100000001
   SpawnPoints:
   - {fileID: 960418177}
   - {fileID: 826504684}
@@ -630,6 +632,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f33f0016e6d4f9e499b69241e2d8f21b, type: 2}
   - {fileID: 2100000, guid: 046b71c85e161ba4398fea92f24da510, type: 2}
   - {fileID: 2100000, guid: aaf25b90bb2d0e349966a7f79eca7526, type: 2}
+  blinkMat: {fileID: 2100000, guid: c0f00141533fcce419c3e0ad5f363b9d, type: 2}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -971,7 +974,7 @@ Transform:
   m_PrefabInternal: {fileID: 1043148249}
   m_GameObject: {fileID: 413831644}
   m_LocalRotation: {x: 0, y: .719943523, z: 0, w: .694032729}
-  m_LocalPosition: {x: 5.12149334, y: 4.34104443, z: -.408349693}
+  m_LocalPosition: {x: 5.12149334, y: 4.34104443, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1626434575}
@@ -1015,8 +1018,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 100
-  chargeSpeed: 3
+  shotForce: 200
+  chargeSpeed: 5
   maxChargeTime: 10
 --- !u!114 &413831649
 MonoBehaviour:
@@ -1031,6 +1034,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 350
+  GroundDetectLength: .5
 --- !u!114 &413831650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,6 +1067,7 @@ MonoBehaviour:
   Id: 1
   DeathTime: 5
   RespawnTime: 1.5
+  RespawnBlinkRate: .100000001
   SpawnPoints:
   - {fileID: 960418177}
   - {fileID: 826504684}
@@ -1073,6 +1078,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f33f0016e6d4f9e499b69241e2d8f21b, type: 2}
   - {fileID: 2100000, guid: 046b71c85e161ba4398fea92f24da510, type: 2}
   - {fileID: 2100000, guid: aaf25b90bb2d0e349966a7f79eca7526, type: 2}
+  blinkMat: {fileID: 2100000, guid: c0f00141533fcce419c3e0ad5f363b9d, type: 2}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -1282,8 +1288,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 100
-  chargeSpeed: 3
+  shotForce: 200
+  chargeSpeed: 5
   maxChargeTime: 10
 --- !u!114 &506517933
 MonoBehaviour:
@@ -1298,6 +1304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 350
+  GroundDetectLength: .5
 --- !u!114 &506517934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1330,6 +1337,7 @@ MonoBehaviour:
   Id: 0
   DeathTime: 5
   RespawnTime: 1.5
+  RespawnBlinkRate: .100000001
   SpawnPoints:
   - {fileID: 960418177}
   - {fileID: 826504684}
@@ -1340,6 +1348,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f33f0016e6d4f9e499b69241e2d8f21b, type: 2}
   - {fileID: 2100000, guid: 046b71c85e161ba4398fea92f24da510, type: 2}
   - {fileID: 2100000, guid: aaf25b90bb2d0e349966a7f79eca7526, type: 2}
+  blinkMat: {fileID: 2100000, guid: c0f00141533fcce419c3e0ad5f363b9d, type: 2}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -1915,6 +1924,18 @@ Prefab:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: blinkMat
+      value: 
+      objectReference: {fileID: 2100000, guid: c0f00141533fcce419c3e0ad5f363b9d, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: shotForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: chargeSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 506517928}
@@ -2080,7 +2101,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 826504684}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.74456501, y: 4.44129372, z: 0}
+  m_LocalPosition: {x: 5.22056246, y: 4.30834913, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 370689759}
@@ -2436,7 +2457,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 960418177}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.41706276, y: 3.44775391, z: 0}
+  m_LocalPosition: {x: -6.03488445, y: 4.42366552, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 370689759}
@@ -2534,7 +2555,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 983992970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.40549994, y: -1.3425312, z: 0}
+  m_LocalPosition: {x: 4.96220398, y: -1.78630376, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 370689759}
@@ -2624,7 +2645,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.408349693
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2689,6 +2710,18 @@ Prefab:
     - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Name
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: blinkMat
+      value: 
+      objectReference: {fileID: 2100000, guid: c0f00141533fcce419c3e0ad5f363b9d, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: shotForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: chargeSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2767,32 +2800,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1096540243}
   m_GameObject: {fileID: 1073533954}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1083653903
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1083653904}
-  m_Layer: 0
-  m_Name: ObjectiveAreas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1083653904
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1083653903}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.46733236, y: -1.98264265, z: -2.29026985}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
 --- !u!1001 &1096540243
 Prefab:
   m_ObjectHideFlags: 0
@@ -2810,7 +2817,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4.49307263e-05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -2875,6 +2882,18 @@ Prefab:
     - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Name
       value: Player3
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: blinkMat
+      value: 
+      objectReference: {fileID: 2100000, guid: c0f00141533fcce419c3e0ad5f363b9d, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: shotForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: chargeSpeed
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -3626,6 +3645,18 @@ Prefab:
       propertyPath: m_Name
       value: Player4
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: blinkMat
+      value: 
+      objectReference: {fileID: 2100000, guid: c0f00141533fcce419c3e0ad5f363b9d, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: shotForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: chargeSpeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 281371089}
@@ -3694,8 +3725,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 100
-  chargeSpeed: 3
+  shotForce: 200
+  chargeSpeed: 5
   maxChargeTime: 10
 --- !u!114 &1459672827
 MonoBehaviour:
@@ -3710,6 +3741,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 350
+  GroundDetectLength: .5
 --- !u!114 &1459672828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3742,6 +3774,7 @@ MonoBehaviour:
   Id: 2
   DeathTime: 5
   RespawnTime: 1.5
+  RespawnBlinkRate: .100000001
   SpawnPoints:
   - {fileID: 960418177}
   - {fileID: 826504684}
@@ -3752,6 +3785,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f33f0016e6d4f9e499b69241e2d8f21b, type: 2}
   - {fileID: 2100000, guid: 046b71c85e161ba4398fea92f24da510, type: 2}
   - {fileID: 2100000, guid: aaf25b90bb2d0e349966a7f79eca7526, type: 2}
+  blinkMat: {fileID: 2100000, guid: c0f00141533fcce419c3e0ad5f363b9d, type: 2}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -3821,7 +3855,7 @@ Transform:
   m_PrefabInternal: {fileID: 1096540243}
   m_GameObject: {fileID: 1459672823}
   m_LocalRotation: {x: 0, y: .719943523, z: 0, w: .694032729}
-  m_LocalPosition: {x: -6.0664959, y: -2.08977222, z: 4.49307263e-05}
+  m_LocalPosition: {x: -6.0664959, y: -2.08977222, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1196545526}
@@ -4344,7 +4378,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1706684723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.47061443, y: -1.59000397, z: 0}
+  m_LocalPosition: {x: -6.03897238, y: -2.63708019, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 370689759}

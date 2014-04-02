@@ -69,6 +69,8 @@ public class PlayerMove : MonoBehaviour
 	public void Move(Vector3 direction)
 	{
 		rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*MoveSpeed);
+		//pTran.Translate(direction*Time.deltaTime*MoveSpeed,Space.World);
+		
 		if(GetComponent<Player>().LoFi == false)
 			pTran.forward = direction;
 	}
