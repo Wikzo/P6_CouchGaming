@@ -170,7 +170,8 @@ Transform:
   m_LocalRotation: {x: -.00242069573, y: -.707102656, z: .707102716, w: .00242063473}
   m_LocalPosition: {x: .00863623619, y: 5.89340448, z: 2.0950458}
   m_LocalScale: {x: 1.29550385, y: .745170176, z: .903482556}
-  m_Children: []
+  m_Children:
+  - {fileID: 1659399089}
   m_Father: {fileID: 0}
 --- !u!114 &148398461
 MonoBehaviour:
@@ -930,6 +931,42 @@ Prefab:
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: RespawnBlinkRate
       value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Keyboard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: GroundDetectOffset
+      value: .699999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LaserShotObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LaserDiskObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ProjectileObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ShotForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ChargeSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: MaxChargeTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Constraints
+      value: 72
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2042,6 +2079,38 @@ Prefab:
       propertyPath: RespawnBlinkRate
       value: .200000003
       objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: GroundDetectOffset
+      value: .699999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LaserShotObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LaserDiskObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ProjectileObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ShotForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ChargeSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: MaxChargeTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Constraints
+      value: 72
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2369,7 +2438,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!114 &1333197873
 MonoBehaviour:
@@ -2383,10 +2452,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 200
-  chargeSpeed: 5
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 5
+  ChargeSpeed: 2
+  MaxChargeTime: 6
+  ShotAmount: 1
 --- !u!114 &1333197874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2400,6 +2472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 1
   Score: 0
   Id: 0
   DeathTime: 5
@@ -2445,6 +2518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &1333197877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2646,6 +2720,38 @@ Prefab:
       propertyPath: RespawnBlinkRate
       value: .200000003
       objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: GroundDetectOffset
+      value: .699999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LaserShotObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LaserDiskObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ProjectileObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ShotForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ChargeSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: MaxChargeTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Constraints
+      value: 72
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2798,10 +2904,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 200
-  chargeSpeed: 5
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 5
+  ChargeSpeed: 2
+  MaxChargeTime: 6
+  ShotAmount: 1
 --- !u!114 &1475358123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2816,6 +2925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &1475358124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2844,6 +2954,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
   Id: 2
   DeathTime: 5
@@ -2877,7 +2988,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!23 &1475358127
 Renderer:
@@ -3196,10 +3307,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 200
-  chargeSpeed: 5
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 5
+  ChargeSpeed: 2
+  MaxChargeTime: 6
+  ShotAmount: 1
 --- !u!114 &1596579679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3214,6 +3328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &1596579680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3242,6 +3357,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
   Id: 3
   DeathTime: 5
@@ -3275,7 +3391,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!23 &1596579683
 Renderer:
@@ -3410,16 +3526,16 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1659399088}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.46733236, y: -1.98264265, z: -2.29026985}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: .00242069573, y: .707102656, z: -.707102716, w: .00242063473}
+  m_LocalPosition: {x: -1.16756606, y: 5.88498878, z: 8.7061739}
+  m_LocalScale: {x: .771915793, y: 1.10681212, z: 1.34197509}
   m_Children:
   - {fileID: 567528505}
   - {fileID: 643583295}
   - {fileID: 1130285509}
   - {fileID: 823400888}
   - {fileID: 1913795748}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 148398460}
 --- !u!1 &1662069004
 GameObject:
   m_ObjectHideFlags: 0
@@ -3602,10 +3718,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 200
-  chargeSpeed: 5
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 5
+  ChargeSpeed: 2
+  MaxChargeTime: 6
+  ShotAmount: 1
 --- !u!114 &1829481887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3620,6 +3739,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &1829481888
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3648,6 +3768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
   Id: 1
   DeathTime: 5
@@ -3681,7 +3802,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 72
   m_CollisionDetection: 0
 --- !u!23 &1829481891
 Renderer:
@@ -3841,6 +3962,38 @@ Prefab:
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: RespawnBlinkRate
       value: .200000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: GroundDetectOffset
+      value: .699999988
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LaserShotObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: LaserDiskObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ProjectileObj
+      value: 
+      objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ShotForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ChargeSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: MaxChargeTime
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Constraints
+      value: 72
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}

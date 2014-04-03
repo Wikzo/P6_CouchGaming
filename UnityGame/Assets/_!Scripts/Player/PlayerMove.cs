@@ -15,6 +15,8 @@ public class PlayerMove : MonoBehaviour
 
 	private ControllerState controllerState;
 
+	private Player playerScript;
+
 	private bool canMove = true;
 
 
@@ -40,6 +42,8 @@ public class PlayerMove : MonoBehaviour
 		pTran = transform;
 
 		controllerState = GetComponent<ControllerState>();
+
+		playerScript = GetComponent<Player>();
 	}
 	
 	// Update is called once per frame
@@ -47,12 +51,12 @@ public class PlayerMove : MonoBehaviour
 	{
 		if(CanMove)
 		{
-			if(controllerState.GetCurrentState().ThumbSticks.Left.X < 0)
+			if(controllerState.GetCurrentState().ThumbSticks.Left.X < 0 || playerScript.Keyboard && Input.GetKey(KeyCode.A))
 			{
 				Move(Vector3.left);
 				MovingLeft = true;
 			}
-			else if(controllerState.GetCurrentState().ThumbSticks.Left.X > 0)
+			else if(controllerState.GetCurrentState().ThumbSticks.Left.X > 0 || playerScript.Keyboard && Input.GetKey(KeyCode.D))
 			{
 				Move(Vector3.right);
 				MovingRight = true;
@@ -65,7 +69,7 @@ public class PlayerMove : MonoBehaviour
 		}
 	}
 
-	//MAYBE THIS SHOULD BE CALLED FROM FIXED UPDATE:
+	//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
 	public void Move(Vector3 direction)
 	{
 		rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*MoveSpeed);

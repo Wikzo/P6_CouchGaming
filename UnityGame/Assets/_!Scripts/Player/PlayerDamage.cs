@@ -45,7 +45,7 @@ public class PlayerDamage : MonoBehaviour {
 	{
 		if(playerScript.PState == PlayerState.Alive)
 		{	
-			if(killObject == "LaserBullet" && shieldEnabled == false)
+			if(killObject == "Projectile" && shieldEnabled == false)
 			{
 				playerScript.KilledBy = objectOwner;
 				StartCoroutine(playerScript.Die());

@@ -4,7 +4,7 @@
 TagManager:
   tags:
   - floor
-  - LaserBullet
+  - Projectile
   - NotCollidable
   - 
   Builtin Layer 0: Default
