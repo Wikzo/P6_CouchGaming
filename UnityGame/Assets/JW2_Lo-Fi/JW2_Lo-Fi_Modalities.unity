@@ -571,10 +571,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 200
-  chargeSpeed: 5
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 0}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 100
+  ChargeSpeed: 3
+  MaxChargeTime: 10
+  ShotAmount: 1
 --- !u!114 &281371094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -589,6 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &281371095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,6 +621,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
   Id: 3
   DeathTime: 5
@@ -1017,10 +1022,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 200
-  chargeSpeed: 5
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 0}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 100
+  ChargeSpeed: 3
+  MaxChargeTime: 10
+  ShotAmount: 1
 --- !u!114 &413831649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1035,6 +1043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &413831650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1063,6 +1072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
   Id: 1
   DeathTime: 5
@@ -1287,10 +1297,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 200
-  chargeSpeed: 5
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 0}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 100
+  ChargeSpeed: 3
+  MaxChargeTime: 10
+  ShotAmount: 1
 --- !u!114 &506517933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,6 +1318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &506517934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1333,6 +1347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 1
+  Keyboard: 0
   Score: 0
   Id: 0
   DeathTime: 5
@@ -3724,10 +3739,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 200
-  chargeSpeed: 5
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 0}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 100
+  ChargeSpeed: 3
+  MaxChargeTime: 10
+  ShotAmount: 1
 --- !u!114 &1459672827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3742,6 +3760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &1459672828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3770,6 +3789,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
   Id: 2
   DeathTime: 5
@@ -3860,6 +3880,45 @@ Transform:
   m_Children:
   - {fileID: 1196545526}
   - {fileID: 604756992}
+  m_Father: {fileID: 0}
+--- !u!1 &1461852977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1461852979}
+  - 114: {fileID: 1461852978}
+  m_Layer: 0
+  m_Name: DataSaver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1461852978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1461852977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6748c7f59cb57d648a07b468560cd2b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  highScores: []
+--- !u!4 &1461852979
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1461852977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.44250035, y: 5.41754532, z: -2.43711662}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &1524890567
 GameObject:
