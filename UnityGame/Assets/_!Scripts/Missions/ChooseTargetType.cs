@@ -1,15 +1,17 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using System.Collections;
 
 
 public class ChooseTargetType : MonoBehaviour
 {
+    protected HowToChooseTarget chooseTarget;
+    private MissionBase missionBase;
 
-    private HowToChooseTarget chooseTarget;
-    public MissionBase missionBase;
+    public List<GameObject> TargetList;
 
-    void Start()
+    private void Awake() // important that this is called in Awake (before Start)!
     {
 
         missionBase = GetComponent<MissionBase>();
@@ -19,17 +21,18 @@ public class ChooseTargetType : MonoBehaviour
         this.chooseTarget = missionBase.HowToChooseTarget;
 
         DecideHowToChooseTarget();
-
-
     }
 
-    void DecideHowToChooseTarget()
+    public void DecideHowToChooseTarget()
     {
         switch (this.chooseTarget)
         {
-            case HowToChooseTarget.ChooseTargetBasedOnChildren:
-                ChooseTargetBasedOnChildrenPool();
+             case HowToChooseTarget.ChooseTargetBasedOnList:
+                ChooseTargetBasedOnListPool();
                 break;
+            /*case HowToChooseTarget.ChooseTargetBasedOnChildren:
+                ChooseTargetBasedOnChildrenPool();
+                break;*/
             case HowToChooseTarget.ChooseTargetAmongAllPlayers:
             case HowToChooseTarget.ChooseTargetAmongAllPlayersExceptMe:
                 SetTargetsToPlayers();
@@ -40,7 +43,16 @@ public class ChooseTargetType : MonoBehaviour
         }
     }
 
-    public void ChooseTargetBasedOnChildrenPool()
+    public virtual void ChooseTargetBasedOnListPool()
+    {
+        if (TargetList.Count <= 0)
+            Debug.Log("ERROR - target list is empty!");
+
+        missionBase.TargetPool = TargetList;
+
+    }
+
+    /*public void ChooseTargetBasedOnChildrenPool()
     {
         missionBase.TargetPool = new List<GameObject>();
 
@@ -55,7 +67,7 @@ public class ChooseTargetType : MonoBehaviour
 
         if (missionBase.TargetPool.Count <= 0)
             Debug.Log("ERROR - mission needs to have some potential targets!");
-    }
+    }*/
 
     public void SetTargetsToPlayers()
     {

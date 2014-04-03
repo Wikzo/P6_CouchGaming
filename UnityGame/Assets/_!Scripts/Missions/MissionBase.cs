@@ -13,7 +13,8 @@ public enum MissionType
 
 public enum HowToChooseTarget
 {
-    ChooseTargetBasedOnChildren,
+    ChooseTargetBasedOnList,
+    //ChooseTargetBasedOnChildren,
     ChooseTargetAmongAllPlayers,
     ChooseTargetAmongAllPlayersExceptMe,
     Other
@@ -29,6 +30,7 @@ public abstract class MissionBase : MonoBehaviour
     [HideInInspector]
     public GameObject Player;
 
+    [HideInInspector]
     public List<GameObject> TargetPool;
     
     //[HideInInspector]
@@ -44,19 +46,17 @@ public abstract class MissionBase : MonoBehaviour
     [HideInInspector]
     public int TargetRumbleCount;
 
-    public bool IsTemplateMission; //TODO: target system does not work on children
-
-
     //public MissionBase Template;
 
     // An abstract function has to be overridden while a virtual function may be overridden.
 
-    public virtual void InitializeMission(GameObject player, GameObject target, MissionBase Template)
+    public virtual void InitializeMission(GameObject player, MissionBase Template)
     {
         if (Template == null)
-            Debug.Log("ERROR, Mission Templates have not been assigned!");
+            Debug.Log("ERROR, Mission Templates have not been assigned for " + player);
 
-        IsTemplateMission = false; // this function is not called on template missions, anyway
+        if (Template.TargetPool.Count <= 0)
+            Debug.Log("ERROR - Target pool is empty for " + player);
 
         // Use specific values
         this.Player = player;
@@ -73,16 +73,16 @@ public abstract class MissionBase : MonoBehaviour
 
     public GameObject ChooseRandomTarget(MissionBase Template)
     {
-        if (Template.Target == null)
-            return null;
-
         System.Random random = new System.Random();
 
         switch (Template.HowToChooseTarget)
         {
-                case HowToChooseTarget.ChooseTargetBasedOnChildren:
-                case HowToChooseTarget.ChooseTargetAmongAllPlayers:
-                    return Template.TargetPool[random.Next(0, Template.TargetPool.Count)];
+            //case HowToChooseTarget.ChooseTargetBasedOnChildren:
+            case HowToChooseTarget.ChooseTargetBasedOnList:
+            case HowToChooseTarget.ChooseTargetAmongAllPlayers:
+                int r = random.Next(0, Template.TargetPool.Count);
+                print(r);
+                    return Template.TargetPool[r];
                 break;
 
             case HowToChooseTarget.ChooseTargetAmongAllPlayersExceptMe:

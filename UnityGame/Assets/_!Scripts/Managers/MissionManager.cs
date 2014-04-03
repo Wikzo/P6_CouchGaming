@@ -13,12 +13,10 @@ public class MissionManager : MonoBehaviour
     
     private List<MissionBase> MissionPoolList;
     
-    [HideInInspector]
     public MissionBase[] ChosenMissions; // templates
     [HideInInspector] public MissionBase[] InstantiatedMissions; // actual missions on players
 
     GameObject[] Players;
-    public GameObject[] Targets;
 
     //  public static Instance  
     public static MissionManager Instance
@@ -85,7 +83,7 @@ public class MissionManager : MonoBehaviour
 
             string scriptName = ChosenMissions[i].ToString();
             Players[i].AddComponent(scriptName);
-            Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], Targets[i], ChosenMissions[i]);
+            Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], ChosenMissions[i]);
             InstantiatedMissions[i] = Players[i].GetComponent<MissionBase>();
         }
 
@@ -98,8 +96,8 @@ public class MissionManager : MonoBehaviour
             if (!m.MissionIsActive) // dont look into inactive missions
                 return;
 
-            if (m.MissionAccomplished()) // look if mission has been accomplished
-                Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+            //if (m.MissionAccomplished()) // look if mission has been accomplished
+              //  Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
         }
     }
 
@@ -118,7 +116,7 @@ public class MissionManager : MonoBehaviour
     {
         Random.seed = (int)System.DateTime.Now.Ticks;
 
-        return missions[Random.Range(0, missions.Count-1)];
+        return missions[Random.Range(0, missions.Count)];
 
         // TODO: implement probability into Missions
         /*float total = 0;

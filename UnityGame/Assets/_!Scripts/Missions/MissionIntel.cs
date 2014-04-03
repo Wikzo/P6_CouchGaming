@@ -4,17 +4,13 @@ using System.Collections;
 
 public class MissionIntel : MissionBase
 {
+    // Intel base = Target
+    // IntelToSteal = prop to steal
+    public GameObject IntelPropToSteal;
 
-    public List<GameObject> IntelBasePool;
-    public List<GameObject> IntelPropPool;
-
-    public GameObject IntelBase;
-    public GameObject IntelProp;
-
-    public override void InitializeMission(GameObject player, GameObject target, MissionBase Template)
+    public override void InitializeMission(GameObject player, MissionBase Template)
     {
-        base.InitializeMission(player, target, Template);
-        this.Target = null;
+        base.InitializeMission(player, Template);
         SetTargetBaseAndIntel(Template);
     }
 
@@ -23,9 +19,8 @@ public class MissionIntel : MissionBase
         if (template is MissionIntel)
         {
             MissionIntel intel = (MissionIntel)template;
-            this.IntelBase = intel.IntelBase;
-            this.IntelProp = intel.IntelProp;
-            Debug.Log("Successfully casted from MissionBase to MissionIntel");
+            this.IntelPropToSteal = intel.IntelPropToSteal;
+            //Debug.Log("Successfully casted from MissionBase to MissionIntel");
         }
         else
             Debug.Log("ERROR - could not cast from MissionBase to MissionIntel!");
@@ -36,7 +31,7 @@ public class MissionIntel : MissionBase
         _missionIsActive = false;
 
         return false;
-        if (IntelProp.transform.position.x > IntelBase.transform.position.x)
+        if (IntelPropToSteal.transform.position.x > Target.transform.position.x)
         {
             _missionIsActive = false;
             return true;
