@@ -54,6 +54,8 @@ public class PlayerJump : MonoBehaviour {
 		if(CanJump && controllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
 			rigidbody.AddForce(Vector3.up*JumpForce);
+
+		    DataSaver.Instance.highScores[0].timesJumped++;
 		}
 	}
 }
