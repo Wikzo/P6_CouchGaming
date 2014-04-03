@@ -12,6 +12,7 @@ public enum PlayerState
 public class Player : MonoBehaviour {
 
 	public bool LoFi = false;
+	public bool Keyboard = false;
 
 	public int Score;
 	public int Id;
@@ -70,7 +71,7 @@ public class Player : MonoBehaviour {
 		if(PState == PlayerState.Respawning)
 		{
 			float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
-			renderer.material.Lerp(Materials[0], blinkMat, lerp);
+			renderer.material.Lerp(pMat, blinkMat, lerp);
 		}
 		else
 			renderer.material = pMat;
@@ -80,6 +81,8 @@ public class Player : MonoBehaviour {
 	public IEnumerator Die()
 	{
 		PState = PlayerState.Dead;
+		rigidbody.velocity = Vector3.zero;
+		rigidbody.angularVelocity = Vector3.zero;
 		renderer.enabled = false;
 		pTran.position = new Vector3(-1000,-1000,-1000);
 		yield return new WaitForSeconds(DeathTime);
