@@ -46,6 +46,8 @@ public abstract class MissionBase : MonoBehaviour
     [HideInInspector]
     public int TargetRumbleCount;
 
+    public static List<int> TargetNumbersUsed = new List<int>();
+
     //public MissionBase Template;
 
     // An abstract function has to be overridden while a virtual function may be overridden.
@@ -80,8 +82,9 @@ public abstract class MissionBase : MonoBehaviour
             //case HowToChooseTarget.ChooseTargetBasedOnChildren:
             case HowToChooseTarget.ChooseTargetBasedOnList:
             case HowToChooseTarget.ChooseTargetAmongAllPlayers:
-                int r = random.Next(0, Template.TargetPool.Count);
-                print(r);
+                //int r = random.Next(0, Template.TargetPool.Count);
+                int r = GetUniqueRandomNumber(0, Template.TargetPool.Count);
+                //print(r);
                     return Template.TargetPool[r];
                 break;
 
@@ -106,6 +109,24 @@ public abstract class MissionBase : MonoBehaviour
                 break;
 
         }
+    }
+
+    int GetUniqueRandomNumber(int min, int max) // "relative random" target
+    {
+        Random.seed = (int)System.DateTime.Now.Ticks;
+
+        int number = Random.Range(min, max);
+        int tries = 0;
+
+        while (TargetNumbersUsed.Contains(number) && tries < 1)
+        {
+            number = Random.Range(min, max);
+            tries++;
+        }
+
+        TargetNumbersUsed.Add(number);
+        return number;
+
     }
 
     public abstract bool MissionAccomplished();

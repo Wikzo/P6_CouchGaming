@@ -13,10 +13,10 @@ public class MissionManager : MonoBehaviour
     
     private List<MissionBase> MissionPoolList;
     
-    public MissionBase[] ChosenMissions; // templates
-    [HideInInspector] public MissionBase[] InstantiatedMissions; // actual missions on players
+    public List<MissionBase> ChosenMissions; // templates
+    [HideInInspector] public List<MissionBase> InstantiatedMissions; // actual missions on players
 
-    GameObject[] Players;
+    public List <GameObject> Players;
 
     //  public static Instance  
     public static MissionManager Instance
@@ -55,11 +55,11 @@ public class MissionManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        ChosenMissions = new MissionBase[4];
-        InstantiatedMissions = new MissionBase[4];
-        Players = new GameObject[4];
-
-        MissionPoolList = new List<MissionBase>();
+        Players = GameManager.Instance.Players;
+        ChosenMissions = new List<MissionBase>(Players.Count);
+        MissionPoolList = new List<MissionBase>(4);
+        InstantiatedMissions = new List<MissionBase>(4);
+        
 
         MissionBase[] allChildren = GetComponentsInChildren<MissionBase>();
         foreach (MissionBase mission in allChildren)
@@ -67,24 +67,15 @@ public class MissionManager : MonoBehaviour
             MissionPoolList.Add(mission);
         }
         
-        // choose from set
-        /*ChosenMissions = ChooseMissionsFromSet(4, MissionPool);
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < Players.Count; i++)
         {
-            ChosenMissions[i].InitializeMission(Players[i], Targets[i]);            
-        }*/
-        
-        // choose randomly
-        for (int i = 0; i < 4; i++)
-        {
-            Players[i] = GameManager.Instance.Players[i];
+            MissionBase c = GetUniqueMission();
+            //ChosenMissions[i] = ChooseRandomMission(MissionPoolList);
 
-            ChosenMissions[i] = ChooseRandomMission(MissionPoolList);
-
-            string scriptName = ChosenMissions[i].ToString();
+            string scriptName = c.ToString();
             Players[i].AddComponent(scriptName);
-            Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], ChosenMissions[i]);
-            InstantiatedMissions[i] = Players[i].GetComponent<MissionBase>();
+            Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c);
+            InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>());
         }
 
     }
@@ -101,7 +92,7 @@ public class MissionManager : MonoBehaviour
         }
     }
 
-    void ShuffleMissions(MissionBase[] missions)
+    void ShuffleMissions(MissionBase[] missions) // NOT USED ANYMORE
     {
         for (int i = 0; i < missions.Length; i++)
         {
@@ -112,8 +103,27 @@ public class MissionManager : MonoBehaviour
         }
     }
 
-    MissionBase ChooseRandomMission(List<MissionBase> missions)
+    MissionBase GetUniqueMission() // "relative random" mission
     {
+        Random.seed = (int)System.DateTime.Now.Ticks;
+
+        MissionBase m = MissionPoolList[Random.Range(0, MissionPoolList.Count)];
+        int tries = 0;
+
+        while (ChosenMissions.Contains(m) && tries < 1)
+        {
+            m = MissionPoolList[Random.Range(0, MissionPoolList.Count)];
+            tries++;
+        }
+
+        ChosenMissions.Add(m);
+        return m;
+
+    }
+
+    MissionBase ChooseRandomMission(List<MissionBase> missions) // NOT USED ANYMORE
+    {
+        
         Random.seed = (int)System.DateTime.Now.Ticks;
 
         return missions[Random.Range(0, missions.Count)];
@@ -137,7 +147,7 @@ public class MissionManager : MonoBehaviour
         return cards[cards.Length - 1];*/
     }
 
-    MissionBase[] ChooseMissionsFromSet(int howManyToChoose, MissionBase[] availableMissions)
+    MissionBase[] ChooseMissionsFromSet(int howManyToChoose, MissionBase[] availableMissions) // NOT USED ANYMORE
     {
         Random.seed = (int)System.DateTime.Now.Ticks;
 
