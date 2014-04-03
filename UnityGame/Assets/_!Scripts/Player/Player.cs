@@ -9,6 +9,8 @@ public enum PlayerState
 	Dead
 };
 
+
+[RequireComponent(typeof(TargetIDColor))]
 public class Player : MonoBehaviour {
 
 	public bool LoFi = false;

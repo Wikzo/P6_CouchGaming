@@ -20,6 +20,15 @@ public enum HowToChooseTarget
     Other
 }
 
+public enum MissionIDRumbleState
+{
+    NotAssigned,
+    One,
+    Two,
+    Three,
+    Four
+}
+
 public abstract class MissionBase : MonoBehaviour
 {
     public int Points;
@@ -30,7 +39,7 @@ public abstract class MissionBase : MonoBehaviour
     [HideInInspector]
     public GameObject Player;
 
-    [HideInInspector]
+    //[HideInInspector]
     public List<GameObject> TargetPool;
     
     //[HideInInspector]
@@ -39,19 +48,15 @@ public abstract class MissionBase : MonoBehaviour
     public MissionType MissionType;
     public HowToChooseTarget HowToChooseTarget;
     //public Texture2D Texture;
-    
-    [HideInInspector]
-    public int MissionRumbleCount;
 
-    [HideInInspector]
-    public int TargetRumbleCount;
+    public int MissionIDRumbleState; // what mission (1 to 4; Left Bumper rumble)
+    public TargetIDColorState TargetIDColorState; // target color (Right Bumper rumble)
 
     public static List<int> TargetNumbersUsed = new List<int>();
 
-    //public MissionBase Template;
+    private int ChanceOfGettingUniqueTarget = 2; // higher value = bigger chance of NOT getting same player target
 
     // An abstract function has to be overridden while a virtual function may be overridden.
-
     public virtual void InitializeMission(GameObject player, MissionBase Template)
     {
         if (Template == null)
@@ -63,44 +68,52 @@ public abstract class MissionBase : MonoBehaviour
         // Use specific values
         this.Player = player;
         this._missionIsActive = true;
+
+        this.HowToChooseTarget = Template.HowToChooseTarget;
+
         this.Target = ChooseRandomTarget(Template);
+
+        // Rumble IDs
+        //this.TargetIDColorState = Target.GetComponent<TargetIDColor>().TargetIDColorState;
 
         // Use template values
         this.MissionType = Template.MissionType;
         this.Points = Template.Points;
+        this.MissionIDRumbleState = Template.MissionIDRumbleState;
 
 
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
     }
 
-    public GameObject ChooseRandomTarget(MissionBase Template)
+    public GameObject ChooseRandomTarget(MissionBase template)
     {
         System.Random random = new System.Random();
 
-        switch (Template.HowToChooseTarget)
+        switch (this.HowToChooseTarget)
         {
             //case HowToChooseTarget.ChooseTargetBasedOnChildren:
             case HowToChooseTarget.ChooseTargetBasedOnList:
             case HowToChooseTarget.ChooseTargetAmongAllPlayers:
-                //int r = random.Next(0, Template.TargetPool.Count);
-                int r = GetUniqueRandomNumber(0, Template.TargetPool.Count);
+                int randomAmongAll = GetUniqueTarget(0, template.TargetPool.Count);
                 //print(r);
-                    return Template.TargetPool[r];
+                return template.TargetPool[randomAmongAll];
                 break;
 
             case HowToChooseTarget.ChooseTargetAmongAllPlayersExceptMe:
                 int counter = 0;
-                GameObject target = Template.TargetPool[random.Next(0, Template.TargetPool.Count)];
+                int randomExceptMyself = GetUniqueTarget(0, template.TargetPool.Count);
 
-                if (Template.HowToChooseTarget == HowToChooseTarget.ChooseTargetAmongAllPlayersExceptMe) // try to avoid myself
+                GameObject tempTarget = template.TargetPool[randomExceptMyself];
+                if (this.HowToChooseTarget == HowToChooseTarget.ChooseTargetAmongAllPlayersExceptMe) // try to avoid choosing myself
                 {
-                    while (this.Target == this.Player && counter < 100) // try to pick a new target
+                    while (tempTarget == this.Player && counter < 100) // try to pick a new target
                     {
-                        target = Template.TargetPool[random.Next(0, Template.TargetPool.Count)];
+                        randomExceptMyself = GetUniqueTarget(0, template.TargetPool.Count);
+                        tempTarget = template.TargetPool[randomExceptMyself];
                         counter++;
                     }
                 }
-                return target;
+                return template.TargetPool[randomExceptMyself];
                 break;
             
             default:
@@ -111,14 +124,14 @@ public abstract class MissionBase : MonoBehaviour
         }
     }
 
-    int GetUniqueRandomNumber(int min, int max) // "relative random" target
+    int GetUniqueTarget(int min, int max) // "relative random" target
     {
         Random.seed = (int)System.DateTime.Now.Ticks;
 
         int number = Random.Range(min, max);
         int tries = 0;
 
-        while (TargetNumbersUsed.Contains(number) && tries < 1)
+        while (TargetNumbersUsed.Contains(number) && tries < ChanceOfGettingUniqueTarget)
         {
             number = Random.Range(min, max);
             tries++;

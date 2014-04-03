@@ -46,7 +46,7 @@ public class ChooseTargetType : MonoBehaviour
     public virtual void ChooseTargetBasedOnListPool()
     {
         if (TargetList.Count <= 0)
-            Debug.Log("ERROR - target list is empty!");
+            Debug.Log("ERROR - target list is empty for " + this);
 
         missionBase.TargetPool = TargetList;
 
@@ -71,7 +71,7 @@ public class ChooseTargetType : MonoBehaviour
 
     public void SetTargetsToPlayers()
     {
-        missionBase.TargetPool = new List<GameObject>();
+        this.TargetList = GameManager.Instance.Players;
         missionBase.TargetPool = GameManager.Instance.Players; // all players
     }
 }

@@ -1,23 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
+using Random = UnityEngine.Random;
 
 public class MissionManager : MonoBehaviour
 {
     // Singleton itself
     private static MissionManager _instance;
-
-    // Fields
-    //public MissionBase[] MissionPool;
-
     
-    private List<MissionBase> MissionPoolList;
-    
-    public List<MissionBase> ChosenMissions; // templates
-    [HideInInspector] public List<MissionBase> InstantiatedMissions; // actual missions on players
+    public List<MissionBase> AllAvailableMissionsTotal; // pool of ALL missions available
+    public List<MissionBase> FourPotentialMissionsAvailable; // of the total list, four are selected as potential candiates
+    public List<MissionBase> AlreadyChosenMissions; // the missions that has already been chosen
+    [HideInInspector] public List<MissionBase> InstantiatedMissions; // actual missions on players (to make it easier to see in Inspector)
 
     public List <GameObject> Players;
 
+    public int ChanceOfGettingUniqueMissions = 5; // higher value = bigger chance of NOT getting same mission 
+                                                  //(20-50 seems like a good value if you want to ABSOLUTELY make sure that they won't get same mission!)
+                                                  // between 1 and 3 is "so-so"
     //  public static Instance  
     public static MissionManager Instance
     {
@@ -55,27 +56,38 @@ public class MissionManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        // set up all the lists
         Players = GameManager.Instance.Players;
-        ChosenMissions = new List<MissionBase>(Players.Count);
-        MissionPoolList = new List<MissionBase>(4);
+        AlreadyChosenMissions = new List<MissionBase>(Players.Count);
+        AllAvailableMissionsTotal = new List<MissionBase>(4);
         InstantiatedMissions = new List<MissionBase>(4);
         
-
+        // find all the missions parented to this game object
         MissionBase[] allChildren = GetComponentsInChildren<MissionBase>();
         foreach (MissionBase mission in allChildren)
         {
-            MissionPoolList.Add(mission);
+            AllAvailableMissionsTotal.Add(mission);
         }
-        
+
+        if (AllAvailableMissionsTotal.Count < 4)
+            Debug.Log("ERROR - at least 4 missions needs to be assigned to Mission Manager!");
+
+        // choose four missions out of the total amount
+        FourPotentialMissionsAvailable = ChooseMissionsFromSet(4, AllAvailableMissionsTotal);
+        for (int i = 1; i < 5; i++)
+        {
+            // set the rumble states for each mission (1, 2, 3, 4)
+            FourPotentialMissionsAvailable[i-1].MissionIDRumbleState = i;
+        }
+
         for (int i = 0; i < Players.Count; i++)
         {
-            MissionBase c = GetUniqueMission();
-            //ChosenMissions[i] = ChooseRandomMission(MissionPoolList);
+            MissionBase c = GetUniqueMission(); // find a "relatively random" mission
 
-            string scriptName = c.ToString();
+            string scriptName = c.ToString(); // get name of mission script so it can be attached to player
             Players[i].AddComponent(scriptName);
-            Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c);
-            InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>());
+            Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c); // set up various stuff on mission via the template mission
+            InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>()); // list of the current missions, easy to see in Inspector
         }
 
     }
@@ -92,12 +104,12 @@ public class MissionManager : MonoBehaviour
         }
     }
 
-    void ShuffleMissions(MissionBase[] missions) // NOT USED ANYMORE
+    void ShuffleMissions(List<MissionBase> missions) 
     {
-        for (int i = 0; i < missions.Length; i++)
+        for (int i = 0; i < missions.Count; i++)
         {
             MissionBase temp = missions[i];
-            int random = Random.Range(0, missions.Length);
+            int random = Random.Range(0, missions.Count);
             missions[i] = missions[random];
             missions[random] = temp;
         }
@@ -107,47 +119,21 @@ public class MissionManager : MonoBehaviour
     {
         Random.seed = (int)System.DateTime.Now.Ticks;
 
-        MissionBase m = MissionPoolList[Random.Range(0, MissionPoolList.Count)];
+        MissionBase m = FourPotentialMissionsAvailable[Random.Range(0, FourPotentialMissionsAvailable.Count)];
         int tries = 0;
 
-        while (ChosenMissions.Contains(m) && tries < 1)
+        while (AlreadyChosenMissions.Contains(m) && tries < ChanceOfGettingUniqueMissions)
         {
-            m = MissionPoolList[Random.Range(0, MissionPoolList.Count)];
+            m = FourPotentialMissionsAvailable[Random.Range(0, FourPotentialMissionsAvailable.Count)];
             tries++;
         }
-
-        ChosenMissions.Add(m);
+        
+        AlreadyChosenMissions.Add(m);
         return m;
 
     }
 
-    MissionBase ChooseRandomMission(List<MissionBase> missions) // NOT USED ANYMORE
-    {
-        
-        Random.seed = (int)System.DateTime.Now.Ticks;
-
-        return missions[Random.Range(0, missions.Count)];
-
-        // TODO: implement probability into Missions
-        /*float total = 0;
-
-        foreach (GameObject c in cards)
-            total += c.probability; // add up all probabilities
-
-        float random = Random.value * total; // Random.value returns value between 0.0 and 1.0
-
-        for (int i = 0; i < cards.Length; i++)
-        {
-            if (cards[i].probability > random)
-                return cards[i];
-            else
-                random -= cards[i].probability;
-        }
-
-        return cards[cards.Length - 1];*/
-    }
-
-    MissionBase[] ChooseMissionsFromSet(int howManyToChoose, MissionBase[] availableMissions) // NOT USED ANYMORE
+    List<MissionBase> ChooseMissionsFromSet(int howManyToChoose, List<MissionBase> availableMissions) // NOT USED ANYMORE
     {
         Random.seed = (int)System.DateTime.Now.Ticks;
 
@@ -157,11 +143,11 @@ public class MissionManager : MonoBehaviour
         // However, if the first was not chosen then the probability for the second will be 5 / 9 or 0.56 (ie, five still needed, nine left to choose from)
         // This continues until the set contains the five items required.
 
-        MissionBase[] result = new MissionBase[howManyToChoose];
+        List<MissionBase> result = new List<MissionBase>(howManyToChoose);
 
         int numToChoose = howManyToChoose;
 
-        for (int numLeft = availableMissions.Length; numLeft > 0; numLeft--)
+        for (int numLeft = availableMissions.Count; numLeft > 0; numLeft--)
         {
             // Adding 0.0 is simply to cast the integers to float for the division.
             float probability = numToChoose + 0.0f / numLeft + 0.0f;
@@ -169,7 +155,7 @@ public class MissionManager : MonoBehaviour
             if (probability >= Random.value)
             {
                 numToChoose--;
-                result[numToChoose] = availableMissions[numLeft - 1];
+                result.Add(availableMissions[numLeft - 1]);
             }
 
             if (numToChoose == 0)
