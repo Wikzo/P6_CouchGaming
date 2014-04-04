@@ -23,6 +23,7 @@ public enum HowToChooseTarget
 
 public abstract class MissionBase : MonoBehaviour
 {
+    private float intervals;
     public int Points;
     
     protected bool _missionIsActive; // only this class + derived classes can access this
@@ -32,7 +33,7 @@ public abstract class MissionBase : MonoBehaviour
     public GameObject Player;
     protected Player PlayerScript;
 
-    //[HideInInspector]
+    [HideInInspector]
     public List<GameObject> TargetPool;
     
     //[HideInInspector]
@@ -40,7 +41,7 @@ public abstract class MissionBase : MonoBehaviour
     
     public MissionType MissionType;
     public HowToChooseTarget HowToChooseTarget;
-    //public Texture2D Texture;
+    public Texture2D Texture;
 
     public int MissionIDRumble; // what mission (1 to 4; Left Bumper rumble)
     public TargetIDColorState TargetIDColorState; // target color (Right Bumper rumble)
@@ -225,7 +226,7 @@ public abstract class MissionBase : MonoBehaviour
     {
         if (!isInstanceMission) // don't rumble for template missions
             return;
-        
+
         if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
             PickMissionRumble();
 

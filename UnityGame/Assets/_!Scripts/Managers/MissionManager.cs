@@ -15,6 +15,7 @@ public class MissionManager : MonoBehaviour
     [HideInInspector] public List<MissionBase> InstantiatedMissions; // actual missions on players (to make it easier to see in Inspector)
 
     public List <GameObject> Players;
+    public List<TextMesh> MissionTextsGUI; 
 
     public int ChanceOfGettingUniqueMissions = 5; // higher value = bigger chance of NOT getting same mission 
                                                   //(20-50 seems like a good value if you want to ABSOLUTELY make sure that they won't get same mission!)
@@ -62,6 +63,9 @@ public class MissionManager : MonoBehaviour
         AllAvailableMissionsTotal = new List<MissionBase>(4);
         InstantiatedMissions = new List<MissionBase>(4);
         
+        if (MissionTextsGUI.Count != 4)
+            Debug.Log("ERROR - Mission Manager needs to have 4 links to TextMesh!");
+        
         // find all the missions parented to this game object
         MissionBase[] allChildren = GetComponentsInChildren<MissionBase>();
         foreach (MissionBase mission in allChildren)
@@ -97,13 +101,23 @@ public class MissionManager : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            GUILayout.Label(string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble));
+            string text = string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble);
+            
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + (40*i) + 5, 1000, 40), text);
+            
+            
+            //GUILayout.Label(string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble));
         }
 
     }
 
     void Update()
     {
+        for (int i = 0; i < 4; i++)
+        {
+            MissionTextsGUI[i].text = FourPotentialMissionsAvailable[i].MissionDescription;
+        }
+
         foreach (MissionBase m in InstantiatedMissions)
         {
             if (!m.MissionIsActive) // dont look into inactive missions
