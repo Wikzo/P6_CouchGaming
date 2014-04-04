@@ -77,7 +77,7 @@ public class MissionManager : MonoBehaviour
         for (int i = 1; i < 5; i++)
         {
             // set the rumble states for each mission (1, 2, 3, 4)
-            FourPotentialMissionsAvailable[i-1].MissionIDRumbleState = i;
+            FourPotentialMissionsAvailable[i-1].MissionIDRumble = i;
         }
 
         for (int i = 0; i < Players.Count; i++)
