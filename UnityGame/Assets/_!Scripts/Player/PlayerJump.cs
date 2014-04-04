@@ -10,8 +10,6 @@ public class PlayerJump : MonoBehaviour {
 	private bool canJump = true;
 	private Player playerScript;
 
-	private ControllerState controllerState;
-
 	private Transform pTran;
 
 	public bool CanJump
@@ -23,7 +21,6 @@ public class PlayerJump : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		controllerState = GetComponent<ControllerState>();
 		pTran = transform;
 
 		playerScript = GetComponent<Player>();
@@ -51,7 +48,7 @@ public class PlayerJump : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if(CanJump && controllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
+		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
 			rigidbody.AddForce(Vector3.up*JumpForce);
 

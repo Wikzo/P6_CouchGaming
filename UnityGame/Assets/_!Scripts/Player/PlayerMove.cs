@@ -13,8 +13,6 @@ public class PlayerMove : MonoBehaviour
 
 	private Transform pTran;
 
-	private ControllerState controllerState;
-
 	private Player playerScript;
 
 	private bool canMove = true;
@@ -41,8 +39,6 @@ public class PlayerMove : MonoBehaviour
 	{
 		pTran = transform;
 
-		controllerState = GetComponent<ControllerState>();
-
 		playerScript = GetComponent<Player>();
 	}
 	
@@ -51,12 +47,12 @@ public class PlayerMove : MonoBehaviour
 	{
 		if(CanMove)
 		{
-			if(controllerState.GetCurrentState().ThumbSticks.Left.X < 0 || playerScript.Keyboard && Input.GetKey(KeyCode.A))
+			if(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X < 0 || playerScript.Keyboard && Input.GetKey(KeyCode.A))
 			{
 				Move(Vector3.left);
 				MovingLeft = true;
 			}
-			else if(controllerState.GetCurrentState().ThumbSticks.Left.X > 0 || playerScript.Keyboard && Input.GetKey(KeyCode.D))
+			else if(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X > 0 || playerScript.Keyboard && Input.GetKey(KeyCode.D))
 			{
 				Move(Vector3.right);
 				MovingRight = true;

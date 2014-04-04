@@ -28,8 +28,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.45841312, y: 3.49551153, z: 4.95970488}
-  m_LocalScale: {x: .615283668, y: .0591962263, z: .615283668}
+  m_LocalPosition: {x: -1.77093601, y: -1.04916334, z: 7.267138}
+  m_LocalScale: {x: .680955648, y: .140034437, z: .5}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!23 &2300000
@@ -98,7 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c042da2a437fc4ea386c37f82eb2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BlinkMat: {fileID: 2100000, guid: 275704cbc34a81f4989c254c4201e22b, type: 2}
+  DeadlyTime: 1
+  DeadlyBlinkRate: .200000003
   MaxReflections: 3
+  VelocityReflection: 0
+  ForceReflection: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

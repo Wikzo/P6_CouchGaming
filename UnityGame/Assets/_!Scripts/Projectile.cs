@@ -3,13 +3,21 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour 
 {
+	public Material BlinkMat;
+
+	public float DeadlyTime = 1;
+	public float DeadlyBlinkRate = 0.1f;
+
 	public int MaxReflections = 2;
 	public bool VelocityReflection = false;
 	public bool ForceReflection = false;
 
 	private int reflectionCount = 0;
+	private bool hasHit = false;
 
 	private string owner;
+
+	private Material pMat;
 
 	public string Owner
 	{
@@ -20,19 +28,43 @@ public class Projectile : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-
+		pMat = new Material(BlinkMat.shader);
+		pMat.color = renderer.material.color;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		
+		if(DeadlyTime > 0)
+		{
+			DeadlyTime -= Time.deltaTime;
+
+			float lerp = Mathf.PingPong(Time.time, DeadlyBlinkRate) / DeadlyBlinkRate;
+			renderer.material.Lerp(pMat, BlinkMat, lerp);
+		}
+		else
+		{
+			renderer.material = pMat;
+		}
 	}
 
 	void OnCollisionEnter(Collision collision)
 	{
 		if(collision.gameObject.tag != "NotCollidable")
 		{
+			if(collision.gameObject.GetComponent<PlayerDamage>())
+			{
+				if(DeadlyTime > 0)
+				{
+					collision.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
+				}
+				else if(collision.gameObject.name == Owner)
+				{
+					collision.gameObject.GetComponent<PlayerAim>().ShotAmount++;
+					Destroy(gameObject);
+				}
+			}
+
 			//VELOCITY REFLECTION:
 			if(VelocityReflection)
 			{
@@ -51,7 +83,6 @@ public class Projectile : MonoBehaviour
       				rigidbody.angularVelocity = Vector3.zero;
       			}
       			reflectionCount++;
-      			//rigidbody.useGravity = true;
       		}
       		
       		//FORCE REFLECTION:
@@ -77,7 +108,7 @@ public class Projectile : MonoBehaviour
       			rigidbody.velocity = Vector3.zero;
       			rigidbody.angularVelocity = Vector3.zero;
       		}
-      		//rigidbody.useGravity = true;
+      		
 		}	
 	}
 }
