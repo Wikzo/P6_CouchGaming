@@ -31,6 +31,7 @@ public class Player : MonoBehaviour {
 	public string KilledBy;
 	[HideInInspector]
 	public PlayerIndex PlayerController;
+	public ControllerState PlayerControllerState;
 
 	private Transform pTran;
 	private GameObject spawnPoint;
@@ -65,6 +66,8 @@ public class Player : MonoBehaviour {
 			break;
 		}
 		renderer.material = pMat;
+
+		PlayerControllerState = GetComponent<ControllerState>();
 	}
 	
 	// Update is called once per frame
