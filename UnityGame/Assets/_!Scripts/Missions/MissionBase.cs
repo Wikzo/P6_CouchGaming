@@ -58,6 +58,8 @@ public abstract class MissionBase : MonoBehaviour
 
     protected bool isInstanceMission = false;
 
+    public string MissionDescription = "MISSION";
+
 
     // An abstract function has to be overridden while a virtual function may be overridden.
     public virtual void InitializeMission(GameObject player, MissionBase Template)
