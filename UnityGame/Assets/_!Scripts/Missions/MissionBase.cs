@@ -21,15 +21,6 @@ public enum HowToChooseTarget
     Other
 }
 
-public enum MissionIDRumbleState
-{
-    NotAssigned,
-    One,
-    Two,
-    Three,
-    Four
-}
-
 public abstract class MissionBase : MonoBehaviour
 {
     public int Points;
@@ -62,6 +53,10 @@ public abstract class MissionBase : MonoBehaviour
     protected float missionTimeCounter;
     protected bool isDisplayingMissionOrTargetRumbleRightNow;
     protected int missionRumbleCounter;
+    protected int targetRumbleCounter;
+    protected float targetTimeCounter;
+
+    protected bool isInstanceMission = false;
 
 
     // An abstract function has to be overridden while a virtual function may be overridden.
@@ -87,12 +82,15 @@ public abstract class MissionBase : MonoBehaviour
         this.Target = ChooseRandomTarget(Template);
 
         // Rumble IDs
-        //this.TargetIDColorState = Target.GetComponent<TargetIDColor>().TargetIDColorState;
+        if (Target.GetComponent<TargetIDColor>() == null)
+            Debug.Log("ERROR  - mission hasn't been assigned a target " + this);
+        this.TargetIDColorState = Target.GetComponent<TargetIDColor>().TargetIDColorState;
 
         // Use template values
         this.MissionType = Template.MissionType;
         this.Points = Template.Points;
         this.MissionIDRumble = Template.MissionIDRumble;
+        this.isInstanceMission = true;
 
 
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
@@ -156,7 +154,7 @@ public abstract class MissionBase : MonoBehaviour
     }
 
 
-    public void PickMissionRumble()
+    public void PickMissionRumble() // check if ready to display mission
     {
         if (isDisplayingMissionOrTargetRumbleRightNow)
             return;
@@ -167,8 +165,9 @@ public abstract class MissionBase : MonoBehaviour
 
     }
 
-    public void MissionRumbler(float interval)
+    public void MissionRumbler(float interval) // display mission (rumble)
     {
+        //print("rumble " + missionRumbleCounter + " " + this);
         if (missionTimeCounter < interval)
         {
             missionTimeCounter += Time.deltaTime;
@@ -181,8 +180,6 @@ public abstract class MissionBase : MonoBehaviour
         }
         else
         {
-            transform.guiText.text = "";
-
             missionTimeCounter = 0;
             missionRumbleCounter--;
             isDisplayingMissionOrTargetRumbleRightNow = false;
@@ -190,21 +187,54 @@ public abstract class MissionBase : MonoBehaviour
         }
     }
 
+    public void PickTargetRumble() // check if ready to display target
+    {
+        if (isDisplayingMissionOrTargetRumbleRightNow)
+            return;
+        else
+            isDisplayingMissionOrTargetRumbleRightNow = true;
+
+        targetRumbleCounter = (int)this.TargetIDColorState;
+
+    }
+
+    public void TargetRumbler(float interval) // display target (rumble)
+    {
+        if (targetTimeCounter < interval)
+        {
+            targetTimeCounter += Time.deltaTime;
+            GamePad.SetVibration(PlayerScript.PlayerController, 1, 1);
+        }
+        else if (targetTimeCounter < interval * 3)
+        {
+            targetTimeCounter += Time.deltaTime;
+            GamePad.SetVibration(PlayerScript.PlayerController, 0, 0);
+        }
+        else
+        {
+            targetTimeCounter = 0;
+            targetRumbleCounter--;
+            isDisplayingMissionOrTargetRumbleRightNow = false;
+
+        }
+    }
+
     public void Update()
     {
-        print("update in " + this);
-        /*
-        if (PlayerScript && !isDisplayingMissionOrTargetRumbleRightNow)
+        if (!isInstanceMission) // don't rumble for template missions
+            return;
+        
+        if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
             PickMissionRumble();
 
-        if (buttonRBDown && !isDisplayingMissionOrTargetRumbleRightNow)
+        if (PlayerScript.PlayerControllerState.ButtonDownRightShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
             PickTargetRumble();
 
         if (missionRumbleCounter > 0)
             MissionRumbler(0.2f);
 
         if (targetRumbleCounter > 0)
-            TargetRumbler(0.2f);*/
+            TargetRumbler(0.2f);
     }
 
     public abstract bool MissionAccomplished();

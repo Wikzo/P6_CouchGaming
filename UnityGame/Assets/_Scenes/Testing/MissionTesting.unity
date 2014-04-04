@@ -299,7 +299,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.16326809
+      value: 1.15987515
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalPosition.y
@@ -343,7 +343,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.16326809
+      value: -7.18676424
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalPosition.y
@@ -373,6 +373,10 @@ Prefab:
       propertyPath: m_Name
       value: Player3
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Id
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 328331646}
@@ -396,6 +400,7 @@ GameObject:
   - 114: {fileID: 328331649}
   - 114: {fileID: 328331648}
   - 114: {fileID: 328331647}
+  - 114: {fileID: 328331658}
   m_Layer: 0
   m_Name: Player3
   m_TagString: Untagged
@@ -440,10 +445,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 100
-  chargeSpeed: 3
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 0}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 100
+  ChargeSpeed: 3
+  MaxChargeTime: 10
+  ShotAmount: 1
 --- !u!114 &328331650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &328331651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,8 +495,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
-  Id: 0
+  Id: 2
   DeathTime: 5
   RespawnTime: 3
   RespawnBlinkRate: .100000001
@@ -505,6 +515,7 @@ MonoBehaviour:
   PState: 0
   KilledBy: 
   PlayerController: 0
+  PlayerControllerState: {fileID: 0}
 --- !u!54 &328331653
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -571,12 +582,24 @@ Transform:
   m_PrefabInternal: {fileID: 171133896}
   m_GameObject: {fileID: 328331646}
   m_LocalRotation: {x: 0, y: .719943523, z: 0, w: .694032729}
-  m_LocalPosition: {x: -3.16326809, y: -1.73576665, z: 2.67218399}
+  m_LocalPosition: {x: -7.18676424, y: -1.73576665, z: 2.67218399}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1614151723}
   - {fileID: 102406555}
   m_Father: {fileID: 0}
+--- !u!114 &328331658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 328331646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 3
 --- !u!1 &337993519
 GameObject:
   m_ObjectHideFlags: 0
@@ -660,6 +683,7 @@ GameObject:
   - 33: {fileID: 347993501}
   - 135: {fileID: 347993500}
   - 23: {fileID: 347993499}
+  - 114: {fileID: 347993503}
   m_Layer: 0
   m_Name: IntelProp
   m_TagString: IntelProp
@@ -718,6 +742,18 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 605391745}
+--- !u!114 &347993503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 347993498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 4
 --- !u!1 &453361671
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,7 +865,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 2
   HowToChooseTarget: 0
-  MissionIDRumbleState: 0
+  MissionIDRumble: 0
   TargetIDColorState: 0
   IntelPropToSteal: {fileID: 0}
 --- !u!4 &605391745
@@ -950,7 +986,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.16326809
+      value: -.978632092
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalPosition.y
@@ -958,7 +994,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 2.67218399
+      value: 2.67218423
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.x
@@ -979,6 +1015,10 @@ Prefab:
     - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Name
       value: Player4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Id
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -1003,6 +1043,7 @@ GameObject:
   - 114: {fileID: 648364907}
   - 114: {fileID: 648364906}
   - 114: {fileID: 648364905}
+  - 114: {fileID: 648364915}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -1017,7 +1058,7 @@ Transform:
   m_PrefabInternal: {fileID: 136608965}
   m_GameObject: {fileID: 648364903}
   m_LocalRotation: {x: 0, y: .719943523, z: 0, w: .694032729}
-  m_LocalPosition: {x: -3.16326809, y: -1.73576665, z: 2.67218399}
+  m_LocalPosition: {x: 1.15987515, y: -1.73576665, z: 2.67218399}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1130160475}
@@ -1060,10 +1101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 100
-  chargeSpeed: 3
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 0}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 100
+  ChargeSpeed: 3
+  MaxChargeTime: 10
+  ShotAmount: 1
 --- !u!114 &648364908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1078,6 +1122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &648364909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1106,6 +1151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
   Id: 0
   DeathTime: 5
@@ -1125,6 +1171,7 @@ MonoBehaviour:
   PState: 0
   KilledBy: 
   PlayerController: 0
+  PlayerControllerState: {fileID: 0}
 --- !u!54 &648364911
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1184,6 +1231,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 136608965}
   m_GameObject: {fileID: 648364903}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &648364915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 648364903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 1
 --- !u!1 &654315090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1195,6 +1254,7 @@ GameObject:
   - 33: {fileID: 654315093}
   - 136: {fileID: 654315092}
   - 23: {fileID: 654315091}
+  - 114: {fileID: 654315095}
   m_Layer: 0
   m_Name: IntelBase0
   m_TagString: IntelBase
@@ -1254,6 +1314,18 @@ Transform:
   m_LocalScale: {x: 3.74725366, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 605391745}
+--- !u!114 &654315095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 654315090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 1
 --- !u!1 &707310114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,8 +1365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375f7901c70364442bd6dc8e020ab05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetList:
-  - {fileID: 1851039868}
+  TargetList: []
 --- !u!114 &707310117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1311,8 +1382,8 @@ MonoBehaviour:
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 0
-  HowToChooseTarget: 0
-  MissionIDRumbleState: 0
+  HowToChooseTarget: 1
+  MissionIDRumble: 0
   TargetIDColorState: 0
 --- !u!1 &745225792
 GameObject:
@@ -1397,6 +1468,7 @@ GameObject:
   - 33: {fileID: 870845380}
   - 136: {fileID: 870845379}
   - 23: {fileID: 870845378}
+  - 114: {fileID: 870845382}
   m_Layer: 0
   m_Name: IntelBase1
   m_TagString: IntelBase
@@ -1456,6 +1528,18 @@ Transform:
   m_LocalScale: {x: 3.74725366, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 605391745}
+--- !u!114 &870845382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 870845377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 1
 --- !u!1 &941274198
 GameObject:
   m_ObjectHideFlags: 0
@@ -1501,7 +1585,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 0
   HowToChooseTarget: 2
-  MissionIDRumbleState: 0
+  MissionIDRumble: 0
   TargetIDColorState: 0
 --- !u!114 &941274201
 MonoBehaviour:
@@ -1575,8 +1659,8 @@ MonoBehaviour:
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 1
-  HowToChooseTarget: 0
-  MissionIDRumbleState: 0
+  HowToChooseTarget: 1
+  MissionIDRumble: 0
   TargetIDColorState: 0
 --- !u!114 &1065852327
 MonoBehaviour:
@@ -1589,9 +1673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 375f7901c70364442bd6dc8e020ab05f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetList:
-  - {fileID: 1851039868}
-  - {fileID: 870845377}
+  TargetList: []
 --- !u!4 &1065852328
 Transform:
   m_ObjectHideFlags: 0
@@ -1614,6 +1696,7 @@ GameObject:
   - 33: {fileID: 1082021362}
   - 136: {fileID: 1082021361}
   - 23: {fileID: 1082021360}
+  - 114: {fileID: 1082021364}
   m_Layer: 0
   m_Name: IntelBase2
   m_TagString: IntelBase
@@ -1673,6 +1756,18 @@ Transform:
   m_LocalScale: {x: 3.74725366, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 605391745}
+--- !u!114 &1082021364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1082021359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 2
 --- !u!1 &1130160474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1711,6 +1806,7 @@ GameObject:
   - 33: {fileID: 1183609074}
   - 136: {fileID: 1183609073}
   - 23: {fileID: 1183609072}
+  - 114: {fileID: 1183609075}
   m_Layer: 0
   m_Name: IntelBase5
   m_TagString: IntelBase
@@ -1770,6 +1866,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1183609070}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1183609075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1183609070}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 2
 --- !u!1 &1256744996
 GameObject:
   m_ObjectHideFlags: 0
@@ -1781,6 +1889,7 @@ GameObject:
   - 33: {fileID: 1256745000}
   - 136: {fileID: 1256744999}
   - 23: {fileID: 1256744998}
+  - 114: {fileID: 1256745001}
   m_Layer: 0
   m_Name: IntelBase4
   m_TagString: IntelBase
@@ -1840,6 +1949,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1256744996}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1256745001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1256744996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 4
 --- !u!1 &1384366669
 GameObject:
   m_ObjectHideFlags: 0
@@ -2002,6 +2123,7 @@ GameObject:
   - 114: {fileID: 1522762437}
   - 114: {fileID: 1522762436}
   - 114: {fileID: 1522762435}
+  - 114: {fileID: 1522762445}
   m_Layer: 0
   m_Name: Player4
   m_TagString: Untagged
@@ -2016,7 +2138,7 @@ Transform:
   m_PrefabInternal: {fileID: 623327057}
   m_GameObject: {fileID: 1522762433}
   m_LocalRotation: {x: 0, y: .719943523, z: 0, w: .694032729}
-  m_LocalPosition: {x: -3.16326809, y: -1.73576665, z: 2.67218399}
+  m_LocalPosition: {x: -.978632092, y: -1.73576665, z: 2.67218423}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 72887145}
@@ -2059,10 +2181,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 100
-  chargeSpeed: 3
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 0}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 100
+  ChargeSpeed: 3
+  MaxChargeTime: 10
+  ShotAmount: 1
 --- !u!114 &1522762438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2077,6 +2202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &1522762439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2105,8 +2231,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
-  Id: 0
+  Id: 3
   DeathTime: 5
   RespawnTime: 3
   RespawnBlinkRate: .100000001
@@ -2124,6 +2251,7 @@ MonoBehaviour:
   PState: 0
   KilledBy: 
   PlayerController: 0
+  PlayerControllerState: {fileID: 0}
 --- !u!54 &1522762441
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2183,6 +2311,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 623327057}
   m_GameObject: {fileID: 1522762433}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1522762445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1522762433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 4
 --- !u!1 &1608180302
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,6 +2461,10 @@ Prefab:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Id
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 1995553784}
@@ -2337,6 +2481,7 @@ GameObject:
   - 33: {fileID: 1681563918}
   - 136: {fileID: 1681563917}
   - 23: {fileID: 1681563916}
+  - 114: {fileID: 1681563919}
   m_Layer: 0
   m_Name: IntelBase3
   m_TagString: IntelBase
@@ -2396,6 +2541,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1681563914}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1681563919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1681563914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 3
 --- !u!1 &1851039868
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,6 +2651,7 @@ GameObject:
   - 114: {fileID: 1995553788}
   - 114: {fileID: 1995553787}
   - 114: {fileID: 1995553786}
+  - 114: {fileID: 1995553796}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -2551,10 +2709,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47149cc7f8156be4380163a944427291, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LaserShotObj: {fileID: 100000, guid: 6ea1cc78538129d45997295876497352, type: 2}
-  shotForce: 100
-  chargeSpeed: 3
-  maxChargeTime: 10
+  ProjectileObj: {fileID: 0}
+  ShootKey: 9
+  ShotOffset: 1.5
+  ShotForce: 100
+  ChargeSpeed: 3
+  MaxChargeTime: 10
+  ShotAmount: 1
 --- !u!114 &1995553789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2569,6 +2730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpForce: 350
   GroundDetectLength: .5
+  GroundDetectOffset: .699999988
 --- !u!114 &1995553790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2597,8 +2759,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoFi: 0
+  Keyboard: 0
   Score: 0
-  Id: 0
+  Id: 1
   DeathTime: 5
   RespawnTime: 3
   RespawnBlinkRate: .100000001
@@ -2616,6 +2779,7 @@ MonoBehaviour:
   PState: 0
   KilledBy: 
   PlayerController: 0
+  PlayerControllerState: {fileID: 0}
 --- !u!54 &1995553792
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2675,6 +2839,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1639898121}
   m_GameObject: {fileID: 1995553784}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1995553796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1995553784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 2
 --- !u!1 &2117821202
 GameObject:
   m_ObjectHideFlags: 0
@@ -2720,7 +2896,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 0
   HowToChooseTarget: 2
-  MissionIDRumbleState: 0
+  MissionIDRumble: 0
   TargetIDColorState: 0
 --- !u!114 &2117821205
 MonoBehaviour:
