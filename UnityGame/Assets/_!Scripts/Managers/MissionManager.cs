@@ -11,7 +11,7 @@ public class MissionManager : MonoBehaviour
     
     public List<MissionBase> AllAvailableMissionsTotal; // pool of ALL missions available
     public List<MissionBase> FourPotentialMissionsAvailable; // of the total list, four are selected as potential candiates
-    public List<MissionBase> AlreadyChosenMissions; // the missions that has already been chosen
+    private List<MissionBase> AlreadyChosenMissions; // the missions that has already been chosen- used to try to get a "relative random" set
     [HideInInspector] public List<MissionBase> InstantiatedMissions; // actual missions on players (to make it easier to see in Inspector)
 
     public List <GameObject> Players;
@@ -74,6 +74,7 @@ public class MissionManager : MonoBehaviour
 
         // choose four missions out of the total amount
         FourPotentialMissionsAvailable = ChooseMissionsFromSet(4, AllAvailableMissionsTotal);
+        ShuffleMissions(FourPotentialMissionsAvailable);
         for (int i = 1; i < 5; i++)
         {
             // set the rumble states for each mission (1, 2, 3, 4)
@@ -88,6 +89,15 @@ public class MissionManager : MonoBehaviour
             Players[i].AddComponent(scriptName);
             Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c); // set up various stuff on mission via the template mission
             InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>()); // list of the current missions, easy to see in Inspector
+        }
+
+    }
+
+    void OnGUI()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            GUILayout.Label(string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble));
         }
 
     }

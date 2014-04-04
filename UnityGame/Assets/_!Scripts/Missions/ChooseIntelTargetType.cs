@@ -20,6 +20,10 @@ public class ChooseIntelTargetType : ChooseTargetType
 
         this.chooseTarget = missionIntel.HowToChooseTarget;
 
+        if (this.chooseTarget != HowToChooseTarget.ChooseTargetBasedOnList)
+            Debug.Log("ERROR - Intel mission should use ChooseTargetBasedOnList (target = base to move intel to" + this);
+
+
         DecideHowToChooseTarget();
     }
 

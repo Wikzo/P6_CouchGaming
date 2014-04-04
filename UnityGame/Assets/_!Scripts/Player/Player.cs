@@ -68,6 +68,9 @@ public class Player : MonoBehaviour {
 		renderer.material = pMat;
 
 		PlayerControllerState = GetComponent<ControllerState>();
+
+        if (GetComponent<TargetIDColor>() == null)
+            Debug.Log("ERROR - player needs to have TargetIDColor component " + gameObject);
 	}
 	
 	// Update is called once per frame
