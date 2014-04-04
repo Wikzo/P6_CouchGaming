@@ -85,7 +85,7 @@ public abstract class MissionBase : MonoBehaviour
 
         // Rumble IDs
         if (Target.GetComponent<TargetIDColor>() == null)
-            Debug.Log("ERROR  - mission hasn't been assigned a target " + this);
+            Debug.Log("ERROR  - target for " + this + " doesn't have a TargetIDColor!");
         this.TargetIDColorState = Target.GetComponent<TargetIDColor>().TargetIDColorState;
 
         // Use template values
