@@ -26,8 +26,6 @@ public class PlayerAim : MonoBehaviour
 	private PlayerMove playerMove;
 	private PlayerJump playerJump;
 
-	private ControllerState controllerState;
-
 	// Use this for initialization
 	void Start () 
 	{
@@ -38,8 +36,6 @@ public class PlayerAim : MonoBehaviour
 
 		chargeBar.right = Vector3.right;
 
-		controllerState = GetComponent<ControllerState>();
-
 		playerScript = GetComponent<Player>();
 		playerMove = GetComponent<PlayerMove>();
 		playerJump = GetComponent<PlayerJump>();
@@ -49,7 +45,7 @@ public class PlayerAim : MonoBehaviour
 	void Update ()
 	{
 		//THIS SHOULD BE DONE SMARTER WITHOUT CHECKING SHOTAMOUNT SO MANY TIMES
-		if(controllerState.GetCurrentState().Buttons.X == ButtonState.Pressed && ShotAmount > 0 || playerScript.Keyboard && Input.GetKey(ShootKey) && ShotAmount > 0)
+		if(playerScript.PlayerControllerState.GetCurrentState().Buttons.X == ButtonState.Pressed && ShotAmount > 0 || playerScript.Keyboard && Input.GetKey(ShootKey) && ShotAmount > 0)
 		{
 			if(playerMove.MovingLeft && !playerJump.CanJump)
 				playerMove.Move(Vector3.left);
@@ -66,7 +62,7 @@ public class PlayerAim : MonoBehaviour
 			if(playerScript.Keyboard && Input.GetKey(ShootKey))
 				direction = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
 			else
-				direction = new Vector3(controllerState.GetCurrentState().ThumbSticks.Left.X, controllerState.GetCurrentState().ThumbSticks.Left.Y, 0);
+				direction = new Vector3(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X, playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y, 0);
 
 
 			Quaternion rotation = Quaternion.LookRotation(direction, Vector3.forward);
@@ -81,13 +77,14 @@ public class PlayerAim : MonoBehaviour
 				chargeBar.position = new Vector3(pTran.position.x-0.5f+chargeBar.localScale.x/2, pTran.position.y+0.6f, pTran.position.z);
 			}
 		}
-		else if(controllerState.ButtonUpX && ShotAmount > 0 || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && ShotAmount > 0)
+		else if(playerScript.PlayerControllerState.ButtonUpX && ShotAmount > 0 || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && ShotAmount > 0)
 		{
 			projectile = Instantiate(ProjectileObj, aimTran.position+aimTran.forward*ShotOffset, Quaternion.identity) as GameObject;
 			projectile.GetComponent<Projectile>().Owner = name;
 			projectile.transform.right = aimTran.forward;
 			projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
 			//projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
+			projectile.renderer.material = renderer.material;
 			
 			chargeTimer = 1;
 

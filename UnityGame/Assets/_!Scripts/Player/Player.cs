@@ -86,8 +86,11 @@ public class Player : MonoBehaviour {
 	public IEnumerator Die()
 	{
 		PState = PlayerState.Dead;
+
 		rigidbody.velocity = Vector3.zero;
 		rigidbody.angularVelocity = Vector3.zero;
+		transform.rotation = Quaternion.identity;
+
 		renderer.enabled = false;
 		pTran.position = new Vector3(-1000,-1000,-1000);
 		yield return new WaitForSeconds(DeathTime);

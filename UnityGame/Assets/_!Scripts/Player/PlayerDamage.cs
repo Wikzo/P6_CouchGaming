@@ -41,11 +41,11 @@ public class PlayerDamage : MonoBehaviour {
 		}
 	}
 
-	public void CalculateDeath(string killObject, string objectOwner)
+	public void CalculateDeath(string killObjectTag, string objectOwner)
 	{
 		if(playerScript.PState == PlayerState.Alive)
 		{	
-			if(killObject == "Projectile" && shieldEnabled == false)
+			if(killObjectTag == "Projectile" && shieldEnabled == false)
 			{
 				playerScript.KilledBy = objectOwner;
 				StartCoroutine(playerScript.Die());
