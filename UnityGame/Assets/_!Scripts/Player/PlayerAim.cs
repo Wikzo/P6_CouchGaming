@@ -57,14 +57,14 @@ public class PlayerAim : MonoBehaviour
 				if(playerJump.CanJump)
 					playerMove.MovingLeft = false;
 				else
-					playerMove.Move(Vector3.left);
+					pTran.forward = Vector3.left;
 			}
 			else if(playerMove.MovingRight)
 			{
 				if(playerJump.CanJump)
 					playerMove.MovingRight = false;
 				else
-					playerMove.Move(Vector3.right);
+					pTran.forward = Vector3.right;
 			}
 
 			Vector3 direction;
@@ -73,6 +73,16 @@ public class PlayerAim : MonoBehaviour
 				direction = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
 			else
 				direction = new Vector3(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X, playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y, 0);
+
+			//Face the direction that the player is aiming in
+			if(direction.x < 0)
+			{
+				pTran.forward = Vector3.left;
+			}
+			else if(direction.x > 0)
+			{
+				pTran.forward = Vector3.right;
+			}
 
 			//Cancel the aim if the player is aiming downwards
 			if(direction.y == -1 && playerJump.CanJump)
