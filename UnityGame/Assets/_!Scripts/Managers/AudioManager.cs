@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     private static AudioManager _instance;
 
     // Missions audio
+    public AudioClip MissionAccomplishedSound;
     public AudioClip IntelKeyboardPressingSound;
 
     //  public static Instance  

@@ -5,6 +5,12 @@ public class MissionDefend : MissionBase
 {
     private bool targetWasAliveWhenBegan;
 
+    public override void TemplateSetUp()
+    {
+        base.TemplateSetUp();
+        print("yay defend" + this);
+    }
+
     public override bool MissionAccomplished()
     {
         if (GameManager.Instance.CurrentRoundJustEnded)
