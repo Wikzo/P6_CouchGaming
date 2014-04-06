@@ -16,15 +16,13 @@ public class MissionKill : MissionBase
     
     public override bool MissionAccomplished()
     {
-        if (!this.targetWasAliveWhenMissionBegan) // no target
-            return false;
-
-        if (this.Target == null) // target has died
+        if(this.Player.name == this.Target.GetComponent<Player>().KilledBy)
         {
-            this._missionIsActive = false;
+           this._missionIsActive = false;
             return true;
         }
 
         return false; // nothing
+        //return true;
     }
 }

@@ -15,7 +15,7 @@ public class PlayerAim : MonoBehaviour
 
 	private GameObject projectile;
 
-	private float chargeTimer = 1;
+	private float chargeTimer = 0;
 
 	private bool cancelAim = false;
 
@@ -92,7 +92,7 @@ public class PlayerAim : MonoBehaviour
 				aimTran.renderer.enabled = false;
 				chargeBar.renderer.enabled = false;
 
-				chargeTimer = 1;
+				chargeTimer = 0;
 			}
 			else
 			{

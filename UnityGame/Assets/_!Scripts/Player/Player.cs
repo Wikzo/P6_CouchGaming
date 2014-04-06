@@ -102,6 +102,7 @@ public class Player : MonoBehaviour {
 
 	public IEnumerator Respawn()
 	{
+		KilledBy = "";
 		PState = PlayerState.Respawning;
 		renderer.enabled = true;
 		pTran.position = spawnPoint.transform.position;
