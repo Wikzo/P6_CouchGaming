@@ -271,8 +271,16 @@ MonoBehaviour:
   FourPotentialMissionsAvailable: []
   InstantiatedMissions: []
   Players: []
-  MissionTexts: []
-  MissionIcons: []
+  MissionTexts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  MissionIcons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ChanceOfGettingUniqueMissions: 5
 --- !u!114 &11400006
 MonoBehaviour:
@@ -291,7 +299,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 0
   HowToChooseTarget: 2
-  Texture: {fileID: 0}
+  MissionMaterial: {fileID: 2100000, guid: 40fbacd733175e94fac6108293e47781, type: 2}
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Defend PLAYER
@@ -336,7 +344,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 0
   HowToChooseTarget: 1
-  Texture: {fileID: 0}
+  MissionMaterial: {fileID: 2100000, guid: 70222324cc54a744dbdb8397274dcac0, type: 2}
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Stay in ZONE
@@ -357,7 +365,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 0
   HowToChooseTarget: 2
-  Texture: {fileID: 0}
+  MissionMaterial: {fileID: 2100000, guid: b0676b0a8118d584b8a1801ca52f4326, type: 2}
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Kill PLAYER
@@ -390,11 +398,13 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 2
   HowToChooseTarget: 0
-  Texture: {fileID: 0}
+  MissionMaterial: {fileID: 2100000, guid: f45df0794cc3d124cb328ae3fb9e3216, type: 2}
   MissionIDRumble: 0
   TargetIDColorState: 0
-  MissionDescription: Move INTEL to BASE
+  MissionDescription: Move intel to BASE
   IntelPropToSteal: {fileID: 0}
+  XOffset: .100000001
+  YOffset: 1
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,7 +417,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetList:
-  - {fileID: 0}
   - {fileID: 0}
   IntelToSteal: {fileID: 0}
 --- !u!1001 &100100000

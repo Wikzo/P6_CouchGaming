@@ -33,7 +33,7 @@ public abstract class MissionBase : MonoBehaviour
     public GameObject Player;
     protected Player PlayerScript;
 
-    [HideInInspector]
+    //[HideInInspector]
     public List<GameObject> TargetPool;
     
     //[HideInInspector]
@@ -41,7 +41,7 @@ public abstract class MissionBase : MonoBehaviour
     
     public MissionType MissionType;
     public HowToChooseTarget HowToChooseTarget;
-    public Material Texture;
+    public Material MissionMaterial;
 
     public int MissionIDRumble; // what mission (1 to 4; Left Bumper rumble)
     public TargetIDColorState TargetIDColorState; // target color (Right Bumper rumble)
@@ -86,7 +86,7 @@ public abstract class MissionBase : MonoBehaviour
 
         // Rumble IDs
         if (Target.GetComponent<TargetIDColor>() == null)
-            Debug.Log("ERROR  - target for " + this + " doesn't have a TargetIDColor!");
+            Debug.Log("ERROR  - target for " + gameObject + " doesn't have a TargetIDColor!");
         this.TargetIDColorState = Target.GetComponent<TargetIDColor>().TargetIDColorState;
 
         // Use template values

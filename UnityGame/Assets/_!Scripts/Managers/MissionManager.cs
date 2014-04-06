@@ -100,6 +100,7 @@ public class MissionManager : MonoBehaviour
             string scriptName = c.ToString(); // get name of mission script so it can be attached to player
             Players[i].AddComponent(scriptName);
             Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c); // set up various stuff on mission via the template mission
+            Players[i].name += "_" + c.name;
             InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>()); // list of the current missions, easy to see in Inspector
         }
 
@@ -127,7 +128,7 @@ public class MissionManager : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             MissionTexts[i].text = FourPotentialMissionsAvailable[i].MissionDescription;
-            MissionIcons[i].renderer.material = FourPotentialMissionsAvailable[i].Texture; // TODO: use one parent object with text AND icon instead
+            MissionIcons[i].renderer.material = FourPotentialMissionsAvailable[i].MissionMaterial; // TODO: use one parent object with text AND icon instead
         }
     }
 
@@ -138,8 +139,8 @@ public class MissionManager : MonoBehaviour
             if (!m.MissionIsActive) // dont look into inactive missions
                 return;
 
-            //if (m.MissionAccomplished()) // look if mission has been accomplished
-              //  Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+            if (m.MissionAccomplished()) // look if mission has been accomplished
+                 Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
         }
     }
 
