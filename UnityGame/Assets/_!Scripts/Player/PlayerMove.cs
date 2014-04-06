@@ -4,7 +4,8 @@ using XInputDotNetPure;
 
 public class PlayerMove : MonoBehaviour 
 {
-	public int MoveSpeed = 3;
+	public float GroundMoveSpeed = 3;
+	public float AirMoveSpeed = 2;
 
 	[HideInInspector]
 	public bool movingLeft = false;
@@ -14,6 +15,7 @@ public class PlayerMove : MonoBehaviour
 	private Transform pTran;
 
 	private Player playerScript;
+	private PlayerJump playerJump;
 
 	private bool canMove = true;
 
@@ -40,6 +42,7 @@ public class PlayerMove : MonoBehaviour
 		pTran = transform;
 
 		playerScript = GetComponent<Player>();
+		playerJump = GetComponent<PlayerJump>();
 	}
 	
 	// Update is called once per frame
@@ -68,8 +71,17 @@ public class PlayerMove : MonoBehaviour
 	//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
 	public void Move(Vector3 direction)
 	{
-		rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*MoveSpeed);
-		//pTran.Translate(direction*Time.deltaTime*MoveSpeed,Space.World);
+		//Give the player a different movement speed if he is in the air
+		if(playerJump.CanJump)
+		{
+			rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*GroundMoveSpeed);
+			rigidbody.drag = 0;
+		}
+		else
+		{
+			rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*AirMoveSpeed);
+			rigidbody.drag = 1;
+		}
 		
 		if(GetComponent<Player>().LoFi == false)
 			pTran.forward = direction;
