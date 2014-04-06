@@ -51,20 +51,20 @@ public class PlayerAim : MonoBehaviour
 		{
 			playerMove.CanMove = false;
 
-			//Give the player momentum in the air
+			//Give the player momentum in the air, but remove it as soon as he hits the ground (CanJump)
 			if(playerMove.MovingLeft)
 			{
 				if(playerJump.CanJump)
 					playerMove.MovingLeft = false;
 				else
-					pTran.forward = Vector3.left;
+					playerMove.Move(Vector3.left);
 			}
 			else if(playerMove.MovingRight)
 			{
 				if(playerJump.CanJump)
 					playerMove.MovingRight = false;
 				else
-					pTran.forward = Vector3.right;
+					playerMove.Move(Vector3.right);
 			}
 
 			Vector3 direction;
