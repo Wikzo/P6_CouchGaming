@@ -18,6 +18,8 @@ public class PlayerMove : MonoBehaviour
 	private PlayerJump playerJump;
 
 	private bool canMove = true;
+	private Quaternion startRotation;
+	private Vector3 pForwardDir;
 
 
 	public bool CanMove
@@ -43,6 +45,10 @@ public class PlayerMove : MonoBehaviour
 
 		playerScript = GetComponent<Player>();
 		playerJump = GetComponent<PlayerJump>();
+
+		startRotation = pTran.rotation;
+
+		InvokeRepeating("ResetRotation", 0, 1);
 	}
 	
 	// Update is called once per frame
@@ -53,11 +59,17 @@ public class PlayerMove : MonoBehaviour
 			if(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X < 0 || playerScript.Keyboard && Input.GetKey(KeyCode.A))
 			{
 				Move(Vector3.left);
+				pTran.forward = Vector3.left;
+				pForwardDir = pTran.forward;
+
 				MovingLeft = true;
 			}
 			else if(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X > 0 || playerScript.Keyboard && Input.GetKey(KeyCode.D))
 			{
 				Move(Vector3.right);
+				pTran.forward = Vector3.right;
+				pForwardDir = pTran.forward;
+
 				MovingRight = true;
 			}
 			else
@@ -85,5 +97,15 @@ public class PlayerMove : MonoBehaviour
 		
 		if(GetComponent<Player>().LoFi == false)
 			pTran.forward = direction;
+	}
+
+	//Correct the rotation if it's skewed
+	void ResetRotation()
+	{
+		if(pTran.rotation != startRotation)
+		{
+			pTran.rotation = startRotation;
+			pTran.forward = pForwardDir;
+		}
 	}
 }

@@ -51,7 +51,7 @@ public class PlayerAim : MonoBehaviour
 		{
 			playerMove.CanMove = false;
 
-			//Give the player momentum in the air
+			//Give the player momentum in the air, but remove it as soon as he hits the ground (CanJump)
 			if(playerMove.MovingLeft)
 			{
 				if(playerJump.CanJump)
@@ -73,6 +73,16 @@ public class PlayerAim : MonoBehaviour
 				direction = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
 			else
 				direction = new Vector3(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X, playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y, 0);
+
+			//Face the direction that the player is aiming in
+			if(direction.x < 0)
+			{
+				pTran.forward = Vector3.left;
+			}
+			else if(direction.x > 0)
+			{
+				pTran.forward = Vector3.right;
+			}
 
 			//Cancel the aim if the player is aiming downwards
 			if(direction.y == -1 && playerJump.CanJump)
