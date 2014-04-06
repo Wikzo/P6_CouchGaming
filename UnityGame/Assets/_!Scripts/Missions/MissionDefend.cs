@@ -7,11 +7,13 @@ public class MissionDefend : MissionBase
 
     public override bool MissionAccomplished()
     {
-        return false;
-        if (Target.GetComponent<Player>().PState == PlayerState.Alive)
+        if (GameManager.Instance.CurrentRoundJustEnded)
         {
-            _missionIsActive = false;
-            return true;
+            if (Target.GetComponent<Player>().PState == PlayerState.Alive)
+            {
+                _missionIsActive = false;
+                return true;
+            }
         }
 
         return false;

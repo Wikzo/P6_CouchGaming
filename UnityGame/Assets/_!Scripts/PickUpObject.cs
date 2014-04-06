@@ -3,20 +3,32 @@ using System.Collections;
 
 public class PickUpObject : MonoBehaviour
 {
-    private bool isPickedUpRightNow = false;
-    private Vector3 Offset = new Vector3(0, 0.9f, 0);
-    private GameObject PlayerToFollow;
+    public bool IsPickedUpRightNow = false;
+    public bool CanBeUsedRightNow = true;
+    public Vector3 Offset = new Vector3(0, 0.9f, 0);
+    public GameObject PlayerToFollow;
+
+    // idle times (when it has been placed and is currently inactive for some seconds)
+    private bool Idle = false;
+    private float IdleBlinkRate = 0.5f;
+    private float IdleBlinkTimeTotal = 3f;
+
     
+  
+
     void OnCollisionEnter(Collision col)
     {
-        if (isPickedUpRightNow) // can only be picked up once at a time
+        if (!CanBeUsedRightNow) // can't be picked up right now
+            return;
+
+        if (IsPickedUpRightNow) // can only be picked up once at a time
             return;
 
         if (col.gameObject.tag == "Player")
         {
             if (col.gameObject.GetComponent<Player>().PState == PlayerState.Alive) // only works on living players
             {
-                isPickedUpRightNow = true;
+                IsPickedUpRightNow = true;
                 PlayerToFollow = col.gameObject;
                 
                 gameObject.collider.isTrigger = true;
@@ -33,18 +45,52 @@ public class PickUpObject : MonoBehaviour
         if (PlayerToFollow != null && PlayerToFollow.GetComponent<Player>().PState != PlayerState.Alive)
         {
             PlayerToFollow = null;
-            isPickedUpRightNow = false;
+            IsPickedUpRightNow = false;
         }
 
         // follow player
-        if (isPickedUpRightNow)
+        if (IsPickedUpRightNow)
             transform.position = PlayerToFollow.transform.position + Offset;
-        else // standard
+        else if (CanBeUsedRightNow)// standard
         {
             gameObject.collider.isTrigger = false;
             rigidbody.isKinematic = false;
             rigidbody.useGravity = true;
         }
+
+        if (Idle)
+        {
+            float lerp = Mathf.PingPong(Time.time, IdleBlinkRate) / IdleBlinkRate;
+            renderer.material.color = Color.Lerp(Color.white, Color.black, lerp);
+        }
+    }
+
+    public IEnumerator BecomeIdle()
+    {
+        Idle = true;
+        yield return new WaitForSeconds(IdleBlinkTimeTotal);
+        Idle = false;
+
+        CanBeUsedRightNow = true;
+        gameObject.collider.isTrigger = false;
+        rigidbody.isKinematic = false;
+        rigidbody.useGravity = true;
+        renderer.material.color = Color.white;
+    }
+
+    public void GoToBaseAndStayIdle(Vector3 pos)
+    {
+        CanBeUsedRightNow = false;
+        gameObject.collider.isTrigger = true;
+        PlayerToFollow = null;
+        IsPickedUpRightNow = false;
+        rigidbody.isKinematic = true;
+        rigidbody.useGravity = false;
+
+        transform.position = pos + new Vector3(0, transform.localScale.y / 2, 0);
+        StartCoroutine(BecomeIdle());
+
+
     }
 
 }

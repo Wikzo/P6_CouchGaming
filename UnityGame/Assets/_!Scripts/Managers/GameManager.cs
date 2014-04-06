@@ -1,6 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
+public enum PlayingState
+{
+    Playing,
+    Paused,
+    Pratice
+}
+
 public class GameManager : MonoBehaviour
 {
     // Singleton itself
@@ -8,8 +15,18 @@ public class GameManager : MonoBehaviour
 
     // Fields
     public List<GameObject> Players;// = new GameObject[4];
-    public int Round;
-    public float Time;
+
+    public int NumberOfRoundsPerGame = 5;
+    
+    // Round stuff
+    [HideInInspector]
+    public int CurrentRound;
+    private float TimePerRound = 5;
+    private float TimeLeft;
+    [HideInInspector]
+    public bool CurrentRoundJustEnded;
+    [HideInInspector]
+    public PlayingState PlayingState = PlayingState.Playing;
 
     //  public static Instance  
     public static GameManager Instance
@@ -47,4 +64,42 @@ public class GameManager : MonoBehaviour
         GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
     }
 
+    void Start()
+    {
+        CurrentRound = NumberOfRoundsPerGame;
+        TimeLeft = TimePerRound;
+        CurrentRoundJustEnded = false;
+    }
+    void Update()
+    {
+        TimeLeft -= Time.deltaTime;
+
+        if (TimeLeft <= 0)
+        {
+            CurrentRoundJustEnded = true;
+            Time.timeScale = 0;
+            PlayingState = PlayingState.Paused;
+        }
+    }
+
+    void OnGUI()
+    {
+        GUILayout.Label(string.Format("TIME: {0}", TimeLeft.ToString("F2")));
+        GUILayout.Label(string.Format("ROUND: {0}", CurrentRound.ToString()));
+
+        if (CurrentRoundJustEnded)
+        {
+            if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2, 200, 200), "START NEXT ROUND"))
+            {
+                CurrentRoundJustEnded = false;
+                CurrentRound--;
+                TimeLeft = TimePerRound;
+                PlayingState = PlayingState.Playing;
+                Time.timeScale = 1;
+
+            }
+        }
+
+        
+    }
 }
