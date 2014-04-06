@@ -90,6 +90,10 @@ public class MissionManager : MonoBehaviour
         // choose four missions out of the total amount
         FourPotentialMissionsAvailable = ChooseMissionsFromSet(4, AllAvailableMissionsTotal);
         ShuffleMissions(FourPotentialMissionsAvailable);
+        
+        foreach (MissionBase m in FourPotentialMissionsAvailable)
+            m.TemplateSetUp();
+
         for (int i = 1; i < 5; i++)
         {
             // set the rumble states for each mission (1, 2, 3, 4)
