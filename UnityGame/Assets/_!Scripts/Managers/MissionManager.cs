@@ -15,7 +15,9 @@ public class MissionManager : MonoBehaviour
     [HideInInspector] public List<MissionBase> InstantiatedMissions; // actual missions on players (to make it easier to see in Inspector)
 
     public List <GameObject> Players;
-    public List<TextMesh> MissionTextsGUI; 
+
+    public List<TextMesh> MissionTexts; 
+    public List<GameObject> MissionIcons; 
 
     public int ChanceOfGettingUniqueMissions = 5; // higher value = bigger chance of NOT getting same mission 
                                                   //(20-50 seems like a good value if you want to ABSOLUTELY make sure that they won't get same mission!)
@@ -63,7 +65,7 @@ public class MissionManager : MonoBehaviour
         AllAvailableMissionsTotal = new List<MissionBase>(4);
         InstantiatedMissions = new List<MissionBase>(4);
         
-        if (MissionTextsGUI.Count != 4)
+        if (MissionTexts.Count != 4)
             Debug.Log("ERROR - Mission Manager needs to have 4 links to TextMesh!");
         
         // find all the missions parented to this game object
@@ -75,6 +77,12 @@ public class MissionManager : MonoBehaviour
 
         if (AllAvailableMissionsTotal.Count < 4)
             Debug.Log("ERROR - at least 4 missions needs to be assigned to Mission Manager!");
+
+        if (MissionTexts.Count != 4)
+            Debug.Log("ERROR - 4 missions texts needs to be assigned to Mission Manager!");
+        if (MissionIcons.Count != 4)
+            Debug.Log("ERROR - 4 missions icons needs to be assigned to Mission Manager!");
+        
 
         // choose four missions out of the total amount
         FourPotentialMissionsAvailable = ChooseMissionsFromSet(4, AllAvailableMissionsTotal);
@@ -95,9 +103,12 @@ public class MissionManager : MonoBehaviour
             InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>()); // list of the current missions, easy to see in Inspector
         }
 
+        SetTextAndIcons();
+
     }
 
-    void OnGUI()
+    // DONT USE GUI TO DRAW THIS ANYMORE
+    /*void OnGUI()
     {
         for (int i = 0; i < 4; i++)
         {
@@ -109,15 +120,19 @@ public class MissionManager : MonoBehaviour
             //GUILayout.Label(string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble));
         }
 
+    }*/
+
+    void SetTextAndIcons()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            MissionTexts[i].text = FourPotentialMissionsAvailable[i].MissionDescription;
+            MissionIcons[i].renderer.material = FourPotentialMissionsAvailable[i].Texture; // TODO: use one parent object with text AND icon instead
+        }
     }
 
     void Update()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            MissionTextsGUI[i].text = FourPotentialMissionsAvailable[i].MissionDescription;
-        }
-
         foreach (MissionBase m in InstantiatedMissions)
         {
             if (!m.MissionIsActive) // dont look into inactive missions

@@ -41,7 +41,7 @@ public abstract class MissionBase : MonoBehaviour
     
     public MissionType MissionType;
     public HowToChooseTarget HowToChooseTarget;
-    public Texture2D Texture;
+    public Material Texture;
 
     public int MissionIDRumble; // what mission (1 to 4; Left Bumper rumble)
     public TargetIDColorState TargetIDColorState; // target color (Right Bumper rumble)

@@ -45,6 +45,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 0
   HowToChooseTarget: 2
+  Texture: {fileID: 2100000, guid: b0676b0a8118d584b8a1801ca52f4326, type: 2}
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Kill PLAYER

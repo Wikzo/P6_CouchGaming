@@ -97,23 +97,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100012
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400012}
-  - 114: {fileID: 11400014}
-  - 114: {fileID: 11400016}
-  m_Layer: 0
-  m_Name: MissionPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &100014
 GameObject:
   m_ObjectHideFlags: 1
@@ -183,7 +166,6 @@ Transform:
   - {fileID: 400008}
   - {fileID: 400016}
   - {fileID: 400014}
-  - {fileID: 400012}
   - {fileID: 400010}
   m_Father: {fileID: 400006}
 --- !u!4 &400006
@@ -217,17 +199,6 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100010}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.04268646, y: -20.4430389, z: 11.3498449}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400004}
---- !u!4 &400012
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.04268646, y: -20.4430389, z: 11.3498449}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -300,7 +271,8 @@ MonoBehaviour:
   FourPotentialMissionsAvailable: []
   InstantiatedMissions: []
   Players: []
-  MissionTextsGUI: []
+  MissionTexts: []
+  MissionIcons: []
   ChanceOfGettingUniqueMissions: 5
 --- !u!114 &11400006
 MonoBehaviour:
@@ -368,39 +340,6 @@ MonoBehaviour:
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Stay in ZONE
---- !u!114 &11400014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c91c03ed88b695419e51ff116edf898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Points: 2
-  Player: {fileID: 0}
-  TargetPool: []
-  Target: {fileID: 0}
-  MissionType: 1
-  HowToChooseTarget: 1
-  Texture: {fileID: 0}
-  MissionIDRumble: 0
-  TargetIDColorState: 0
-  MissionDescription: Stand in POSITION
---- !u!114 &11400016
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375f7901c70364442bd6dc8e020ab05f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetList: []
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
