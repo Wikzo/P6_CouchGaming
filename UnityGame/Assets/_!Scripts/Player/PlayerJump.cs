@@ -42,17 +42,20 @@ public class PlayerJump : MonoBehaviour {
 			CanJump = false;
 		}
 
+		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
+		{
+			Jump();
+		}
+
 		//Debug.DrawRay(leftPos, Vector3.down);
 		//Debug.DrawRay(rightPos, Vector3.down);
 	}
 
-	void FixedUpdate()
+	public void Jump()
 	{
-		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
-		{
-			rigidbody.AddForce(Vector3.up*JumpForce);
+		//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
+		rigidbody.AddForce(Vector3.up*JumpForce);
 
-		    DataSaver.Instance.highScores[0].timesJumped++;
-		}
+		DataSaver.Instance.highScores[0].timesJumped++;
 	}
 }

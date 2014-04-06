@@ -17,6 +17,8 @@ public class PlayerAim : MonoBehaviour
 
 	private float chargeTimer = 1;
 
+	private bool cancelAim = false;
+
 	private Transform pTran;
 	private Transform aimPivotTran;
 	private Transform aimTran;
@@ -47,15 +49,23 @@ public class PlayerAim : MonoBehaviour
 		//THIS SHOULD BE DONE SMARTER WITHOUT CHECKING SHOTAMOUNT SO MANY TIMES
 		if(playerScript.PlayerControllerState.GetCurrentState().Buttons.X == ButtonState.Pressed && ShotAmount > 0 || playerScript.Keyboard && Input.GetKey(ShootKey) && ShotAmount > 0)
 		{
-			if(playerMove.MovingLeft && !playerJump.CanJump)
-				playerMove.Move(Vector3.left);
-			else if(playerMove.MovingRight && !playerJump.CanJump)
-				playerMove.Move(Vector3.right);
-
 			playerMove.CanMove = false;
 
-			aimTran.renderer.enabled = true;
-			chargeBar.renderer.enabled = true;
+			//Give the player momentum in the air
+			if(playerMove.MovingLeft)
+			{
+				if(playerJump.CanJump)
+					playerMove.MovingLeft = false;
+				else
+					playerMove.Move(Vector3.left);
+			}
+			else if(playerMove.MovingRight)
+			{
+				if(playerJump.CanJump)
+					playerMove.MovingRight = false;
+				else
+					playerMove.Move(Vector3.right);
+			}
 
 			Vector3 direction;
 
@@ -64,20 +74,40 @@ public class PlayerAim : MonoBehaviour
 			else
 				direction = new Vector3(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X, playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y, 0);
 
-
-			Quaternion rotation = Quaternion.LookRotation(direction, Vector3.forward);
-
-			if(direction != Vector3.zero)
-				aimPivotTran.rotation = rotation;
-
-			if(chargeTimer < MaxChargeTime)
+			//Cancel the aim if the player is aiming downwards
+			if(direction.y == -1 && playerJump.CanJump)
 			{
-				chargeTimer += Time.deltaTime*ChargeSpeed;
-				chargeBar.localScale = new Vector3(chargeTimer/MaxChargeTime, chargeBar.localScale.y, chargeBar.localScale.z);
-				chargeBar.position = new Vector3(pTran.position.x-0.5f+chargeBar.localScale.x/2, pTran.position.y+0.6f, pTran.position.z);
+				cancelAim = true;
+
+				aimTran.renderer.enabled = false;
+				chargeBar.renderer.enabled = false;
+
+				chargeTimer = 1;
 			}
+			else
+			{
+				cancelAim = false;
+
+				aimTran.renderer.enabled = true;
+				chargeBar.renderer.enabled = true;
+
+				//Only rotate the aim if the player is aiming someplace 
+				if(direction != Vector3.zero)
+				{
+					Quaternion rotation = Quaternion.LookRotation(direction, Vector3.forward);
+					aimPivotTran.rotation = rotation;
+				}
+
+				//Scale the charge bar with a timer
+				if(chargeTimer < MaxChargeTime)
+				{
+					chargeTimer += Time.deltaTime*ChargeSpeed;
+					chargeBar.localScale = new Vector3(chargeTimer/MaxChargeTime, chargeBar.localScale.y, chargeBar.localScale.z);
+					chargeBar.position = new Vector3(pTran.position.x-0.5f+chargeBar.localScale.x/2, pTran.position.y+0.6f, pTran.position.z);
+				}
+			}			
 		}
-		else if(playerScript.PlayerControllerState.ButtonUpX && ShotAmount > 0 || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && ShotAmount > 0)
+		else if(playerScript.PlayerControllerState.ButtonUpX && ShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && ShotAmount > 0 && cancelAim == false)
 		{
 			projectile = Instantiate(ProjectileObj, aimTran.position+aimTran.forward*ShotOffset, Quaternion.identity) as GameObject;
 			projectile.GetComponent<Projectile>().Owner = name;
@@ -97,6 +127,7 @@ public class PlayerAim : MonoBehaviour
 			chargeBar.renderer.enabled = false;
 
 			playerMove.CanMove = true;
+			cancelAim = false;
 		}
 	}
 }
