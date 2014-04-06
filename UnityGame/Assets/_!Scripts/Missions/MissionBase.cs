@@ -242,6 +242,12 @@ public abstract class MissionBase : MonoBehaviour
 
     public abstract bool MissionAccomplished();
 
+    public bool MissionIsDone()
+    {
+        _missionIsActive = false;
+        return true;
+    }
+
     public override string ToString()
     {
         return this.GetType().Name; // returns excact name of C# file (no spaces)
