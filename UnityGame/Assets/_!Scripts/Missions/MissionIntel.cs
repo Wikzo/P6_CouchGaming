@@ -46,7 +46,6 @@ public class MissionIntel : MissionBase
         if (IntelPropToSteal.renderer.bounds.Intersects(Target.renderer.bounds))
         {
             //Destroy(IntelPropToSteal); // TODO: remove intel from scene so it can't be used for other missions
-            //IntelPropToSteal.rigidbody.isKinematic = true;
             _missionIsActive = false;
             return true;
         }

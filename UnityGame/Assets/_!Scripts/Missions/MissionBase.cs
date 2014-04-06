@@ -61,6 +61,7 @@ public abstract class MissionBase : MonoBehaviour
 
     public string MissionDescription = "MISSION";
 
+    public virtual void TemplateSetUp() { }
 
     // An abstract function has to be overridden while a virtual function may be overridden.
     public virtual void InitializeMission(GameObject player, MissionBase Template)
@@ -241,6 +242,12 @@ public abstract class MissionBase : MonoBehaviour
     }
 
     public abstract bool MissionAccomplished();
+
+    public bool MissionIsDone()
+    {
+        _missionIsActive = false;
+        return true;
+    }
 
     public override string ToString()
     {

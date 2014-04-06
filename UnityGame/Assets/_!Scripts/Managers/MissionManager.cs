@@ -22,6 +22,9 @@ public class MissionManager : MonoBehaviour
     public int ChanceOfGettingUniqueMissions = 5; // higher value = bigger chance of NOT getting same mission 
                                                   //(20-50 seems like a good value if you want to ABSOLUTELY make sure that they won't get same mission!)
                                                   // between 1 and 3 is "so-so"
+
+    public AudioClip MissionAccomplishedSound;
+
     //  public static Instance  
     public static MissionManager Instance
     {
@@ -87,6 +90,10 @@ public class MissionManager : MonoBehaviour
         // choose four missions out of the total amount
         FourPotentialMissionsAvailable = ChooseMissionsFromSet(4, AllAvailableMissionsTotal);
         ShuffleMissions(FourPotentialMissionsAvailable);
+        
+        foreach (MissionBase m in FourPotentialMissionsAvailable)
+            m.TemplateSetUp();
+
         for (int i = 1; i < 5; i++)
         {
             // set the rumble states for each mission (1, 2, 3, 4)
@@ -140,7 +147,11 @@ public class MissionManager : MonoBehaviour
                 return;
 
             if (m.MissionAccomplished()) // look if mission has been accomplished
-                 Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+            {
+                GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
+                audio.PlayOneShot(MissionAccomplishedSound);
+                Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+            }
         }
     }
 
