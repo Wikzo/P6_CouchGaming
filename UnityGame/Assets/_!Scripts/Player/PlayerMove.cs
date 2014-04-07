@@ -48,7 +48,7 @@ public class PlayerMove : MonoBehaviour
 
 		startRotation = pTran.rotation;
 
-		InvokeRepeating("ResetRotation", 0, 1);
+		InvokeRepeating("ResetRotation", 0, 0.1f);
 	}
 	
 	// Update is called once per frame

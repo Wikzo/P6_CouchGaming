@@ -30,6 +30,7 @@ public class MissionZone : MissionBase
 
     		chooseTarget[i] = ZoneAreas[Random.Range(0,3)];
     		chooseTarget[i].SetActive(true);
+    		chooseTarget[i].GetComponent<ZoneTrigger>().RestartZone();
     	}
     }
 }

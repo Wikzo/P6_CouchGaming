@@ -54,4 +54,10 @@ public class ZoneTrigger : MonoBehaviour {
 		if(collider.gameObject.GetComponent<Player>())
 			playersColliding--;
 	}
+
+	public void RestartZone()
+	{
+		Accomplished = false;
+		progressCounter = 0;
+	}
 }
