@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     // Round stuff
     [HideInInspector]
     public int CurrentRound;
-    private float TimePerRound = 5;
+    private float TimePerRound = 30;
     private float TimeLeft;
     [HideInInspector]
     public bool CurrentRoundJustEnded;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     public PlayingState PlayingState = PlayingState.Playing;
 
     // Debug stuff
-    public bool DebugShowMissions = false;
+    public bool DebugMode = true;
 
     //  public static Instance  
     public static GameManager Instance

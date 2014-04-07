@@ -11,7 +11,10 @@ public enum PlayerState
 
 
 [RequireComponent(typeof(TargetIDColor))]
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
+
+    public int Points;
 
 	public bool LoFi = false;
 	public bool Keyboard = false;
@@ -83,19 +86,27 @@ public class Player : MonoBehaviour {
             Debug.Log("ERROR - player needs to have TargetIDColor component " + gameObject);
 	    
         Name = gameObject.name;
+	    Points = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if(GameManager.Instance.PlayingState == PlayingState.Playing)
-		{
-			playerAim.AimUpdate();
-			playerMove.MoveUpdate();
-			playerJump.JumpUpdate();
-		}
+	    if (GameManager.Instance.PlayingState == PlayingState.Playing)
+	    {
+	        playerAim.AimUpdate();
+	        playerMove.MoveUpdate();
+	        playerJump.JumpUpdate();
 
-		if(PState == PlayerState.Respawning)
+	        if (GameManager.Instance.DebugMode)
+	        {
+	            // kill myself - DEBUG
+	            if (PlayerControllerState.ButtonDownY)
+	                StartCoroutine(Die());
+	        }
+	    }
+
+	    if(PState == PlayerState.Respawning)
 		{
 			float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
 			renderer.material.Lerp(pMat, blinkMat, lerp);
@@ -105,7 +116,7 @@ public class Player : MonoBehaviour {
 
 	}
 
-    public void RemoveAllMissionsOnMe()
+    public void RemoveAllMissionsOnMeDontUseThis()
     {
         // Removes all previous missions from player
 

@@ -209,6 +209,7 @@ MonoBehaviour:
   CurrentRound: 0
   CurrentRoundJustEnded: 0
   PlayingState: 0
+  DebugShowMissions: 1
 --- !u!1 &80781186
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9044801350130824ea9344476a716f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 50
+  Points: 10
   Player: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
@@ -970,6 +971,7 @@ MonoBehaviour:
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Defend PLAYER
+  DebugShowCurrentMission: 0
 --- !u!1 &428892442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,6 +1239,10 @@ Prefab:
       propertyPath: TargetList.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: TargetList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
       propertyPath: m_LocalPosition.x
       value: .339652836
@@ -1341,6 +1347,30 @@ Prefab:
       propertyPath: ZoneAreas.Array.data[3]
       value: 
       objectReference: {fileID: 485242046}
+    - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: DebugShowMissions
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400012, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: Points
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: Points
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400022, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: Points
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: Points
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400024, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: TargetList.Array.data[1]
+      value: 
+      objectReference: {fileID: 1088287648}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
   m_RootGameObject: {fileID: 1360649201}
@@ -2868,7 +2898,7 @@ Transform:
   m_GameObject: {fileID: 990675978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.56271029, y: -1.48554039, z: -1.63937569}
-  m_LocalScale: {x: 4.85376406, y: .373654991, z: 3.963063}
+  m_LocalScale: {x: 3.5765655, y: .373654991, z: 3.963063}
   m_Children: []
   m_Father: {fileID: 760583346}
 --- !u!1 &990838588
@@ -2925,7 +2955,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a2f7cf7cd9c484499467f2b9c208e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 0
+  Points: 6
   Player: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
@@ -2935,6 +2965,7 @@ MonoBehaviour:
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Stay in ZONE
+  DebugShowCurrentMission: 0
   ZoneAreas:
   - {fileID: 1271954947}
   - {fileID: 1145667821}
@@ -3098,6 +3129,88 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1873736859}
   m_GameObject: {fileID: 1029490554}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1088287648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1088287653}
+  - 33: {fileID: 1088287652}
+  - 65: {fileID: 1088287651}
+  - 23: {fileID: 1088287650}
+  - 114: {fileID: 1088287649}
+  m_Layer: 0
+  m_Name: intelBaseTargetPink
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1088287649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1088287648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 1
+--- !u!23 &1088287650
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1088287648}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 97fa1a96c5e14b54499d86527937667b, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortingLayerID: 0
+--- !u!65 &1088287651
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1088287648}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1088287652
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1088287648}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1088287653
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1088287648}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.70777321, y: 2.65187693, z: 0}
+  m_LocalScale: {x: 1, y: .136618674, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1125568892
 GameObject:
   m_ObjectHideFlags: 0
@@ -4103,6 +4216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetList:
   - {fileID: 1790708549}
+  - {fileID: 1088287648}
   IntelToSteal: {fileID: 428892442}
 --- !u!114 &1329614740
 MonoBehaviour:
@@ -4116,7 +4230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202eb986c43a6824f99df8b20cbce108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 5
+  Points: 7
   Player: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
@@ -4126,6 +4240,7 @@ MonoBehaviour:
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Move intel to BASE
+  DebugShowCurrentMission: 0
   IntelPropToSteal: {fileID: 0}
   YOffset: 1
 --- !u!1 &1329889731
@@ -4360,9 +4475,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Points: 0
   LoFi: 0
   Keyboard: 1
-  PauseMode: 0
   Score: 0
   Id: 0
   DeathTime: 5
@@ -4383,6 +4498,7 @@ MonoBehaviour:
   KilledBy: 
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
+  Name: 
 --- !u!114 &1333197875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4487,7 +4603,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec3a90ed372322408a035c0482bc495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 15
+  Points: 4
   Player: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
@@ -4497,6 +4613,7 @@ MonoBehaviour:
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Kill PLAYER
+  DebugShowCurrentMission: 0
 --- !u!1 &1360649201
 GameObject:
   m_ObjectHideFlags: 0
@@ -4995,9 +5112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Points: 0
   LoFi: 0
   Keyboard: 0
-  PauseMode: 0
   Score: 0
   Id: 2
   DeathTime: 5
@@ -5018,6 +5135,7 @@ MonoBehaviour:
   KilledBy: 
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
+  Name: 
 --- !u!54 &1475358126
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5480,9 +5598,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Points: 0
   LoFi: 0
   Keyboard: 0
-  PauseMode: 0
   Score: 0
   Id: 3
   DeathTime: 5
@@ -5503,6 +5621,7 @@ MonoBehaviour:
   KilledBy: 
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
+  Name: 
 --- !u!54 &1596579682
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6038,7 +6157,7 @@ GameObject:
   - 23: {fileID: 1790708550}
   - 114: {fileID: 1790708554}
   m_Layer: 0
-  m_Name: intelBaseTarget
+  m_Name: intelBaseTargetGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6056,7 +6175,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 046b71c85e161ba4398fea92f24da510, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -6091,7 +6210,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1790708549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .891688347, y: 1.12337911, z: 0}
+  m_LocalPosition: {x: -3.34822178, y: 1.12337911, z: 0}
   m_LocalScale: {x: 1, y: .136618674, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6106,7 +6225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetIDColorState: 1
+  TargetIDColorState: 3
 --- !u!1 &1809301609
 GameObject:
   m_ObjectHideFlags: 0
@@ -6288,9 +6407,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61a4701f50db1f746ba084243b9cfcef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Points: 0
   LoFi: 0
   Keyboard: 0
-  PauseMode: 0
   Score: 0
   Id: 1
   DeathTime: 5
@@ -6311,6 +6430,7 @@ MonoBehaviour:
   KilledBy: 
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
+  Name: 
 --- !u!54 &1829481890
 Rigidbody:
   m_ObjectHideFlags: 0
