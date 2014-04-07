@@ -63,9 +63,9 @@ public class ControllerState : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () 
-	{
-		currentState = GamePad.GetState(playerController);
+	void Update ()
+    {
+        currentState = GamePad.GetState(playerController);
 
         if (currentState.Buttons.Y == ButtonState.Pressed)
             Application.LoadLevel(0);

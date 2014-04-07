@@ -8,7 +8,6 @@ public class MissionDefend : MissionBase
     public override void TemplateSetUp()
     {
         base.TemplateSetUp();
-        print("yay defend" + this);
     }
 
     public override bool MissionAccomplished()

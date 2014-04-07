@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
         CurrentRound = NumberOfRoundsPerGame;
         TimeLeft = TimePerRound;
         CurrentRoundJustEnded = false;
+
+        MissionManager.Instance.GetMissionsReady();
     }
     void Update()
     {
@@ -96,6 +98,9 @@ public class GameManager : MonoBehaviour
                 TimeLeft = TimePerRound;
                 PlayingState = PlayingState.Playing;
                 Time.timeScale = 1;
+
+                MissionManager.Instance.GetMissionsReady();
+
 
             }
         }

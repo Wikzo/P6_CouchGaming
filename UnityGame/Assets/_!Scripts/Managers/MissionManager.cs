@@ -60,15 +60,21 @@ public class MissionManager : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        
+
+    }
+
+    public void GetMissionsReady()
+    {
         // set up all the lists
         Players = GameManager.Instance.Players;
         AlreadyChosenMissions = new List<MissionBase>(Players.Count);
         AllAvailableMissionsTotal = new List<MissionBase>(4);
         InstantiatedMissions = new List<MissionBase>(4);
-        
+
         if (MissionTexts.Count != 4)
             Debug.Log("ERROR - Mission Manager needs to have 4 links to TextMesh!");
-        
+
         // find all the missions parented to this game object
         MissionBase[] allChildren = GetComponentsInChildren<MissionBase>();
         foreach (MissionBase mission in allChildren)
@@ -83,12 +89,12 @@ public class MissionManager : MonoBehaviour
             Debug.Log("ERROR - 4 missions texts needs to be assigned to Mission Manager!");
         if (MissionIcons.Count != 4)
             Debug.Log("ERROR - 4 missions icons needs to be assigned to Mission Manager!");
-        
+
 
         // choose four missions out of the total amount
         FourPotentialMissionsAvailable = ChooseMissionsFromSet(4, AllAvailableMissionsTotal);
         ShuffleMissions(FourPotentialMissionsAvailable);
-        
+
         // set up template stuff that is only called once per mission
         foreach (MissionBase m in FourPotentialMissionsAvailable)
             m.TemplateSetUp();
@@ -96,7 +102,7 @@ public class MissionManager : MonoBehaviour
         for (int i = 1; i < 5; i++)
         {
             // set the rumble states for each mission (1, 2, 3, 4)
-            FourPotentialMissionsAvailable[i-1].MissionIDRumble = i;
+            FourPotentialMissionsAvailable[i - 1].MissionIDRumble = i;
         }
 
         for (int i = 0; i < Players.Count; i++)
@@ -111,7 +117,6 @@ public class MissionManager : MonoBehaviour
         }
 
         SetTextAndIcons();
-
     }
 
     // DONT USE GUI TO DRAW THIS ANYMORE

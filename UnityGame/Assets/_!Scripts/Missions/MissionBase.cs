@@ -228,6 +228,9 @@ public abstract class MissionBase : MonoBehaviour
         if (!isInstanceMission) // don't rumble for template missions
             return;
 
+        if (GameManager.Instance.PlayingState == PlayingState.Paused) // round is paused
+            return;
+
         if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
             PickMissionRumble();
 
