@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using System.Collections;
 
@@ -20,9 +21,16 @@ public class MissionZone : MissionBase
     public override void TemplateSetUp()
     {
     	base.TemplateSetUp();
+    	List<GameObject> chooseTarget = GetComponent<ChooseTargetType>().TargetList;
 
-    	GameObject chosenZone = ZoneAreas[Random.Range(0,3)];
-    	chosenZone.active = true;
-    	GetComponent<ChooseTargetType>().TargetList[0] = chosenZone;
+    	for(int i = 0; i<chooseTarget.Count; i++)
+    	{
+    		if(chooseTarget[i] != null)
+    			chooseTarget[i].SetActive(false);
+
+    		chooseTarget[i] = ZoneAreas[Random.Range(0,3)];
+    		chooseTarget[i].SetActive(true);
+    		chooseTarget[i].GetComponent<ZoneTrigger>().RestartZone();
+    	}
     }
 }

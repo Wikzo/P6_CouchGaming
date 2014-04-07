@@ -562,8 +562,8 @@ Transform:
   m_PrefabInternal: {fileID: 1213624457}
   m_GameObject: {fileID: 227267135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0986015797, z: 1.00357783}
-  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
+  m_LocalPosition: {x: 0, y: .0986015797, z: .75999999}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .5}
   m_Children: []
   m_Father: {fileID: 216067796}
 --- !u!23 &227267137
@@ -1039,7 +1039,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 428892442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.11023021, y: .880745053, z: 0}
+  m_LocalPosition: {x: -1.11023021, y: 1.54024804, z: 0}
   m_LocalScale: {x: 1, y: .861127496, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2028,8 +2028,8 @@ Transform:
   m_PrefabInternal: {fileID: 588212259}
   m_GameObject: {fileID: 721268263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0986015797, z: 1.00357783}
-  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
+  m_LocalPosition: {x: 0, y: .0986015797, z: .75999999}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .5}
   m_Children: []
   m_Father: {fileID: 1307003887}
 --- !u!1 &726707245
@@ -2897,7 +2897,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 990675978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.56271029, y: -1.48554039, z: -1.63937569}
+  m_LocalPosition: {x: 6.56271029, y: -.335468292, z: -1.63937569}
   m_LocalScale: {x: 3.5765655, y: .373654991, z: 3.963063}
   m_Children: []
   m_Father: {fileID: 760583346}
@@ -3082,8 +3082,8 @@ Transform:
   m_PrefabInternal: {fileID: 1873736859}
   m_GameObject: {fileID: 1029490554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0986015797, z: 1.00357783}
-  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
+  m_LocalPosition: {x: 0, y: .0986015797, z: .75999999}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .5}
   m_Children: []
   m_Father: {fileID: 80781187}
 --- !u!23 &1029490556
@@ -3207,7 +3207,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1088287648}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.70777321, y: 2.65187693, z: 0}
+  m_LocalPosition: {x: 2.3667345, y: 2.62611914, z: 0}
   m_LocalScale: {x: 1, y: .136618674, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4068,7 +4068,7 @@ Transform:
   m_PrefabInternal: {fileID: 1637593126}
   m_GameObject: {fileID: 1271954947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9127022, y: 2.15988636, z: -7.65300274}
+  m_LocalPosition: {x: 1.9127022, y: 3.28534794, z: -7.65300274}
   m_LocalScale: {x: 2.31421685, y: 1.8367511, z: 3.23129153}
   m_Children:
   - {fileID: 481940723}
@@ -4347,6 +4347,7 @@ GameObject:
   - 114: {fileID: 1333197876}
   - 114: {fileID: 1333197873}
   - 114: {fileID: 1333197875}
+  - 114: {fileID: 1333197879}
   - 114: {fileID: 1333197877}
   - 114: {fileID: 1333197878}
   m_Layer: 0
@@ -4437,7 +4438,7 @@ Rigidbody:
   m_GameObject: {fileID: 1333197866}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -4458,7 +4459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   ShootKey: 9
-  ShotOffset: 1.5
+  ShotOffset: 1
   ShotForce: 5
   ChargeSpeed: 2
   MaxChargeTime: 6
@@ -4523,7 +4524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 350
+  JumpForce: 400
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1333197877
@@ -4543,6 +4544,19 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1333197866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 1
+--- !u!114 &1333197879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: 96687a9be80bbe14db92abc3549c759b,
+    type: 2}
+  m_PrefabInternal: {fileID: 588212259}
   m_GameObject: {fileID: 1333197866}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -4940,8 +4954,8 @@ Transform:
   m_PrefabInternal: {fileID: 1453738607}
   m_GameObject: {fileID: 1465680981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0986015797, z: 1.00357783}
-  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
+  m_LocalPosition: {x: 0, y: .0986015797, z: .75999999}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .5}
   m_Children: []
   m_Father: {fileID: 157434885}
 --- !u!23 &1465680983
@@ -5004,6 +5018,7 @@ GameObject:
   - 114: {fileID: 1475358123}
   - 114: {fileID: 1475358122}
   - 114: {fileID: 1475358121}
+  - 114: {fileID: 1475358131}
   - 114: {fileID: 1475358120}
   - 114: {fileID: 1475358130}
   m_Layer: 0
@@ -5064,7 +5079,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   ShootKey: 9
-  ShotOffset: 1.5
+  ShotOffset: 1
   ShotForce: 5
   ChargeSpeed: 2
   MaxChargeTime: 6
@@ -5081,7 +5096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 350
+  JumpForce: 400
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1475358124
@@ -5114,7 +5129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 0
+  Keyboard: 1
   Score: 0
   Id: 2
   DeathTime: 5
@@ -5145,7 +5160,7 @@ Rigidbody:
   m_GameObject: {fileID: 1475358118}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -5206,7 +5221,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetIDColorState: 3
+  TargetIDColorState: 2
+--- !u!114 &1475358131
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: 96687a9be80bbe14db92abc3549c759b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1873736859}
+  m_GameObject: {fileID: 1475358118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 1
 --- !u!1 &1524890567
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,6 +5518,7 @@ GameObject:
   - 114: {fileID: 1596579679}
   - 114: {fileID: 1596579678}
   - 114: {fileID: 1596579677}
+  - 114: {fileID: 1596579687}
   - 114: {fileID: 1596579676}
   - 114: {fileID: 1596579686}
   m_Layer: 0
@@ -5550,7 +5579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   ShootKey: 9
-  ShotOffset: 1.5
+  ShotOffset: 1
   ShotForce: 5
   ChargeSpeed: 2
   MaxChargeTime: 6
@@ -5567,7 +5596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 350
+  JumpForce: 400
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1596579680
@@ -5600,7 +5629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 0
+  Keyboard: 1
   Score: 0
   Id: 3
   DeathTime: 5
@@ -5631,7 +5660,7 @@ Rigidbody:
   m_GameObject: {fileID: 1596579674}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -5693,6 +5722,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetIDColorState: 4
+--- !u!114 &1596579687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: 96687a9be80bbe14db92abc3549c759b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1213624457}
+  m_GameObject: {fileID: 1596579674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 1
 --- !u!1 &1602780287
 GameObject:
   m_ObjectHideFlags: 0
@@ -5796,6 +5838,14 @@ Prefab:
     - target: {fileID: 400024, guid: c712f6a9f2428fc44b3724c04d79d5fe, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: c712f6a9f2428fc44b3724c04d79d5fe, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400018, guid: c712f6a9f2428fc44b3724c04d79d5fe, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 3.28534794
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c712f6a9f2428fc44b3724c04d79d5fe, type: 2}
@@ -6210,7 +6260,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1790708549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.34822178, y: 1.12337911, z: 0}
+  m_LocalPosition: {x: -2.83690667, y: 2.36452484, z: 0}
   m_LocalScale: {x: 1, y: .136618674, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6312,6 +6362,7 @@ GameObject:
   - 114: {fileID: 1829481887}
   - 114: {fileID: 1829481886}
   - 114: {fileID: 1829481885}
+  - 114: {fileID: 1829481896}
   - 114: {fileID: 1829481884}
   - 114: {fileID: 1829481895}
   m_Layer: 0
@@ -6359,7 +6410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   ShootKey: 9
-  ShotOffset: 1.5
+  ShotOffset: 1
   ShotForce: 5
   ChargeSpeed: 2
   MaxChargeTime: 6
@@ -6376,7 +6427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 350
+  JumpForce: 400
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1829481888
@@ -6409,7 +6460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 0
+  Keyboard: 1
   Score: 0
   Id: 1
   DeathTime: 5
@@ -6440,7 +6491,7 @@ Rigidbody:
   m_GameObject: {fileID: 1829481883}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -6514,7 +6565,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetIDColorState: 2
+  TargetIDColorState: 3
+--- !u!114 &1829481896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: 96687a9be80bbe14db92abc3549c759b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1453738607}
+  m_GameObject: {fileID: 1829481883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 1
 --- !u!1001 &1873736859
 Prefab:
   m_ObjectHideFlags: 0
