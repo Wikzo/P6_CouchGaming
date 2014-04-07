@@ -5,12 +5,21 @@ public class MissionDefend : MissionBase
 {
     private bool targetWasAliveWhenBegan;
 
+    public override void TemplateSetUp()
+    {
+        base.TemplateSetUp();
+        print("yay defend" + this);
+    }
+
     public override bool MissionAccomplished()
     {
-        if (Target.GetComponent<Player>().PState == PlayerState.Alive)
+        if (GameManager.Instance.CurrentRoundJustEnded)
         {
-            _missionIsActive = false;
-            return true;
+            if (Target.GetComponent<Player>().PState == PlayerState.Alive)
+            {
+                _missionIsActive = false;
+                return true;
+            }
         }
 
         return false;

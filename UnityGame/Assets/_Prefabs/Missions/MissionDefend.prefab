@@ -45,6 +45,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 0
   HowToChooseTarget: 2
+  Texture: {fileID: 2100000, guid: 40fbacd733175e94fac6108293e47781, type: 2}
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Defend PLAYER

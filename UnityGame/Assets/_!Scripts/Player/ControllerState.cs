@@ -67,6 +67,9 @@ public class ControllerState : MonoBehaviour {
 	{
 		currentState = GamePad.GetState(playerController);
 
+        if (currentState.Buttons.Y == ButtonState.Pressed)
+            Application.LoadLevel(0);
+
 		if(GetCurrentState().Buttons.A == ButtonState.Pressed && previousState.Buttons.A != ButtonState.Pressed){ButtonDownA = true; canRelease = true;}else ButtonDownA = false;
 		if(GetCurrentState().Buttons.B == ButtonState.Pressed && previousState.Buttons.B != ButtonState.Pressed){ButtonDownB = true; canRelease = true;}else ButtonDownB = false;
 		if(GetCurrentState().Buttons.X == ButtonState.Pressed && previousState.Buttons.X != ButtonState.Pressed){ButtonDownX = true; canRelease = true;}else ButtonDownX = false;

@@ -335,8 +335,8 @@ Transform:
   m_PrefabInternal: {fileID: 1213624457}
   m_GameObject: {fileID: 227267135}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0986015797, z: 1.00357783}
-  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
+  m_LocalPosition: {x: 0, y: .0986015797, z: .75999999}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .5}
   m_Children: []
   m_Father: {fileID: 216067796}
 --- !u!23 &227267137
@@ -850,7 +850,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.y
-      value: .719943523
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.z
@@ -858,7 +858,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .694032729
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 2300004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Materials.Array.data[0]
@@ -954,19 +954,39 @@ Prefab:
       objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ShotForce
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ChargeSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: MaxChargeTime
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Constraints
-      value: 72
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .75999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: JumpForce
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ShotOffset
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -1203,8 +1223,8 @@ Transform:
   m_PrefabInternal: {fileID: 588212259}
   m_GameObject: {fileID: 721268263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0986015797, z: 1.00357783}
-  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
+  m_LocalPosition: {x: 0, y: .0986015797, z: .75999999}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .5}
   m_Children: []
   m_Father: {fileID: 1307003887}
 --- !u!1 &749555718
@@ -1791,8 +1811,8 @@ Transform:
   m_PrefabInternal: {fileID: 1873736859}
   m_GameObject: {fileID: 1029490554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0986015797, z: 1.00357783}
-  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
+  m_LocalPosition: {x: 0, y: .0986015797, z: .75999999}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .5}
   m_Children: []
   m_Father: {fileID: 80781187}
 --- !u!23 &1029490556
@@ -2001,7 +2021,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.y
-      value: .719943523
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.z
@@ -2009,7 +2029,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .694032729
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: Id
@@ -2097,19 +2117,35 @@ Prefab:
       objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ShotForce
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ChargeSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: MaxChargeTime
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Constraints
-      value: 72
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .75999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: JumpForce
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ShotOffset
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2346,6 +2382,7 @@ GameObject:
   - 114: {fileID: 1333197873}
   - 114: {fileID: 1333197875}
   - 114: {fileID: 1333197877}
+  - 114: {fileID: 1333197878}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -2365,7 +2402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1868693855a404c82720de3b48ecfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
+  GroundMoveSpeed: 3
+  AirMoveSpeed: 2
   movingLeft: 0
   movingRight: 0
 --- !u!23 &1333197868
@@ -2417,7 +2455,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_PrefabInternal: {fileID: 588212259}
   m_GameObject: {fileID: 1333197866}
-  m_LocalRotation: {x: 0, y: .719943523, z: 0, w: .694032729}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: -6.06527042, y: 3.99920559, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2433,12 +2471,12 @@ Rigidbody:
   m_GameObject: {fileID: 1333197866}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!114 &1333197873
 MonoBehaviour:
@@ -2454,10 +2492,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   ShootKey: 9
-  ShotOffset: 1.5
-  ShotForce: 6
-  ChargeSpeed: 2
-  MaxChargeTime: 6
+  ShotOffset: 1
+  ShotForce: 4
+  ChargeSpeed: 3
+  MaxChargeTime: 7
   ShotAmount: 1
 --- !u!114 &1333197874
 MonoBehaviour:
@@ -2517,7 +2555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 350
+  JumpForce: 400
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1333197877
@@ -2532,6 +2570,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionSound: {fileID: 0}
+--- !u!114 &1333197878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1333197866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 1
 --- !u!1 &1414318504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2643,7 +2693,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.y
-      value: .719943523
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.z
@@ -2651,7 +2701,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .694032729
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: Id
@@ -2739,19 +2789,35 @@ Prefab:
       objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ShotForce
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ChargeSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: MaxChargeTime
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Constraints
-      value: 72
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .75999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: JumpForce
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ShotOffset
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2784,8 +2850,8 @@ Transform:
   m_PrefabInternal: {fileID: 1453738607}
   m_GameObject: {fileID: 1465680981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .0986015797, z: 1.00357783}
-  m_LocalScale: {x: .100000001, y: .100000001, z: 1}
+  m_LocalPosition: {x: 0, y: .0986015797, z: .75999999}
+  m_LocalScale: {x: .100000001, y: .100000001, z: .5}
   m_Children: []
   m_Father: {fileID: 157434885}
 --- !u!23 &1465680983
@@ -2849,6 +2915,7 @@ GameObject:
   - 114: {fileID: 1475358122}
   - 114: {fileID: 1475358121}
   - 114: {fileID: 1475358120}
+  - 114: {fileID: 1475358130}
   m_Layer: 0
   m_Name: Player3
   m_TagString: Untagged
@@ -2862,7 +2929,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_PrefabInternal: {fileID: 1873736859}
   m_GameObject: {fileID: 1475358118}
-  m_LocalRotation: {x: 0, y: .719943523, z: 0, w: .694032729}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: -6.17405796, y: -2.42699242, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2907,10 +2974,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   ShootKey: 9
-  ShotOffset: 1.5
-  ShotForce: 6
-  ChargeSpeed: 2
-  MaxChargeTime: 6
+  ShotOffset: 1
+  ShotForce: 4
+  ChargeSpeed: 3
+  MaxChargeTime: 7
   ShotAmount: 1
 --- !u!114 &1475358123
 MonoBehaviour:
@@ -2924,7 +2991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 350
+  JumpForce: 400
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1475358124
@@ -2939,7 +3006,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1868693855a404c82720de3b48ecfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
+  GroundMoveSpeed: 3
+  AirMoveSpeed: 2
   movingLeft: 0
   movingRight: 0
 --- !u!114 &1475358125
@@ -2990,7 +3058,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!23 &1475358127
 Renderer:
@@ -3035,6 +3103,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1873736859}
   m_GameObject: {fileID: 1475358118}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1475358130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1475358118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 3
 --- !u!1 &1524890567
 GameObject:
   m_ObjectHideFlags: 0
@@ -3279,6 +3359,7 @@ GameObject:
   - 114: {fileID: 1596579678}
   - 114: {fileID: 1596579677}
   - 114: {fileID: 1596579676}
+  - 114: {fileID: 1596579686}
   m_Layer: 0
   m_Name: Player4
   m_TagString: Untagged
@@ -3292,7 +3373,7 @@ Transform:
   m_PrefabParentObject: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_PrefabInternal: {fileID: 1213624457}
   m_GameObject: {fileID: 1596579674}
-  m_LocalRotation: {x: 0, y: .719943523, z: 0, w: .694032729}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: 5.45330954, y: -2.20403767, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3337,10 +3418,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   ShootKey: 9
-  ShotOffset: 1.5
-  ShotForce: 6
-  ChargeSpeed: 2
-  MaxChargeTime: 6
+  ShotOffset: 1
+  ShotForce: 4
+  ChargeSpeed: 3
+  MaxChargeTime: 7
   ShotAmount: 1
 --- !u!114 &1596579679
 MonoBehaviour:
@@ -3354,7 +3435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 350
+  JumpForce: 400
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1596579680
@@ -3369,7 +3450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1868693855a404c82720de3b48ecfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
+  GroundMoveSpeed: 3
+  AirMoveSpeed: 2
   movingLeft: 0
   movingRight: 0
 --- !u!114 &1596579681
@@ -3420,7 +3502,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!23 &1596579683
 Renderer:
@@ -3465,6 +3547,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1213624457}
   m_GameObject: {fileID: 1596579674}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1596579686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1596579674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 4
 --- !u!1 &1602780287
 GameObject:
   m_ObjectHideFlags: 0
@@ -3743,6 +3837,7 @@ GameObject:
   - 114: {fileID: 1829481886}
   - 114: {fileID: 1829481885}
   - 114: {fileID: 1829481884}
+  - 114: {fileID: 1829481895}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -3788,10 +3883,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ProjectileObj: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   ShootKey: 9
-  ShotOffset: 1.5
-  ShotForce: 6
-  ChargeSpeed: 2
-  MaxChargeTime: 6
+  ShotOffset: 1
+  ShotForce: 4
+  ChargeSpeed: 3
+  MaxChargeTime: 7
   ShotAmount: 1
 --- !u!114 &1829481887
 MonoBehaviour:
@@ -3805,7 +3900,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 350
+  JumpForce: 400
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1829481888
@@ -3820,7 +3915,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1868693855a404c82720de3b48ecfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 3
+  GroundMoveSpeed: 3
+  AirMoveSpeed: 2
   movingLeft: 0
   movingRight: 0
 --- !u!114 &1829481889
@@ -3871,7 +3967,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 72
+  m_Constraints: 120
   m_CollisionDetection: 0
 --- !u!23 &1829481891
 Renderer:
@@ -3922,13 +4018,25 @@ Transform:
   m_PrefabParentObject: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_PrefabInternal: {fileID: 1453738607}
   m_GameObject: {fileID: 1829481883}
-  m_LocalRotation: {x: 0, y: .719943523, z: 0, w: .694032729}
+  m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: 4.92836857, y: 3.99920559, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 157434885}
   - {fileID: 152729448}
   m_Father: {fileID: 0}
+--- !u!114 &1829481895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1829481883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetIDColorState: 2
 --- !u!1001 &1873736859
 Prefab:
   m_ObjectHideFlags: 0
@@ -3954,7 +4062,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.y
-      value: .719943523
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.z
@@ -3962,7 +4070,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .694032729
+      value: .707106829
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: Id
@@ -4050,19 +4158,35 @@ Prefab:
       objectReference: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ShotForce
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ChargeSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: MaxChargeTime
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Constraints
-      value: 72
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .75999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: JumpForce
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ShotOffset
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}

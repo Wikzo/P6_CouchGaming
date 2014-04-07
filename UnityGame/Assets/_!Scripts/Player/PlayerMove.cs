@@ -4,7 +4,8 @@ using XInputDotNetPure;
 
 public class PlayerMove : MonoBehaviour 
 {
-	public int MoveSpeed = 3;
+	public float GroundMoveSpeed = 3;
+	public float AirMoveSpeed = 2;
 
 	[HideInInspector]
 	public bool movingLeft = false;
@@ -14,8 +15,11 @@ public class PlayerMove : MonoBehaviour
 	private Transform pTran;
 
 	private Player playerScript;
+	private PlayerJump playerJump;
 
 	private bool canMove = true;
+	private Quaternion startRotation;
+	private Vector3 pForwardDir;
 
 
 	public bool CanMove
@@ -40,6 +44,11 @@ public class PlayerMove : MonoBehaviour
 		pTran = transform;
 
 		playerScript = GetComponent<Player>();
+		playerJump = GetComponent<PlayerJump>();
+
+		startRotation = pTran.rotation;
+
+		InvokeRepeating("ResetRotation", 0, 1);
 	}
 	
 	// Update is called once per frame
@@ -50,11 +59,17 @@ public class PlayerMove : MonoBehaviour
 			if(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X < 0 || playerScript.Keyboard && Input.GetKey(KeyCode.A))
 			{
 				Move(Vector3.left);
+				pTran.forward = Vector3.left;
+				pForwardDir = pTran.forward;
+
 				MovingLeft = true;
 			}
 			else if(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X > 0 || playerScript.Keyboard && Input.GetKey(KeyCode.D))
 			{
 				Move(Vector3.right);
+				pTran.forward = Vector3.right;
+				pForwardDir = pTran.forward;
+
 				MovingRight = true;
 			}
 			else
@@ -68,10 +83,29 @@ public class PlayerMove : MonoBehaviour
 	//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
 	public void Move(Vector3 direction)
 	{
-		rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*MoveSpeed);
-		//pTran.Translate(direction*Time.deltaTime*MoveSpeed,Space.World);
+		//Give the player a different movement speed if he is in the air
+		if(playerJump.CanJump)
+		{
+			rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*GroundMoveSpeed);
+			rigidbody.drag = 0;
+		}
+		else
+		{
+			rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*AirMoveSpeed);
+			rigidbody.drag = 1;
+		}
 		
 		if(GetComponent<Player>().LoFi == false)
 			pTran.forward = direction;
+	}
+
+	//Correct the rotation if it's skewed
+	void ResetRotation()
+	{
+		if(pTran.rotation != startRotation)
+		{
+			pTran.rotation = startRotation;
+			pTran.forward = pForwardDir;
+		}
 	}
 }

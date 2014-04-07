@@ -57,6 +57,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 0
   HowToChooseTarget: 0
+  Texture: {fileID: 2100000, guid: 70222324cc54a744dbdb8397274dcac0, type: 2}
   MissionIDRumble: 0
   TargetIDColorState: 0
   MissionDescription: Stay in ZONE

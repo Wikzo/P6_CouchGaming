@@ -4,9 +4,9 @@ using System.Collections;
 public enum TargetIDColorState
 {
     NotAssigned = 0,
-    RedOne = 1,
-    GreenTwo = 2,
-    BlueThree = 3,
+    PinkOne = 1,
+    BlueTwo = 2,
+    GreenThree = 3,
     OrangeFour = 4
 }
 

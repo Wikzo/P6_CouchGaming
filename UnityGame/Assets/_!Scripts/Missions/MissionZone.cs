@@ -7,4 +7,11 @@ public class MissionZone : MissionBase
     {
         return false;
     }
+
+    public override void TemplateSetUp()
+    {
+    	base.TemplateSetUp();
+
+    	//GetComponent<ZoneSpawner>().CanSpawn = true;
+    }
 }

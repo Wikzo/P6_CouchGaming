@@ -23,6 +23,7 @@ public enum HowToChooseTarget
 
 public abstract class MissionBase : MonoBehaviour
 {
+    private float intervals;
     public int Points;
     
     protected bool _missionIsActive; // only this class + derived classes can access this
@@ -40,7 +41,7 @@ public abstract class MissionBase : MonoBehaviour
     
     public MissionType MissionType;
     public HowToChooseTarget HowToChooseTarget;
-    //public Texture2D Texture;
+    public Material MissionMaterial;
 
     public int MissionIDRumble; // what mission (1 to 4; Left Bumper rumble)
     public TargetIDColorState TargetIDColorState; // target color (Right Bumper rumble)
@@ -60,6 +61,7 @@ public abstract class MissionBase : MonoBehaviour
 
     public string MissionDescription = "MISSION";
 
+    public virtual void TemplateSetUp() { }
 
     // An abstract function has to be overridden while a virtual function may be overridden.
     public virtual void InitializeMission(GameObject player, MissionBase Template)
@@ -85,7 +87,7 @@ public abstract class MissionBase : MonoBehaviour
 
         // Rumble IDs
         if (Target.GetComponent<TargetIDColor>() == null)
-            Debug.Log("ERROR  - target for " + this + " doesn't have a TargetIDColor!");
+            Debug.Log("ERROR  - target for " + gameObject + " doesn't have a TargetIDColor!");
         this.TargetIDColorState = Target.GetComponent<TargetIDColor>().TargetIDColorState;
 
         // Use template values
@@ -225,7 +227,7 @@ public abstract class MissionBase : MonoBehaviour
     {
         if (!isInstanceMission) // don't rumble for template missions
             return;
-        
+
         if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
             PickMissionRumble();
 
@@ -240,6 +242,12 @@ public abstract class MissionBase : MonoBehaviour
     }
 
     public abstract bool MissionAccomplished();
+
+    public bool MissionIsDone()
+    {
+        _missionIsActive = false;
+        return true;
+    }
 
     public override string ToString()
     {

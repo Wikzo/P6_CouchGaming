@@ -16,9 +16,13 @@ public class MissionManager : MonoBehaviour
 
     public List <GameObject> Players;
 
+    public List<TextMesh> MissionTexts; 
+    public List<GameObject> MissionIcons; 
+
     public int ChanceOfGettingUniqueMissions = 5; // higher value = bigger chance of NOT getting same mission 
                                                   //(20-50 seems like a good value if you want to ABSOLUTELY make sure that they won't get same mission!)
                                                   // between 1 and 3 is "so-so"
+
     //  public static Instance  
     public static MissionManager Instance
     {
@@ -62,6 +66,9 @@ public class MissionManager : MonoBehaviour
         AllAvailableMissionsTotal = new List<MissionBase>(4);
         InstantiatedMissions = new List<MissionBase>(4);
         
+        if (MissionTexts.Count != 4)
+            Debug.Log("ERROR - Mission Manager needs to have 4 links to TextMesh!");
+        
         // find all the missions parented to this game object
         MissionBase[] allChildren = GetComponentsInChildren<MissionBase>();
         foreach (MissionBase mission in allChildren)
@@ -72,9 +79,20 @@ public class MissionManager : MonoBehaviour
         if (AllAvailableMissionsTotal.Count < 4)
             Debug.Log("ERROR - at least 4 missions needs to be assigned to Mission Manager!");
 
+        if (MissionTexts.Count != 4)
+            Debug.Log("ERROR - 4 missions texts needs to be assigned to Mission Manager!");
+        if (MissionIcons.Count != 4)
+            Debug.Log("ERROR - 4 missions icons needs to be assigned to Mission Manager!");
+        
+
         // choose four missions out of the total amount
         FourPotentialMissionsAvailable = ChooseMissionsFromSet(4, AllAvailableMissionsTotal);
         ShuffleMissions(FourPotentialMissionsAvailable);
+        
+        // set up template stuff that is only called once per mission
+        foreach (MissionBase m in FourPotentialMissionsAvailable)
+            m.TemplateSetUp();
+
         for (int i = 1; i < 5; i++)
         {
             // set the rumble states for each mission (1, 2, 3, 4)
@@ -88,18 +106,36 @@ public class MissionManager : MonoBehaviour
             string scriptName = c.ToString(); // get name of mission script so it can be attached to player
             Players[i].AddComponent(scriptName);
             Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c); // set up various stuff on mission via the template mission
+            Players[i].name += "_" + c.name;
             InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>()); // list of the current missions, easy to see in Inspector
         }
 
+        SetTextAndIcons();
+
     }
 
-    void OnGUI()
+    // DONT USE GUI TO DRAW THIS ANYMORE
+    /*void OnGUI()
     {
         for (int i = 0; i < 4; i++)
         {
-            GUILayout.Label(string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble));
+            string text = string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble);
+            
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + (40*i) + 5, 1000, 40), text);
+            
+            
+            //GUILayout.Label(string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble));
         }
 
+    }*/
+
+    void SetTextAndIcons()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            MissionTexts[i].text = FourPotentialMissionsAvailable[i].MissionDescription;
+            MissionIcons[i].renderer.material = FourPotentialMissionsAvailable[i].MissionMaterial; // TODO: use one parent object with text AND icon instead
+        }
     }
 
     void Update()
@@ -109,8 +145,12 @@ public class MissionManager : MonoBehaviour
             if (!m.MissionIsActive) // dont look into inactive missions
                 return;
 
-            //if (m.MissionAccomplished()) // look if mission has been accomplished
-              //  Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+            if (m.MissionAccomplished()) // look if mission has been accomplished
+            {
+                GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
+                audio.PlayOneShot(AudioManager.Instance.MissionAccomplishedSound);
+                Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+            }
         }
     }
 
