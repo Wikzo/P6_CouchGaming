@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     // Round stuff
     [HideInInspector]
     public int CurrentRound;
-    private float TimePerRound = 5;
+    private float TimePerRound = 10;
     private float TimeLeft;
     [HideInInspector]
     public bool CurrentRoundJustEnded;
