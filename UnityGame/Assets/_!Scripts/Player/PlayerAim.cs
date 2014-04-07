@@ -44,7 +44,7 @@ public class PlayerAim : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	public void AimUpdate ()
 	{
 		//THIS SHOULD BE DONE SMARTER WITHOUT CHECKING SHOTAMOUNT SO MANY TIMES
 		if(playerScript.PlayerControllerState.GetCurrentState().Buttons.X == ButtonState.Pressed && ShotAmount > 0 || playerScript.Keyboard && Input.GetKey(ShootKey) && ShotAmount > 0)

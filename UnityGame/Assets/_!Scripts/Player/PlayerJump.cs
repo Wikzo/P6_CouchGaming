@@ -27,7 +27,7 @@ public class PlayerJump : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () 
+	public void JumpUpdate () 
 	{
 		//Rays will be cast on both sides of the player, so edges are also detected
 		Vector3 leftPos = pTran.position+Vector3.left*GroundDetectOffset;
