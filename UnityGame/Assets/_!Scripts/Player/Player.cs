@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
 
 	public bool LoFi = false;
 	public bool Keyboard = false;
+	public bool PauseMode = false;
 
 	public int Score;
 	public int Id;
@@ -32,6 +33,10 @@ public class Player : MonoBehaviour {
 	[HideInInspector]
 	public PlayerIndex PlayerController;
 	public ControllerState PlayerControllerState;
+
+	private PlayerAim playerAim;
+	private PlayerMove playerMove;
+	private PlayerJump playerJump;
 
 	private Transform pTran;
 	private GameObject spawnPoint;
@@ -68,6 +73,9 @@ public class Player : MonoBehaviour {
 		renderer.material = pMat;
 
 		PlayerControllerState = GetComponent<ControllerState>();
+		playerAim = GetComponent<PlayerAim>();
+		playerMove = GetComponent<PlayerMove>();
+		playerJump = GetComponent<PlayerJump>();
 
         if (GetComponent<TargetIDColor>() == null)
             Debug.Log("ERROR - player needs to have TargetIDColor component " + gameObject);
@@ -76,6 +84,13 @@ public class Player : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+		if(PauseMode == false)
+		{
+			playerAim.AimUpdate();
+			playerMove.MoveUpdate();
+			playerJump.JumpUpdate();
+		}
+
 		if(PState == PlayerState.Respawning)
 		{
 			float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;

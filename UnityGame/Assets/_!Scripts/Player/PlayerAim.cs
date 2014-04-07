@@ -44,7 +44,7 @@ public class PlayerAim : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	public void AimUpdate ()
 	{
         if (GameManager.Instance.PlayingState == PlayingState.Paused) // round is paused
             return;
