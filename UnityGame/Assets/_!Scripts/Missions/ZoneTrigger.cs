@@ -3,6 +3,9 @@ using System.Collections;
 
 public class ZoneTrigger : MonoBehaviour {
 
+	[HideInInspector]
+	public bool Accomplished = false;
+
 	public float AccomplishTime = 5;
 	public float DownSlowFactor = 1;
 
@@ -37,7 +40,7 @@ public class ZoneTrigger : MonoBehaviour {
 			progressBar.position = new Vector3(progressBar.position.x, pTran.position.y-1.03f+progressBar.localScale.y, progressBar.position.z);
 		}
 		else
-			print("ZONE MISSION ACCOMPLISHED!");
+			Accomplished = true;
 	}
 
 	void OnTriggerEnter(Collider collider)

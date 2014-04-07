@@ -7,6 +7,8 @@ public class ControllerState : MonoBehaviour {
 	private GamePadState previousState;
 	private GamePadState currentState;
 
+	private bool joinedFromStart = false;
+
 	private PlayerIndex playerController;
 	private int id = 0;
 
@@ -57,9 +59,16 @@ public class ControllerState : MonoBehaviour {
 	public bool ButtonUpStart{get{return buttonUpStart;}set{buttonUpStart = value;}}
 
 	// Use this for initialization
+
 	void Start () 
 	{
 		playerController = GetComponent<Player>().PlayerController;
+		currentState = GamePad.GetState(playerController);
+
+		GamePad.SetVibration(playerController, 0, 0);
+
+		if(currentState.IsConnected)
+			joinedFromStart = true;
 	}
 	
 	// Update is called once per frame
@@ -69,6 +78,9 @@ public class ControllerState : MonoBehaviour {
 
         if (currentState.Buttons.Y == ButtonState.Pressed)
             Application.LoadLevel(0);
+
+        if(joinedFromStart && !currentState.IsConnected)
+			print("Player " + playerController + " disconnected!");
 
 		if(GetCurrentState().Buttons.A == ButtonState.Pressed && previousState.Buttons.A != ButtonState.Pressed){ButtonDownA = true; canRelease = true;}else ButtonDownA = false;
 		if(GetCurrentState().Buttons.B == ButtonState.Pressed && previousState.Buttons.B != ButtonState.Pressed){ButtonDownB = true; canRelease = true;}else ButtonDownB = false;
@@ -101,5 +113,10 @@ public class ControllerState : MonoBehaviour {
 	public GamePadState GetCurrentState()
 	{
 		return currentState;
+	}
+
+	void OnApplicationQuit()
+	{
+		GamePad.SetVibration(playerController, 0, 0);
 	}
 }
