@@ -30,7 +30,6 @@ public class Player : MonoBehaviour
 
 	[HideInInspector]
 	public PlayerState PState;
-	[HideInInspector]
 	public string KilledBy;
 	[HideInInspector]
 	public PlayerIndex PlayerController;
