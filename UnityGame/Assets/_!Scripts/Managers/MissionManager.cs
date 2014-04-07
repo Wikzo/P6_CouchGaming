@@ -12,7 +12,7 @@ public class MissionManager : MonoBehaviour
     public List<MissionBase> AllAvailableMissionsTotal; // pool of ALL missions available
     public List<MissionBase> FourPotentialMissionsAvailable; // of the total list, four are selected as potential candiates
     private List<MissionBase> AlreadyChosenMissions; // the missions that has already been chosen- used to try to get a "relative random" set
-    [HideInInspector] public List<MissionBase> InstantiatedMissions; // actual missions on players (to make it easier to see in Inspector)
+    public List<MissionBase> InstantiatedMissions; // actual missions on players (to make it easier to see in Inspector)
 
     public List <GameObject> Players;
 
@@ -22,6 +22,9 @@ public class MissionManager : MonoBehaviour
     public int ChanceOfGettingUniqueMissions = 5; // higher value = bigger chance of NOT getting same mission 
                                                   //(20-50 seems like a good value if you want to ABSOLUTELY make sure that they won't get same mission!)
                                                   // between 1 and 3 is "so-so"
+
+
+    private bool firstTime;
 
     //  public static Instance  
     public static MissionManager Instance
@@ -58,13 +61,7 @@ public class MissionManager : MonoBehaviour
     }
 
     // Use this for initialization
-    private void Start()
-    {
-        
-
-    }
-
-    public void GetMissionsReady()
+    private void OldStartDoneUseAnyMore()
     {
         // set up all the lists
         Players = GameManager.Instance.Players;
@@ -117,6 +114,74 @@ public class MissionManager : MonoBehaviour
         }
 
         SetTextAndIcons();
+
+    }
+
+    public void GetNewMissions()
+    {
+        // set up all the lists
+        Players = GameManager.Instance.Players;
+        AlreadyChosenMissions = new List<MissionBase>(Players.Count);
+        AllAvailableMissionsTotal = new List<MissionBase>(4);
+        InstantiatedMissions = new List<MissionBase>(4);
+
+        if (MissionTexts.Count != 4)
+            Debug.Log("ERROR - Mission Manager needs to have 4 links to TextMesh!");
+
+        // find all the missions parented to this game object
+        MissionBase[] allChildren = GetComponentsInChildren<MissionBase>();
+        foreach (MissionBase mission in allChildren)
+        {
+            AllAvailableMissionsTotal.Add(mission);
+        }
+
+        if (AllAvailableMissionsTotal.Count < 4)
+            Debug.Log("ERROR - at least 4 missions needs to be assigned to Mission Manager!");
+
+        if (MissionTexts.Count != 4)
+            Debug.Log("ERROR - 4 missions texts needs to be assigned to Mission Manager!");
+        if (MissionIcons.Count != 4)
+            Debug.Log("ERROR - 4 missions icons needs to be assigned to Mission Manager!");
+
+
+        // choose four missions out of the total amount
+        FourPotentialMissionsAvailable = ChooseMissionsFromSet(4, AllAvailableMissionsTotal);
+        ShuffleMissions(FourPotentialMissionsAvailable);
+
+        // set up template stuff that is only called once per mission
+        foreach (MissionBase m in FourPotentialMissionsAvailable)
+            m.TemplateSetUp();
+
+        // set the rumble states for each mission (1, 2, 3, 4)
+        for (int i = 1; i < 5; i++)
+        {
+            FourPotentialMissionsAvailable[i - 1].MissionIDRumble = i;
+        }
+
+        // destroy all missions on players
+        // NOTE: players should only have 1 active mission at the same time!
+        for (int i = 0; i < Players.Count; i++)
+        {
+            //Players[i].GetComponent<Player>().RemoveAllMissionsOnMe(); // does not work
+            MissionBase m = Players[i].GetComponent<MissionBase>();
+            DestroyImmediate(m);
+        }
+
+        // assign new missions
+        for (int i = 0; i < Players.Count; i++)
+        {
+            MissionBase c = GetUniqueMission(); // find a "relatively random" mission
+
+            string scriptName = c.ToString(); // get name of mission script so it can be attached to player
+            Players[i].AddComponent(scriptName);
+            Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c); // set up various stuff on mission via the template mission
+            Players[i].name = Players[i].GetComponent<Player>().Name + "_" + scriptName;
+            InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>()); // list of the current missions, easy to see in Inspector
+        }
+
+        // set the GUI things
+        SetTextAndIcons();
+
     }
 
     // DONT USE GUI TO DRAW THIS ANYMORE

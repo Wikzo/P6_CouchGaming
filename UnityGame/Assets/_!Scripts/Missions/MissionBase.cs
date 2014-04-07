@@ -25,9 +25,9 @@ public abstract class MissionBase : MonoBehaviour
 {
     private float intervals;
     public int Points;
-    
+
     protected bool _missionIsActive; // only this class + derived classes can access this
-    public bool MissionIsActive{get { return _missionIsActive; }} // getter property
+    public bool MissionIsActive { get { return _missionIsActive; } } // getter property
 
     [HideInInspector]
     public GameObject Player;
@@ -35,10 +35,10 @@ public abstract class MissionBase : MonoBehaviour
 
     //[HideInInspector]
     public List<GameObject> TargetPool;
-    
+
     //[HideInInspector]
     public GameObject Target;
-    
+
     public MissionType MissionType;
     public HowToChooseTarget HowToChooseTarget;
     public Material MissionMaterial;
@@ -78,7 +78,7 @@ public abstract class MissionBase : MonoBehaviour
 
         if (PlayerScript == null)
             Debug.Log("ERROR - mission doesn't have link to player! " + this);
-        
+
         this._missionIsActive = true;
 
         this.HowToChooseTarget = Template.HowToChooseTarget;
@@ -130,7 +130,7 @@ public abstract class MissionBase : MonoBehaviour
                 }
                 return template.TargetPool[randomExceptMyself];
                 break;
-            
+
             default:
                 print("default");
                 return null;
@@ -226,9 +226,6 @@ public abstract class MissionBase : MonoBehaviour
     public void Update()
     {
         if (!isInstanceMission) // don't rumble for template missions
-            return;
-
-        if (GameManager.Instance.PlayingState == PlayingState.Paused) // round is paused
             return;
 
         if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)

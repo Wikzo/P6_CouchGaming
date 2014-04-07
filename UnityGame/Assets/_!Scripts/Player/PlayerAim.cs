@@ -46,9 +46,6 @@ public class PlayerAim : MonoBehaviour
 	// Update is called once per frame
 	public void AimUpdate ()
 	{
-        if (GameManager.Instance.PlayingState == PlayingState.Paused) // round is paused
-            return;
-
 		//THIS SHOULD BE DONE SMARTER WITHOUT CHECKING SHOTAMOUNT SO MANY TIMES
 		if(playerScript.PlayerControllerState.GetCurrentState().Buttons.X == ButtonState.Pressed && ShotAmount > 0 || playerScript.Keyboard && Input.GetKey(ShootKey) && ShotAmount > 0)
 		{

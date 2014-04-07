@@ -15,7 +15,6 @@ public class Player : MonoBehaviour {
 
 	public bool LoFi = false;
 	public bool Keyboard = false;
-	public bool PauseMode = false;
 
 	public int Score;
 	public int Id;
@@ -41,6 +40,9 @@ public class Player : MonoBehaviour {
 	private Transform pTran;
 	private GameObject spawnPoint;
 	private Material pMat;
+
+    [HideInInspector]
+    public string Name;
 
 	// Use this for initialization
 	void Awake () 
@@ -79,12 +81,14 @@ public class Player : MonoBehaviour {
 
         if (GetComponent<TargetIDColor>() == null)
             Debug.Log("ERROR - player needs to have TargetIDColor component " + gameObject);
+	    
+        Name = gameObject.name;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if(PauseMode == false)
+		if(GameManager.Instance.PlayingState == PlayingState.Playing)
 		{
 			playerAim.AimUpdate();
 			playerMove.MoveUpdate();
@@ -100,6 +104,17 @@ public class Player : MonoBehaviour {
 			renderer.material = pMat;
 
 	}
+
+    public void RemoveAllMissionsOnMe()
+    {
+        // Removes all previous missions from player
+
+        // DOES NOT WORK WITH ARRAY!
+
+        MissionBase[] missions = gameObject.GetComponents<MissionBase>();
+        foreach (MissionBase m in missions)
+            DestroyImmediate(m);
+    }
 
 	public IEnumerator Die()
 	{
