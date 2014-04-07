@@ -22,6 +22,7 @@ public class Mover : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        // Gustav ... dont use
 
         state = GamePad.GetState(PlayerIndex.One);
 

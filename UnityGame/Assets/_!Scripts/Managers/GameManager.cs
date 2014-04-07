@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public PlayingState PlayingState = PlayingState.Playing;
 
+    // Debug stuff
+    public bool DebugShowMissions = false;
+
     //  public static Instance  
     public static GameManager Instance
     {
@@ -69,6 +72,8 @@ public class GameManager : MonoBehaviour
         CurrentRound = NumberOfRoundsPerGame;
         TimeLeft = TimePerRound;
         CurrentRoundJustEnded = false;
+
+        MissionManager.Instance.GetNewMissions();
     }
     void Update()
     {
@@ -96,6 +101,10 @@ public class GameManager : MonoBehaviour
                 TimeLeft = TimePerRound;
                 PlayingState = PlayingState.Playing;
                 Time.timeScale = 1;
+
+                MissionManager.Instance.GetNewMissions();
+
+
 
             }
         }

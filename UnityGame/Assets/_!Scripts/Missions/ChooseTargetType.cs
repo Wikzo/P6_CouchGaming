@@ -13,7 +13,6 @@ public class ChooseTargetType : MonoBehaviour
 
     private void Awake() // important that this is called in Awake (before Start)!
     {
-
         missionBase = GetComponent<MissionBase>();
         if (missionBase == null)
             Debug.Log("ERROR - needs to have a mission attached to template game object!");

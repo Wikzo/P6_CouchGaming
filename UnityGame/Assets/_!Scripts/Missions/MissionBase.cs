@@ -25,9 +25,9 @@ public abstract class MissionBase : MonoBehaviour
 {
     private float intervals;
     public int Points;
-    
+
     protected bool _missionIsActive; // only this class + derived classes can access this
-    public bool MissionIsActive{get { return _missionIsActive; }} // getter property
+    public bool MissionIsActive { get { return _missionIsActive; } } // getter property
 
     [HideInInspector]
     public GameObject Player;
@@ -35,10 +35,10 @@ public abstract class MissionBase : MonoBehaviour
 
     //[HideInInspector]
     public List<GameObject> TargetPool;
-    
+
     //[HideInInspector]
     public GameObject Target;
-    
+
     public MissionType MissionType;
     public HowToChooseTarget HowToChooseTarget;
     public Material MissionMaterial;
@@ -61,6 +61,8 @@ public abstract class MissionBase : MonoBehaviour
 
     public string MissionDescription = "MISSION";
 
+    public bool DebugShowCurrentMission = false;
+
     public virtual void TemplateSetUp() { }
 
     // An abstract function has to be overridden while a virtual function may be overridden.
@@ -78,7 +80,7 @@ public abstract class MissionBase : MonoBehaviour
 
         if (PlayerScript == null)
             Debug.Log("ERROR - mission doesn't have link to player! " + this);
-        
+
         this._missionIsActive = true;
 
         this.HowToChooseTarget = Template.HowToChooseTarget;
@@ -130,7 +132,7 @@ public abstract class MissionBase : MonoBehaviour
                 }
                 return template.TargetPool[randomExceptMyself];
                 break;
-            
+
             default:
                 print("default");
                 return null;
@@ -239,6 +241,17 @@ public abstract class MissionBase : MonoBehaviour
 
         if (targetRumbleCounter > 0)
             TargetRumbler(0.2f);
+    }
+
+    public void OnGUI()
+    {
+        if (isInstanceMission && GameManager.Instance.DebugShowMissions)
+        {
+            string text = this.ToString() + " - " + this.TargetIDColorState;
+            var point = Camera.main.WorldToScreenPoint(transform.position);
+            GUI.Label(new Rect(point.x, Screen.currentResolution.height - point.y - 200, 200, 200), text);
+
+        }
     }
 
     public abstract bool MissionAccomplished();
