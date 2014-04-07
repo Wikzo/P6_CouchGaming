@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
         // Furthermore we make sure that we don't destroy between scenes (this is optional)
         DontDestroyOnLoad(gameObject);
 
-        GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
     }
 
     void Start()
@@ -73,7 +72,7 @@ public class GameManager : MonoBehaviour
         TimeLeft = TimePerRound;
         CurrentRoundJustEnded = false;
 
-        MissionManager.Instance.GetNewMissions();
+        ResetLevel();
     }
     void Update()
     {
@@ -85,6 +84,19 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             PlayingState = PlayingState.Paused;
         }
+    }
+
+    public void ResetLevel()
+    {
+        foreach (GameObject p in Players)
+            p.GetComponent<Player>().Reset();
+
+        MissionManager.Instance.GetNewMissions();
+
+        GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
+
+
+
     }
 
     void OnGUI()
@@ -102,7 +114,7 @@ public class GameManager : MonoBehaviour
                 PlayingState = PlayingState.Playing;
                 Time.timeScale = 1;
 
-                MissionManager.Instance.GetNewMissions();
+                ResetLevel();
 
 
 

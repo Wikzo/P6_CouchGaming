@@ -61,7 +61,7 @@ public class MissionManager : MonoBehaviour
     }
 
     // Use this for initialization
-    private void OldStartDoneUseAnyMore()
+    /*private void OldStartDoneUseAnyMore()
     {
         // set up all the lists
         Players = GameManager.Instance.Players;
@@ -109,13 +109,13 @@ public class MissionManager : MonoBehaviour
             string scriptName = c.ToString(); // get name of mission script so it can be attached to player
             Players[i].AddComponent(scriptName);
             Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c); // set up various stuff on mission via the template mission
-            Players[i].name += "_" + c.name;
+            //Players[i].name += "_" + c.name;
             InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>()); // list of the current missions, easy to see in Inspector
         }
 
         SetTextAndIcons();
 
-    }
+    }*/
 
     public void GetNewMissions()
     {
@@ -175,7 +175,7 @@ public class MissionManager : MonoBehaviour
             string scriptName = c.ToString(); // get name of mission script so it can be attached to player
             Players[i].AddComponent(scriptName);
             Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c); // set up various stuff on mission via the template mission
-            Players[i].name = Players[i].GetComponent<Player>().Name + "_" + scriptName;
+            //Players[i].name = Players[i].GetComponent<Player>().Name + "_" + scriptName;
             InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>()); // list of the current missions, easy to see in Inspector
         }
 

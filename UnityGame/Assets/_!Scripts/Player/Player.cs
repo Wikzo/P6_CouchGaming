@@ -141,6 +141,18 @@ public class Player : MonoBehaviour
 		StartCoroutine(Respawn());
 	}
 
+    public void Reset()
+    {
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+
+        KilledBy = "";
+        renderer.enabled = true;
+        pTran.position = spawnPoint.transform.position;
+        PState = PlayerState.Alive;
+    }
+
 	public IEnumerator Respawn()
 	{
 		KilledBy = "";

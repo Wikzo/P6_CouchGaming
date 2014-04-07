@@ -209,7 +209,7 @@ MonoBehaviour:
   CurrentRound: 0
   CurrentRoundJustEnded: 0
   PlayingState: 0
-  DebugShowMissions: 1
+  DebugMode: 1
 --- !u!1 &80781186
 GameObject:
   m_ObjectHideFlags: 0
@@ -5206,7 +5206,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetIDColorState: 2
+  TargetIDColorState: 3
 --- !u!1 &1524890567
 GameObject:
   m_ObjectHideFlags: 0
@@ -6514,7 +6514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetIDColorState: 3
+  TargetIDColorState: 2
 --- !u!1001 &1873736859
 Prefab:
   m_ObjectHideFlags: 0
