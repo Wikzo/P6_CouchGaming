@@ -80,7 +80,7 @@ public class ControllerState : MonoBehaviour {
 	    {
 	        // reset game
 	        if (currentState.Buttons.Start == ButtonState.Pressed)
-	            Application.LoadLevel(0);
+	            GameManager.Instance.ResetLevel();
 	    }
 
 	    if(joinedFromStart && !currentState.IsConnected)
