@@ -220,6 +220,7 @@ public class MissionManager : MonoBehaviour
                 GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
                 audio.PlayOneShot(AudioManager.Instance.MissionAccomplishedSound);
                 Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+                m.GivePointsToPlayer();
             }
         }
     }

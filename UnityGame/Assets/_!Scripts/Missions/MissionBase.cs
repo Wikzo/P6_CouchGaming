@@ -243,14 +243,20 @@ public abstract class MissionBase : MonoBehaviour
             TargetRumbler(0.2f);
     }
 
+    public void GivePointsToPlayer()
+    {
+        this.PlayerScript.Points += this.Points;
+    }
+
     public void OnGUI()
     {
-        if (isInstanceMission && GameManager.Instance.DebugShowMissions)
+        if (isInstanceMission && GameManager.Instance.DebugMode)
         {
             string text = this.ToString() + " - " + this.TargetIDColorState;
+            text += "\nIs Active: " + this._missionIsActive;
+            text += "\nPoints: " + this.PlayerScript.Points;
             var point = Camera.main.WorldToScreenPoint(transform.position);
             GUI.Label(new Rect(point.x, Screen.currentResolution.height - point.y - 200, 200, 200), text);
-
         }
     }
 

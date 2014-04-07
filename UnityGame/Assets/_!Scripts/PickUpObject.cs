@@ -12,10 +12,8 @@ public class PickUpObject : MonoBehaviour
     private bool Idle = false;
     private float IdleBlinkRate = 0.5f;
     private float IdleBlinkTimeTotal = 3f;
-
-    
   
-
+    //TODO: consider if using OnTrigger instead
     void OnCollisionEnter(Collision col)
     {
         if (!CanBeUsedRightNow) // can't be picked up right now
