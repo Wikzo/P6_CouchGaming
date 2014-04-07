@@ -61,6 +61,8 @@ public abstract class MissionBase : MonoBehaviour
 
     public string MissionDescription = "MISSION";
 
+    public bool DebugShowCurrentMission = false;
+
     public virtual void TemplateSetUp() { }
 
     // An abstract function has to be overridden while a virtual function may be overridden.
@@ -239,6 +241,17 @@ public abstract class MissionBase : MonoBehaviour
 
         if (targetRumbleCounter > 0)
             TargetRumbler(0.2f);
+    }
+
+    public void OnGUI()
+    {
+        if (isInstanceMission && GameManager.Instance.DebugShowMissions)
+        {
+            string text = this.ToString() + " - " + this.TargetIDColorState;
+            var point = Camera.main.WorldToScreenPoint(transform.position);
+            GUI.Label(new Rect(point.x, Screen.currentResolution.height - point.y - 200, 200, 200), text);
+
+        }
     }
 
     public abstract bool MissionAccomplished();

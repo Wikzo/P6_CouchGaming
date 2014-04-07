@@ -28,6 +28,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public PlayingState PlayingState = PlayingState.Playing;
 
+    // Debug stuff
+    public bool DebugShowMissions = false;
+
     //  public static Instance  
     public static GameManager Instance
     {
