@@ -26,7 +26,6 @@ public class Player : MonoBehaviour
 	public float RespawnBlinkRate = 0.1f;
 	public GameObject[] SpawnPoints = new GameObject[4];
 	public Material[] Materials = new Material[4];
-	public Material blinkMat;
 
 	[HideInInspector]
 	public PlayerState PState;
@@ -108,7 +107,7 @@ public class Player : MonoBehaviour
 	    if(PState == PlayerState.Respawning)
 		{
 			float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
-			renderer.material.Lerp(pMat, blinkMat, lerp);
+			renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
 		}
 		else
 			renderer.material = pMat;
@@ -130,34 +129,40 @@ public class Player : MonoBehaviour
 	{
 		PState = PlayerState.Dead;
 
-		rigidbody.velocity = Vector3.zero;
-		rigidbody.angularVelocity = Vector3.zero;
-		transform.rotation = Quaternion.identity;
-
 		renderer.enabled = false;
 		pTran.position = new Vector3(-1000,-1000,-1000);
+
+		rigidbody.velocity = Vector3.zero;
+		rigidbody.angularVelocity = Vector3.zero;
+
 		yield return new WaitForSeconds(DeathTime);
 		StartCoroutine(Respawn());
 	}
 
     public void Reset()
     {
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.angularVelocity = Vector3.zero;
-        transform.rotation = Quaternion.identity;
-
+        PState = PlayerState.Alive;
         KilledBy = "";
+
         renderer.enabled = true;
         pTran.position = spawnPoint.transform.position;
-        PState = PlayerState.Alive;
+
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
+
+        playerAim.CurrentShotAmount = playerAim.ShotAmount;
+        if(playerAim.Projectile != null)
+        	Destroy(playerAim.Projectile);
     }
 
 	public IEnumerator Respawn()
 	{
-		KilledBy = "";
 		PState = PlayerState.Respawning;
+		KilledBy = "";
+		
 		renderer.enabled = true;
 		pTran.position = spawnPoint.transform.position;
+
 		yield return new WaitForSeconds(RespawnTime);
 		PState = PlayerState.Alive;
 	}

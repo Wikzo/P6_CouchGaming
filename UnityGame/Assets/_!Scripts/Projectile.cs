@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour 
 {
-	public Material BlinkMat;
-
 	public float DeadlyTime = 1;
 	public float DeadlyBlinkRate = 0.1f;
 
@@ -12,12 +10,12 @@ public class Projectile : MonoBehaviour
 	public bool VelocityReflection = false;
 	public bool ForceReflection = false;
 
+	[HideInInspector]
+	public Material PMat;
+
 	private int reflectionCount = 0;
-	private bool hasHit = false;
 
 	private string owner;
-
-	private Material pMat;
 
 	public string Owner
 	{
@@ -26,10 +24,9 @@ public class Projectile : MonoBehaviour
 	}
 
 	// Use this for initialization
-	void Start () 
+	void Start () 	
 	{
-		pMat = new Material(BlinkMat.shader);
-		pMat.color = renderer.material.color;
+
 	}
 	
 	// Update is called once per frame
@@ -40,11 +37,11 @@ public class Projectile : MonoBehaviour
 			DeadlyTime -= Time.deltaTime;
 
 			float lerp = Mathf.PingPong(Time.time, DeadlyBlinkRate) / DeadlyBlinkRate;
-			renderer.material.Lerp(pMat, BlinkMat, lerp);
+			renderer.material.color = Color.Lerp(PMat.color, Color.red, lerp);
 		}
 		else
 		{
-			renderer.material = pMat;
+			renderer.material.color = PMat.color;
 		}
 	}
 
@@ -60,7 +57,7 @@ public class Projectile : MonoBehaviour
 				}
 				else if(collision.gameObject.name == Owner)
 				{
-					collision.gameObject.GetComponent<PlayerAim>().ShotAmount++;
+					collision.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
 					Destroy(gameObject);
 				}
 			}
