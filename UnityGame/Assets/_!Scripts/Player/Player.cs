@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
 
 	private Transform pTran;
 	private GameObject spawnPoint;
+	private GameObject spawnZone;
 	private Material pMat;
 
     [HideInInspector]
@@ -80,6 +81,8 @@ public class Player : MonoBehaviour
 		playerMove = GetComponent<PlayerMove>();
 		playerJump = GetComponent<PlayerJump>();
 
+		spawnZone = spawnPoint.transform.Find("SpawnZone").gameObject;
+
         if (GetComponent<TargetIDColor>() == null)
             Debug.Log("ERROR - player needs to have TargetIDColor component " + gameObject);
 	    
@@ -111,7 +114,6 @@ public class Player : MonoBehaviour
 		}
 		else
 			renderer.material = pMat;
-
 	}
 
     public void RemoveAllMissionsOnMeDontUseThis()
@@ -146,6 +148,7 @@ public class Player : MonoBehaviour
 
         renderer.enabled = true;
         pTran.position = spawnPoint.transform.position;
+        spawnZone.SetActive(false);
 
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
@@ -163,7 +166,10 @@ public class Player : MonoBehaviour
 		renderer.enabled = true;
 		pTran.position = spawnPoint.transform.position;
 
+		//spawnZone.SetActive(true);
 		yield return new WaitForSeconds(RespawnTime);
 		PState = PlayerState.Alive;
+
+		//spawnZone.SetActive(false);
 	}
 }
