@@ -4,6 +4,7 @@ using XInputDotNetPure;
 
 public enum PlayerState
 {
+	Reset,
 	Alive,
 	Respawning,
 	Dead
@@ -19,6 +20,9 @@ public class Player : MonoBehaviour
 	public bool LoFi = false;
 	public bool Keyboard = false;
 
+	[HideInInspector]
+	public bool IsReadyToBegin = false;
+
 	public int Score;
 	public int Id;
 	public int DeathTime = 5;
@@ -26,6 +30,9 @@ public class Player : MonoBehaviour
 	public float RespawnBlinkRate = 0.1f;
 	public GameObject[] SpawnPoints = new GameObject[4];
 	public Material[] Materials = new Material[4];
+
+	[HideInInspector]
+	public GameObject spawnZone;
 
 	[HideInInspector]
 	public PlayerState PState;
@@ -40,7 +47,7 @@ public class Player : MonoBehaviour
 
 	private Transform pTran;
 	private GameObject spawnPoint;
-	private GameObject spawnZone;
+
 	private Material pMat;
 
     [HideInInspector]
@@ -106,14 +113,19 @@ public class Player : MonoBehaviour
 	                StartCoroutine(Die());
 	        }
 	    }
+	    else if(GameManager.Instance.PlayingState == PlayingState.Reset)
+	    {
+	    	playerMove.MoveUpdate();
+	        playerJump.JumpUpdate();
+	    }
 
-	    if(PState == PlayerState.Respawning)
-		{
-			float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
-			renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
-		}
-		else
-			renderer.material = pMat;
+	    //if(PState == PlayerState.Respawning)
+		//{
+		//	float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
+		//	renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+		//}
+		//else
+		//	renderer.material = pMat;
 	}
 
     public void RemoveAllMissionsOnMeDontUseThis()
@@ -143,12 +155,11 @@ public class Player : MonoBehaviour
 
     public void Reset()
     {
-        PState = PlayerState.Alive;
         KilledBy = "";
+        IsReadyToBegin = false;
 
         renderer.enabled = true;
         pTran.position = spawnPoint.transform.position;
-        spawnZone.SetActive(false);
 
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
@@ -156,6 +167,18 @@ public class Player : MonoBehaviour
         playerAim.CurrentShotAmount = playerAim.ShotAmount;
         if(playerAim.Projectile != null)
         	Destroy(playerAim.Projectile);
+
+       if(GameManager.Instance.WaitForReady)
+       {
+       		PState = PlayerState.Reset;
+       		spawnZone.SetActive(true);
+       		InvokeRepeating("PlayerReady", 0, 0.01f);
+       }
+       else
+       {
+       		PState = PlayerState.Alive;
+       		spawnZone.SetActive(false);
+       }
     }
 
 	public IEnumerator Respawn()
@@ -166,10 +189,20 @@ public class Player : MonoBehaviour
 		renderer.enabled = true;
 		pTran.position = spawnPoint.transform.position;
 
-		//spawnZone.SetActive(true);
+		spawnZone.SetActive(true);
+
 		yield return new WaitForSeconds(RespawnTime);
 		PState = PlayerState.Alive;
 
-		//spawnZone.SetActive(false);
+		spawnZone.SetActive(false);
+	}
+
+	void PlayerReady()
+	{
+		if(PlayerControllerState.ButtonDownY || Keyboard && Input.GetKeyDown(KeyCode.Q))
+		{
+			IsReadyToBegin = true;
+			CancelInvoke("PlayerReady");
+		}
 	}
 }

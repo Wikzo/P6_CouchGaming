@@ -279,6 +279,7 @@ MonoBehaviour:
   - {fileID: 1596579674}
   NumberOfRoundsPerGame: 5
   CurrentRound: 0
+  WaitForReady: 0
   CurrentRoundJustEnded: 0
   PlayingState: 0
   DebugMode: 1
@@ -1837,6 +1838,10 @@ Prefab:
       propertyPath: TargetList.Array.data[1]
       value: 
       objectReference: {fileID: 1088287648}
+    - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: WaitForReady
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
   m_RootGameObject: {fileID: 1360649201}
@@ -5282,6 +5287,7 @@ MonoBehaviour:
   Points: 0
   LoFi: 0
   Keyboard: 1
+  IsReadyToBegin: 0
   Score: 0
   Id: 0
   DeathTime: 2
@@ -5297,6 +5303,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
   - {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
   - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
+  spawnZone: {fileID: 0}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -5986,6 +5993,7 @@ MonoBehaviour:
   Points: 0
   LoFi: 0
   Keyboard: 0
+  IsReadyToBegin: 0
   Score: 0
   Id: 2
   DeathTime: 2
@@ -6001,6 +6009,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
   - {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
   - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
+  spawnZone: {fileID: 0}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -6559,6 +6568,7 @@ MonoBehaviour:
   Points: 0
   LoFi: 0
   Keyboard: 0
+  IsReadyToBegin: 0
   Score: 0
   Id: 3
   DeathTime: 2
@@ -6574,6 +6584,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
   - {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
   - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
+  spawnZone: {fileID: 0}
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -7482,6 +7493,7 @@ MonoBehaviour:
   Points: 0
   LoFi: 0
   Keyboard: 0
+  IsReadyToBegin: 0
   Score: 0
   Id: 1
   DeathTime: 2
@@ -7497,6 +7509,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
   - {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
   - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
+  spawnZone: {fileID: 0}
   PState: 0
   KilledBy: 
   PlayerController: 0

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public enum PlayingState
 {
+    Reset,
     Playing,
     Paused,
     Pratice
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     // Round stuff
     [HideInInspector]
     public int CurrentRound;
+    public bool WaitForReady = true;
     private float TimePerRound = 30;
     private float TimeLeft;
     [HideInInspector]
@@ -95,8 +97,13 @@ public class GameManager : MonoBehaviour
 
         GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
 
-
-
+        if(WaitForReady)
+        {
+            PlayingState = PlayingState.Reset;
+            InvokeRepeating("AllReady", 0, 0.01f);
+        }
+        else
+            PlayingState = PlayingState.Playing;
     }
 
     void OnGUI()
@@ -115,12 +122,34 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1;
 
                 ResetLevel();
+            }
+        }
+    }
 
+    void AllReady()
+    {
+        int playersReady = 0;
 
-
+        for(int i = 0; i<Players.Count; i++)
+        {
+            if(Players[i].GetComponent<Player>().IsReadyToBegin)
+            {
+                playersReady++;
             }
         }
 
-        
+        if(playersReady == Players.Count)
+        {
+            foreach(GameObject player in Players)
+            {
+                Player playerScript = player.GetComponent<Player>();
+
+                PlayingState = PlayingState.Playing;
+                playerScript.PState = PlayerState.Alive;
+                playerScript.spawnZone.SetActive(false);
+                playerScript.IsReadyToBegin = false;
+            }
+            CancelInvoke("AllReady");
+        }
     }
 }
