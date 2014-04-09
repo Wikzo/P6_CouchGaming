@@ -4,7 +4,7 @@ using XInputDotNetPure;
 
 public class PlayerAim : MonoBehaviour 
 {
-	public GameObject ProjectileObj;
+	
 	public KeyCode ShootKey = KeyCode.Tab;
 
 	public float ShotOffset = 1.5f;
@@ -12,8 +12,13 @@ public class PlayerAim : MonoBehaviour
 	public float ChargeSpeed = 3;
 	public float MaxChargeTime = 10;
 	public float ShotAmount = 1;
+	[HideInInspector]
+	public float CurrentShotAmount;
 
-	private GameObject projectile;
+	public GameObject ProjectileObj;
+
+	[HideInInspector]
+	public GameObject Projectile;
 
 	private float chargeTimer = 0;
 
@@ -38,6 +43,8 @@ public class PlayerAim : MonoBehaviour
 
 		chargeBar.right = Vector3.right;
 
+		CurrentShotAmount = ShotAmount;
+
 		playerScript = GetComponent<Player>();
 		playerMove = GetComponent<PlayerMove>();
 		playerJump = GetComponent<PlayerJump>();
@@ -47,7 +54,7 @@ public class PlayerAim : MonoBehaviour
 	public void AimUpdate ()
 	{
 		//THIS SHOULD BE DONE SMARTER WITHOUT CHECKING SHOTAMOUNT SO MANY TIMES
-		if(playerScript.PlayerControllerState.GetCurrentState().Buttons.X == ButtonState.Pressed && ShotAmount > 0 || playerScript.Keyboard && Input.GetKey(ShootKey) && ShotAmount > 0)
+		if(playerScript.PlayerControllerState.GetCurrentState().Buttons.X == ButtonState.Pressed && CurrentShotAmount > 0 || playerScript.Keyboard && Input.GetKey(ShootKey) && CurrentShotAmount > 0)
 		{
 			playerMove.CanMove = false;
 
@@ -117,18 +124,19 @@ public class PlayerAim : MonoBehaviour
 				}
 			}			
 		}
-		else if(playerScript.PlayerControllerState.ButtonUpX && ShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && ShotAmount > 0 && cancelAim == false)
+		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
-			projectile = Instantiate(ProjectileObj, aimTran.position+aimTran.forward*ShotOffset, Quaternion.identity) as GameObject;
-			projectile.GetComponent<Projectile>().Owner = name;
-			projectile.transform.right = aimTran.forward;
-			projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
-			//projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
-			projectile.renderer.material = renderer.material;
+			Projectile = Instantiate(ProjectileObj, aimTran.position+aimTran.forward*ShotOffset, Quaternion.identity) as GameObject;
+			Projectile.GetComponent<Projectile>().Owner = name;
+			Projectile.GetComponent<Projectile>().PMat = renderer.material;
+			Projectile.transform.right = aimTran.forward;
+			Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
+			//Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
+			
 			
 			chargeTimer = 1;
 
-			ShotAmount -= 1;
+			CurrentShotAmount -= 1;
 		}
 		else
 		{

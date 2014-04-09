@@ -4,6 +4,7 @@ using XInputDotNetPure;
 
 public enum PlayerState
 {
+	Reset,
 	Alive,
 	Respawning,
 	Dead
@@ -19,6 +20,9 @@ public class Player : MonoBehaviour
 	public bool LoFi = false;
 	public bool Keyboard = false;
 
+	[HideInInspector]
+	public bool IsReadyToBegin = false;
+
 	public int Score;
 	public int Id;
 	public int DeathTime = 5;
@@ -26,11 +30,12 @@ public class Player : MonoBehaviour
 	public float RespawnBlinkRate = 0.1f;
 	public GameObject[] SpawnPoints = new GameObject[4];
 	public Material[] Materials = new Material[4];
-	public Material blinkMat;
+
+	[HideInInspector]
+	public GameObject spawnZone;
 
 	[HideInInspector]
 	public PlayerState PState;
-	[HideInInspector]
 	public string KilledBy;
 	[HideInInspector]
 	public PlayerIndex PlayerController;
@@ -42,6 +47,7 @@ public class Player : MonoBehaviour
 
 	private Transform pTran;
 	private GameObject spawnPoint;
+
 	private Material pMat;
 
     [HideInInspector]
@@ -82,6 +88,8 @@ public class Player : MonoBehaviour
 		playerMove = GetComponent<PlayerMove>();
 		playerJump = GetComponent<PlayerJump>();
 
+		spawnZone = spawnPoint.transform.Find("SpawnZone").gameObject;
+
         if (GetComponent<TargetIDColor>() == null)
             Debug.Log("ERROR - player needs to have TargetIDColor component " + gameObject);
 	    
@@ -105,15 +113,19 @@ public class Player : MonoBehaviour
 	                StartCoroutine(Die());
 	        }
 	    }
+	    else if(GameManager.Instance.PlayingState == PlayingState.Reset)
+	    {
+	    	playerMove.MoveUpdate();
+	        playerJump.JumpUpdate();
+	    }
 
-	    if(PState == PlayerState.Respawning)
-		{
-			float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
-			renderer.material.Lerp(pMat, blinkMat, lerp);
-		}
-		else
-			renderer.material = pMat;
-
+	    //if(PState == PlayerState.Respawning)
+		//{
+		//	float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
+		//	renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+		//}
+		//else
+		//	renderer.material = pMat;
 	}
 
     public void RemoveAllMissionsOnMeDontUseThis()
@@ -131,35 +143,66 @@ public class Player : MonoBehaviour
 	{
 		PState = PlayerState.Dead;
 
-		rigidbody.velocity = Vector3.zero;
-		rigidbody.angularVelocity = Vector3.zero;
-		transform.rotation = Quaternion.identity;
-
 		renderer.enabled = false;
 		pTran.position = new Vector3(-1000,-1000,-1000);
+
+		rigidbody.velocity = Vector3.zero;
+		rigidbody.angularVelocity = Vector3.zero;
+
 		yield return new WaitForSeconds(DeathTime);
 		StartCoroutine(Respawn());
 	}
 
     public void Reset()
     {
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.angularVelocity = Vector3.zero;
-        transform.rotation = Quaternion.identity;
-
         KilledBy = "";
+        IsReadyToBegin = false;
+
         renderer.enabled = true;
         pTran.position = spawnPoint.transform.position;
-        PState = PlayerState.Alive;
+
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
+
+        playerAim.CurrentShotAmount = playerAim.ShotAmount;
+        if(playerAim.Projectile != null)
+        	Destroy(playerAim.Projectile);
+
+       if(GameManager.Instance.WaitForReady)
+       {
+       		PState = PlayerState.Reset;
+       		spawnZone.SetActive(true);
+       		InvokeRepeating("PlayerReady", 0, 0.01f);
+       }
+       else
+       {
+       		PState = PlayerState.Alive;
+       		spawnZone.SetActive(false);
+       }
     }
 
 	public IEnumerator Respawn()
 	{
-		KilledBy = "";
 		PState = PlayerState.Respawning;
+		KilledBy = "";
+		
 		renderer.enabled = true;
 		pTran.position = spawnPoint.transform.position;
+
+		spawnZone.SetActive(true);
+
 		yield return new WaitForSeconds(RespawnTime);
 		PState = PlayerState.Alive;
+
+		spawnZone.SetActive(false);
+	}
+
+	void PlayerReady()
+	{
+		if(PlayerControllerState.ButtonDownY || Keyboard && Input.GetKeyDown(KeyCode.Q))
+		{
+			IsReadyToBegin = true;
+			CancelInvoke("PlayerReady");
+		}
 	}
 }
