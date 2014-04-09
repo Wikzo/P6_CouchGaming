@@ -190,7 +190,10 @@ public class GameManager : MonoBehaviour
                 Player playerScript = player.GetComponent<Player>();
 
                 playerScript.PState = PlayerState.Alive;
-                playerScript.spawnZone.SetActive(false);
+
+                playerScript.ChosenSpawn.SetActive(true);
+                playerScript.SpawnZone.SetActive(false);
+                
                 playerScript.IsReadyToBegin = false;
             }
             CancelInvoke("AllReady");

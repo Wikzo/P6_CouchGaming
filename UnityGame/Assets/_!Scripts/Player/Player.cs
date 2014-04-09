@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using System.Collections;
 using XInputDotNetPure;
 
@@ -14,7 +15,6 @@ public enum PlayerState
 [RequireComponent(typeof(TargetIDColor))]
 public class Player : MonoBehaviour
 {
-
     public int Points;
 
 	public bool LoFi = false;
@@ -28,11 +28,17 @@ public class Player : MonoBehaviour
 	public int DeathTime = 5;
 	public float RespawnTime = 3;
 	public float RespawnBlinkRate = 0.1f;
-	public GameObject[] SpawnPoints = new GameObject[4];
+
 	public Material[] Materials = new Material[4];
 
 	[HideInInspector]
-	public GameObject spawnZone;
+	public GameObject SpawnZone;
+
+	[HideInInspector]
+	public GameObject ChosenSpawn;
+
+	public GameObject SpawnPoints;
+	private GameObject[] spawnPoints;
 
 	[HideInInspector]
 	public PlayerState PState;
@@ -41,12 +47,13 @@ public class Player : MonoBehaviour
 	public PlayerIndex PlayerController;
 	public ControllerState PlayerControllerState;
 
+	
+
 	private PlayerAim playerAim;
 	private PlayerMove playerMove;
 	private PlayerJump playerJump;
 
 	private Transform pTran;
-	private GameObject spawnPoint;
 
 	private Material pMat;
 
@@ -62,33 +69,36 @@ public class Player : MonoBehaviour
 		{
 			case 0:
 			PlayerController = PlayerIndex.One;
-			spawnPoint = SpawnPoints[0];
 			pMat = Materials[0];
 			break;
 			case 1:
 			PlayerController = PlayerIndex.Two;
-			spawnPoint = SpawnPoints[1];
 			pMat = Materials[1];
 			break;
 			case 2:
 			PlayerController = PlayerIndex.Three;
-			spawnPoint = SpawnPoints[2];
 			pMat = Materials[2];
 			break;
 			case 3:
 			PlayerController = PlayerIndex.Four;
-			spawnPoint = SpawnPoints[3];
 			pMat = Materials[3];
 			break;
 		}
 		renderer.material = pMat;
+
+		spawnPoints = new GameObject[SpawnPoints.transform.GetChildCount()];
+
+		for(int i = 0; i<spawnPoints.Length; i++)
+		{
+			spawnPoints[i] = SpawnPoints.transform.GetChild(i).gameObject;
+		}
 
 		PlayerControllerState = GetComponent<ControllerState>();
 		playerAim = GetComponent<PlayerAim>();
 		playerMove = GetComponent<PlayerMove>();
 		playerJump = GetComponent<PlayerJump>();
 
-		spawnZone = spawnPoint.transform.Find("SpawnZone").gameObject;
+		SpawnZone = transform.Find("SpawnZone").gameObject;
 
         if (GetComponent<TargetIDColor>() == null)
             Debug.Log("ERROR - player needs to have TargetIDColor component " + gameObject);
@@ -166,7 +176,7 @@ public class Player : MonoBehaviour
 		rigidbody.angularVelocity = Vector3.zero;
 
 		yield return new WaitForSeconds(DeathTime);
-		StartCoroutine(Respawn());
+		Respawn();
 	}
 
     void Hide()
@@ -185,7 +195,6 @@ public class Player : MonoBehaviour
         IsReadyToBegin = false;
 
         renderer.enabled = true;
-        pTran.position = spawnPoint.transform.position;
 
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
@@ -194,11 +203,12 @@ public class Player : MonoBehaviour
         if(playerAim.Projectile != null)
         	Destroy(playerAim.Projectile);
 
+        ChooseSpawnPoint();
+
         // TODO: unsure if this sometimes doesn't get called due to State check
        //if(GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
        //{
        		PState = PlayerState.Reset;
-       		spawnZone.SetActive(true);
        		//InvokeRepeating("PlayerReady", 0, 0.01f);
        //}
 
@@ -206,7 +216,7 @@ public class Player : MonoBehaviour
         /*else
        {
        		PState = PlayerState.Alive;
-       		spawnZone.SetActive(false);
+       		SpawnZone.SetActive(false);
        }*/
     }
 
@@ -221,20 +231,18 @@ public class Player : MonoBehaviour
         }
 
     }
-	public IEnumerator Respawn()
+	public void Respawn()
 	{
 		PState = PlayerState.Respawning;
 		KilledBy = "";
 		
 		renderer.enabled = true;
-		pTran.position = spawnPoint.transform.position;
+		//pTran.position = spawnPoint;
 
-		spawnZone.SetActive(true);
+		ChooseSpawnPoint();
+
 		InvokeRepeating("CheckMovement", 0, 0.01f);
-
-		yield return null;
 	}
-
 
 	void PlayerReady()
 	{
@@ -242,6 +250,9 @@ public class Player : MonoBehaviour
 		{
 		    IsReadyToBegin = !IsReadyToBegin;
 		    //CancelInvoke("PlayerReady");
+
+		    //This is set in AllReady in GameManager instead, to make sure that everyone is done spawning:
+		    //ChosenSpawn.SetActive(true);
 		}
 	}
 
@@ -250,9 +261,35 @@ public class Player : MonoBehaviour
 		if(PlayerControllerState.GetCurrentState().ThumbSticks.Left.X != 0 || PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y != 0 || PlayerControllerState.ButtonDownA || Keyboard && Input.anyKey)
 		{
 			PState = PlayerState.Alive;
-			spawnZone.SetActive(false);
+			
+			ChosenSpawn.SetActive(true);
+			SpawnZone.SetActive(false);
 
 			CancelInvoke("CheckMovement");
 		}
+	}
+
+	void ChooseSpawnPoint()
+	{
+		SpawnZone.SetActive(true);
+
+		List<GameObject> spawnsToChoose = new List<GameObject>();
+
+		//Finds all active spawnpoints and stores them
+        for(int i = 0; i<spawnPoints.Length; i++)
+        {
+        	if(spawnPoints[i].activeInHierarchy)
+        	{
+        		spawnsToChoose.Add(spawnPoints[i]);
+        	}
+        }
+        //Picks a random active spawnpoint and places the player there
+        if(spawnsToChoose.Count != 0)
+        {
+        	ChosenSpawn = spawnsToChoose[Random.Range(0,spawnsToChoose.Count-1)];
+        	pTran.position = ChosenSpawn.transform.position;
+        }
+
+        ChosenSpawn.SetActive(false);
 	}
 }
