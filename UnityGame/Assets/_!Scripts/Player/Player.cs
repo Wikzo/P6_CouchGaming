@@ -116,16 +116,15 @@ public class Player : MonoBehaviour
 	    else if(GameManager.Instance.PlayingState == PlayingState.Reset)
 	    {
 	    	playerMove.MoveUpdate();
-	        playerJump.JumpUpdate();
 	    }
 
-	    //if(PState == PlayerState.Respawning)
-		//{
-		//	float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
-		//	renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
-		//}
-		//else
-		//	renderer.material = pMat;
+	    if(PState != PlayerState.Alive)
+		{
+			float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
+			renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+		}
+		else
+			renderer.material = pMat;
 	}
 
     public void RemoveAllMissionsOnMeDontUseThis()
@@ -190,11 +189,9 @@ public class Player : MonoBehaviour
 		pTran.position = spawnPoint.transform.position;
 
 		spawnZone.SetActive(true);
+		InvokeRepeating("CheckMovement", 0, 0.01f);
 
-		yield return new WaitForSeconds(RespawnTime);
-		PState = PlayerState.Alive;
-
-		spawnZone.SetActive(false);
+		yield return null;
 	}
 
 	void PlayerReady()
@@ -203,6 +200,17 @@ public class Player : MonoBehaviour
 		{
 			IsReadyToBegin = true;
 			CancelInvoke("PlayerReady");
+		}
+	}
+
+	void CheckMovement()
+	{
+		if(PlayerControllerState.GetCurrentState().ThumbSticks.Left.X != 0 || PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y != 0 || PlayerControllerState.ButtonDownA || Keyboard && Input.anyKey)
+		{
+			PState = PlayerState.Alive;
+			spawnZone.SetActive(false);
+
+			CancelInvoke("CheckMovement");
 		}
 	}
 }
