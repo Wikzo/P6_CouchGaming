@@ -76,12 +76,7 @@ public class ControllerState : MonoBehaviour {
     {
         currentState = GamePad.GetState(playerController);
 
-	    if (GameManager.Instance.DebugMode)
-	    {
-	        // reset game
-	        if (currentState.Buttons.Start == ButtonState.Pressed)
-	            GameManager.Instance.ResetLevel();
-	    }
+	    
 
 	    if(joinedFromStart && !currentState.IsConnected)
 			print("Player " + playerController + " disconnected!");

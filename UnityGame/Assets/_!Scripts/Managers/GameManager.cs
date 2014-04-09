@@ -3,10 +3,12 @@ using UnityEngine;
 
 public enum PlayingState
 {
-    Reset,
-    Playing,
+    WaitingForEverbodyToGetReady,
+    GameIsPlaying,
+    DisplayingScore,
     Paused,
-    Pratice
+    PraticeMode,
+    GameIsOver
 }
 
 public class GameManager : MonoBehaviour
@@ -16,6 +18,9 @@ public class GameManager : MonoBehaviour
 
     // Fields
     public List<GameObject> Players;// = new GameObject[4];
+    
+    [HideInInspector]
+    public List<ResetObjectPosition> AllObjectsToReset; // contains all objects in scene that must reset
 
     public int NumberOfRoundsPerGame = 5;
     
@@ -23,12 +28,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int CurrentRound;
     public bool WaitForReady = true;
-    private float TimePerRound = 30;
+    private float TimePerRound = 5;
     private float TimeLeft;
     [HideInInspector]
     public bool CurrentRoundJustEnded;
     [HideInInspector]
-    public PlayingState PlayingState = PlayingState.Playing;
+    public PlayingState PlayingState;
 
     // Debug stuff
     public bool DebugMode = true;
@@ -71,59 +76,99 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         CurrentRound = NumberOfRoundsPerGame;
-        TimeLeft = TimePerRound;
-        CurrentRoundJustEnded = false;
-
-        ResetLevel();
+        this.PlayingState = PlayingState.PraticeMode;
     }
     void Update()
     {
-        TimeLeft -= Time.deltaTime;
-
-        if (TimeLeft <= 0)
+        if (PlayingState == PlayingState.GameIsPlaying)
         {
-            CurrentRoundJustEnded = true;
-            Time.timeScale = 0;
-            PlayingState = PlayingState.Paused;
+            TimeLeft -= Time.deltaTime;
+
+            if (TimeLeft <= 0)
+            {
+                CurrentRoundJustEnded = true;
+                PlayingState = PlayingState.DisplayingScore;
+            }
         }
     }
 
     public void ResetLevel()
     {
+        foreach (ResetObjectPosition r in AllObjectsToReset) // reset all objects to initial state
+            r.ResetMyPosition();
+
+        TimeLeft = TimePerRound;
+        CurrentRoundJustEnded = false;
+        CurrentRound--;
+
+        if (CurrentRound <= 0)
+        {
+            PlayingState = PlayingState.GameIsOver;
+            return;
+        }
+
+        PlayingState = PlayingState.WaitingForEverbodyToGetReady;
+
         foreach (GameObject p in Players)
             p.GetComponent<Player>().Reset();
 
+        InvokeRepeating("AllReady", 0, 0.01f);
+
+
         MissionManager.Instance.GetNewMissions();
 
-        GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
+        //GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
 
-        if(WaitForReady)
-        {
-            PlayingState = PlayingState.Reset;
-            InvokeRepeating("AllReady", 0, 0.01f);
-        }
-        else
-            PlayingState = PlayingState.Playing;
+        //if(WaitForReady)
+        //{
+            
+        //}
+        //else
+          //  PlayingState = PlayingState.GameIsPlaying;
     }
 
-    void OnGUI()
+    private void OnGUI()
     {
-        GUILayout.Label(string.Format("TIME: {0}", TimeLeft.ToString("F2")));
-        GUILayout.Label(string.Format("ROUND: {0}", CurrentRound.ToString()));
+        GUILayout.Label(string.Format("Current state: {0}", PlayingState.ToString()));
+        GUILayout.Label(string.Format("Round: {0}", CurrentRound.ToString()));
 
-        if (CurrentRoundJustEnded)
+        switch (PlayingState)
         {
-            if (GUI.Button(new Rect(Screen.width / 2, Screen.height / 2, 200, 200), "START NEXT ROUND"))
-            {
-                CurrentRoundJustEnded = false;
-                CurrentRound--;
-                TimeLeft = TimePerRound;
-                PlayingState = PlayingState.Playing;
-                Time.timeScale = 1;
+            case PlayingState.WaitingForEverbodyToGetReady:
+                break;
 
-                ResetLevel();
-            }
+            case PlayingState.GameIsPlaying:
+                GUILayout.Label(string.Format("TIME: {0}", TimeLeft.ToString("F2")));
+                break;
+
+            case PlayingState.DisplayingScore:
+                GUILayout.Label("SCORE TABLES:\nbla\nbla\nbla");
+                if (GUI.Button(new Rect(Screen.width/2, Screen.height/2, 200, 200), "START NEXT ROUND"))
+                    ResetLevel();
+                break;
+
+            case PlayingState.Paused:
+                GUILayout.Label("***PAUSED***");
+                break;
+
+            case PlayingState.PraticeMode:
+                GUILayout.Label("PRACTICE MODE");
+
+                if (GUI.Button(new Rect(Screen.width/2, Screen.height/2, 200, 200), "Click to start game"))
+                    ResetLevel();
+                break;
+
+            case PlayingState.GameIsOver:
+                GUILayout.Label("BUHUUUU GAME IS OVER!! :(");
+                if (GUI.Button(new Rect(Screen.width/2, Screen.height/2, 200, 200), "Restart"))
+                    ResetWholeGame();
+                break;
         }
+    }
+
+    public void ResetWholeGame()
+    {
+        Application.LoadLevel(0);
     }
 
     void AllReady()
@@ -144,12 +189,13 @@ public class GameManager : MonoBehaviour
             {
                 Player playerScript = player.GetComponent<Player>();
 
-                PlayingState = PlayingState.Playing;
                 playerScript.PState = PlayerState.Alive;
                 playerScript.spawnZone.SetActive(false);
                 playerScript.IsReadyToBegin = false;
             }
             CancelInvoke("AllReady");
+
+            PlayingState = PlayingState.GameIsPlaying;
         }
     }
 }

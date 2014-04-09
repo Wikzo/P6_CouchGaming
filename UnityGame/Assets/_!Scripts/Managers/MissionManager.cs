@@ -203,6 +203,8 @@ public class MissionManager : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
+            Destroy(MissionIcons[i].renderer.material); // to save up space
+
             MissionTexts[i].text = FourPotentialMissionsAvailable[i].MissionDescription;
             MissionIcons[i].renderer.material = FourPotentialMissionsAvailable[i].MissionMaterial; // TODO: use one parent object with text AND icon instead
         }
@@ -210,6 +212,9 @@ public class MissionManager : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.PlayingState != PlayingState.GameIsPlaying) // only check if game is playing
+            return;
+
         foreach (MissionBase m in InstantiatedMissions)
         {
             if (!m.MissionIsActive) // dont look into inactive missions

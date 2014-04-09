@@ -36,6 +36,15 @@ public class MissionIntel : MissionBase
             Debug.Log("ERROR - could not cast from MissionBase to MissionIntel!");
     }
 
+    void Update()
+    {
+        if (!isInstanceMission)
+            return;
+
+        // stop audio if not playing
+        if(GameManager.Instance.PlayingState != PlayingState.GameIsPlaying && audio.isPlaying)
+            audio.Stop();
+    }
     
     public override bool MissionAccomplished()
     {

@@ -111,21 +111,21 @@ public abstract class MissionBase : MonoBehaviour
             //case HowToChooseTarget.ChooseTargetBasedOnChildren:
             case HowToChooseTarget.ChooseTargetBasedOnList:
             case HowToChooseTarget.ChooseTargetAmongAllPlayers:
-                int randomAmongAll = GetUniqueTarget(0, template.TargetPool.Count);
+                int randomAmongAll = GetUniqueTarget(TargetNumbersUsed, ChanceOfGettingUniqueTarget, 0, template.TargetPool.Count);
                 //print(r);
                 return template.TargetPool[randomAmongAll];
                 break;
 
             case HowToChooseTarget.ChooseTargetAmongAllPlayersExceptMe:
                 int counter = 0;
-                int randomExceptMyself = GetUniqueTarget(0, template.TargetPool.Count);
+                int randomExceptMyself = GetUniqueTarget(TargetNumbersUsed, ChanceOfGettingUniqueTarget, 0, template.TargetPool.Count);
 
                 GameObject tempTarget = template.TargetPool[randomExceptMyself];
                 if (this.HowToChooseTarget == HowToChooseTarget.ChooseTargetAmongAllPlayersExceptMe) // try to avoid choosing myself
                 {
                     while (tempTarget == this.Player && counter < 100) // try to pick a new target
                     {
-                        randomExceptMyself = GetUniqueTarget(0, template.TargetPool.Count);
+                        randomExceptMyself = GetUniqueTarget(TargetNumbersUsed, ChanceOfGettingUniqueTarget, 0, template.TargetPool.Count);
                         tempTarget = template.TargetPool[randomExceptMyself];
                         counter++;
                     }
@@ -141,20 +141,20 @@ public abstract class MissionBase : MonoBehaviour
         }
     }
 
-    int GetUniqueTarget(int min, int max) // "relative random" target
+    public int GetUniqueTarget(List<int> NumbersUsed, int chance, int min, int max) // "relative random" target
     {
         Random.seed = (int)System.DateTime.Now.Ticks;
 
         int number = Random.Range(min, max);
         int tries = 0;
 
-        while (TargetNumbersUsed.Contains(number) && tries < ChanceOfGettingUniqueTarget)
+        while (NumbersUsed.Contains(number) && tries < chance)
         {
             number = Random.Range(min, max);
             tries++;
         }
 
-        TargetNumbersUsed.Add(number);
+        NumbersUsed.Add(number);
         return number;
 
     }
@@ -173,6 +173,8 @@ public abstract class MissionBase : MonoBehaviour
 
     public void MissionRumbler(float interval) // display mission (rumble)
     {
+        
+
         //print("rumble " + missionRumbleCounter + " " + this);
         if (missionTimeCounter < interval)
         {
@@ -229,6 +231,8 @@ public abstract class MissionBase : MonoBehaviour
     {
         if (!isInstanceMission) // don't rumble for template missions
             return;
+
+        
 
         if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
             PickMissionRumble();

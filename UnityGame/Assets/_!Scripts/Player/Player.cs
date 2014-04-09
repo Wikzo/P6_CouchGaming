@@ -98,9 +98,22 @@ public class Player : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update () 
+	void Update ()
 	{
-	    if (GameManager.Instance.PlayingState == PlayingState.Playing)
+        // reset whole game - DEBUG
+        if (GameManager.Instance.DebugMode && PlayerControllerState.ButtonDownStart)
+           GameManager.Instance.ResetWholeGame();
+
+        // hide player
+	    if (GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
+	        Hide();
+
+        // tell game manager that I am ready
+        if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
+            PlayerReady();
+
+        // playing loop
+	    if (GameManager.Instance.PlayingState == PlayingState.GameIsPlaying)
 	    {
 	        playerAim.AimUpdate();
 	        playerMove.MoveUpdate();
@@ -113,8 +126,9 @@ public class Player : MonoBehaviour
 	                StartCoroutine(Die());
 	        }
 	    }
-	    else if(GameManager.Instance.PlayingState == PlayingState.Reset)
+	    else if(GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
 	    {
+            // can move even while waiting ... MAYBE?
 	    	playerMove.MoveUpdate();
 	        playerJump.JumpUpdate();
 	    }
@@ -153,6 +167,11 @@ public class Player : MonoBehaviour
 		StartCoroutine(Respawn());
 	}
 
+    void Hide()
+    {
+        renderer.enabled = false;
+    }
+
     public void Reset()
     {
         KilledBy = "";
@@ -168,19 +187,33 @@ public class Player : MonoBehaviour
         if(playerAim.Projectile != null)
         	Destroy(playerAim.Projectile);
 
-       if(GameManager.Instance.WaitForReady)
-       {
+        // TODO: unsure if this sometimes doesn't get called due to State check
+       //if(GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
+       //{
        		PState = PlayerState.Reset;
        		spawnZone.SetActive(true);
-       		InvokeRepeating("PlayerReady", 0, 0.01f);
-       }
-       else
+       		//InvokeRepeating("PlayerReady", 0, 0.01f);
+       //}
+
+        
+        /*else
        {
        		PState = PlayerState.Alive;
        		spawnZone.SetActive(false);
-       }
+       }*/
     }
 
+
+    public void OnGUI()
+    {
+        if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
+        {
+            string text = "Is ready: " + IsReadyToBegin.ToString();
+            var point = Camera.main.WorldToScreenPoint(transform.position - new Vector3(2,0, 0));
+            GUI.Label(new Rect(point.x, Screen.currentResolution.height - point.y - 200, 200, 200), text);
+        }
+
+    }
 	public IEnumerator Respawn()
 	{
 		PState = PlayerState.Respawning;
@@ -197,12 +230,13 @@ public class Player : MonoBehaviour
 		spawnZone.SetActive(false);
 	}
 
+
 	void PlayerReady()
 	{
-		if(PlayerControllerState.ButtonDownY || Keyboard && Input.GetKeyDown(KeyCode.Q))
+		if (PlayerControllerState.ButtonDownY || Keyboard && Input.GetKeyDown(KeyCode.Q))
 		{
-			IsReadyToBegin = true;
-			CancelInvoke("PlayerReady");
+		    IsReadyToBegin = !IsReadyToBegin;
+		    //CancelInvoke("PlayerReady");
 		}
 	}
 }

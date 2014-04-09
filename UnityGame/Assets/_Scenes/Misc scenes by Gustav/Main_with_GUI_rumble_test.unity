@@ -277,6 +277,7 @@ MonoBehaviour:
   - {fileID: 1829481883}
   - {fileID: 1475358118}
   - {fileID: 1596579674}
+  AllObjectsToReset: []
   NumberOfRoundsPerGame: 5
   CurrentRound: 0
   WaitForReady: 0
@@ -1308,6 +1309,7 @@ GameObject:
   - 23: {fileID: 428892443}
   - 114: {fileID: 428892447}
   - 54: {fileID: 428892448}
+  - 114: {fileID: 428892449}
   m_Layer: 0
   m_Name: intelTOSteal
   m_TagString: Untagged
@@ -1396,6 +1398,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &428892449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428892442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c53b4b0ddc5920644817a8f3812da4f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &443413250
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,6 +1855,22 @@ Prefab:
       propertyPath: WaitForReady
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: m_Name
+      value: MissionZone
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
   m_RootGameObject: {fileID: 1360649201}
@@ -2263,7 +2292,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: Keyboard
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: GroundDetectOffset
@@ -4691,7 +4720,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: Keyboard
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: DeathTime
@@ -5286,7 +5315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 1
+  Keyboard: 0
   IsReadyToBegin: 0
   Score: 0
   Id: 0
@@ -5706,7 +5735,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: Keyboard
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: DeathTime
@@ -5992,7 +6021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 0
+  Keyboard: 1
   IsReadyToBegin: 0
   Score: 0
   Id: 2
@@ -6567,7 +6596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 0
+  Keyboard: 1
   IsReadyToBegin: 0
   Score: 0
   Id: 3
@@ -7492,7 +7521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 0
+  Keyboard: 1
   IsReadyToBegin: 0
   Score: 0
   Id: 1
@@ -7753,7 +7782,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: Keyboard
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: DeathTime

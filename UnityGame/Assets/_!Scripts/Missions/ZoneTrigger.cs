@@ -28,6 +28,10 @@ public class ZoneTrigger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
+        // only rumble if playing
+        if (GameManager.Instance.PlayingState != PlayingState.GameIsPlaying)
+            return;
+
 		if(progressCounter <= AccomplishTime)
 		{
 			if(playersColliding > 0)

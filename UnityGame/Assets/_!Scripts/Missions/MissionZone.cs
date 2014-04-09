@@ -7,6 +7,9 @@ public class MissionZone : MissionBase
 {
     public GameObject[] ZoneAreas = new GameObject[4];
 
+    private static List<int> ZonesUsed = new List<int>();
+
+
     public override bool MissionAccomplished()
     {
         if(this.Target.GetComponent<ZoneTrigger>().Accomplished)
@@ -28,7 +31,9 @@ public class MissionZone : MissionBase
     		if(chooseTarget[i] != null)
     			chooseTarget[i].SetActive(false);
 
-    		chooseTarget[i] = ZoneAreas[Random.Range(0,3)];
+    	    int zoneTarget = GetUniqueTarget(ZonesUsed, 3, 0, ZoneAreas.Count());
+
+    		chooseTarget[i] = ZoneAreas[zoneTarget];
     		chooseTarget[i].SetActive(true);
     		chooseTarget[i].GetComponent<ZoneTrigger>().RestartZone();
     	}
