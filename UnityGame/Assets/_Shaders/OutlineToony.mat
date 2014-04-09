@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: bright-pink-canvas-fabric-texture
-  m_Shader: {fileID: 4800000, guid: 015d76b7ef727aa48a7944a8fdec0a37, type: 3}
+  m_Name: OutlineToony
+  m_Shader: {fileID: 4800000, guid: 6933718a2b8ee1e46af7993e0fdbbb00, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -38,17 +38,13 @@ Material:
       data:
         first:
           name: _Outline
-        second: .0299999993
+        second: .150000006
       data:
         first:
           name: _ColorMerge
-        second: 8
+        second: 20000
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 0, b: 0, a: 0}
-      data:
-        first:
-          name: _OutlineColor
-        second: {r: 0, g: 1, b: .337931156, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
