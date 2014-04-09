@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
             PlayerReady();
 
         // playing loop
-	    if (GameManager.Instance.PlayingState == PlayingState.GameIsPlaying)
+	    if (GameManager.Instance.PlayingState == PlayingState.Playing)
 	    {
 	        playerAim.AimUpdate();
 	        playerMove.MoveUpdate();
@@ -128,17 +128,20 @@ public class Player : MonoBehaviour
 	    }
 	    else if(GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
 	    {
-            // can move even while waiting ... MAYBE?
-	    	playerMove.MoveUpdate();
+            // can move/aim even while waiting ... MAYBE?
+	    	//playerMove.MoveUpdate();
 	    }
 
-	    if(PState != PlayerState.Alive)
-		{
-			float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
-			renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
-		}
-		else
-			renderer.material = pMat;
+	    if (PState != PlayerState.Alive)
+	    {
+	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
+	        renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+	    }
+	    else
+	    {
+            //Destroy(renderer.material); // just to be sure no memory garbage
+	        renderer.material.color = pMat.color;
+	    }
 	}
 
     public void RemoveAllMissionsOnMeDontUseThis()
@@ -169,6 +172,11 @@ public class Player : MonoBehaviour
     void Hide()
     {
         renderer.enabled = false;
+
+        pTran.position = new Vector3(-1000, -1000, -1000);
+
+        rigidbody.velocity = Vector3.zero;
+        rigidbody.angularVelocity = Vector3.zero;
     }
 
     public void Reset()

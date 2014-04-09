@@ -29,7 +29,7 @@ public class ZoneTrigger : MonoBehaviour {
 	void Update () 
 	{
         // only rumble if playing
-        if (GameManager.Instance.PlayingState != PlayingState.GameIsPlaying)
+        if (GameManager.Instance.PlayingState != PlayingState.Playing)
             return;
 
 		if(progressCounter <= AccomplishTime)

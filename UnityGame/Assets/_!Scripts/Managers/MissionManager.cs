@@ -212,7 +212,7 @@ public class MissionManager : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.PlayingState != PlayingState.GameIsPlaying) // only check if game is playing
+        if (GameManager.Instance.PlayingState != PlayingState.Playing) // only check if game is playing
             return;
 
         foreach (MissionBase m in InstantiatedMissions)

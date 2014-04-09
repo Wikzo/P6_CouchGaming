@@ -42,7 +42,7 @@ public class MissionIntel : MissionBase
             return;
 
         // stop audio if not playing
-        if(GameManager.Instance.PlayingState != PlayingState.GameIsPlaying && audio.isPlaying)
+        if(GameManager.Instance.PlayingState != PlayingState.Playing && audio.isPlaying)
             audio.Stop();
     }
     

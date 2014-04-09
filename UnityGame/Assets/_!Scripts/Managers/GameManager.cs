@@ -4,7 +4,7 @@ using UnityEngine;
 public enum PlayingState
 {
     WaitingForEverbodyToGetReady,
-    GameIsPlaying,
+    Playing,
     DisplayingScore,
     Paused,
     PraticeMode,
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        if (PlayingState == PlayingState.GameIsPlaying)
+        if (PlayingState == PlayingState.Playing)
         {
             TimeLeft -= Time.deltaTime;
 
@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
             
         //}
         //else
-          //  PlayingState = PlayingState.GameIsPlaying;
+          //  PlayingState = PlayingState.Playing;
     }
 
     private void OnGUI()
@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
             case PlayingState.WaitingForEverbodyToGetReady:
                 break;
 
-            case PlayingState.GameIsPlaying:
+            case PlayingState.Playing:
                 GUILayout.Label(string.Format("TIME: {0}", TimeLeft.ToString("F2")));
                 break;
 
@@ -195,7 +195,7 @@ public class GameManager : MonoBehaviour
             }
             CancelInvoke("AllReady");
 
-            PlayingState = PlayingState.GameIsPlaying;
+            PlayingState = PlayingState.Playing;
         }
     }
 }
