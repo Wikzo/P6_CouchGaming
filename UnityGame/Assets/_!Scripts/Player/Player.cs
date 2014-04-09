@@ -130,16 +130,15 @@ public class Player : MonoBehaviour
 	    {
             // can move even while waiting ... MAYBE?
 	    	playerMove.MoveUpdate();
-	        playerJump.JumpUpdate();
 	    }
 
-	    //if(PState == PlayerState.Respawning)
-		//{
-		//	float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
-		//	renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
-		//}
-		//else
-		//	renderer.material = pMat;
+	    if(PState != PlayerState.Alive)
+		{
+			float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate) / RespawnBlinkRate;
+			renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+		}
+		else
+			renderer.material = pMat;
 	}
 
     public void RemoveAllMissionsOnMeDontUseThis()
@@ -223,11 +222,9 @@ public class Player : MonoBehaviour
 		pTran.position = spawnPoint.transform.position;
 
 		spawnZone.SetActive(true);
+		InvokeRepeating("CheckMovement", 0, 0.01f);
 
-		yield return new WaitForSeconds(RespawnTime);
-		PState = PlayerState.Alive;
-
-		spawnZone.SetActive(false);
+		yield return null;
 	}
 
 
@@ -237,6 +234,17 @@ public class Player : MonoBehaviour
 		{
 		    IsReadyToBegin = !IsReadyToBegin;
 		    //CancelInvoke("PlayerReady");
+		}
+	}
+
+	void CheckMovement()
+	{
+		if(PlayerControllerState.GetCurrentState().ThumbSticks.Left.X != 0 || PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y != 0 || PlayerControllerState.ButtonDownA || Keyboard && Input.anyKey)
+		{
+			PState = PlayerState.Alive;
+			spawnZone.SetActive(false);
+
+			CancelInvoke("CheckMovement");
 		}
 	}
 }
