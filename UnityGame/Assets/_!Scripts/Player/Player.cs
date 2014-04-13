@@ -37,9 +37,9 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public GameObject ChosenSpawn;
 
-	public GameObject SpawnPoints;
-	public GameObject[] spawnPoints;
-    public List<GameObject> spawnsToChoose;
+	GameObject SpawnPoints;
+	GameObject[] spawnPoints;
+    List<GameObject> spawnsToChoose;
 
 	[HideInInspector]
 	public PlayerState PState;
@@ -114,7 +114,6 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        print(name + PState);
         // reset whole game - DEBUG
         if (GameManager.Instance.DebugMode && PlayerControllerState.ButtonDownBack)
            GameManager.Instance.ResetWholeGame();
@@ -269,7 +268,6 @@ public class Player : MonoBehaviour
 			SpawnZone.SetActive(false);
 
 			CancelInvoke("CheckMovement");
-			print("stuff");
 		}
 	}
 

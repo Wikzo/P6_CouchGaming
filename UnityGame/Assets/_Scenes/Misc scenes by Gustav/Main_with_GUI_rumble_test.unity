@@ -5607,9 +5607,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
   SpawnZone: {fileID: 0}
   ChosenSpawn: {fileID: 0}
-  SpawnPoints: {fileID: 1944622118}
-  spawnPoints: []
-  spawnsToChoose: []
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -6105,9 +6102,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
   SpawnZone: {fileID: 0}
   ChosenSpawn: {fileID: 0}
-  SpawnPoints: {fileID: 1944622118}
-  spawnPoints: []
-  spawnsToChoose: []
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -6735,9 +6729,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
   SpawnZone: {fileID: 0}
   ChosenSpawn: {fileID: 0}
-  SpawnPoints: {fileID: 1944622118}
-  spawnPoints: []
-  spawnsToChoose: []
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -7818,9 +7809,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
   SpawnZone: {fileID: 0}
   ChosenSpawn: {fileID: 0}
-  SpawnPoints: {fileID: 1944622118}
-  spawnPoints: []
-  spawnsToChoose: []
   PState: 0
   KilledBy: 
   PlayerController: 0
