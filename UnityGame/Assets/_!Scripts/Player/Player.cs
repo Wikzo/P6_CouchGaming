@@ -275,13 +275,8 @@ public class Player : MonoBehaviour
 
 	void ChooseSpawnPoint()
 	{
-<<<<<<< HEAD
 		if(GameManager.Instance.PlayingState != PlayingState.PraticeMode)
 			SpawnZone.SetActive(true);
-=======
-	    if (GameManager.Instance.PlayingState != PlayingState.PraticeMode)
-	        SpawnZone.SetActive(true);
->>>>>>> 6468a10bd5f931e983a91bc0ea9485ae151d8b55
 
 	    spawnsToChoose = new List<GameObject>(); // copy of original
 
