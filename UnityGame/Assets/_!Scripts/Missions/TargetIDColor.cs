@@ -18,5 +18,9 @@ public class TargetIDColor : MonoBehaviour
     {
         if (TargetIDColorState == TargetIDColorState.NotAssigned)
             Debug.Log("ERROR - needs to be assigned a target id color " + this);
+
+        Player p = gameObject.GetComponent<Player>();
+        if (p != null && p.MyColorIDName != TargetIDColorState.ToString())
+            Debug.Log("Name and target ID does not match for " + gameObject);
     }
 }

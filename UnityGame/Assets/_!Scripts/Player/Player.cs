@@ -38,7 +38,8 @@ public class Player : MonoBehaviour
 	public GameObject ChosenSpawn;
 
 	public GameObject SpawnPoints;
-	private GameObject[] spawnPoints;
+	public GameObject[] spawnPoints;
+    public List<GameObject> spawnsToChoose;
 
 	[HideInInspector]
 	public PlayerState PState;
@@ -57,6 +58,8 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public string Name;
+
+    public string MyColorIDName;
 
 	// Use this for initialization
 	void Awake () 
@@ -104,6 +107,8 @@ public class Player : MonoBehaviour
 	    
         Name = gameObject.name;
 	    Points = 0;
+
+        SpawnZone.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -111,8 +116,9 @@ public class Player : MonoBehaviour
 	{
         print(name + PState);
         // reset whole game - DEBUG
-        if (GameManager.Instance.DebugMode && PlayerControllerState.ButtonDownStart)
+        if (GameManager.Instance.DebugMode && PlayerControllerState.ButtonDownBack)
            GameManager.Instance.ResetWholeGame();
+
 
         // hide player
 	    if (GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
@@ -127,13 +133,13 @@ public class Player : MonoBehaviour
             PlayerReady();
 
         // playing loop
-	    if (GameManager.Instance.PlayingState == PlayingState.Playing)
+	    if (GameManager.Instance.PlayingState == PlayingState.Playing || GameManager.Instance.PlayingState == PlayingState.PraticeMode)
 	    {
 	        playerAim.AimUpdate();
 	        playerMove.MoveUpdate();
 	        playerJump.JumpUpdate();
 
-	        if (GameManager.Instance.DebugMode)
+            if (GameManager.Instance.DebugMode && GameManager.Instance.PlayingState == PlayingState.Playing)
 	        {
 	            // kill myself - DEBUG
 	            if (PlayerControllerState.ButtonDownY)
@@ -141,7 +147,14 @@ public class Player : MonoBehaviour
 	        }
 	    }
 
-	    if (PState != PlayerState.Alive)
+        // go from practice mode to game, or from show score to game
+        if (GameManager.Instance.PlayingState == PlayingState.PraticeMode || GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
+        {
+            if (PlayerControllerState.ButtonDownStart)
+                GameManager.Instance.ResetLevel();
+        }
+
+	    if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
 	    {
 	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
 	        renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
@@ -262,10 +275,15 @@ public class Player : MonoBehaviour
 
 	void ChooseSpawnPoint()
 	{
+<<<<<<< HEAD
 		if(GameManager.Instance.PlayingState != PlayingState.PraticeMode)
 			SpawnZone.SetActive(true);
+=======
+	    if (GameManager.Instance.PlayingState != PlayingState.PraticeMode)
+	        SpawnZone.SetActive(true);
+>>>>>>> 6468a10bd5f931e983a91bc0ea9485ae151d8b55
 
-		List<GameObject> spawnsToChoose = new List<GameObject>();
+	    spawnsToChoose = new List<GameObject>(); // copy of original
 
 		//Finds all active spawnpoints and stores them
         for(int i = 0; i<spawnPoints.Length; i++)
@@ -275,7 +293,16 @@ public class Player : MonoBehaviour
         		spawnsToChoose.Add(spawnPoints[i]);
         	}
         }
-        //Picks a random active spawnpoint and places the player there
+
+        // shuffle potential spawn points
+        for (int i = 0; i < spawnsToChoose.Count; i++)
+	    {
+            GameObject temp = spawnsToChoose[i];
+            GameObject random = spawnsToChoose[Random.Range(0, spawnsToChoose.Count)];
+
+            spawnsToChoose[i] = random;
+	    }
+	    //Picks a random active spawnpoint and places the player there
         if(spawnsToChoose.Count != 0)
         {
         	ChosenSpawn = spawnsToChoose[Random.Range(0,spawnsToChoose.Count-1)];

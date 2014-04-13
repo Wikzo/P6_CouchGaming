@@ -44,7 +44,7 @@ public abstract class MissionBase : MonoBehaviour
     public Material MissionMaterial;
 
     public int MissionIDRumble; // what mission (1 to 4; Left Bumper rumble)
-    public TargetIDColorState TargetIDColorState; // target color (Right Bumper rumble)
+    private TargetIDColorState TargetIDColorState; // target color (Right Bumper rumble)
 
     public static List<int> TargetNumbersUsed = new List<int>();
 
@@ -143,18 +143,39 @@ public abstract class MissionBase : MonoBehaviour
 
     public int GetUniqueTarget(List<int> NumbersUsed, int chance, int min, int max) // "relative random" target
     {
-        Random.seed = (int)System.DateTime.Now.Ticks;
+        // from http://forum.unity3d.com/threads/60033-CODE-Unique-random-numbers
 
-        int number = Random.Range(min, max);
-        int tries = 0;
+        System.Random rnd = new System.Random();
+        List<int> l = new List<int>();
 
-        while (NumbersUsed.Contains(number) && tries < chance)
+        int lfsr = (rnd.Next() % max) + 1;
+
+        for (int i = 0; i < max; i++)
         {
-            number = Random.Range(min, max);
-            tries++;
+
+            do
+            {
+                lfsr ^= (lfsr << 9);
+                lfsr &= 31;
+
+                lfsr ^= (lfsr >> 2);
+                lfsr &= 31;
+
+                lfsr ^= (lfsr << 3);
+                lfsr &= 31;
+
+
+
+            } while (lfsr > max);
+
+            //Debug.Log(lfsr.ToString() + ", ");
+            l.Add(lfsr-1);
         }
 
-        NumbersUsed.Add(number);
+        int number = l[Random.Range(0, l.Count)];
+
+        //print("I CHOSE: " + number);
+
         return number;
 
     }
@@ -179,11 +200,13 @@ public abstract class MissionBase : MonoBehaviour
         if (missionTimeCounter < interval)
         {
             missionTimeCounter += Time.deltaTime;
+
             GamePad.SetVibration(PlayerScript.PlayerController, 1, 1);
         }
         else if (missionTimeCounter < interval * 3)
         {
             missionTimeCounter += Time.deltaTime;
+
             GamePad.SetVibration(PlayerScript.PlayerController, 0, 0);
         }
         else
@@ -232,7 +255,7 @@ public abstract class MissionBase : MonoBehaviour
         if (!isInstanceMission) // don't rumble for template missions
             return;
 
-        
+        // TODO: only rumble in PRACTICE MODE, GET READY MODE or PLAYING MODE
 
         if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
             PickMissionRumble();
@@ -245,6 +268,8 @@ public abstract class MissionBase : MonoBehaviour
 
         if (targetRumbleCounter > 0)
             TargetRumbler(0.2f);
+
+
     }
 
     public void GivePointsToPlayer()
