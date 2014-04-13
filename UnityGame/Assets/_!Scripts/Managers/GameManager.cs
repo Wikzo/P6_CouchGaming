@@ -40,7 +40,9 @@ public class GameManager : MonoBehaviour
     public bool HasPlayedAtLeastOnce;
 
     // mission stuff
-    public List<int> TargetChosenSoFar = new List<int>(); 
+    public List<int> TargetChosenSoFar = new List<int>();
+
+    private Camera Camera;
 
     // Debug stuff
     public bool DebugMode = true;
@@ -101,6 +103,11 @@ public class GameManager : MonoBehaviour
             g.GetComponent<MissionBase>().PraciceRumbles();
 
         }*/
+
+        Camera = GameObject.Find("Main Camera").camera;
+        if (Camera == null)
+            Debug.Log("ERROR - Game Manager needs a link to the camera!");
+
     }
 
     void Update()
@@ -115,6 +122,12 @@ public class GameManager : MonoBehaviour
                 PlayingState = PlayingState.DisplayingScore;
             }
         }
+
+        if (PlayingState == PlayingState.DisplayingScore)
+            Camera.GetComponent<GlitchEffect>().enabled = true;
+        else
+            Camera.GetComponent<GlitchEffect>().enabled = false;
+
     }
 
     public void ResetLevel()

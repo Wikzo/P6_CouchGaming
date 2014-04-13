@@ -83,7 +83,7 @@ public class HiResScreenShots : MonoBehaviour
         foreach (var b in data)
         {
             i++;
-            string path = "Screenshots/" + i + "_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
+            string path = "_Screenshots/" + i + "_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
 
             FileStream fs = new FileStream(path, FileMode.CreateNew);
 
