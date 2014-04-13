@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
 
         HasPlayedAtLeastOnce = false;
 
+        // TODO: make practice rumble things
         /*foreach (GameObject g in Players)
         {
 

@@ -341,10 +341,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  AllObjectsToReset: []
   NumberOfRoundsPerGame: 5
   CurrentRound: 0
+  WaitForReady: 1
   CurrentRoundJustEnded: 0
   PlayingState: 0
+  HasPlayedAtLeastOnce: 0
+  TargetChosenSoFar: 
   DebugMode: 1
 --- !u!114 &11400004
 MonoBehaviour:
@@ -388,10 +392,9 @@ MonoBehaviour:
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 0
-  HowToChooseTarget: 2
+  HowToChooseTarget: 1
   MissionMaterial: {fileID: 2100000, guid: 40fbacd733175e94fac6108293e47781, type: 2}
   MissionIDRumble: 0
-  TargetIDColorState: 0
   MissionDescription: Defend PLAYER
   DebugShowCurrentMission: 0
 --- !u!114 &11400008
@@ -438,7 +441,6 @@ MonoBehaviour:
   HowToChooseTarget: 0
   MissionMaterial: {fileID: 2100000, guid: 70222324cc54a744dbdb8397274dcac0, type: 2}
   MissionIDRumble: 0
-  TargetIDColorState: 0
   MissionDescription: Stay in ZONE
   DebugShowCurrentMission: 0
   ZoneAreas:
@@ -477,10 +479,9 @@ MonoBehaviour:
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 0
-  HowToChooseTarget: 2
+  HowToChooseTarget: 1
   MissionMaterial: {fileID: 2100000, guid: b0676b0a8118d584b8a1801ca52f4326, type: 2}
   MissionIDRumble: 0
-  TargetIDColorState: 0
   MissionDescription: Kill PLAYER
   DebugShowCurrentMission: 0
 --- !u!114 &11400020
@@ -514,7 +515,6 @@ MonoBehaviour:
   HowToChooseTarget: 0
   MissionMaterial: {fileID: 2100000, guid: f45df0794cc3d124cb328ae3fb9e3216, type: 2}
   MissionIDRumble: 0
-  TargetIDColorState: 0
   MissionDescription: Move intel to BASE
   DebugShowCurrentMission: 0
   IntelPropToSteal: {fileID: 0}
@@ -531,7 +531,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetList:
-  - {fileID: 0}
   - {fileID: 0}
   IntelToSteal: {fileID: 0}
 --- !u!1001 &100100000
