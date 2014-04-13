@@ -60,8 +60,9 @@ public class Player : MonoBehaviour
     public string Name;
 
     public string MyColorIDName;
+    private int resetCounter;
 
-	// Use this for initialization
+    // Use this for initialization
 	void Awake () 
 	{
 		pTran = transform;
@@ -91,7 +92,7 @@ public class Player : MonoBehaviour
 
 		for(int i = 0; i<spawnPoints.Length; i++)
 		{
-			spawnPoints[i] = SpawnPoints.transform.GetChild(i).gameObject;
+			  spawnPoints[i] = SpawnPoints.transform.GetChild(i).gameObject;
 		}
 
 		PlayerControllerState = GetComponent<ControllerState>();
@@ -108,8 +109,14 @@ public class Player : MonoBehaviour
         Name = gameObject.name;
 	    Points = 0;
 
-        SpawnZone.SetActive(false);
+	    
 	}
+
+    void Start()
+    {
+        resetCounter = 0;
+        Reset();
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -206,6 +213,7 @@ public class Player : MonoBehaviour
 
     public void Reset()
     {
+
         KilledBy = "";
         IsReadyToBegin = false;
 
@@ -218,12 +226,21 @@ public class Player : MonoBehaviour
         if(playerAim.Projectile != null)
         	Destroy(playerAim.Projectile);
 
-     	 	
-        ChooseSpawnPoint();
+
+        if (resetCounter != 1) // 
+        {
+            ChooseSpawnPoint();
+        }
+        else if (resetCounter == 1) // unique case between PRACTICE and WAIT mode --> don't find new spawn point, just go to existing one
+            pTran.position = ChosenSpawn.transform.position;
+
         CancelInvoke("CheckMovement");
 
         // TODO: unsure if this sometimes doesn't get called due to State check
        	PState = PlayerState.Reset;
+
+        resetCounter++;
+
     }
 
 
@@ -232,7 +249,7 @@ public class Player : MonoBehaviour
         if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
         {
             string text = "Is ready: " + IsReadyToBegin.ToString();
-            var point = Camera.main.WorldToScreenPoint(transform.position - new Vector3(2,0, 0));
+            var point = Camera.main.WorldToScreenPoint(transform.position - new Vector3(0,3, 0));
             GUI.Label(new Rect(point.x, Screen.currentResolution.height - point.y - 200, 200, 200), text);
         }
 
@@ -252,10 +269,12 @@ public class Player : MonoBehaviour
 
 	void PlayerReady()
 	{
-		if (PlayerControllerState.ButtonDownY || Keyboard && Input.GetKeyDown(KeyCode.Q))
-		{
+		if (PlayerControllerState.ButtonDownY)
 		    IsReadyToBegin = !IsReadyToBegin;
-		}
+        
+        if (Input.GetKeyDown(KeyCode.Y))
+            IsReadyToBegin = !IsReadyToBegin;
+
 	}
 
 	void CheckMovement()
@@ -273,8 +292,10 @@ public class Player : MonoBehaviour
 
 	void ChooseSpawnPoint()
 	{
-		if(GameManager.Instance.PlayingState != PlayingState.PraticeMode)
-			SpawnZone.SetActive(true);
+	    if (GameManager.Instance.PlayingState != PlayingState.PraticeMode)
+	    {
+	        SpawnZone.SetActive(true);
+	    }
 
 	    spawnsToChoose = new List<GameObject>(); // copy of original
 

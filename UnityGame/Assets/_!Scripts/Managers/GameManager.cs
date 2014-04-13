@@ -34,7 +34,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool CurrentRoundJustEnded;
     [HideInInspector]
-    public PlayingState PlayingState;
+    public PlayingState PlayingState = PlayingState.PraticeMode;
+
+    [HideInInspector]
+    public bool HasPlayedAtLeastOnce;
 
     // mission stuff
     public List<int> TargetChosenSoFar = new List<int>(); 
@@ -75,14 +78,29 @@ public class GameManager : MonoBehaviour
         // Furthermore we make sure that we don't destroy between scenes (this is optional)
         DontDestroyOnLoad(gameObject);
 
+        this.PlayingState = PlayingState.PraticeMode;
+
+
     }
 
     void Start()
     {
         CurrentRound = NumberOfRoundsPerGame;
-        this.PlayingState = PlayingState.PraticeMode;
 
         TargetChosenSoFar = new List<int>();
+
+        HasPlayedAtLeastOnce = false;
+
+        /*foreach (GameObject g in Players)
+        {
+
+            MissionBase m = new MissionKill();
+            string scriptName = m.ToString();
+            g.AddComponent(scriptName);
+
+            g.GetComponent<MissionBase>().PraciceRumbles();
+
+        }*/
     }
 
     void Update()

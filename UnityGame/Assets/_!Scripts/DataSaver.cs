@@ -139,7 +139,7 @@ public class DataSaver : MonoBehaviour
     {
         /*foreach (var score in highScores)
         {
-            GUILayout.Label(string.Format("NUMBER OF JUMPS: {0}", score.timesJumped));
+            GUI.Label(new Rect(Screen.width/2, Screen.height/2, 100, 100), string.Format("NUMBER OF JUMPS: {0}", score.timesJumped));
         }*/
 
     }

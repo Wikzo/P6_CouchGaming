@@ -180,6 +180,12 @@ public abstract class MissionBase : MonoBehaviour
 
     }
 
+    public void PraciceRumbles()
+    {
+        missionRumbleCounter = 0;
+        targetRumbleCounter = 0;
+
+    }
 
     public void PickMissionRumble() // check if ready to display mission
     {

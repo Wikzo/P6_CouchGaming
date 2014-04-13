@@ -43,7 +43,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: -3.09086232e-08, y: .707106829, z: -.707106829, w: -3.09086232e-08}
-  m_LocalPosition: {x: -47.8515778, y: 32.7849731, z: 0}
+  m_LocalPosition: {x: -58.866909, y: 32.784977, z: 0}
   m_LocalScale: {x: 4.59521627, y: 4.59521675, z: 4.59521675}
   m_Children: []
   m_Father: {fileID: 400002}
@@ -54,8 +54,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.68211365, y: .848207951, z: 2.07710099}
-  m_LocalScale: {x: .0099432515, y: .0099432515, z: .0099432515}
+  m_LocalPosition: {x: -6.07353354, y: 6.40176153, z: 2.07710099}
+  m_LocalScale: {x: .0256905518, y: .0256905518, z: .0256905518}
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 0}
@@ -128,7 +128,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
-  m_Text: Kill PLAYER
+  m_Text: MISSION
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
