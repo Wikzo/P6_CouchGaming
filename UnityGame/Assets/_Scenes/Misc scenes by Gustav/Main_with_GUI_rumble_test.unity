@@ -1286,6 +1286,22 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: -1.18075585
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 5aacdf32c434b3c4ca1a269328fb8700, type: 2}
+      propertyPath: m_Name
+      value: SpawnPointLUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 5aacdf32c434b3c4ca1a269328fb8700, type: 2}
+      propertyPath: m_Name
+      value: SpawnPointRUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 5aacdf32c434b3c4ca1a269328fb8700, type: 2}
+      propertyPath: m_Name
+      value: SpawnPointLDown
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 5aacdf32c434b3c4ca1a269328fb8700, type: 2}
+      propertyPath: m_Name
+      value: SpawnPointRDown
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5aacdf32c434b3c4ca1a269328fb8700, type: 2}
   m_RootGameObject: {fileID: 1944622118}
@@ -5588,6 +5604,8 @@ MonoBehaviour:
   SpawnZone: {fileID: 0}
   ChosenSpawn: {fileID: 0}
   SpawnPoints: {fileID: 1944622118}
+  spawnPoints: []
+  spawnsToChoose: []
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -5646,7 +5664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionSound: {fileID: 0}
 --- !u!1 &1343869915
 GameObject:
   m_ObjectHideFlags: 0
@@ -5824,7 +5841,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1423609540}
   m_Layer: 9
-  m_Name: SpawnPoint
+  m_Name: SpawnPointLUp
   m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5850,7 +5867,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1425006100}
   m_Layer: 9
-  m_Name: SpawnPoint
+  m_Name: SpawnPointLDown
   m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6085,6 +6102,8 @@ MonoBehaviour:
   SpawnZone: {fileID: 0}
   ChosenSpawn: {fileID: 0}
   SpawnPoints: {fileID: 1944622118}
+  spawnPoints: []
+  spawnsToChoose: []
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -6162,7 +6181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionSound: {fileID: 0}
 --- !u!1 &1520109647
 GameObject:
   m_ObjectHideFlags: 0
@@ -6621,7 +6639,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionSound: {fileID: 0}
 --- !u!114 &1596579677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6715,6 +6732,8 @@ MonoBehaviour:
   SpawnZone: {fileID: 0}
   ChosenSpawn: {fileID: 0}
   SpawnPoints: {fileID: 1944622118}
+  spawnPoints: []
+  spawnsToChoose: []
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -7225,7 +7244,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1662069005}
   m_Layer: 9
-  m_Name: SpawnPoint
+  m_Name: SpawnPointRUp
   m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7496,7 +7515,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1770021592}
   m_Layer: 9
-  m_Name: SpawnPoint
+  m_Name: SpawnPointRDown
   m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7796,6 +7815,8 @@ MonoBehaviour:
   SpawnZone: {fileID: 0}
   ChosenSpawn: {fileID: 0}
   SpawnPoints: {fileID: 1944622118}
+  spawnPoints: []
+  spawnsToChoose: []
   PState: 0
   KilledBy: 
   PlayerController: 0
@@ -7887,7 +7908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionSound: {fileID: 0}
 --- !u!1 &1864914869
 GameObject:
   m_ObjectHideFlags: 0
