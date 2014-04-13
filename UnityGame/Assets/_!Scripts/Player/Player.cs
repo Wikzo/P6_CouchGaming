@@ -105,14 +105,17 @@ public class Player : MonoBehaviour
 	    
         Name = gameObject.name;
 	    Points = 0;
+
+        SpawnZone.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
         // reset whole game - DEBUG
-        if (GameManager.Instance.DebugMode && PlayerControllerState.ButtonDownStart)
+        if (GameManager.Instance.DebugMode && PlayerControllerState.ButtonDownBack)
            GameManager.Instance.ResetWholeGame();
+
 
         // hide player
 	    if (GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
@@ -123,7 +126,7 @@ public class Player : MonoBehaviour
             PlayerReady();
 
         // playing loop
-	    if (GameManager.Instance.PlayingState == PlayingState.Playing)
+	    if (GameManager.Instance.PlayingState == PlayingState.Playing || GameManager.Instance.PlayingState == PlayingState.PraticeMode)
 	    {
 	        playerAim.AimUpdate();
 	        playerMove.MoveUpdate();
@@ -142,7 +145,13 @@ public class Player : MonoBehaviour
 	    	//playerMove.MoveUpdate();
 	    }
 
-	    if (PState != PlayerState.Alive)
+        if (GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+        {
+            if (PlayerControllerState.ButtonDownStart)
+                GameManager.Instance.ResetLevel();
+        }
+
+	    if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
 	    {
 	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
 	        renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
@@ -271,9 +280,10 @@ public class Player : MonoBehaviour
 
 	void ChooseSpawnPoint()
 	{
-		SpawnZone.SetActive(true);
+	    if (GameManager.Instance.PlayingState != PlayingState.PraticeMode)
+	        SpawnZone.SetActive(true);
 
-		List<GameObject> spawnsToChoose = new List<GameObject>();
+	    List<GameObject> spawnsToChoose = new List<GameObject>();
 
 		//Finds all active spawnpoints and stores them
         for(int i = 0; i<spawnPoints.Length; i++)

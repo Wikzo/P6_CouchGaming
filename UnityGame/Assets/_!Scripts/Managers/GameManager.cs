@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum PlayingState
@@ -78,6 +79,7 @@ public class GameManager : MonoBehaviour
         CurrentRound = NumberOfRoundsPerGame;
         this.PlayingState = PlayingState.PraticeMode;
     }
+
     void Update()
     {
         if (PlayingState == PlayingState.Playing)
@@ -154,8 +156,7 @@ public class GameManager : MonoBehaviour
             case PlayingState.PraticeMode:
                 GUILayout.Label("PRACTICE MODE");
 
-                if (GUI.Button(new Rect(Screen.width/2, Screen.height/2, 200, 200), "Click to start game"))
-                    ResetLevel();
+                
                 break;
 
             case PlayingState.GameIsOver:
