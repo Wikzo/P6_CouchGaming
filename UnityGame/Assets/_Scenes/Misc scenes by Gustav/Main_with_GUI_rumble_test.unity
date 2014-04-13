@@ -113,7 +113,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 505323068}
   m_GameObject: {fileID: 35091639}
-  m_Text: Kill PLAYER
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -367,6 +367,10 @@ Prefab:
       propertyPath: m_FontSize
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: 898009cedb3d4b04fb0ef8853c2e3986, type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 898009cedb3d4b04fb0ef8853c2e3986, type: 2}
   m_RootGameObject: {fileID: 1754457527}
@@ -402,7 +406,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 17a335fb3df03a44ea2fa58446fd809e, type: 2}
+  - {fileID: 2100000, guid: 4056ed42f801d834bbcaa5d7bb8586c8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1938,6 +1942,10 @@ Prefab:
       propertyPath: m_FontSize
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: 898009cedb3d4b04fb0ef8853c2e3986, type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 898009cedb3d4b04fb0ef8853c2e3986, type: 2}
   m_RootGameObject: {fileID: 35091639}
@@ -2382,6 +2390,10 @@ Prefab:
       propertyPath: m_FontSize
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: 898009cedb3d4b04fb0ef8853c2e3986, type: 2}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 898009cedb3d4b04fb0ef8853c2e3986, type: 2}
   m_RootGameObject: {fileID: 1329889731}
@@ -2699,7 +2711,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 1387077289}
   m_GameObject: {fileID: 726707245}
-  m_Text: Kill PLAYER
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -5269,7 +5281,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 630002302}
   m_GameObject: {fileID: 1329889731}
-  m_Text: Kill PLAYER
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -5702,6 +5714,10 @@ Prefab:
     - target: {fileID: 100002, guid: 898009cedb3d4b04fb0ef8853c2e3986, type: 2}
       propertyPath: m_Name
       value: MissionText4
+      objectReference: {fileID: 0}
+    - target: {fileID: 10200000, guid: 898009cedb3d4b04fb0ef8853c2e3986, type: 2}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 898009cedb3d4b04fb0ef8853c2e3986, type: 2}
@@ -7267,7 +7283,7 @@ TextMesh:
     type: 2}
   m_PrefabInternal: {fileID: 130605468}
   m_GameObject: {fileID: 1754457527}
-  m_Text: Kill PLAYER
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
