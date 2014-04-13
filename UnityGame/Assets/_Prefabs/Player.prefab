@@ -741,6 +741,7 @@ MonoBehaviour:
   JumpForce: 400
   BoostJumpForce: 500
   MaxBoostJumpsAmount: 1
+  BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &11400012
