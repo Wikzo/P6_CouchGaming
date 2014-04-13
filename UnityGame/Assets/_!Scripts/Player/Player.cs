@@ -37,7 +37,7 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public GameObject ChosenSpawn;
 
-	GameObject SpawnPoints;
+	public GameObject SpawnPoints;
 	GameObject[] spawnPoints;
     List<GameObject> spawnsToChoose;
 
