@@ -4,7 +4,7 @@ using System.Collections;
 public class TextFade : MonoBehaviour
 {
 
-    string PracticeText = "PRACTICE MODE\nPress START to continue";
+    string PracticeText = "PRACTICE MODE";
     private string GetReadyText = "Press Y to get ready";
     private string PauseText = "*Paused*";
     private string ScoreText = "";
@@ -50,7 +50,7 @@ public class TextFade : MonoBehaviour
             }
 
 
-            ScoreText = string.Format("{0}: {1} points\n{2}: {3} points\n{4}: {5} points\n{6}: {7} points\n",
+            ScoreText = string.Format("{0}: {1} points\n{2}: {3} points\n{4}: {5} points\n{6}: {7} points",
                                       players[0].Name, players[0].Points,
                                       players[1].Name, players[1].Points,
                                       players[2].Name, players[2].Points,

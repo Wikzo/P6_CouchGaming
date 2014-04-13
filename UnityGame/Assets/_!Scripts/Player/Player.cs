@@ -38,7 +38,8 @@ public class Player : MonoBehaviour
 	public GameObject ChosenSpawn;
 
 	public GameObject SpawnPoints;
-	private GameObject[] spawnPoints;
+	public GameObject[] spawnPoints;
+    public List<GameObject> spawnsToChoose;
 
 	[HideInInspector]
 	public PlayerState PState;
@@ -59,6 +60,8 @@ public class Player : MonoBehaviour
 
     [HideInInspector]
     public string Name;
+
+    public string MyColorIDName;
 
 	// Use this for initialization
 	void Awake () 
@@ -132,7 +135,7 @@ public class Player : MonoBehaviour
 	        playerMove.MoveUpdate();
 	        playerJump.JumpUpdate();
 
-	        if (GameManager.Instance.DebugMode)
+            if (GameManager.Instance.DebugMode && GameManager.Instance.PlayingState == PlayingState.Playing)
 	        {
 	            // kill myself - DEBUG
 	            if (PlayerControllerState.ButtonDownY)
@@ -145,7 +148,8 @@ public class Player : MonoBehaviour
 	    	//playerMove.MoveUpdate();
 	    }
 
-        if (GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+        // go from practice mode to game, or from show score to game
+        if (GameManager.Instance.PlayingState == PlayingState.PraticeMode || GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
         {
             if (PlayerControllerState.ButtonDownStart)
                 GameManager.Instance.ResetLevel();
@@ -283,7 +287,7 @@ public class Player : MonoBehaviour
 	    if (GameManager.Instance.PlayingState != PlayingState.PraticeMode)
 	        SpawnZone.SetActive(true);
 
-	    List<GameObject> spawnsToChoose = new List<GameObject>();
+	    spawnsToChoose = new List<GameObject>(); // copy of original
 
 		//Finds all active spawnpoints and stores them
         for(int i = 0; i<spawnPoints.Length; i++)
@@ -293,7 +297,16 @@ public class Player : MonoBehaviour
         		spawnsToChoose.Add(spawnPoints[i]);
         	}
         }
-        //Picks a random active spawnpoint and places the player there
+
+        // shuffle potential spawn points
+        for (int i = 0; i < spawnsToChoose.Count; i++)
+	    {
+            GameObject temp = spawnsToChoose[i];
+            GameObject random = spawnsToChoose[Random.Range(0, spawnsToChoose.Count)];
+
+            spawnsToChoose[i] = random;
+	    }
+	    //Picks a random active spawnpoint and places the player there
         if(spawnsToChoose.Count != 0)
         {
         	ChosenSpawn = spawnsToChoose[Random.Range(0,spawnsToChoose.Count-1)];
