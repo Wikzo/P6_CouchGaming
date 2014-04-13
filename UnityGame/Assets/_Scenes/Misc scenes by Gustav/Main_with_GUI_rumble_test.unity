@@ -1230,6 +1230,10 @@ Prefab:
       propertyPath: MyColorIDName
       value: PinkOne
       objectReference: {fileID: 0}
+    - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: Keyboard
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 1333197866}
@@ -5589,7 +5593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 0
+  Keyboard: 1
   IsReadyToBegin: 0
   Score: 0
   Id: 0
