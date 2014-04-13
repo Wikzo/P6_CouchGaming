@@ -108,11 +108,6 @@ public class Player : MonoBehaviour
 	    
         Name = gameObject.name;
 	    Points = 0;
-<<<<<<< HEAD
-
-	    
-=======
->>>>>>> 731031dc10db8532ede4d83acddb851912ec9f58
 	}
 
     void Start()
