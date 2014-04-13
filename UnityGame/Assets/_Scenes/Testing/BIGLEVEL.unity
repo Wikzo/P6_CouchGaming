@@ -1221,7 +1221,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: JumpForce
-      value: 4000
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -5032,6 +5032,10 @@ Prefab:
       propertyPath: MyColorIDName
       value: GreenThree
       objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: JumpForce
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 1475358118}
@@ -5695,7 +5699,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 4000
+  JumpForce: 500
+  BoostJumpForce: 500
+  MaxBoostJumpsAmount: 1
+  BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1333197877
@@ -6197,7 +6204,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 400
+  JumpForce: 500
+  BoostJumpForce: 500
+  MaxBoostJumpsAmount: 1
+  BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1475358124
@@ -6725,7 +6735,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: JumpForce
-      value: 4000
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -6829,7 +6839,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 400
+  JumpForce: 500
+  BoostJumpForce: 500
+  MaxBoostJumpsAmount: 1
+  BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1596579680
@@ -7984,7 +7997,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 4000
+  JumpForce: 500
+  BoostJumpForce: 500
+  MaxBoostJumpsAmount: 1
+  BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &1829481888
@@ -8257,6 +8273,10 @@ Prefab:
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: MyColorIDName
       value: OrangeFour
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: JumpForce
+      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}

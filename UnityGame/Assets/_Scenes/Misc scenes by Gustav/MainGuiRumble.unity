@@ -283,7 +283,6 @@ MonoBehaviour:
   WaitForReady: 1
   CurrentRoundJustEnded: 0
   PlayingState: 0
-  HasPlayedAtLeastOnce: 0
   TargetChosenSoFar: 
   DebugMode: 1
 --- !u!1 &80781186
