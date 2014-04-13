@@ -25,6 +25,7 @@ public class HiResScreenShots : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log("Grabbing screenshots!");
         StartCoroutine(TakeSnapShot());
     }
 
