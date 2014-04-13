@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerDamage : MonoBehaviour {
 
-	public AudioClip missionSound;
+	//public AudioClip missionSound;
 	private Player playerScript;
 
 	//Lo-Fi
@@ -26,7 +26,7 @@ public class PlayerDamage : MonoBehaviour {
 	void Update () 
 	{
 		//LO-FI
-		if(playerScript.LoFi)
+		/*if(playerScript.LoFi)
 		{
 			if(Input.GetKeyDown(KeyCode.D))
 			{		
@@ -38,7 +38,7 @@ public class PlayerDamage : MonoBehaviour {
 				audio.clip = missionSound;
 				audio.Play();
 			}
-		}
+		}*/
 	}
 
 	public void CalculateDeath(string killObjectTag, string objectOwner)

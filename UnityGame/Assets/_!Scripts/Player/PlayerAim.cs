@@ -7,6 +7,8 @@ public class PlayerAim : MonoBehaviour
 	
 	public KeyCode ShootKey = KeyCode.Tab;
 
+	private bool canAim = false;
+
 	public float ShotOffset = 1.5f;
 	public float ShotForce = 100;
 	public float ChargeSpeed = 3;
@@ -94,12 +96,7 @@ public class PlayerAim : MonoBehaviour
 			//Cancel the aim if the player is aiming downwards
 			if(direction.y == -1 && playerJump.CanJump)
 			{
-				cancelAim = true;
-
-				aimTran.renderer.enabled = false;
-				chargeBar.renderer.enabled = false;
-
-				chargeTimer = 0;
+				TurnOffAim();
 			}
 			else
 			{
@@ -147,5 +144,15 @@ public class PlayerAim : MonoBehaviour
 			playerMove.CanMove = true;
 			cancelAim = false;
 		}
+	}
+
+	//Accessed by the Player script
+	public void TurnOffAim()
+	{
+		cancelAim = true;
+
+		aimTran.renderer.enabled = false;
+		chargeBar.renderer.enabled = false;
+		chargeTimer = 0;
 	}
 }

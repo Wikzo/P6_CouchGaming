@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int CurrentRound;
     public bool WaitForReady = true;
-    private float TimePerRound = 5;
+    private float TimePerRound = 10;
     private float TimeLeft;
     [HideInInspector]
     public bool CurrentRoundJustEnded;
@@ -191,10 +191,10 @@ public class GameManager : MonoBehaviour
 
                 playerScript.PState = PlayerState.Alive;
 
+                playerScript.IsReadyToBegin = false;
+
                 playerScript.ChosenSpawn.SetActive(true);
                 playerScript.SpawnZone.SetActive(false);
-                
-                playerScript.IsReadyToBegin = false;
             }
             CancelInvoke("AllReady");
 

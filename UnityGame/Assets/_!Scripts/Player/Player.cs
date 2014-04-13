@@ -46,9 +46,7 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public PlayerIndex PlayerController;
 	public ControllerState PlayerControllerState;
-
 	
-
 	private PlayerAim playerAim;
 	private PlayerMove playerMove;
 	private PlayerJump playerJump;
@@ -99,6 +97,7 @@ public class Player : MonoBehaviour
 		playerJump = GetComponent<PlayerJump>();
 
 		SpawnZone = transform.Find("SpawnZone").gameObject;
+		SpawnZone.SetActive(false);
 
         if (GetComponent<TargetIDColor>() == null)
             Debug.Log("ERROR - player needs to have TargetIDColor component " + gameObject);
@@ -110,13 +109,18 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+        print(name + PState);
         // reset whole game - DEBUG
         if (GameManager.Instance.DebugMode && PlayerControllerState.ButtonDownStart)
            GameManager.Instance.ResetWholeGame();
 
         // hide player
 	    if (GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
-	        Hide();
+	    {
+	       Hide();
+	       //Activate the spawn point to make sure that everyone will be able to spawn.
+	       ChosenSpawn.SetActive(true);
+	    }
 
         // tell game manager that I am ready
         if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
@@ -136,16 +140,15 @@ public class Player : MonoBehaviour
 	                StartCoroutine(Die());
 	        }
 	    }
-	    else if(GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
-	    {
-            // can move/aim even while waiting ... MAYBE?
-	    	//playerMove.MoveUpdate();
-	    }
 
 	    if (PState != PlayerState.Alive)
 	    {
 	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
 	        renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+
+	        //Make sure the player can't aim
+	    	playerAim.TurnOffAim();
+
 	    }
 	    else
 	    {
@@ -170,7 +173,7 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Dead;
 
 		renderer.enabled = false;
-		pTran.position = new Vector3(-1000,-1000,-1000);
+		//pTran.position = new Vector3(-1000,-1000,-1000);
 
 		rigidbody.velocity = Vector3.zero;
 		rigidbody.angularVelocity = Vector3.zero;
@@ -203,21 +206,12 @@ public class Player : MonoBehaviour
         if(playerAim.Projectile != null)
         	Destroy(playerAim.Projectile);
 
+     	 	
         ChooseSpawnPoint();
+        CancelInvoke("CheckMovement");
 
         // TODO: unsure if this sometimes doesn't get called due to State check
-       //if(GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
-       //{
-       		PState = PlayerState.Reset;
-       		//InvokeRepeating("PlayerReady", 0, 0.01f);
-       //}
-
-        
-        /*else
-       {
-       		PState = PlayerState.Alive;
-       		SpawnZone.SetActive(false);
-       }*/
+       	PState = PlayerState.Reset;
     }
 
 
@@ -249,16 +243,12 @@ public class Player : MonoBehaviour
 		if (PlayerControllerState.ButtonDownY || Keyboard && Input.GetKeyDown(KeyCode.Q))
 		{
 		    IsReadyToBegin = !IsReadyToBegin;
-		    //CancelInvoke("PlayerReady");
-
-		    //This is set in AllReady in GameManager instead, to make sure that everyone is done spawning:
-		    //ChosenSpawn.SetActive(true);
 		}
 	}
 
 	void CheckMovement()
 	{
-		if(PlayerControllerState.GetCurrentState().ThumbSticks.Left.X != 0 || PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y != 0 || PlayerControllerState.ButtonDownA || Keyboard && Input.anyKey)
+		if(PlayerControllerState.GetCurrentState().ThumbSticks.Left.X != 0 || PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y != 0 || PlayerControllerState.ButtonDownA)
 		{
 			PState = PlayerState.Alive;
 			
@@ -266,12 +256,14 @@ public class Player : MonoBehaviour
 			SpawnZone.SetActive(false);
 
 			CancelInvoke("CheckMovement");
+			print("stuff");
 		}
 	}
 
 	void ChooseSpawnPoint()
 	{
-		SpawnZone.SetActive(true);
+		if(GameManager.Instance.PlayingState != PlayingState.PraticeMode)
+			SpawnZone.SetActive(true);
 
 		List<GameObject> spawnsToChoose = new List<GameObject>();
 
