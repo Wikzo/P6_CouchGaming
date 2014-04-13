@@ -355,7 +355,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
+  - {fileID: 2100000, guid: 97fa1a96c5e14b54499d86527937667b, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -647,7 +647,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missionSound: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -696,10 +695,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 0
+  Keyboard: 1
   IsReadyToBegin: 0
   Score: 0
-  Id: 3
+  Id: 0
   DeathTime: 2
   RespawnTime: 3
   RespawnBlinkRate: .5
@@ -716,6 +715,7 @@ MonoBehaviour:
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
   Name: 
+  MyColorIDName: PinkOne
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -739,6 +739,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 400
+  BoostJumpForce: 500
+  MaxBoostJumpsAmount: 1
+  BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
   GroundDetectLength: .5
   GroundDetectOffset: .699999988
 --- !u!114 &11400012
