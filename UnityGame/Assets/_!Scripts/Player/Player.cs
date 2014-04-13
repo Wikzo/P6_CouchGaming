@@ -107,8 +107,6 @@ public class Player : MonoBehaviour
 	    
         Name = gameObject.name;
 	    Points = 0;
-
-        SpawnZone.SetActive(false);
 	}
 	
 	// Update is called once per frame
