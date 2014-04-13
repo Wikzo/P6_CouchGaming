@@ -1002,7 +1002,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &275114452
 Transform:
   m_ObjectHideFlags: 0
@@ -1048,132 +1048,6 @@ MonoBehaviour:
   MissionMaterial: {fileID: 2100000, guid: 40fbacd733175e94fac6108293e47781, type: 2}
   MissionIDRumble: 0
   MissionDescription: Defend PLAYER
-  DebugShowCurrentMission: 0
---- !u!1 &291109582
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 291109583}
-  - 114: {fileID: 291109585}
-  - 114: {fileID: 291109584}
-  m_Layer: 0
-  m_Name: MissionKill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &291109583
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 291109582}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.04268646, y: -20.4430389, z: 11.3498449}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1886009436}
---- !u!114 &291109584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400020, guid: e0e0c6676a7775a4e9091094fbfcf207,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 291109582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375f7901c70364442bd6dc8e020ab05f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetList: []
---- !u!114 &291109585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400018, guid: e0e0c6676a7775a4e9091094fbfcf207,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 291109582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec3a90ed372322408a035c0482bc495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Points: 4
-  Player: {fileID: 0}
-  TargetPool: []
-  Target: {fileID: 0}
-  MissionType: 0
-  HowToChooseTarget: 1
-  MissionMaterial: {fileID: 2100000, guid: b0676b0a8118d584b8a1801ca52f4326, type: 2}
-  MissionIDRumble: 0
-  MissionDescription: Kill PLAYER
-  DebugShowCurrentMission: 0
---- !u!1 &340605723
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 340605724}
-  - 114: {fileID: 340605726}
-  - 114: {fileID: 340605725}
-  m_Layer: 0
-  m_Name: MissionKill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &340605724
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 340605723}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.04268646, y: -20.4430389, z: 11.3498449}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1886009436}
---- !u!114 &340605725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400020, guid: e0e0c6676a7775a4e9091094fbfcf207,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 340605723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375f7901c70364442bd6dc8e020ab05f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetList: []
---- !u!114 &340605726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400018, guid: e0e0c6676a7775a4e9091094fbfcf207,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 340605723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec3a90ed372322408a035c0482bc495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Points: 4
-  Player: {fileID: 0}
-  TargetPool: []
-  Target: {fileID: 0}
-  MissionType: 0
-  HowToChooseTarget: 1
-  MissionMaterial: {fileID: 2100000, guid: b0676b0a8118d584b8a1801ca52f4326, type: 2}
-  MissionIDRumble: 0
-  MissionDescription: Kill PLAYER
   DebugShowCurrentMission: 0
 --- !u!1001 &341829743
 Prefab:
@@ -1872,11 +1746,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100016, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
       propertyPath: m_IsActive
@@ -1896,7 +1770,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100010, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
@@ -3870,7 +3744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &990838589
 Transform:
   m_ObjectHideFlags: 0
@@ -5304,7 +5178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1329614738
 Transform:
   m_ObjectHideFlags: 0
@@ -7053,69 +6927,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1885398014}
   m_GameObject: {fileID: 1626291498}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1644222534
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 100014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1644222535}
-  - 114: {fileID: 1644222537}
-  - 114: {fileID: 1644222536}
-  m_Layer: 0
-  m_Name: MissionKill
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1644222535
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 400014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1644222534}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.04268646, y: -20.4430389, z: 11.3498449}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1886009436}
---- !u!114 &1644222536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400020, guid: e0e0c6676a7775a4e9091094fbfcf207,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1644222534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375f7901c70364442bd6dc8e020ab05f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetList: []
---- !u!114 &1644222537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400018, guid: e0e0c6676a7775a4e9091094fbfcf207,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1644222534}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fec3a90ed372322408a035c0482bc495, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Points: 4
-  Player: {fileID: 0}
-  TargetPool: []
-  Target: {fileID: 0}
-  MissionType: 0
-  HowToChooseTarget: 1
-  MissionMaterial: {fileID: 2100000, guid: b0676b0a8118d584b8a1801ca52f4326, type: 2}
-  MissionIDRumble: 0
-  MissionDescription: Kill PLAYER
-  DebugShowCurrentMission: 0
 --- !u!1 &1647180930
 GameObject:
   m_ObjectHideFlags: 0
@@ -8102,9 +7913,6 @@ Transform:
   - {fileID: 1329614738}
   - {fileID: 1343869916}
   - {fileID: 990838589}
-  - {fileID: 1644222535}
-  - {fileID: 291109583}
-  - {fileID: 340605724}
   m_Father: {fileID: 1360649202}
 --- !u!82 &1886009437
 AudioSource:

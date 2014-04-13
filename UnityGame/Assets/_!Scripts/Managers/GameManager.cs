@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int CurrentRound;
     public bool WaitForReady = true;
-    private float TimePerRound = 10;
+    private float TimePerRound = 30;
     private float TimeLeft;
     [HideInInspector]
     public bool CurrentRoundJustEnded;
