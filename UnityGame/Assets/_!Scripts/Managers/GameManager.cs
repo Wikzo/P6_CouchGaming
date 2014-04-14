@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     public GameObject ControllerGUIToRumble;
     public GameObject[] RumbleStepsGUI;
     public GameObject GUIMissionHud;
+    private bool RumblePracticeStart = true;
 
     //  public static Instance  
     public static GameManager Instance
@@ -159,7 +160,9 @@ public class GameManager : MonoBehaviour
         if (GUIRumbleCounter < 5)
         {
             GUIRumbleCounter++;
-            StartCoroutine(StartRumblePractices());
+
+            if (RumblePracticeStart) // only repeat if this is true
+                StartCoroutine(StartRumblePractices());
         }
     }
 
@@ -185,6 +188,22 @@ public class GameManager : MonoBehaviour
         else
             Camera.GetComponent<GlitchEffect>().enabled = false;
 
+    }
+
+    public void SkipTutorialAndGoToWait() // used to go directly from "tutorial" to wait for ready
+    {
+        StopCoroutine("StartRumblePractices");
+        RumblePracticeStart = false;
+
+        GUIMissionHud.GetComponent<Animator>().enabled = true;
+        ControllerGUIToRumble.SetActive(false);
+
+        MissionBase m;
+        foreach (GameObject p in Players)
+        {
+            m = p.GetComponent<MissionBase>();
+            m.StopPracticeRumble();
+        }
     }
 
     public void ResetLevel()

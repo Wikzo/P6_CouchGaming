@@ -155,7 +155,15 @@ public class Player : MonoBehaviour
         if (GameManager.Instance.PlayingState == PlayingState.PraticeMode || GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
         {
             if (PlayerControllerState.ButtonDownStart)
+            {
+
+
+                // go from practice text to wait for ready (show now dropdown animation of GUI/controller)
+                if (GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+                    GameManager.Instance.SkipTutorialAndGoToWait();
+
                 GameManager.Instance.ResetLevel();
+            }
         }
 
 	    if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)

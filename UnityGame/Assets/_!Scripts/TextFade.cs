@@ -4,8 +4,8 @@ using System.Collections;
 public class TextFade : MonoBehaviour
 {
 
-    string PracticeText = "PRACTICE MODE";
-    private string GetReadyText = "Press Y to get ready";
+    string PracticeText = "PRACTICE MODE\nPress Start to skip";
+    private string GetReadyText = "Receiving missions ...\nPress Y to get ready";
     private string PauseText = "*Paused*";
     private string ScoreText = "";
     public GUIStyle TextStyle;

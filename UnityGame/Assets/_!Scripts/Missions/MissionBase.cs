@@ -189,6 +189,18 @@ public abstract class MissionBase : MonoBehaviour
         missionRumbleCounter = rumbleNumber;
     }
 
+    public void StopPracticeRumble()
+    {
+        RumblePractice = false;
+
+        targetRumbleCounter = (int)this.TargetIDColorState;
+
+        missionRumbleCounter = 0;
+        targetRumbleCounter = 0;
+
+        isDisplayingMissionOrTargetRumbleRightNow = true;
+    }
+
     public void PickMissionRumble() // check if ready to display mission
     {
         if (isDisplayingMissionOrTargetRumbleRightNow)
