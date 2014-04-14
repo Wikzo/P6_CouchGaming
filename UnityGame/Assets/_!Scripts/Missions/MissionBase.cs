@@ -240,7 +240,7 @@ public abstract class MissionBase : MonoBehaviour
         if (targetTimeCounter < interval)
         {
             targetTimeCounter += Time.deltaTime;
-            GamePad.SetVibration(PlayerScript.PlayerController, 1, 1);
+            GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
         }
         else if (targetTimeCounter < interval * 3)
         {
