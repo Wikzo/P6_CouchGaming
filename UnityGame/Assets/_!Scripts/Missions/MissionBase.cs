@@ -58,6 +58,7 @@ public abstract class MissionBase : MonoBehaviour
     protected float targetTimeCounter;
     public bool RumblePractice;
     public bool ShowMissionGUI;
+    private bool PunchTweenHUD = false;
 
     protected bool isInstanceMission = false;
 
@@ -184,9 +185,12 @@ public abstract class MissionBase : MonoBehaviour
     }
 
 
-    public void PracticeRumble(int rumbleNumber)
+    public void PracticeRumble(int rumbleNumber, bool shouldShowPunchTween)
     {
         missionRumbleCounter = rumbleNumber;
+
+        if (shouldShowPunchTween)
+            PunchTweenHUD = true;
     }
 
     public void StopPracticeRumble()
@@ -221,7 +225,7 @@ public abstract class MissionBase : MonoBehaviour
 
             GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
 
-            if (GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+            if (GameManager.Instance.PlayingState == PlayingState.PraticeMode && PunchTweenHUD)
             {
                 MissionManager.Instance.PracticeMissionHUDRumble(this.MissionIDRumble - 1);
                 MissionManager.Instance.PracticeControllerRumbleGUI(GameManager.Instance.GUIRumbleCounter - 1);
@@ -261,7 +265,7 @@ public abstract class MissionBase : MonoBehaviour
             targetTimeCounter += Time.deltaTime;
             GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
 
-            if (GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+            if (GameManager.Instance.PlayingState == PlayingState.PraticeMode && PunchTweenHUD)
             {
                 MissionManager.Instance.PracticeTargetHUDRumble((int)this.TargetIDColorState - 1);
             }

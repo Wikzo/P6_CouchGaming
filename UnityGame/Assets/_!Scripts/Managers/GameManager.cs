@@ -134,15 +134,18 @@ public class GameManager : MonoBehaviour
         GUIMissionHud.GetComponent<Animator>().enabled = false;
 
         MissionBase m;
-        foreach (GameObject p in Players)
+        for (int i = 0; i < Players.Count; i++)
         {
-            m = p.GetComponent<MissionBase>();
+            m = Players[i].GetComponent<MissionBase>();
 
 
             if (GUIRumbleCounter < 5)
             {
                 //MissionManager.Instance.PracticeControllerRumbleGUI(number-1);
-                m.PracticeRumble(GUIRumbleCounter);
+
+                bool showPunchTween = (i == 0); // only player index 0 makes HUD iTween
+
+                m.PracticeRumble(GUIRumbleCounter, showPunchTween);
                 m.RumblePractice = true;
                 m.ShowMissionGUI = false;
             }
@@ -153,6 +156,8 @@ public class GameManager : MonoBehaviour
 
                 ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
                 GUIMissionHud.GetComponent<Animator>().enabled = true;
+
+                StartCoroutine(RemoveAnimations());
             }
         }
 
@@ -166,12 +171,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator RemoveAnimations()
+    {
+        // removes uneccesary animators on controller/mission huds
+
+        yield return new WaitForSeconds(10f);
+        Animator hud = GUIMissionHud.GetComponent<Animator>();
+
+        if (ControllerGUIToRumble != null)
+            Destroy(ControllerGUIToRumble);
+        
+        if (hud != null)
+            Destroy(hud);
+    }
+
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Space))
-            iTween.PunchRotation(ControllerGUIToRumble, new Vector3(50,20,0), 1f);
-
         if (PlayingState == PlayingState.Playing)
         {
             TimeLeft -= Time.deltaTime;
@@ -182,11 +197,10 @@ public class GameManager : MonoBehaviour
                 PlayingState = PlayingState.DisplayingScore;
             }
         }
-
-        if (PlayingState == PlayingState.DisplayingScore)
+        /*if (PlayingState == PlayingState.DisplayingScore)
             Camera.GetComponent<GlitchEffect>().enabled = true;
         else
-            Camera.GetComponent<GlitchEffect>().enabled = false;
+            Camera.GetComponent<GlitchEffect>().enabled = false;*/
 
     }
 
@@ -204,10 +218,19 @@ public class GameManager : MonoBehaviour
             m = p.GetComponent<MissionBase>();
             m.StopPracticeRumble();
         }
+
+        StartCoroutine(RemoveAnimations());
+
     }
 
     public void ResetLevel()
     {
+
+        if (ControllerGUIToRumble != null)
+            Destroy(ControllerGUIToRumble);
+
+        GUIMissionHud.GetComponent<Animator>().enabled = false;
+
         foreach (ResetObjectPosition r in AllObjectsToReset) // reset all objects to initial state
             r.ResetMyPosition();
 

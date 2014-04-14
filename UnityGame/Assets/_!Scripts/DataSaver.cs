@@ -135,13 +135,13 @@ public class DataSaver : MonoBehaviour
 
 
 
-    void OnGUI()
+    /*void OnGUI()
     {
-        /*foreach (var score in highScores)
+        foreach (var score in highScores)
         {
             GUI.Label(new Rect(Screen.width/2, Screen.height/2, 100, 100), string.Format("NUMBER OF JUMPS: {0}", score.timesJumped));
-        }*/
+        }
 
-    }
+    }*/
 
 }
