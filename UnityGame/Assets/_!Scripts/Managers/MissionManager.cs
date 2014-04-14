@@ -60,62 +60,7 @@ public class MissionManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Use this for initialization
-    /*private void OldStartDoneUseAnyMore()
-    {
-        // set up all the lists
-        Players = GameManager.Instance.Players;
-        AlreadyChosenMissions = new List<MissionBase>(Players.Count);
-        AllAvailableMissionsTotal = new List<MissionBase>(4);
-        InstantiatedMissions = new List<MissionBase>(4);
-
-        if (MissionTexts.Count != 4)
-            Debug.Log("ERROR - Mission Manager needs to have 4 links to TextMesh!");
-
-        // find all the missions parented to this game object
-        MissionBase[] allChildren = GetComponentsInChildren<MissionBase>();
-        foreach (MissionBase mission in allChildren)
-        {
-            AllAvailableMissionsTotal.Add(mission);
-        }
-
-        if (AllAvailableMissionsTotal.Count < 4)
-            Debug.Log("ERROR - at least 4 missions needs to be assigned to Mission Manager!");
-
-        if (MissionTexts.Count != 4)
-            Debug.Log("ERROR - 4 missions texts needs to be assigned to Mission Manager!");
-        if (MissionIcons.Count != 4)
-            Debug.Log("ERROR - 4 missions icons needs to be assigned to Mission Manager!");
-
-
-        // choose four missions out of the total amount
-        FourPotentialMissionsAvailable = ChooseMissionsFromSet(4, AllAvailableMissionsTotal);
-        ShuffleMissions(FourPotentialMissionsAvailable);
-
-        // set up template stuff that is only called once per mission
-        foreach (MissionBase m in FourPotentialMissionsAvailable)
-            m.TemplateSetUp();
-
-        for (int i = 1; i < 5; i++)
-        {
-            // set the rumble states for each mission (1, 2, 3, 4)
-            FourPotentialMissionsAvailable[i - 1].MissionIDRumble = i;
-        }
-
-        for (int i = 0; i < Players.Count; i++)
-        {
-            MissionBase c = GetUniqueMission(); // find a "relatively random" mission
-
-            string scriptName = c.ToString(); // get name of mission script so it can be attached to player
-            Players[i].AddComponent(scriptName);
-            Players[i].GetComponent<MissionBase>().InitializeMission(Players[i], c); // set up various stuff on mission via the template mission
-            //Players[i].name += "_" + c.name;
-            InstantiatedMissions.Add(Players[i].GetComponent<MissionBase>()); // list of the current missions, easy to see in Inspector
-        }
-
-        SetTextAndIcons();
-
-    }*/
+    
 
     public void GetNewMissions()
     {
@@ -184,20 +129,6 @@ public class MissionManager : MonoBehaviour
 
     }
 
-    // DONT USE GUI TO DRAW THIS ANYMORE
-    /*void OnGUI()
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            string text = string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble);
-            
-            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2 + (40*i) + 5, 1000, 40), text);
-            
-            
-            //GUILayout.Label(string.Format("{0} - Rumble {1}", FourPotentialMissionsAvailable[i].MissionDescription, FourPotentialMissionsAvailable[i].MissionIDRumble));
-        }
-
-    }*/
 
     void SetTextAndIcons()
     {

@@ -36,16 +36,18 @@ public class MissionIntel : MissionBase
             Debug.Log("ERROR - could not cast from MissionBase to MissionIntel!");
     }
 
-    void Update()
+    public override void UpdateSpecificStuff()
     {
+        base.UpdateSpecificStuff();
+
         if (!isInstanceMission)
             return;
 
         // stop audio if not playing
-        if(GameManager.Instance.PlayingState != PlayingState.Playing && audio.isPlaying)
+        if (GameManager.Instance.PlayingState != PlayingState.Playing && audio.isPlaying)
             audio.Stop();
     }
-    
+
     public override bool MissionAccomplished()
     {
         // winning condition: if intel is inside a base that is MINE

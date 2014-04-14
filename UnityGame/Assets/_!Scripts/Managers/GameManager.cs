@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+
         CurrentRound = NumberOfRoundsPerGame;
 
         TargetChosenSoFar = new List<int>();
@@ -108,6 +109,9 @@ public class GameManager : MonoBehaviour
         Camera = GameObject.Find("Main Camera").camera;
         if (Camera == null)
             Debug.Log("ERROR - Game Manager needs a link to the camera!");
+
+        MissionManager.Instance.GetNewMissions();
+
 
     }
 
