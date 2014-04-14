@@ -260,6 +260,9 @@ public abstract class MissionBase : MonoBehaviour
         if (!isInstanceMission) // don't rumble for template missions
             return;
 
+        if (!_missionIsActive)
+            return;
+
         UpdateSpecificMissionStuff();
 
         // TODO: only rumble in PRACTICE MODE, GET READY MODE or PLAYING MODE
@@ -284,7 +287,7 @@ public abstract class MissionBase : MonoBehaviour
 
     public void OnGUI()
     {
-        if (isInstanceMission && GameManager.Instance.DebugMode)
+        if (isInstanceMission && GameManager.Instance.DebugMode || GameManager.Instance.PlayingState == PlayingState.PraticeMode)
         {
             string text = this.ToString() + " - " + this.TargetIDColorState;
             text += "\nIs Active: " + this._missionIsActive;
@@ -295,12 +298,6 @@ public abstract class MissionBase : MonoBehaviour
     }
 
     public abstract bool MissionAccomplished();
-
-    public bool MissionIsDone()
-    {
-        _missionIsActive = false;
-        return true;
-    }
 
     public override string ToString()
     {

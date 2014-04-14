@@ -128,11 +128,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (PlayingState == PlayingState.PraticeMode)
-            DebugMode = true;
-        else
-            DebugMode = false;
-
         if (PlayingState == PlayingState.DisplayingScore)
             Camera.GetComponent<GlitchEffect>().enabled = true;
         else

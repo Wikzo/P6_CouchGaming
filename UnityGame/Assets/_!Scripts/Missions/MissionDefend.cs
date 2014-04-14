@@ -21,6 +21,9 @@ public class MissionDefend : MissionBase
             }
         }
 
+        if (Target.GetComponent<Player>().PState == PlayerState.Dead)
+            _missionIsActive = false;
+
         return false;
     }
 }
