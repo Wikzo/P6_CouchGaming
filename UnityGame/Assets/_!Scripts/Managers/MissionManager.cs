@@ -17,7 +17,8 @@ public class MissionManager : MonoBehaviour
     public List <GameObject> Players;
 
     public List<TextMesh> MissionTexts; 
-    public List<GameObject> MissionIcons; 
+    public List<GameObject> MissionIcons;
+    public List<GameObject> TargetHuds; 
 
     public int ChanceOfGettingUniqueMissions = 5; // higher value = bigger chance of NOT getting same mission 
                                                   //(20-50 seems like a good value if you want to ABSOLUTELY make sure that they won't get same mission!)
@@ -140,57 +141,25 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    // missions
     public void PracticeMissionHUDRumble(int number)
     {
-        //for (int i = number + 1; i > 0; i-- )
-        //iTween.PunchScale(MissionIcons[number], new Vector3(6, 6), 0.5f);
-
-        iTween.PunchScale(MissionManager.Instance.MissionIcons[number], new Vector3(2, 2, 0), 0.5f);
-
-
-
-        //GameManager.Instance.RumbleStepsGUI[number].transform.renderer.material.color = Color.red;
-
-
-
-        //iTween.ShakePosition();
-
-        return;
-        //StartCoroutine(PunchIcons(number));
-
-        for (int i = number + 1; i > 0; i--)
-        {
-            iTween.PunchScale(MissionIcons[number], new Vector3(2, 2), 1);
-            print("punch" + i);
-        }
-        //GoKitTweenExtensions.shake(MissionIcons[number].transform, 1f, new Vector3(2, 2, 2), GoShakeType.Scale);
+        iTween.PunchScale(MissionManager.Instance.MissionIcons[number], new Vector3(4, 4, 0), 0.5f);
     }
 
+    // targets
+    public void PracticeTargetHUDRumble(int number)
+    {
+        iTween.PunchScale(MissionManager.Instance.TargetHuds[number], new Vector3(0.05f, 0.05f, 0), 0.5f);
+    }
+
+    // controller
     public void PracticeControllerRumbleGUI(int number)
     {
-        //for (int i = number + 1; i > 0; i-- )
-            //iTween.PunchScale(MissionIcons[number], new Vector3(6, 6), 0.5f);
-
         iTween.PunchScale(GameManager.Instance.ControllerGUIToRumble, new Vector3(2, 2, 0), 0.5f);
 
-
-
+        if (number < 4) // only do this initially, then stop doing it
             GameManager.Instance.RumbleStepsGUI[number].transform.renderer.enabled = true;
-            //GameManager.Instance.RumbleStepsGUI[number].transform.renderer.material.color = Color.red;
-
-
-
-        //iTween.ShakePosition();
-
-        return;
-        //StartCoroutine(PunchIcons(number));
-
-        for (int i = number + 1; i > 0; i--)
-        {
-            iTween.PunchScale(MissionIcons[number], new Vector3(2, 2), 1);
-            print("punch" + i);
-        }
-        //GoKitTweenExtensions.shake(MissionIcons[number].transform, 1f, new Vector3(2, 2, 2), GoShakeType.Scale);
     }
 
     IEnumerator PunchIcons(int howMany)

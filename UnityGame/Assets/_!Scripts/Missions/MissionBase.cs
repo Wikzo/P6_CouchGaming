@@ -209,11 +209,11 @@ public abstract class MissionBase : MonoBehaviour
 
             GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
 
-            if (RumblePractice)
+            if (GameManager.Instance.PlayingState == PlayingState.PraticeMode)
             {
+                MissionManager.Instance.PracticeMissionHUDRumble(this.MissionIDRumble - 1);
                 MissionManager.Instance.PracticeControllerRumbleGUI(GameManager.Instance.GUIRumbleCounter - 1);
             }
-            MissionManager.Instance.PracticeMissionHUDRumble(this.MissionIDRumble - 1);
 
         }
         else if (missionTimeCounter < interval * 3)
@@ -248,6 +248,11 @@ public abstract class MissionBase : MonoBehaviour
         {
             targetTimeCounter += Time.deltaTime;
             GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
+
+            if (GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+            {
+                MissionManager.Instance.PracticeTargetHUDRumble((int)this.TargetIDColorState - 1);
+            }
         }
         else if (targetTimeCounter < interval * 3)
         {
