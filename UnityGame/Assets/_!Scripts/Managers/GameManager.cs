@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int CurrentRound;
     public bool WaitForReady = true;
-    private float TimePerRound = 30;
+    private float TimePerRound = 60;
     private float TimeLeft;
     [HideInInspector]
     public bool CurrentRoundJustEnded;
@@ -127,6 +127,11 @@ public class GameManager : MonoBehaviour
                 PlayingState = PlayingState.DisplayingScore;
             }
         }
+
+        if (PlayingState == PlayingState.PraticeMode)
+            DebugMode = true;
+        else
+            DebugMode = false;
 
         if (PlayingState == PlayingState.DisplayingScore)
             Camera.GetComponent<GlitchEffect>().enabled = true;

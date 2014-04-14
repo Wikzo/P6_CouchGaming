@@ -36,9 +36,9 @@ public class MissionIntel : MissionBase
             Debug.Log("ERROR - could not cast from MissionBase to MissionIntel!");
     }
 
-    public override void UpdateSpecificStuff()
+    public override void UpdateSpecificMissionStuff()
     {
-        base.UpdateSpecificStuff();
+        base.UpdateSpecificMissionStuff();
 
         if (!isInstanceMission)
             return;

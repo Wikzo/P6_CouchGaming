@@ -1303,7 +1303,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: JumpForce
-      value: 500
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: BoostJumpForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: GroundDetectLength
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -4903,7 +4923,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: JumpForce
-      value: 500
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: BoostJumpForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: GroundDetectLength
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -5465,7 +5505,7 @@ Transform:
   m_GameObject: {fileID: 1333197866}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: -25.3912029, y: 15.7635088, z: -1.32477865e-07}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1307003887}
   - {fileID: 241142684}
@@ -5567,11 +5607,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 500
-  BoostJumpForce: 500
+  JumpForce: 700
+  BoostJumpForce: 1000
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
-  GroundDetectLength: .5
+  GroundDetectLength: 1
   GroundDetectOffset: .699999988
 --- !u!114 &1333197877
 MonoBehaviour:
@@ -6120,7 +6160,7 @@ Transform:
   m_GameObject: {fileID: 1475358118}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: -28.8011284, y: -12.1749935, z: -1.08315902e-07}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 80781187}
   - {fileID: 1964610963}
@@ -6184,11 +6224,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 500
-  BoostJumpForce: 500
+  JumpForce: 700
+  BoostJumpForce: 1000
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
-  GroundDetectLength: .5
+  GroundDetectLength: 1
   GroundDetectOffset: .699999988
 --- !u!114 &1475358124
 MonoBehaviour:
@@ -6749,7 +6789,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: JumpForce
-      value: 500
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: BoostJumpForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: GroundDetectLength
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -6790,7 +6850,7 @@ Transform:
   m_GameObject: {fileID: 1596579674}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: 28.7182961, y: -11.6202488, z: -2.52037893e-08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 216067796}
   - {fileID: 246443756}
@@ -6853,11 +6913,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 500
-  BoostJumpForce: 500
+  JumpForce: 700
+  BoostJumpForce: 1000
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
-  GroundDetectLength: .5
+  GroundDetectLength: 1
   GroundDetectOffset: .699999988
 --- !u!114 &1596579680
 MonoBehaviour:
@@ -8011,11 +8071,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 500
-  BoostJumpForce: 500
+  JumpForce: 700
+  BoostJumpForce: 1000
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
-  GroundDetectLength: .5
+  GroundDetectLength: 1
   GroundDetectOffset: .699999988
 --- !u!114 &1829481888
 MonoBehaviour:
@@ -8135,7 +8195,7 @@ Transform:
   m_GameObject: {fileID: 1829481883}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
   m_LocalPosition: {x: 23.3734169, y: 14.6604338, z: -8.30431901e-08}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 157434885}
   - {fileID: 152729448}
@@ -8290,7 +8350,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: JumpForce
-      value: 500
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: BoostJumpForce
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: GroundDetectLength
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}

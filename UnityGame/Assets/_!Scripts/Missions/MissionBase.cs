@@ -102,7 +102,7 @@ public abstract class MissionBase : MonoBehaviour
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
     }
 
-    public virtual void UpdateSpecificStuff() {}
+    public virtual void UpdateSpecificMissionStuff() {}
 
     public GameObject ChooseRandomTarget(MissionBase template)
     {
@@ -202,14 +202,12 @@ public abstract class MissionBase : MonoBehaviour
 
     public void MissionRumbler(float interval) // display mission (rumble)
     {
-        
-
         //print("rumble " + missionRumbleCounter + " " + this);
         if (missionTimeCounter < interval)
         {
             missionTimeCounter += Time.deltaTime;
 
-            GamePad.SetVibration(PlayerScript.PlayerController, 1, 1);
+            GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
         }
         else if (missionTimeCounter < interval * 3)
         {
@@ -262,7 +260,7 @@ public abstract class MissionBase : MonoBehaviour
         if (!isInstanceMission) // don't rumble for template missions
             return;
 
-        UpdateSpecificStuff();
+        UpdateSpecificMissionStuff();
 
         // TODO: only rumble in PRACTICE MODE, GET READY MODE or PLAYING MODE
 
