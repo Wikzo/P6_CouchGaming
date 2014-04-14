@@ -8,16 +8,18 @@ public class PlayerJump : MonoBehaviour {
 	public int BoostJumpForce = 350;
 	public int MaxBoostJumpsAmount = 1;
 	public GameObject BoostJumpEffect;
-	public float GroundDetectLength = 0.5f;
 	public float GroundDetectOffset = 0.7f;
 
 	private GameObject boostJumpEffect;
 	private int boostJumpsAmount = 0;
 	private bool canJump = true;
 	private bool canBoostJump = false;
+	private bool addJumpPhysics = false;
+	private bool addBoostJumpPhysics = false;
 	private Player playerScript;
 
 	private Transform pTran;
+	private float groundDetectLength;
 
 	public bool CanJump
 	{
@@ -36,6 +38,8 @@ public class PlayerJump : MonoBehaviour {
 		pTran = transform;
 
 		playerScript = GetComponent<Player>();
+
+		groundDetectLength = pTran.localScale.y/2;
 	}
 
 	// Update is called once per frame
@@ -45,10 +49,14 @@ public class PlayerJump : MonoBehaviour {
 		Vector3 leftPos = pTran.position+Vector3.left*GroundDetectOffset;
 		Vector3 rightPos = pTran.position+Vector3.right*GroundDetectOffset;
 
-		if(Physics.Raycast(pTran.position, Vector3.down, GroundDetectLength) || Physics.Raycast(leftPos, Vector3.down, GroundDetectLength) || Physics.Raycast(rightPos, Vector3.down, GroundDetectLength))
+		RaycastHit hit;
+		if(Physics.Raycast(pTran.position, Vector3.down, out hit, groundDetectLength) || Physics.Raycast(leftPos, Vector3.down, out hit, groundDetectLength) || Physics.Raycast(rightPos, Vector3.down, out hit, groundDetectLength))
 		{
-			CanJump = true;
-			boostJumpsAmount = 0;
+			if(hit.collider.gameObject.tag != "NotCollidable")
+			{
+				CanJump = true;
+				boostJumpsAmount = 0;
+			}
 		}
 		else //We are in the air
 		{
@@ -61,11 +69,14 @@ public class PlayerJump : MonoBehaviour {
 
 		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			Jump();
+			//Jump();
+			addJumpPhysics = true;
 		}
 		else if(CanBoostJump && playerScript.PlayerControllerState.ButtonDownA || CanBoostJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			BoostJump();
+			//BoostJump();
+			addBoostJumpPhysics = true;
+
 			boostJumpsAmount++;
 
 			boostJumpEffect = Instantiate(BoostJumpEffect, pTran.position, Quaternion.identity) as GameObject;
@@ -79,15 +90,31 @@ public class PlayerJump : MonoBehaviour {
 	public void Jump()
 	{
 		//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
-		rigidbody.AddForce(Vector3.up*JumpForce);
+		//rigidbody.AddForce(Vector3.up*JumpForce, ForceMode.VelocityChange);
+		rigidbody.velocity = new Vector3(0,JumpForce,0);
 
 		DataSaver.Instance.highScores[0].timesJumped++;
 	}
 	public void BoostJump()
 	{
 		//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
-		rigidbody.AddForce(Vector3.up*BoostJumpForce);
+		//rigidbody.AddForce(Vector3.up*BoostJumpForce, ForceMode.VelocityChange);
+		rigidbody.velocity = new Vector3(0, BoostJumpForce, 0);
 
 		DataSaver.Instance.highScores[0].timesJumped++;
+	}
+
+	void FixedUpdate()
+	{
+		if(addJumpPhysics)
+		{
+			Jump();
+			addJumpPhysics = false;
+		}
+		else if(addBoostJumpPhysics)
+		{
+			BoostJump();
+			addBoostJumpPhysics = false;
+		}
 	}
 }

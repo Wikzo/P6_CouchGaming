@@ -9,9 +9,8 @@ public class PlayerAim : MonoBehaviour
 
 	private bool canAim = false;
 
-	public float ShotOffset = 1.5f;
 	public float ShotForce = 100;
-	public float ChargeSpeed = 3;
+
 	public float MaxChargeTime = 10;
 	public float ShotAmount = 1;
 	[HideInInspector]
@@ -25,6 +24,8 @@ public class PlayerAim : MonoBehaviour
 	private float chargeTimer = 0;
 
 	private bool cancelAim = false;
+
+	private bool addPhysics = false;
 
 	private Transform pTran;
 	private Transform aimPivotTran;
@@ -115,25 +116,23 @@ public class PlayerAim : MonoBehaviour
 				//Scale the charge bar with a timer
 				if(chargeTimer < MaxChargeTime)
 				{
-					chargeTimer += Time.deltaTime*ChargeSpeed;
+					chargeTimer += Time.deltaTime;
 					chargeBar.localScale = new Vector3(chargeTimer/MaxChargeTime, chargeBar.localScale.y, chargeBar.localScale.z);
-					chargeBar.position = new Vector3(pTran.position.x-0.5f+chargeBar.localScale.x/2, pTran.position.y+0.6f, pTran.position.z);
-				}
+
+					//Give the position an offset, so the bar is positioned outside of the player and then add its scale to make it charge in one direction.
+					chargeBar.position = new Vector3(pTran.position.x-pTran.localScale.x/2+chargeBar.localScale.x, pTran.position.y+pTran.localScale.y/2+chargeBar.localScale.y, pTran.position.z);	
+				}			
 			}			
 		}
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
-			Projectile = Instantiate(ProjectileObj, aimTran.position+aimTran.forward*ShotOffset, Quaternion.identity) as GameObject;
+			Projectile = Instantiate(ProjectileObj, aimTran.position+aimTran.forward*ProjectileObj.transform.localScale.x, Quaternion.identity) as GameObject;
 			Projectile.GetComponent<Projectile>().Owner = name;
 			Projectile.GetComponent<Projectile>().PMat = renderer.material;
 			Projectile.transform.right = aimTran.forward;
-			Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
+			addPhysics = true;
+			//Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
 			//Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
-			
-			
-			chargeTimer = 1;
-
-			CurrentShotAmount -= 1;
 		}
 		else
 		{
@@ -155,4 +154,19 @@ public class PlayerAim : MonoBehaviour
 		chargeBar.renderer.enabled = false;
 		chargeTimer = 0;
 	}
+
+	void FixedUpdate()
+	{
+		if(addPhysics)
+		{
+			Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
+			
+			chargeTimer = 0;
+			CurrentShotAmount -= 1;
+
+			addPhysics = false;
+		}
+	}
 }
+
+

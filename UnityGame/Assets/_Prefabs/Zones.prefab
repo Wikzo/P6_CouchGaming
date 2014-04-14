@@ -53,11 +53,11 @@ GameObject:
   - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: ZoneGreen
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100006
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,11 +73,11 @@ GameObject:
   - 114: {fileID: 11400014}
   m_Layer: 0
   m_Name: ZoneBlue
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100008
 GameObject:
   m_ObjectHideFlags: 1
@@ -169,11 +169,11 @@ GameObject:
   - 114: {fileID: 11400016}
   m_Layer: 0
   m_Name: ZoneOrange
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100018
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,11 +189,11 @@ GameObject:
   - 114: {fileID: 11400030}
   m_Layer: 0
   m_Name: ZonePink
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &100020
 GameObject:
   m_ObjectHideFlags: 1
@@ -242,7 +242,7 @@ GameObject:
   - 4: {fileID: 400024}
   m_Layer: 0
   m_Name: Zones
-  m_TagString: NotCollidable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -420,8 +420,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.36152649, y: 1.49254668, z: -7.65300322}
-  m_LocalScale: {x: 2.31421709, y: 1.83675098, z: 3.23129201}
+  m_LocalPosition: {x: -24.7570457, y: 3.36285639, z: -7.65300322}
+  m_LocalScale: {x: 3.80343771, y: 3.01871753, z: 5.31065941}
   m_Children:
   - {fileID: 400034}
   - {fileID: 400036}
@@ -435,8 +435,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.99282455, y: -.493144512, z: -7.65300322}
-  m_LocalScale: {x: 2.31421709, y: 1.83675098, z: 3.23129201}
+  m_LocalPosition: {x: -17.9259109, y: 10.7179337, z: -7.65300322}
+  m_LocalScale: {x: 6.08016729, y: 4.8257165, z: 8.48960876}
   m_Children:
   - {fileID: 400008}
   - {fileID: 400010}
@@ -494,8 +494,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100016}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.940382, y: 1.5187149, z: -7.65300322}
-  m_LocalScale: {x: 2.31421709, y: 1.83675098, z: 3.23129201}
+  m_LocalPosition: {x: 20.6744919, y: 14.8763332, z: -7.65300322}
+  m_LocalScale: {x: 4.30127001, y: 3.41383743, z: 6.00577021}
   m_Children:
   - {fileID: 400040}
   - {fileID: 400038}
@@ -509,8 +509,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100018}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9127022, y: 3.28534794, z: -7.65300274}
-  m_LocalScale: {x: 2.31421685, y: 1.8367511, z: 3.23129153}
+  m_LocalPosition: {x: -5.68126488, y: -7.14585733, z: -7.65300274}
+  m_LocalScale: {x: 4.05941582, y: 3.22188258, z: 5.66807413}
   m_Children:
   - {fileID: 400020}
   - {fileID: 400022}
@@ -903,7 +903,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 82c679bc2bcd1a846aa070d8632282c8, type: 2}
+  - {fileID: 2100000, guid: 9ab652a5d28043949b8a4f33ecf4f7ea, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -966,7 +966,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 82c679bc2bcd1a846aa070d8632282c8, type: 2}
+  - {fileID: 2100000, guid: 9487c1a156da80642af2586f117b67da, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1029,7 +1029,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 82c679bc2bcd1a846aa070d8632282c8, type: 2}
+  - {fileID: 2100000, guid: 02086031176f24949b670724a92e5512, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1092,7 +1092,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 82c679bc2bcd1a846aa070d8632282c8, type: 2}
+  - {fileID: 2100000, guid: adee69e0bb5a5da45baca779326395fc, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1134,7 +1134,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e87cdd0ee4995ab42bf198c121245592, type: 2}
+  - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1155,7 +1155,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: cb1390842d272a74b8737cd7ca9fe695, type: 2}
+  - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1176,7 +1176,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: d985244a87fd50544881b0699d841a10, type: 2}
+  - {fileID: 2100000, guid: 5d62d9c10efdc254ca9fcd1568dd891e, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1197,7 +1197,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 9d96f8d687547154dadb1d134219b9c5, type: 2}
+  - {fileID: 2100000, guid: ab6b4815bb883b342a09c8c69eba297a, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
