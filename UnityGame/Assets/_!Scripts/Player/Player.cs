@@ -247,6 +247,7 @@ public class Player : MonoBehaviour
         if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
         {
 
+            // TODO: fix offset
             string text = "Is ready: " + IsReadyToBegin.ToString();
             var point = Camera.main.WorldToScreenPoint(transform.position - new Vector3(-2,3, 0));
 

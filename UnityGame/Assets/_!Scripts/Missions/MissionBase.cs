@@ -56,6 +56,8 @@ public abstract class MissionBase : MonoBehaviour
     protected int missionRumbleCounter;
     protected int targetRumbleCounter;
     protected float targetTimeCounter;
+    public bool RumblePractice;
+    public bool ShowMissionGUI;
 
     protected bool isInstanceMission = false;
 
@@ -97,7 +99,6 @@ public abstract class MissionBase : MonoBehaviour
         this.Points = Template.Points;
         this.MissionIDRumble = Template.MissionIDRumble;
         this.isInstanceMission = true;
-
 
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
     }
@@ -182,11 +183,10 @@ public abstract class MissionBase : MonoBehaviour
 
     }
 
-    public void PraciceRumbles()
-    {
-        missionRumbleCounter = 0;
-        targetRumbleCounter = 0;
 
+    public void PracticeRumble(int rumbleNumber)
+    {
+        missionRumbleCounter = rumbleNumber;
     }
 
     public void PickMissionRumble() // check if ready to display mission
@@ -208,6 +208,13 @@ public abstract class MissionBase : MonoBehaviour
             missionTimeCounter += Time.deltaTime;
 
             GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
+
+            if (RumblePractice)
+            {
+                MissionManager.Instance.PracticeControllerRumbleGUI(GameManager.Instance.GUIRumbleCounter - 1);
+            }
+            MissionManager.Instance.PracticeMissionHUDRumble(this.MissionIDRumble - 1);
+
         }
         else if (missionTimeCounter < interval * 3)
         {
@@ -267,11 +274,14 @@ public abstract class MissionBase : MonoBehaviour
 
         // TODO: only rumble in PRACTICE MODE, GET READY MODE or PLAYING MODE
 
-        if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
-            PickMissionRumble();
+        if (!RumblePractice)
+        {
+            if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
+                PickMissionRumble();
 
-        if (PlayerScript.PlayerControllerState.ButtonDownRightShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
-            PickTargetRumble();
+            if (PlayerScript.PlayerControllerState.ButtonDownRightShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
+                PickTargetRumble();
+        }
 
         if (missionRumbleCounter > 0)
             MissionRumbler(0.2f);
@@ -287,9 +297,11 @@ public abstract class MissionBase : MonoBehaviour
 
     public void OnGUI()
     {
-        if (isInstanceMission && GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+        if (isInstanceMission && GameManager.Instance.PlayingState == PlayingState.PraticeMode && ShowMissionGUI)
         {
-            
+
+            // TODO: fix offset
+
             string text = this.ToString() + " - " + this.TargetIDColorState;
             text += "\nIs Active: " + this._missionIsActive;
             text += "\nPoints: " + this.PlayerScript.Points;

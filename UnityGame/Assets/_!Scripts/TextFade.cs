@@ -62,10 +62,10 @@ public class TextFade : MonoBehaviour
         if (shouldFade)
         {
             FadeTime = Mathf.PingPong(Time.time, 1);
-            TextStyle.normal.textColor = new Color(1, 1, 1, FadeTime);
+            TextStyle.normal.textColor = new Color(1, 0, 0, FadeTime);
         }
         else
-            TextStyle.normal.textColor = new Color(1, 1, 1, 1);
+            TextStyle.normal.textColor = new Color(1, 0, 0, 1);
 
     }
 

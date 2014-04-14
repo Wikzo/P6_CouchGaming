@@ -140,6 +140,71 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    public void PracticeMissionHUDRumble(int number)
+    {
+        //for (int i = number + 1; i > 0; i-- )
+        //iTween.PunchScale(MissionIcons[number], new Vector3(6, 6), 0.5f);
+
+        iTween.PunchScale(MissionManager.Instance.MissionIcons[number], new Vector3(2, 2, 0), 0.5f);
+
+
+
+        //GameManager.Instance.RumbleStepsGUI[number].transform.renderer.material.color = Color.red;
+
+
+
+        //iTween.ShakePosition();
+
+        return;
+        //StartCoroutine(PunchIcons(number));
+
+        for (int i = number + 1; i > 0; i--)
+        {
+            iTween.PunchScale(MissionIcons[number], new Vector3(2, 2), 1);
+            print("punch" + i);
+        }
+        //GoKitTweenExtensions.shake(MissionIcons[number].transform, 1f, new Vector3(2, 2, 2), GoShakeType.Scale);
+    }
+
+    public void PracticeControllerRumbleGUI(int number)
+    {
+        //for (int i = number + 1; i > 0; i-- )
+            //iTween.PunchScale(MissionIcons[number], new Vector3(6, 6), 0.5f);
+
+        iTween.PunchScale(GameManager.Instance.ControllerGUIToRumble, new Vector3(2, 2, 0), 0.5f);
+
+
+
+            GameManager.Instance.RumbleStepsGUI[number].transform.renderer.enabled = true;
+            //GameManager.Instance.RumbleStepsGUI[number].transform.renderer.material.color = Color.red;
+
+
+
+        //iTween.ShakePosition();
+
+        return;
+        //StartCoroutine(PunchIcons(number));
+
+        for (int i = number + 1; i > 0; i--)
+        {
+            iTween.PunchScale(MissionIcons[number], new Vector3(2, 2), 1);
+            print("punch" + i);
+        }
+        //GoKitTweenExtensions.shake(MissionIcons[number].transform, 1f, new Vector3(2, 2, 2), GoShakeType.Scale);
+    }
+
+    IEnumerator PunchIcons(int howMany)
+    {
+        if (howMany+1 > 0)
+        {
+            print("hey" + howMany);
+            iTween.PunchScale(MissionIcons[howMany], new Vector3(5, 5), 1f);
+            yield return new WaitForSeconds(0f);
+            StartCoroutine(PunchIcons(howMany - 1));
+        }
+
+    }
+
     void Update()
     {
         if (GameManager.Instance.PlayingState != PlayingState.Playing) // only check if game is playing

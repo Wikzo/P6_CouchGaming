@@ -47,6 +47,14 @@ public class GameManager : MonoBehaviour
     // Debug stuff
     public bool DebugMode = true;
 
+    [HideInInspector]
+    public int GUIRumbleCounter = 1;
+
+    // GUI mission hud stuff
+    public GameObject ControllerGUIToRumble;
+    public GameObject[] RumbleStepsGUI;
+    public GameObject GUIMissionHud;
+
     //  public static Instance  
     public static GameManager Instance
     {
@@ -112,11 +120,55 @@ public class GameManager : MonoBehaviour
 
         MissionManager.Instance.GetNewMissions();
 
+        StartCoroutine(StartRumblePractices());
 
+
+    }
+
+
+    IEnumerator StartRumblePractices()
+    {
+
+        ControllerGUIToRumble.GetComponent<Animator>().enabled = false;
+        GUIMissionHud.GetComponent<Animator>().enabled = false;
+
+        MissionBase m;
+        foreach (GameObject p in Players)
+        {
+            m = p.GetComponent<MissionBase>();
+
+
+            if (GUIRumbleCounter < 5)
+            {
+                //MissionManager.Instance.PracticeControllerRumbleGUI(number-1);
+                m.PracticeRumble(GUIRumbleCounter);
+                m.RumblePractice = true;
+                m.ShowMissionGUI = false;
+            }
+            else
+            {
+                m.RumblePractice = false;
+                m.ShowMissionGUI = true;
+
+                ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
+                GUIMissionHud.GetComponent<Animator>().enabled = true;
+            }
+        }
+
+        yield return new WaitForSeconds(3);
+        if (GUIRumbleCounter < 5)
+        {
+            GUIRumbleCounter++;
+            StartCoroutine(StartRumblePractices());
+        }
     }
 
     void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.Space))
+            iTween.PunchRotation(ControllerGUIToRumble, new Vector3(50,20,0), 1f);
+
         if (PlayingState == PlayingState.Playing)
         {
             TimeLeft -= Time.deltaTime;
