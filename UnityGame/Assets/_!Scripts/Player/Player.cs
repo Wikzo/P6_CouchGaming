@@ -203,6 +203,10 @@ public class Player : MonoBehaviour
 		rigidbody.velocity = Vector3.zero;
 		rigidbody.angularVelocity = Vector3.zero;
 
+		playerAim.CurrentShotAmount = playerAim.ShotAmount;
+		if(playerAim.Projectile != null)
+        	Destroy(playerAim.Projectile);
+
 		yield return new WaitForSeconds(DeathTime);
 		Respawn();
 	}

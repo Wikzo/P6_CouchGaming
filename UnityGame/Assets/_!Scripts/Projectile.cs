@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour 
 {
-	public float DeadlyTime = 1;
+	public float KillVelocity = 1;
 	public float DeadlyBlinkRate = 0.1f;
 
 	public int MaxReflections = 2;
@@ -12,6 +12,8 @@ public class Projectile : MonoBehaviour
 
 	[HideInInspector]
 	public Material PMat;
+
+	private bool isDeadly = false;
 
 	private int reflectionCount = 0;
 
@@ -26,15 +28,17 @@ public class Projectile : MonoBehaviour
 	// Use this for initialization
 	void Start () 	
 	{
-
+		renderer.material.color = PMat.color;
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
-		if(DeadlyTime > 0)
+		//Convert to local velocity, so we know which direction the projectile is going in
+		Vector3 localVelocity = transform.InverseTransformDirection(rigidbody.velocity);
+		if(localVelocity.x > KillVelocity)
 		{
-			DeadlyTime -= Time.deltaTime;
+			isDeadly = true;
 
 			float lerp = Mathf.PingPong(Time.time, DeadlyBlinkRate) / DeadlyBlinkRate;
 			renderer.material.color = Color.Lerp(PMat.color, Color.red, lerp);
@@ -42,6 +46,7 @@ public class Projectile : MonoBehaviour
 		else
 		{
 			renderer.material.color = PMat.color;
+			isDeadly = false;
 		}
 	}
 
@@ -51,7 +56,7 @@ public class Projectile : MonoBehaviour
 		{
 			if(collision.gameObject.GetComponent<PlayerDamage>())
 			{
-				if(DeadlyTime > 0)
+				if(isDeadly)
 				{
 					collision.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
 				}
@@ -105,7 +110,6 @@ public class Projectile : MonoBehaviour
       			rigidbody.velocity = Vector3.zero;
       			rigidbody.angularVelocity = Vector3.zero;
       		}
-      		
 		}	
 	}
 }
