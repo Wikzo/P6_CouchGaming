@@ -287,13 +287,24 @@ public abstract class MissionBase : MonoBehaviour
 
     public void OnGUI()
     {
-        if (isInstanceMission && GameManager.Instance.DebugMode || GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+        if (isInstanceMission && GameManager.Instance.PlayingState == PlayingState.PraticeMode)
         {
+            
             string text = this.ToString() + " - " + this.TargetIDColorState;
             text += "\nIs Active: " + this._missionIsActive;
             text += "\nPoints: " + this.PlayerScript.Points;
             var point = Camera.main.WorldToScreenPoint(transform.position);
-            GUI.Label(new Rect(point.x, Screen.currentResolution.height - point.y - 200, 200, 200), text);
+
+            int xOffset = 0;
+            int yOffset = 0;
+
+            if (point.x > Screen.width - 150)
+                xOffset = -150;
+
+            if (point.y > Screen.height - 50)
+                yOffset = 110;
+
+            GUI.Label(new Rect(point.x + xOffset, Screen.currentResolution.height - point.y - 200 + yOffset, 200, 200), text);
         }
     }
 

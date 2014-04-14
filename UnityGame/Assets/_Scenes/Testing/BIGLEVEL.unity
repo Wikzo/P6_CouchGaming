@@ -204,7 +204,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 046b71c85e161ba4398fea92f24da510, type: 2}
+  - {fileID: 2100000, guid: ab02a714a255fae4d8922950dec4d8d6, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -240,7 +240,7 @@ Transform:
   m_GameObject: {fileID: 39192334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 23.6495686, y: 2.12264824, z: 0}
-  m_LocalScale: {x: 5.00049353, y: 2.14833474, z: 5.00049353}
+  m_LocalScale: {x: 5.00049353, y: 4.13905525, z: 5.00049353}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &64666896
@@ -1508,7 +1508,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 7dfbc6d8d038ade4289582d0d6959129, type: 2}
+  - {fileID: 2100000, guid: 3d269e3496455404f9a37bb62c03af02, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -3640,7 +3640,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: c712f6a9f2428fc44b3724c04d79d5fe, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10.8148613
+      value: -7.14585733
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: c712f6a9f2428fc44b3724c04d79d5fe, type: 2}
       propertyPath: m_LocalScale.x
@@ -5049,7 +5049,7 @@ Transform:
   m_PrefabInternal: {fileID: 950049855}
   m_GameObject: {fileID: 1271954947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.68126488, y: -10.8148613, z: -7.65300274}
+  m_LocalPosition: {x: -5.68126488, y: -7.14585733, z: -7.65300274}
   m_LocalScale: {x: 4.05941582, y: 3.22188258, z: 5.66807413}
   m_Children:
   - {fileID: 481940723}
@@ -5696,7 +5696,7 @@ MonoBehaviour:
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 0
-  HowToChooseTarget: 1
+  HowToChooseTarget: 2
   MissionMaterial: {fileID: 2100000, guid: b0676b0a8118d584b8a1801ca52f4326, type: 2}
   MissionIDRumble: 0
   MissionDescription: Kill PLAYER
@@ -6121,6 +6121,10 @@ Prefab:
       propertyPath: MissionIcons.Array.data[3]
       value: 
       objectReference: {fileID: 2141475664}
+    - target: {fileID: 11400018, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: HowToChooseTarget
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
   m_RootGameObject: {fileID: 1360649201}
@@ -7867,7 +7871,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e87cdd0ee4995ab42bf198c121245592, type: 2}
+  - {fileID: 2100000, guid: 255f2e136923b134c83923952cb98ccd, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -7902,8 +7906,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1790708549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.61797404, y: -7.39575577, z: 0}
-  m_LocalScale: {x: 5.00049353, y: 2.14833474, z: 5.00049353}
+  m_LocalPosition: {x: -1.58103454, y: -2.92951107, z: 0}
+  m_LocalScale: {x: 5.00049353, y: 3.65788078, z: 5.00049353}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!114 &1790708554

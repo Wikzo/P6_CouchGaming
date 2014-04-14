@@ -246,9 +246,21 @@ public class Player : MonoBehaviour
     {
         if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
         {
+
             string text = "Is ready: " + IsReadyToBegin.ToString();
-            var point = Camera.main.WorldToScreenPoint(transform.position - new Vector3(0,3, 0));
-            GUI.Label(new Rect(point.x, Screen.currentResolution.height - point.y - 200, 200, 200), text);
+            var point = Camera.main.WorldToScreenPoint(transform.position - new Vector3(-2,3, 0));
+
+            int xOffset = 0;
+            int yOffset = 0;
+
+            if (point.x > Screen.width - 160)
+                xOffset = -160;
+
+            if (point.y > Screen.height - 50)
+                yOffset = 50;
+
+
+            GUI.Label(new Rect(point.x + xOffset, Screen.currentResolution.height - point.y - 200 + yOffset, 200, 200), text);
         }
 
     }
