@@ -8,7 +8,6 @@ public class PlayerJump : MonoBehaviour {
 	public int BoostJumpForce = 350;
 	public int MaxBoostJumpsAmount = 1;
 	public GameObject BoostJumpEffect;
-	public float GroundDetectOffset = 0.7f;
 
 	private GameObject boostJumpEffect;
 	private int boostJumpsAmount = 0;
@@ -46,16 +45,17 @@ public class PlayerJump : MonoBehaviour {
 	public void JumpUpdate () 
 	{
 		//Rays will be cast on both sides of the player, so edges are also detected
-		Vector3 leftPos = pTran.position+Vector3.left*GroundDetectOffset;
-		Vector3 rightPos = pTran.position+Vector3.right*GroundDetectOffset;
+		Vector3 leftPos = pTran.position+Vector3.left*pTran.localScale.x/1.7f; //1.7 puts the ray further out, causing the player to make less mistakes
+		Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/1.7f;
 
 		RaycastHit hit;
-		if(Physics.Raycast(pTran.position, Vector3.down, out hit, groundDetectLength) || Physics.Raycast(leftPos, Vector3.down, out hit, groundDetectLength) || Physics.Raycast(rightPos, Vector3.down, out hit, groundDetectLength))
+		if(Physics.Raycast(pTran.position, Vector3.down, out hit, pTran.localScale.y/2) || Physics.Raycast(leftPos, Vector3.down, out hit, pTran.localScale.y/2) || Physics.Raycast(rightPos, Vector3.down, out hit, pTran.localScale.y/2))
 		{
 			if(hit.collider.gameObject.tag != "NotCollidable")
 			{
 				CanJump = true;
 				boostJumpsAmount = 0;
+				rigidbody.velocity = Vector3.zero;
 			}
 		}
 		else //We are in the air
@@ -69,12 +69,12 @@ public class PlayerJump : MonoBehaviour {
 
 		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			//Jump();
+			Jump();
 			addJumpPhysics = true;
 		}
 		else if(CanBoostJump && playerScript.PlayerControllerState.ButtonDownA || CanBoostJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			//BoostJump();
+			BoostJump();
 			addBoostJumpPhysics = true;
 
 			boostJumpsAmount++;
@@ -87,6 +87,7 @@ public class PlayerJump : MonoBehaviour {
 		//Debug.DrawRay(rightPos, Vector3.down);
 	}
 
+	//TODO: Fix so it's the same velocity for each jump
 	public void Jump()
 	{
 		//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
@@ -106,15 +107,15 @@ public class PlayerJump : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if(addJumpPhysics)
-		{
-			Jump();
-			addJumpPhysics = false;
-		}
-		else if(addBoostJumpPhysics)
-		{
-			BoostJump();
-			addBoostJumpPhysics = false;
-		}
+		//if(addJumpPhysics)
+		//{
+		//	Jump();
+		//	addJumpPhysics = false;
+		//}
+		//else if(addBoostJumpPhysics)
+		//{
+		//	BoostJump();
+		//	addBoostJumpPhysics = false;
+		//}
 	}
 }

@@ -41,7 +41,7 @@ public class ZoneTrigger : MonoBehaviour {
 				progressCounter -= Time.deltaTime/DownSlowFactor;
 
 			progressBar.localScale = new Vector3(progressBar.localScale.x, progressCounter/AccomplishTime, progressBar.localScale.z);
-			progressBar.position = new Vector3(progressBar.position.x, pTran.position.y-1.03f+progressBar.localScale.y, progressBar.position.z);
+			progressBar.position = new Vector3(progressBar.position.x, pTran.position.y-pTran.localScale.y/2+progressBar.localScale.y, progressBar.position.z);
 		}
 		else
 			Accomplished = true;

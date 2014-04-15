@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   KillVelocity: 30
   DeadlyBlinkRate: .200000003
+  DeadlyTimer: .100000001
   MaxReflections: 3
   VelocityReflection: 0
   ForceReflection: 0

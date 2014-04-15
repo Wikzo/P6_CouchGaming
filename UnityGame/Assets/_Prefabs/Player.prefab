@@ -13,7 +13,7 @@ GameObject:
   - 23: {fileID: 2300000}
   m_Layer: 0
   m_Name: ChargeBar
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ GameObject:
   - 4: {fileID: 400004}
   m_Layer: 0
   m_Name: AimPivot
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -223,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106829}
-  m_LocalPosition: {x: -25.3912029, y: 15.7635088, z: -1.32477865e-07}
+  m_LocalPosition: {x: -111.240784, y: 15.7635088, z: 1.13823944e-05}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 400004}
@@ -674,7 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootKey: 9
-  ShotForce: 30
+  ShotForce: 50
   MaxChargeTime: 3
   ShotAmount: 1
   CurrentShotAmount: 0
@@ -736,11 +736,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 20
+  JumpForce: 27
   BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
-  GroundDetectOffset: .699999988
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
