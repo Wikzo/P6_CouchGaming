@@ -233,8 +233,8 @@ public abstract class MissionBase : MonoBehaviour
         missionTimeCounter = 0;
         targetTimeCounter = 0;
 
-        missionRumbleCounter = this.MissionIDRumble;
-        targetRumbleCounter = (int)this.TargetIDColorState;
+        missionRumbleCounter = 0;
+        targetRumbleCounter = 0;
 
         GamePad.SetVibration(PlayerScript.PlayerController, 0f, 0f);
 

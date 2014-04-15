@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public bool CurrentRoundJustEnded;
     [HideInInspector]
     public PlayingState PlayingState = PlayingState.GettingTutorial;
+    private PlayingState lastState; // used to remember pause
 
     [HideInInspector]
     public bool HasPlayedAtLeastOnce;
@@ -140,14 +141,17 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
+
         if (PlayingState != PlayingState.Paused)
         {
+            lastState = PlayingState;
+
             PlayingState = PlayingState.Paused;
             MainLight.enabled = false;
         }
         else if (PlayingState == PlayingState.Paused)
         {
-            PlayingState = PlayingState.Playing;
+            PlayingState = lastState;
             MainLight.enabled = true;
 
         }
