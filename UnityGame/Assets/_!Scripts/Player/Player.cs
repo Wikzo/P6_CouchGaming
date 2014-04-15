@@ -152,19 +152,24 @@ public class Player : MonoBehaviour
 	    }
 
         // go from practice mode to game, or from show score to game
-        if (GameManager.Instance.PlayingState == PlayingState.PraticeMode || GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
-        {
-            if (PlayerControllerState.ButtonDownStart)
+	    if (PlayerControllerState.ButtonDownStart)
+	    {
+            switch (GameManager.Instance.PlayingState)
             {
-
-
-                // go from practice text to wait for ready (show now dropdown animation of GUI/controller)
-                if (GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+                case PlayingState.GettingTutorial:
                     GameManager.Instance.SkipTutorialAndGoToWait();
+                    break;
 
-                GameManager.Instance.ResetLevel();
+                case PlayingState.PraticeMode:
+	                GameManager.Instance.ResetLevel();
+                    break;
+
+                default:
+                    GameManager.Instance.Pause();
+                    break;
             }
-        }
+	    }
+
 
 	    if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
 	    {
@@ -315,7 +320,8 @@ public class Player : MonoBehaviour
 
 	void ChooseSpawnPoint()
 	{
-	    if (GameManager.Instance.PlayingState != PlayingState.PraticeMode)
+        // Gustav: unsure if this should be PracticeMode or GettingTutorial mode
+	    if (GameManager.Instance.PlayingState != PlayingState.GettingTutorial)
 	    {
 	        SpawnZone.SetActive(true);
 	    }

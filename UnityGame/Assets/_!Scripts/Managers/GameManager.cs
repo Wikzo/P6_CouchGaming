@@ -4,11 +4,12 @@ using UnityEngine;
 
 public enum PlayingState
 {
+    GettingTutorial,
+    PraticeMode,
     WaitingForEverbodyToGetReady,
     Playing,
     DisplayingScore,
     Paused,
-    PraticeMode,
     GameIsOver
 }
 
@@ -29,12 +30,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int CurrentRound;
     public bool WaitForReady = true;
-    private float TimePerRound = 60;
+    public float TimePerRound = 60;
     private float TimeLeft;
     [HideInInspector]
     public bool CurrentRoundJustEnded;
     [HideInInspector]
-    public PlayingState PlayingState = PlayingState.PraticeMode;
+    public PlayingState PlayingState = PlayingState.GettingTutorial;
 
     [HideInInspector]
     public bool HasPlayedAtLeastOnce;
@@ -55,6 +56,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] RumbleStepsGUI;
     public GameObject GUIMissionHud;
     private bool RumblePracticeStart = true;
+
+    public Light MainLight;
 
     //  public static Instance  
     public static GameManager Instance
@@ -89,7 +92,7 @@ public class GameManager : MonoBehaviour
         // Furthermore we make sure that we don't destroy between scenes (this is optional)
         DontDestroyOnLoad(gameObject);
 
-        this.PlayingState = PlayingState.PraticeMode;
+        this.PlayingState = PlayingState.GettingTutorial;
 
 
     }
@@ -112,12 +115,18 @@ public class GameManager : MonoBehaviour
             g.AddComponent(scriptName);
 
             g.GetComponent<MissionBase>().PraciceRumbles();
+         * 
 
         }*/
+
+
 
         Camera = GameObject.Find("Main Camera").camera;
         if (Camera == null)
             Debug.Log("ERROR - Game Manager needs a link to the camera!");
+
+        if (MainLight == null)
+            Debug.Log("ERROR - assign directional light to TextFade");
 
         MissionManager.Instance.GetNewMissions();
 
@@ -127,11 +136,28 @@ public class GameManager : MonoBehaviour
     }
 
 
+    public void Pause()
+    {
+        if (PlayingState != PlayingState.Paused)
+        {
+            PlayingState = PlayingState.Paused;
+            MainLight.enabled = false;
+        }
+        else if (PlayingState == PlayingState.Paused)
+        {
+            PlayingState = PlayingState.Playing;
+            MainLight.enabled = true;
+
+        }
+    }
+
     IEnumerator StartRumblePractices()
     {
-
-        ControllerGUIToRumble.GetComponent<Animator>().enabled = false;
-        GUIMissionHud.GetComponent<Animator>().enabled = false;
+        if (ControllerGUIToRumble != null)
+        {
+            ControllerGUIToRumble.SetActive(true);
+            ControllerGUIToRumble.GetComponent<Animator>().enabled = false;
+        }
 
         MissionBase m;
         for (int i = 0; i < Players.Count; i++)
@@ -145,20 +171,14 @@ public class GameManager : MonoBehaviour
 
                 bool showPunchTween = (i == 0); // only player index 0 makes HUD iTween
 
-                m.PracticeRumble(GUIRumbleCounter, showPunchTween);
-                m.RumblePractice = true;
-                m.ShowMissionGUI = false;
+                m.StartPracticeRumbleController(GUIRumbleCounter, showPunchTween);
             }
             else
             {
-                m.RumblePractice = false;
-                m.ShowMissionGUI = true;
+                m.StopPracticeRumbleController();
 
                 if (ControllerGUIToRumble.GetComponent<Animator>() != null)
                     ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
-
-                if (GUIMissionHud.GetComponent<Animator>() != null)
-                    GUIMissionHud.GetComponent<Animator>().enabled = true;
 
                 StartCoroutine(RemoveAnimations());
             }
@@ -171,7 +191,10 @@ public class GameManager : MonoBehaviour
 
             if (RumblePracticeStart) // only repeat if this is true
                 StartCoroutine(StartRumblePractices());
+                
         }
+        else
+            SkipTutorialAndGoToWait();
     }
 
     IEnumerator RemoveAnimations()
@@ -212,8 +235,6 @@ public class GameManager : MonoBehaviour
         StopCoroutine("StartRumblePractices");
         RumblePracticeStart = false;
 
-        if (GUIMissionHud.GetComponent<Animator>() != null)
-            GUIMissionHud.GetComponent<Animator>().enabled = true;
 
         if (ControllerGUIToRumble != null)
             ControllerGUIToRumble.SetActive(false);
@@ -222,10 +243,12 @@ public class GameManager : MonoBehaviour
         foreach (GameObject p in Players)
         {
             m = p.GetComponent<MissionBase>();
-            m.StopPracticeRumble();
+            m.StopPracticeRumbleController();
         }
 
         StartCoroutine(RemoveAnimations());
+
+        PlayingState = PlayingState.PraticeMode;
 
     }
 
@@ -234,9 +257,6 @@ public class GameManager : MonoBehaviour
 
         if (ControllerGUIToRumble != null)
             Destroy(ControllerGUIToRumble);
-
-        if (GUIMissionHud.GetComponent<Animator>() != null)
-            GUIMissionHud.GetComponent<Animator>().enabled = false;
 
         foreach (ResetObjectPosition r in AllObjectsToReset) // reset all objects to initial state
             r.ResetMyPosition();
@@ -293,11 +313,6 @@ public class GameManager : MonoBehaviour
                 GUILayout.Label("***PAUSED***");
                 break;
 
-            case PlayingState.PraticeMode:
-                GUILayout.Label("PRACTICE MODE");
-
-                
-                break;
 
             case PlayingState.GameIsOver:
                 GUILayout.Label("BUHUUUU GAME IS OVER!! :(");

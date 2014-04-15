@@ -14,8 +14,6 @@ public class TextFade : MonoBehaviour
 
     private bool shouldFade;
 
-    public Light MainLight;
-
     // Use this for initialization
     private void Start()
     {
@@ -26,18 +24,12 @@ public class TextFade : MonoBehaviour
         float h = 0.2f; // proportional height (0..1)
         rect = new Rect((Screen.width*(1 - w))/2, (Screen.height*(1 - h))/2, Screen.width*w, Screen.height*h);
 
-        if (MainLight == null)
-            Debug.Log("ERROR - assign directional light to TextFade");
+        
     }
 
     // Update is called once per frame
     private void Update()
     {
-        // turn off light when showing gui text
-        if (GameManager.Instance.PlayingState != PlayingState.Playing && GameManager.Instance.PlayingState != PlayingState.PraticeMode)
-            MainLight.enabled = false;
-        else
-            MainLight.enabled = true;
 
         if (GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
         {
@@ -73,6 +65,7 @@ public class TextFade : MonoBehaviour
     {
         switch (GameManager.Instance.PlayingState)
         {
+            case PlayingState.GettingTutorial:
             case PlayingState.PraticeMode:
                     GUI.Label(rect, PracticeText, TextStyle);
                     break;

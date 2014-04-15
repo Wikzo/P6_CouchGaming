@@ -58,7 +58,8 @@ public abstract class MissionBase : MonoBehaviour
     protected float targetTimeCounter;
     public bool RumblePractice;
     public bool ShowMissionGUI;
-    private bool PunchTweenHUD = false;
+    private bool PunchTweenHUDInControllerTutorial = false; // used so only one player makes the tween
+    private bool PracticeHUDRumble = false;
 
     protected bool isInstanceMission = false;
 
@@ -185,24 +186,44 @@ public abstract class MissionBase : MonoBehaviour
     }
 
 
-    public void PracticeRumble(int rumbleNumber, bool shouldShowPunchTween)
+    public void StartPracticeRumbleController(int rumbleNumber, bool shouldShowPunchTween)
     {
         missionRumbleCounter = rumbleNumber;
 
         if (shouldShowPunchTween)
-            PunchTweenHUD = true;
+            PunchTweenHUDInControllerTutorial = true;
+
+        RumblePractice = true;
+        ShowMissionGUI = false;
     }
 
-    public void StopPracticeRumble()
+    public void StopPracticeRumbleController()
     {
+        PunchTweenHUDInControllerTutorial = false;
         RumblePractice = false;
-
-        targetRumbleCounter = (int)this.TargetIDColorState;
 
         missionRumbleCounter = 0;
         targetRumbleCounter = 0;
+        isDisplayingMissionOrTargetRumbleRightNow = false;
 
-        isDisplayingMissionOrTargetRumbleRightNow = true;
+        PracticeHUDRumble = false;
+
+        StartPracticeRumbleHUD();
+    }
+
+    private void StartPracticeRumbleHUD()
+    {
+        PracticeHUDRumble = true;
+        ShowMissionGUI = true;
+    }
+
+    private void StopPracticeRumbleHUD()
+    {
+        PracticeHUDRumble = false;
+        ShowMissionGUI = false;
+
+        missionRumbleCounter = 0;
+        targetRumbleCounter = 0;
     }
 
     public void PickMissionRumble() // check if ready to display mission
@@ -225,10 +246,13 @@ public abstract class MissionBase : MonoBehaviour
 
             GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
 
-            if (GameManager.Instance.PlayingState == PlayingState.PraticeMode && PunchTweenHUD)
+            if (GameManager.Instance.PlayingState == PlayingState.GettingTutorial || GameManager.Instance.PlayingState == PlayingState.PraticeMode)
             {
-                MissionManager.Instance.PracticeMissionHUDRumble(this.MissionIDRumble - 1);
-                MissionManager.Instance.PracticeControllerRumbleGUI(GameManager.Instance.GUIRumbleCounter - 1);
+                if (PunchTweenHUDInControllerTutorial)
+                    MissionManager.Instance.PracticeControllerRumbleGUI(GameManager.Instance.GUIRumbleCounter - 1);
+                else if (PracticeHUDRumble)
+                    MissionManager.Instance.PracticeMissionHUDRumble(this.MissionIDRumble - 1);
+
             }
 
         }
@@ -265,9 +289,10 @@ public abstract class MissionBase : MonoBehaviour
             targetTimeCounter += Time.deltaTime;
             GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
 
-            if (GameManager.Instance.PlayingState == PlayingState.PraticeMode && PunchTweenHUD)
+            if (GameManager.Instance.PlayingState == PlayingState.GettingTutorial | GameManager.Instance.PlayingState == PlayingState.PraticeMode)
             {
-                MissionManager.Instance.PracticeTargetHUDRumble((int)this.TargetIDColorState - 1);
+                if (PracticeHUDRumble)
+                    MissionManager.Instance.PracticeTargetHUDRumble((int)this.TargetIDColorState - 1);
             }
         }
         else if (targetTimeCounter < interval * 3)
@@ -297,10 +322,10 @@ public abstract class MissionBase : MonoBehaviour
 
         if (!RumblePractice)
         {
-            if (PlayerScript.PlayerControllerState.ButtonDownLeftShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
+            if (PlayerScript.PlayerControllerState.GetCurrentState().DPad.Up == ButtonState.Pressed && !isDisplayingMissionOrTargetRumbleRightNow)
                 PickMissionRumble();
 
-            if (PlayerScript.PlayerControllerState.ButtonDownRightShoulder && !isDisplayingMissionOrTargetRumbleRightNow)
+            if (PlayerScript.PlayerControllerState.GetCurrentState().DPad.Down == ButtonState.Pressed && !isDisplayingMissionOrTargetRumbleRightNow)
                 PickTargetRumble();
         }
 
