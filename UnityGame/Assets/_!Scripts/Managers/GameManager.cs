@@ -31,7 +31,9 @@ public class GameManager : MonoBehaviour
     public int CurrentRound;
     public bool WaitForReady = true;
     public float TimePerRound = 60;
-    private float TimeLeft;
+    
+    [HideInInspector]
+    public float TimeLeft;
     [HideInInspector]
     public bool CurrentRoundJustEnded;
     [HideInInspector]
@@ -244,16 +246,19 @@ public class GameManager : MonoBehaviour
         {
             m = p.GetComponent<MissionBase>();
             m.StopPracticeRumbleController();
+            m.StopAllRumble();
         }
 
         StartCoroutine(RemoveAnimations());
 
         PlayingState = PlayingState.PraticeMode;
-
     }
 
     public void ResetLevel()
     {
+
+        PlayingState = PlayingState.Playing;
+
 
         if (ControllerGUIToRumble != null)
             Destroy(ControllerGUIToRumble);

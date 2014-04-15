@@ -102,6 +102,8 @@ public abstract class MissionBase : MonoBehaviour
         this.MissionIDRumble = Template.MissionIDRumble;
         this.isInstanceMission = true;
 
+        StopAllRumble();
+
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
     }
 
@@ -226,6 +228,19 @@ public abstract class MissionBase : MonoBehaviour
         targetRumbleCounter = 0;
     }
 
+    public void StopAllRumble()
+    {
+        missionTimeCounter = 0;
+        targetTimeCounter = 0;
+
+        missionRumbleCounter = this.MissionIDRumble;
+        targetRumbleCounter = (int)this.TargetIDColorState;
+
+        GamePad.SetVibration(PlayerScript.PlayerController, 0f, 0f);
+
+
+    }
+
     public void PickMissionRumble() // check if ready to display mission
     {
         if (isDisplayingMissionOrTargetRumbleRightNow)
@@ -234,6 +249,7 @@ public abstract class MissionBase : MonoBehaviour
             isDisplayingMissionOrTargetRumbleRightNow = true;
 
         missionRumbleCounter = this.MissionIDRumble;
+
 
     }
 

@@ -158,6 +158,7 @@ public class Player : MonoBehaviour
             {
                 case PlayingState.GettingTutorial:
                     GameManager.Instance.SkipTutorialAndGoToWait();
+                    GameManager.Instance.ResetLevel();
                     break;
 
                 case PlayingState.PraticeMode:
@@ -265,7 +266,9 @@ public class Player : MonoBehaviour
         {
 
             // TODO: fix offset
-            string text = "Is ready: " + IsReadyToBegin.ToString();
+            string ready = (IsReadyToBegin == true) ? "Ready" : "Not Ready";
+            string text = "Press Y to toggle ready\n" + ready;
+
             var point = Camera.main.WorldToScreenPoint(transform.position - new Vector3(-2,3, 0));
 
             int xOffset = 0;

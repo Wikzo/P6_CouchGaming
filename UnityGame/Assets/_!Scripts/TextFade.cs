@@ -4,13 +4,17 @@ using System.Collections;
 public class TextFade : MonoBehaviour
 {
 
-    string PracticeText = "PRACTICE MODE\nPress Start to skip";
-    private string GetReadyText = "Receiving missions ...\nPress Y to get ready";
+    string TutorialText = "Calibrating controller rumble ...\nPress Start to skip";
+    string PracticeText = "PRACTICE MODE\nUse ↑ and ↓\nPress Start to skip";
+    private string GetReadyText = "Receiving missions ...\nUse ↑ and ↓";
     private string PauseText = "*Paused*";
     private string ScoreText = "";
-    public GUIStyle TextStyle;
+    public GUIStyle FadingTextStyle;
     private float FadeTime;
-    private Rect rect;
+
+    private Rect TopRect;
+    private Rect MidRect;
+    private Rect LowerRect;
 
     private bool shouldFade;
 
@@ -18,13 +22,11 @@ public class TextFade : MonoBehaviour
     private void Start()
     {
         shouldFade = true;
-        TextStyle.alignment = TextAnchor.MiddleCenter;
+        FadingTextStyle.alignment = TextAnchor.MiddleCenter;
         
         float w = 0.3f; // proportional width (0..1)
         float h = 0.2f; // proportional height (0..1)
-        rect = new Rect((Screen.width*(1 - w))/2, (Screen.height*(1 - h))/2, Screen.width*w, Screen.height*h);
-
-        
+        MidRect = new Rect((Screen.width*(1 - w))/2, (Screen.height*(1 - h))/2, Screen.width*w, Screen.height*h);
     }
 
     // Update is called once per frame
@@ -54,10 +56,10 @@ public class TextFade : MonoBehaviour
         if (shouldFade)
         {
             FadeTime = Mathf.PingPong(Time.time, 1);
-            TextStyle.normal.textColor = new Color(1, 0, 0, FadeTime);
+            FadingTextStyle.normal.textColor = new Color(1, 0, 0, FadeTime);
         }
         else
-            TextStyle.normal.textColor = new Color(1, 0, 0, 1);
+            FadingTextStyle.normal.textColor = new Color(1, 0, 0, 1);
 
     }
 
@@ -66,20 +68,22 @@ public class TextFade : MonoBehaviour
         switch (GameManager.Instance.PlayingState)
         {
             case PlayingState.GettingTutorial:
+                GUI.Label(MidRect, TutorialText, FadingTextStyle);
+                    break;
             case PlayingState.PraticeMode:
-                    GUI.Label(rect, PracticeText, TextStyle);
+                    GUI.Label(MidRect, PracticeText, FadingTextStyle);
                     break;
 
             case PlayingState.WaitingForEverbodyToGetReady:
-                GUI.Label(rect, GetReadyText, TextStyle);
+                GUI.Label(MidRect, GetReadyText, FadingTextStyle);
                 break;
 
             case PlayingState.Paused:
-                GUI.Label(rect, PauseText, TextStyle);
+                GUI.Label(MidRect, PauseText, FadingTextStyle);
                 break;
 
             case PlayingState.DisplayingScore:
-                GUI.Label(rect, ScoreText, TextStyle);
+                GUI.Label(MidRect, ScoreText, FadingTextStyle);
                 break;
 
             default:
