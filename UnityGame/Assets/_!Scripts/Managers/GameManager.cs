@@ -154,8 +154,11 @@ public class GameManager : MonoBehaviour
                 m.RumblePractice = false;
                 m.ShowMissionGUI = true;
 
-                ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
-                GUIMissionHud.GetComponent<Animator>().enabled = true;
+                if (ControllerGUIToRumble.GetComponent<Animator>() != null)
+                    ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
+
+                if (GUIMissionHud.GetComponent<Animator>() != null)
+                    GUIMissionHud.GetComponent<Animator>().enabled = true;
 
                 StartCoroutine(RemoveAnimations());
             }
@@ -209,8 +212,11 @@ public class GameManager : MonoBehaviour
         StopCoroutine("StartRumblePractices");
         RumblePracticeStart = false;
 
-        GUIMissionHud.GetComponent<Animator>().enabled = true;
-        ControllerGUIToRumble.SetActive(false);
+        if (GUIMissionHud.GetComponent<Animator>() != null)
+            GUIMissionHud.GetComponent<Animator>().enabled = true;
+
+        if (ControllerGUIToRumble != null)
+            ControllerGUIToRumble.SetActive(false);
 
         MissionBase m;
         foreach (GameObject p in Players)
@@ -229,7 +235,8 @@ public class GameManager : MonoBehaviour
         if (ControllerGUIToRumble != null)
             Destroy(ControllerGUIToRumble);
 
-        GUIMissionHud.GetComponent<Animator>().enabled = false;
+        if (GUIMissionHud.GetComponent<Animator>() != null)
+            GUIMissionHud.GetComponent<Animator>().enabled = false;
 
         foreach (ResetObjectPosition r in AllObjectsToReset) // reset all objects to initial state
             r.ResetMyPosition();
