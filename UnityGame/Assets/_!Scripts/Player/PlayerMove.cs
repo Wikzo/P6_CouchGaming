@@ -12,12 +12,14 @@ public class PlayerMove : MonoBehaviour
 	[HideInInspector]
 	public bool movingRight = false;
 
+	private bool canMove = true;
+	private bool isMovingIntoObject = false;
+
 	private Transform pTran;
 
 	private Player playerScript;
 	private PlayerJump playerJump;
-
-	private bool canMove = true;
+	
 	private Quaternion startRotation;
 	private Vector3 pForwardDir;
 
@@ -47,8 +49,6 @@ public class PlayerMove : MonoBehaviour
 		playerJump = GetComponent<PlayerJump>();
 
 		startRotation = pTran.rotation;
-
-		//InvokeRepeating("ResetRotation", 0, 0.3f);
 	}
 	
 	// Update is called once per frame
@@ -58,19 +58,13 @@ public class PlayerMove : MonoBehaviour
 		{
 			if(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X < 0 || playerScript.Keyboard && Input.GetKey(KeyCode.A))
 			{
-				Move(Vector3.left);
 				pTran.forward = Vector3.left;
-				pForwardDir = pTran.forward;
-
-				MovingLeft = true;
+				Move(Vector3.left);
 			}
 			else if(playerScript.PlayerControllerState.GetCurrentState().ThumbSticks.Left.X > 0 || playerScript.Keyboard && Input.GetKey(KeyCode.D))
 			{
-				Move(Vector3.right);
 				pTran.forward = Vector3.right;
-				pForwardDir = pTran.forward;
-
-				MovingRight = true;
+				Move(Vector3.right);
 			}
 			else
 			{
@@ -83,29 +77,52 @@ public class PlayerMove : MonoBehaviour
 	//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
 	public void Move(Vector3 direction)
 	{
-		//Give the player a different movement speed if he is in the air
-		if(playerJump.CanJump)
+		Vector3 upPos = pTran.position+Vector3.up*pTran.localScale.y/2.1f;
+		Vector3 downPos = pTran.position+Vector3.down*pTran.localScale.y/2.1f;
+
+		RaycastHit hit;
+
+		//Check if we are walking into something
+		if(Physics.Raycast(pTran.position, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(upPos, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(downPos, pTran.forward, out hit, pTran.localScale.x/2))
 		{
-			rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*GroundMoveSpeed);
-			rigidbody.drag = 0;
+			if(hit.collider.gameObject.tag == "NotCollidable")
+				isMovingIntoObject = false;
+			else
+				isMovingIntoObject = true;
+		}
+		else if(!Physics.Raycast(pTran.position, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(upPos, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(downPos, pTran.forward, pTran.localScale.x/2))
+			isMovingIntoObject = false;	
+
+		
+		if(isMovingIntoObject == false)
+		{
+			if(playerJump.CanJump)
+			{
+				rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*GroundMoveSpeed);
+				rigidbody.drag = 0;
+			}
+			else //Give the player a different movement speed if he is in the air
+			{
+				rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*AirMoveSpeed);
+				rigidbody.drag = 1;
+			}
+			if(direction == Vector3.right)
+				MovingRight = true;
+			else
+			{
+				MovingLeft = true;
+			}
 		}
 		else
 		{
-			rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*AirMoveSpeed);
-			rigidbody.drag = 1;
+			MovingRight = false;
+			MovingLeft = false;
 		}
 		
 		if(GetComponent<Player>().LoFi == false)
 			pTran.forward = direction;
-	}
 
-	//Correct the rotation if it's skewed
-	void ResetRotation()
-	{
-		if(pTran.rotation != startRotation)
-		{
-			pTran.rotation = startRotation;
-			pTran.forward = pForwardDir;
-		}
+		//Debug.DrawRay(upPos, pTran.forward);
+		//Debug.DrawRay(downPos, pTran.forward);
 	}
 }
