@@ -5,6 +5,7 @@ public class Projectile : MonoBehaviour
 {
 	public float KillVelocity = 1;
 	public float DeadlyBlinkRate = 0.1f;
+	public float DeadlyTimer = 0.5f;
 
 	public int MaxReflections = 2;
 	public bool VelocityReflection = false;
@@ -34,29 +35,41 @@ public class Projectile : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		//Convert to local velocity, so we know which direction the projectile is going in
-		Vector3 localVelocity = transform.InverseTransformDirection(rigidbody.velocity);
-		if(localVelocity.x > KillVelocity)
+		if(DeadlyTimer > 0)
 		{
+			DeadlyTimer -= Time.deltaTime;
 			isDeadly = true;
+		}
+		else
+		{
+			//Convert to local velocity, so we know which direction the projectile is going in
+			Vector3 localVelocity = transform.InverseTransformDirection(rigidbody.velocity);
+			if(localVelocity.x > KillVelocity)
+			{
+				isDeadly = true;
+			}
+			else
+			{
+				isDeadly = false;
+			}
+		}
 
+		if(isDeadly)
+		{
 			float lerp = Mathf.PingPong(Time.time, DeadlyBlinkRate) / DeadlyBlinkRate;
 			renderer.material.color = Color.Lerp(PMat.color, Color.red, lerp);
 		}
 		else
-		{
 			renderer.material.color = PMat.color;
-			isDeadly = false;
-		}
 	}
 
-	void OnCollisionEnter(Collision collision)
+	void OnCollisionStay(Collision collision)
 	{
 		if(collision.gameObject.tag != "NotCollidable")
 		{
 			if(collision.gameObject.GetComponent<PlayerDamage>())
 			{
-				if(isDeadly)
+				if(isDeadly && collision.gameObject.name != Owner)
 				{
 					collision.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
 				}

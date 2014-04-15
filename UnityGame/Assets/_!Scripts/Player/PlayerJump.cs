@@ -55,6 +55,7 @@ public class PlayerJump : MonoBehaviour {
 			{
 				CanJump = true;
 				boostJumpsAmount = 0;
+				rigidbody.velocity = Vector3.zero;
 			}
 		}
 		else //We are in the air
@@ -68,12 +69,12 @@ public class PlayerJump : MonoBehaviour {
 
 		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			//Jump();
+			Jump();
 			addJumpPhysics = true;
 		}
 		else if(CanBoostJump && playerScript.PlayerControllerState.ButtonDownA || CanBoostJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			//BoostJump();
+			BoostJump();
 			addBoostJumpPhysics = true;
 
 			boostJumpsAmount++;
@@ -86,6 +87,7 @@ public class PlayerJump : MonoBehaviour {
 		//Debug.DrawRay(rightPos, Vector3.down);
 	}
 
+	//TODO: Fix so it's the same velocity for each jump
 	public void Jump()
 	{
 		//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
@@ -105,15 +107,15 @@ public class PlayerJump : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		if(addJumpPhysics)
-		{
-			Jump();
-			addJumpPhysics = false;
-		}
-		else if(addBoostJumpPhysics)
-		{
-			BoostJump();
-			addBoostJumpPhysics = false;
-		}
+		//if(addJumpPhysics)
+		//{
+		//	Jump();
+		//	addJumpPhysics = false;
+		//}
+		//else if(addBoostJumpPhysics)
+		//{
+		//	BoostJump();
+		//	addBoostJumpPhysics = false;
+		//}
 	}
 }

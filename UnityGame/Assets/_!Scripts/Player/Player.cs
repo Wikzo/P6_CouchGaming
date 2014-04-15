@@ -203,7 +203,7 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Dead;
 
 		renderer.enabled = false;
-		//pTran.position = new Vector3(-1000,-1000,-1000);
+		pTran.position = new Vector3(-1000,-1000,-1000);
 
 		rigidbody.velocity = Vector3.zero;
 		rigidbody.angularVelocity = Vector3.zero;
