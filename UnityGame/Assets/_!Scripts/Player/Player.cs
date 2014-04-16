@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 	public bool LoFi = false;
 	public bool Keyboard = false;
 
+    public Color PlayerColor;
+
 	[HideInInspector]
 	public bool IsReadyToBegin = false;
 
@@ -169,6 +171,10 @@ public class Player : MonoBehaviour
 
                 case PlayingState.PraticeMode:
 	                GameManager.Instance.ResetLevel();
+                    break;
+
+                case PlayingState.DisplayingScore:
+                    GameManager.Instance.ResetWholeGame();
                     break;
 
                 default:

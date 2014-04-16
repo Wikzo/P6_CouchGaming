@@ -22,6 +22,11 @@ public class ControllerState : MonoBehaviour {
 	private bool buttonDownRightStick = false;
 	private bool buttonDownBack = false;
 	private bool buttonDownStart = false;
+	private bool buttonDownDPadUp = false;
+	private bool buttonUpDPadUp = false;
+
+    private bool buttonDownDPadDown = false;
+    private bool buttonUpDPadDown = false;
 
 	private bool canRelease = false;
 
@@ -46,6 +51,13 @@ public class ControllerState : MonoBehaviour {
 	public bool ButtonDownRightStick{get{return buttonDownRightStick;}set{buttonDownRightStick = value;}}
 	public bool ButtonDownBack{get{return buttonDownBack;}set{buttonDownBack = value;}}
 	public bool ButtonDownStart{get{return buttonDownStart;}set{buttonDownStart = value;}}
+
+    public bool ButtonDownDPadUp { get { return buttonDownDPadUp; } set { buttonDownDPadUp = value; } }
+    public bool ButtonUpDPadUp { get { return buttonUpDPadUp; } set { buttonUpDPadUp = value; } }
+
+    public bool ButtonDownDPadDown { get { return buttonDownDPadDown; } set { buttonDownDPadDown = value; } }
+    public bool ButtonUpDPadDown { get { return buttonUpDPadDown; } set { buttonUpDPadDown = value; } }
+
 
 	public bool ButtonUpA{get{return buttonUpA;}set{buttonUpA = value;}}
 	public bool ButtonUpB{get{return buttonUpB;}set{buttonUpB = value;}}
@@ -91,6 +103,11 @@ public class ControllerState : MonoBehaviour {
 		if(GetCurrentState().Buttons.RightStick == ButtonState.Pressed && previousState.Buttons.RightStick != ButtonState.Pressed){ButtonDownRightStick = true; canRelease = true;}else ButtonDownRightStick = false;
 		if(GetCurrentState().Buttons.Back == ButtonState.Pressed && previousState.Buttons.Back != ButtonState.Pressed){ButtonDownBack = true; canRelease = true;}else ButtonDownBack = false;
 		if(GetCurrentState().Buttons.Start == ButtonState.Pressed && previousState.Buttons.Start != ButtonState.Pressed){ButtonDownStart = true; canRelease = true;}else ButtonDownStart = false;
+		
+        // dpad up
+        if (GetCurrentState().DPad.Up == ButtonState.Pressed && previousState.DPad.Up != ButtonState.Pressed) { ButtonDownDPadUp = true; canRelease = true; } else ButtonDownDPadUp = false;
+        if (GetCurrentState().DPad.Down == ButtonState.Pressed && previousState.DPad.Down != ButtonState.Pressed) { ButtonDownDPadDown = true; canRelease = true; } else ButtonDownDPadDown = false;
+        
 
 		if(canRelease)
 		{
@@ -104,6 +121,10 @@ public class ControllerState : MonoBehaviour {
 			if(GetCurrentState().Buttons.RightStick == ButtonState.Released && previousState.Buttons.RightStick != ButtonState.Released)	ButtonUpRightStick = true;else ButtonUpRightStick = false;
 			if(GetCurrentState().Buttons.Back == ButtonState.Released && previousState.Buttons.Back != ButtonState.Released)	ButtonUpBack = true;else ButtonUpBack = false;
 			if(GetCurrentState().Buttons.Start == ButtonState.Released && previousState.Buttons.Start != ButtonState.Released)	ButtonUpStart = true;else ButtonUpStart = false;
+
+
+            if (GetCurrentState().DPad.Up == ButtonState.Released && previousState.DPad.Up != ButtonState.Released) ButtonUpDPadUp = true; else ButtonUpDPadUp = false;
+            if (GetCurrentState().DPad.Down == ButtonState.Released && previousState.DPad.Down != ButtonState.Released) ButtonUpDPadDown = true; else ButtonUpDPadDown = false;
 		}
 
 		previousState = currentState;

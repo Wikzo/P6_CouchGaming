@@ -61,6 +61,9 @@ public abstract class MissionBase : MonoBehaviour
     private bool PunchTweenHUDInControllerTutorial = false; // used so only one player makes the tween
     private bool PracticeHUDRumble = false;
 
+    [HideInInspector]
+    public bool HasHeardMissionRumble;
+
     protected bool isInstanceMission = false;
 
     public string MissionDescription = "MISSION";
@@ -107,7 +110,9 @@ public abstract class MissionBase : MonoBehaviour
         StopAllRumble();
 
         GameObject Particles = (GameObject)Instantiate(GameManager.Instance.MissionInitializedParticles);
-        Particles.GetComponent<MissionParticle>().PlayerToFollow = this.Player;
+        Particles.GetComponent<MissionParticle>().PlayerToFollow = this;
+
+        HasHeardMissionRumble = false;
 
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
     }
@@ -261,6 +266,7 @@ public abstract class MissionBase : MonoBehaviour
     public void MissionRumbler(float interval) // display mission (rumble)
     {
         //print("rumble " + missionRumbleCounter + " " + this);
+        HasHeardMissionRumble = true;
         if (missionTimeCounter < interval)
         {
             missionTimeCounter += Time.deltaTime;
@@ -343,10 +349,10 @@ public abstract class MissionBase : MonoBehaviour
 
         if (!RumblePractice)
         {
-            if (PlayerScript.PlayerControllerState.GetCurrentState().DPad.Up == ButtonState.Pressed && !isDisplayingMissionOrTargetRumbleRightNow)
+            if (PlayerScript.PlayerControllerState.ButtonDownDPadUp && !isDisplayingMissionOrTargetRumbleRightNow)
                 PickMissionRumble();
 
-            if (PlayerScript.PlayerControllerState.GetCurrentState().DPad.Down == ButtonState.Pressed && !isDisplayingMissionOrTargetRumbleRightNow)
+            if (PlayerScript.PlayerControllerState.ButtonDownDPadDown && !isDisplayingMissionOrTargetRumbleRightNow)
                 PickTargetRumble();
         }
 
