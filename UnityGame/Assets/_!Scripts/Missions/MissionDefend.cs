@@ -9,7 +9,7 @@ public class MissionDefend : MissionBase
     private float maxIntervalForDeadline = 30;
     private float minIntervalForDeadline = 20;
 
-    private bool targetIsAlive;
+    private bool targetHasNotDiedYet;
 
     public override void InitializeMission(GameObject player, MissionBase Template)
     {
@@ -40,7 +40,7 @@ public class MissionDefend : MissionBase
 
         GameManager.Instance.TimeBar.TimeMarks.Add(deadlineTime);
 
-        targetIsAlive = true;
+        targetHasNotDiedYet = true;
 
     }
 
@@ -60,14 +60,14 @@ public class MissionDefend : MissionBase
         // check if player is still alive - if dead: mission is done
         if (Target.GetComponent<Player>().PState == PlayerState.Dead)
         {
-            targetIsAlive = false;
+            targetHasNotDiedYet = true;
             return false;
         }
 
         // reached deadline
         if (GameManager.Instance.TimeLeft <= deadlineTime)
         {
-            if (targetIsAlive)
+            if (targetHasNotDiedYet)
             {
                 this._missionIsActive = false;
                 return true;
@@ -76,6 +76,7 @@ public class MissionDefend : MissionBase
             {
                 this._missionIsActive = false;
                 MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
+                return false;
             }
         }
 
