@@ -64,7 +64,7 @@ public class Projectile : MonoBehaviour
 
 		
 	}
-	void FixedUpdate()
+	/*void FixedUpdate()
 	{
 		RaycastHit hit;
 		if(Physics.Raycast(transform.position+transform.right, transform.right, out hit, transform.localScale.x))
@@ -122,6 +122,65 @@ public class Projectile : MonoBehaviour
       			reflectionCount++;
       		}
       		
+      		//FORCE REFLECTION:
+      		else if(ForceReflection)
+      		{
+      			if(reflectionCount < MaxReflections)
+      			{
+      				ContactPoint contact = collision.contacts[0];
+      				Vector3 reflectedForce = Vector3.Reflect(transform.right, contact.normal);
+      				rigidbody.AddForce(reflectedForce*300);
+      				Quaternion rotation = Quaternion.FromToRotation(transform.forward, reflectedForce);
+      				transform.rotation = rotation * transform.rotation;
+      			}
+      			else
+      			{
+      				rigidbody.velocity = Vector3.zero;
+      				rigidbody.angularVelocity = Vector3.zero;
+      			}
+      			reflectionCount++;
+      		}
+      		else
+      		{
+      			rigidbody.velocity = Vector3.zero;
+      			rigidbody.angularVelocity = Vector3.zero;
+      		}
+		}	
+	}*/
+
+	void OnCollisionStay(Collision collision)
+	{
+		if(collision.gameObject.tag != "NotCollidable")
+		{
+			if(isDeadly && collision.gameObject.GetComponent<PlayerDamage>() && collision.gameObject.name != Owner)
+			{
+				collision.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
+			}
+			else if(collision.gameObject.name == Owner)
+			{
+				collision.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
+					Destroy(gameObject);
+			}
+
+			//VELOCITY REFLECTION:
+			if(VelocityReflection)
+			{
+				if(reflectionCount < MaxReflections)
+				{
+					Vector3 oldVelocity = rigidbody.velocity;
+      				ContactPoint contact = collision.contacts[0];
+      				Vector3 reflectedVelocity = Vector3.Reflect(oldVelocity, contact.normal);    
+      				rigidbody.velocity = reflectedVelocity;
+      				Quaternion rotation = Quaternion.FromToRotation(oldVelocity, reflectedVelocity);
+      				transform.rotation = rotation * transform.rotation;
+      			}
+      			else
+      			{
+      				rigidbody.velocity = Vector3.zero;
+      				rigidbody.angularVelocity = Vector3.zero;
+      			}
+      			reflectionCount++;
+      		}
       		//FORCE REFLECTION:
       		else if(ForceReflection)
       		{
