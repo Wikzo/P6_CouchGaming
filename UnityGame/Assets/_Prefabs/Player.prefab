@@ -539,7 +539,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!65 &6500000
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -712,6 +712,7 @@ MonoBehaviour:
   KilledBy: 
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
+  RespawnIdleTime: 6
   Name: 
   MyColorIDName: PinkOne
 --- !u!114 &11400008
