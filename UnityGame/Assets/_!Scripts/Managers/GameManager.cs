@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PlayingState
 {
-    GettingTutorial,
+    ControllerCalibration,
     PraticeMode,
     WaitingForEverbodyToGetReady,
     Playing,
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool CurrentRoundJustEnded;
     [HideInInspector]
-    public PlayingState PlayingState = PlayingState.GettingTutorial;
+    public PlayingState PlayingState = PlayingState.ControllerCalibration;
     private PlayingState lastState; // used to remember pause
 
     [HideInInspector]
@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     // mission stuff
     public List<int> TargetChosenSoFar = new List<int>();
+    public GameObject MissionInitializedParticles;
 
     private Camera Camera;
 
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] RumbleStepsGUI;
     public GameObject GUIMissionHud;
     private bool RumblePracticeStart = true;
+    public TimeBar TimeBar;
 
     public Light MainLight;
 
@@ -95,13 +97,14 @@ public class GameManager : MonoBehaviour
         // Furthermore we make sure that we don't destroy between scenes (this is optional)
         DontDestroyOnLoad(gameObject);
 
-        this.PlayingState = PlayingState.GettingTutorial;
+        this.PlayingState = PlayingState.ControllerCalibration;
 
 
     }
 
     void Start()
     {
+        TimeLeft = TimePerRound;
 
         CurrentRound = NumberOfRoundsPerGame;
 
@@ -130,6 +133,10 @@ public class GameManager : MonoBehaviour
 
         if (MainLight == null)
             Debug.Log("ERROR - assign directional light to TextFade");
+
+        if (TimeBar == null)
+            Debug.Log("ERROR - assign timebar to Game Manager");
+
 
         MissionManager.Instance.GetNewMissions();
 
@@ -219,6 +226,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        /*// turn off when calibrating/tutorial
+        if (PlayingState == PlayingState.ControllerCalibration)
+            MainLight.enabled = false;
+        else
+            MainLight.enabled = true; */
+
         if (PlayingState == PlayingState.Playing)
         {
             TimeLeft -= Time.deltaTime;

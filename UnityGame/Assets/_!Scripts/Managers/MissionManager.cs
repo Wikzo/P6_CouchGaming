@@ -130,6 +130,22 @@ public class MissionManager : MonoBehaviour
 
     }
 
+    public void GetNewMissionToSinglePlayer(GameObject Player)
+    {
+        // destroy old
+        MissionBase oldMission = Player.GetComponent<MissionBase>();
+        InstantiatedMissions.Remove(oldMission);
+        oldMission.DestroyMission();
+
+
+        // get new mission
+        MissionBase newMission = GetUniqueMission();
+        string scriptName = newMission.ToString();
+        Player.AddComponent(scriptName);
+        Player.GetComponent<MissionBase>().InitializeMission(Player, newMission);
+        InstantiatedMissions.Add(Player.GetComponent<MissionBase>());
+    }
+
     void SetTextAndIcons()
     {
         for (int i = 0; i < 4; i++)
@@ -179,7 +195,24 @@ public class MissionManager : MonoBehaviour
         if (GameManager.Instance.PlayingState != PlayingState.Playing) // only check if game is playing
             return;
 
-        foreach (MissionBase m in InstantiatedMissions)
+        for (int i = 4 - 1; i >= 0; i--)
+        {
+            MissionBase m = InstantiatedMissions[i];
+            if (m != null)
+            {
+                if (!m.MissionIsActive) // dont look into inactive missions
+                    return;
+
+                if (m.MissionAccomplished()) // look if mission has been accomplished
+                {
+                    GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
+                    audio.PlayOneShot(AudioManager.Instance.MissionAccomplishedSound);
+                    Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+                    m.GivePointsToPlayer();
+                }
+            }
+        }
+        /*foreach (MissionBase m in InstantiatedMissions)
         {
             if (!m.MissionIsActive) // dont look into inactive missions
                 return;
@@ -191,7 +224,7 @@ public class MissionManager : MonoBehaviour
                 Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
                 m.GivePointsToPlayer();
             }
-        }
+        }*/
     }
 
     void ShuffleMissions(List<MissionBase> missions) 

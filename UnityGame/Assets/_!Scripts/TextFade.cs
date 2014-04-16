@@ -67,7 +67,7 @@ public class TextFade : MonoBehaviour
     {
         switch (GameManager.Instance.PlayingState)
         {
-            case PlayingState.GettingTutorial:
+            case PlayingState.ControllerCalibration:
                 GUI.Label(MidRect, TutorialText, FadingTextStyle);
                     break;
             case PlayingState.PraticeMode:

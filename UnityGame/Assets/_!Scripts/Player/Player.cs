@@ -156,7 +156,7 @@ public class Player : MonoBehaviour
 	    {
             switch (GameManager.Instance.PlayingState)
             {
-                case PlayingState.GettingTutorial:
+                case PlayingState.ControllerCalibration:
                     GameManager.Instance.SkipTutorialAndGoToWait();
                     GameManager.Instance.ResetLevel();
                     break;
@@ -323,8 +323,8 @@ public class Player : MonoBehaviour
 
 	void ChooseSpawnPoint()
 	{
-        // Gustav: unsure if this should be PracticeMode or GettingTutorial mode
-	    if (GameManager.Instance.PlayingState != PlayingState.GettingTutorial)
+        // Gustav: unsure if this should be PracticeMode or ControllerCalibration mode
+	    if (GameManager.Instance.PlayingState != PlayingState.ControllerCalibration)
 	    {
 	        SpawnZone.SetActive(true);
 	    }

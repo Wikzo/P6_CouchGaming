@@ -31,7 +31,7 @@ public class DPadBlinkGUI : MonoBehaviour
         // show blink between normal and pressed-down
         if (GameManager.Instance.PlayingState == PlayingState.PraticeMode || GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
             showBlink = true;
-        else if (GameManager.Instance.PlayingState != PlayingState.GettingTutorial) // just show pressed-down
+        else if (GameManager.Instance.PlayingState != PlayingState.ControllerCalibration) // just show pressed-down
         {
             showBlink = false;
             blinkRender.enabled = true;

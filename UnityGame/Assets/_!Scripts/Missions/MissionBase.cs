@@ -67,6 +67,8 @@ public abstract class MissionBase : MonoBehaviour
 
     public bool DebugShowCurrentMission = false;
 
+    protected string StuffToShowInGUI = "";
+
     public virtual void TemplateSetUp() { }
 
     // An abstract function has to be overridden while a virtual function may be overridden.
@@ -103,6 +105,9 @@ public abstract class MissionBase : MonoBehaviour
         this.isInstanceMission = true;
 
         StopAllRumble();
+
+        GameObject Particles = (GameObject)Instantiate(GameManager.Instance.MissionInitializedParticles);
+        Particles.GetComponent<MissionParticle>().PlayerToFollow = this.Player;
 
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
     }
@@ -262,7 +267,7 @@ public abstract class MissionBase : MonoBehaviour
 
             GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
 
-            if (GameManager.Instance.PlayingState == PlayingState.GettingTutorial || GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+            if (GameManager.Instance.PlayingState == PlayingState.ControllerCalibration || GameManager.Instance.PlayingState == PlayingState.PraticeMode)
             {
                 if (PunchTweenHUDInControllerTutorial)
                     MissionManager.Instance.PracticeControllerRumbleGUI(GameManager.Instance.GUIRumbleCounter - 1);
@@ -305,7 +310,7 @@ public abstract class MissionBase : MonoBehaviour
             targetTimeCounter += Time.deltaTime;
             GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
 
-            if (GameManager.Instance.PlayingState == PlayingState.GettingTutorial | GameManager.Instance.PlayingState == PlayingState.PraticeMode)
+            if (GameManager.Instance.PlayingState == PlayingState.ControllerCalibration | GameManager.Instance.PlayingState == PlayingState.PraticeMode)
             {
                 if (PracticeHUDRumble)
                     MissionManager.Instance.PracticeTargetHUDRumble((int)this.TargetIDColorState - 1);
@@ -355,11 +360,19 @@ public abstract class MissionBase : MonoBehaviour
     public void GivePointsToPlayer()
     {
         this.PlayerScript.Points += this.Points;
+
+        MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
+    }
+
+    public virtual void DestroyMission()
+    {
+        DestroyImmediate(this);
     }
 
     public void OnGUI()
     {
         if (isInstanceMission && GameManager.Instance.PlayingState == PlayingState.PraticeMode && ShowMissionGUI)
+        //if (isInstanceMission && GameManager.Instance.DebugMode)
         {
 
             // TODO: fix offset
@@ -367,6 +380,7 @@ public abstract class MissionBase : MonoBehaviour
             string text = this.ToString() + " - " + this.TargetIDColorState;
             text += "\nIs Active: " + this._missionIsActive;
             text += "\nPoints: " + this.PlayerScript.Points;
+            text += "\n" + StuffToShowInGUI;
             var point = Camera.main.WorldToScreenPoint(transform.position);
 
             int xOffset = 0;
