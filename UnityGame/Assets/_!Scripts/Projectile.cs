@@ -20,6 +20,8 @@ public class Projectile : MonoBehaviour
 
 	private string owner;
 
+	private Vector3 lockPos;
+
 	public string Owner
 	{
 		get{return owner;}
@@ -35,24 +37,26 @@ public class Projectile : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(DeadlyTimer > 0)
-		{
-			DeadlyTimer -= Time.deltaTime;
-			isDeadly = true;
-		}
-		else
-		{
-			//Convert to local velocity, so we know which direction the projectile is going in
-			Vector3 localVelocity = transform.InverseTransformDirection(rigidbody.velocity);
-			if(localVelocity.x > KillVelocity)
-			{
-				isDeadly = true;
-			}
-			else
-			{
-				isDeadly = false;
-			}
-		}
+		//if(DeadlyTimer > 0)
+		//{
+		//	DeadlyTimer -= Time.deltaTime;
+		//	isDeadly = true;
+		//}
+		//else
+		//{
+		//	//Convert to local velocity, so we know which direction the projectile is going in
+		//	Vector3 localVelocity = transform.InverseTransformDirection(rigidbody.velocity);
+		//	if(localVelocity.x > KillVelocity)
+		//	{
+		//		isDeadly = true;
+		//	}
+		//	else
+		//	{
+		//		isDeadly = false;
+		//	}
+		//}
+
+		isDeadly = true;
 
 		if(isDeadly)
 		{
@@ -64,6 +68,7 @@ public class Projectile : MonoBehaviour
 
 		
 	}
+	//Not working version
 	/*void FixedUpdate()
 	{
 		RaycastHit hit;
@@ -148,7 +153,8 @@ public class Projectile : MonoBehaviour
 		}	
 	}*/
 
-	void OnCollisionStay(Collision collision)
+	//Working version
+	/*void OnCollisionStay(Collision collision)
 	{
 		if(collision.gameObject.tag != "NotCollidable")
 		{
@@ -205,5 +211,26 @@ public class Projectile : MonoBehaviour
       			rigidbody.angularVelocity = Vector3.zero;
       		}
 		}	
-	}
+	}*/
+
+	//LaserDisk continuing in the determined direction
+	void OnTriggerStay(Collider other)
+	{
+		lockPos = transform.position;
+		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.name != Owner)
+		{
+			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
+		}
+		else if(other.gameObject.name == Owner)
+		{
+			other.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
+				Destroy(gameObject);
+		}
+		else if(!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable")
+		{
+			rigidbody.velocity = Vector3.zero;
+      		rigidbody.angularVelocity = Vector3.zero;
+      		transform.position = lockPos;
+		}
+	} 
 }
