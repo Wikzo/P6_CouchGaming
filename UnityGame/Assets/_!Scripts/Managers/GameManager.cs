@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public List<ResetObjectPosition> AllObjectsToReset; // contains all objects in scene that must reset
 
-    public int NumberOfRoundsPerGame = 5;
+    public int NumberOfRoundsPerGame = 6;
     
     // Round stuff
     [HideInInspector]
@@ -148,16 +148,17 @@ public class GameManager : MonoBehaviour
 
     public void Pause()
     {
-
         if (PlayingState != PlayingState.Paused)
         {
             lastState = PlayingState;
 
             PlayingState = PlayingState.Paused;
+            Time.timeScale = 0;
             MainLight.enabled = false;
         }
         else if (PlayingState == PlayingState.Paused)
         {
+            Time.timeScale = 1;
             PlayingState = lastState;
             MainLight.enabled = true;
 
@@ -226,11 +227,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        /*// turn off when calibrating/tutorial
-        if (PlayingState == PlayingState.ControllerCalibration)
+        // turn off when calibrating/tutorial
+        if (PlayingState == PlayingState.WaitingForEverbodyToGetReady)
             MainLight.enabled = false;
         else
-            MainLight.enabled = true; */
+            MainLight.enabled = true;
 
         if (PlayingState == PlayingState.Playing)
         {
@@ -285,6 +286,7 @@ public class GameManager : MonoBehaviour
 
         TimeLeft = TimePerRound;
         CurrentRoundJustEnded = false;
+
         CurrentRound--;
 
         if (CurrentRound <= 0)
@@ -315,6 +317,7 @@ public class GameManager : MonoBehaviour
 
     private void OnGUI()
     {
+        /*
         GUILayout.Label(string.Format("Current state: {0}", PlayingState.ToString()));
         GUILayout.Label(string.Format("Round: {0}", CurrentRound.ToString()));
 
@@ -342,6 +345,7 @@ public class GameManager : MonoBehaviour
                     ResetWholeGame();
                 break;
         }
+         * */
     }
 
     public void ResetWholeGame()

@@ -39,7 +39,11 @@ public class TimeBar : MonoBehaviour
                 TimeMarks.RemoveAt(i);
         }
 
-        
+        timerText = string.Format("TIME (Round {0}/{1})",
+                                  GameManager.Instance.CurrentRound.ToString(),
+                                  GameManager.Instance.NumberOfRoundsPerGame.ToString());
+
+
     }
 
     private void OnGUI()
@@ -51,7 +55,7 @@ public class TimeBar : MonoBehaviour
         var textDimensions = GUI.skin.label.CalcSize(new GUIContent(timerText));
 
         // draw string
-        GUI.Label(new Rect(BarPosition.x - textDimensions.x / 2, BarPosition.y - 20, 50, 50), timerText);
+        GUI.Label(new Rect(BarPosition.x - textDimensions.x / 2, BarPosition.y - 20, 300, 50), timerText);
 
         // Draw black border
         GUI.DrawTexture(new Rect(BarPosition.x - totalLength/2, BarPosition.y, totalLength, BarHeight), backgroundTexture, ScaleMode.StretchToFill, true, 10.0F);
