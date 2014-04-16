@@ -61,23 +61,45 @@ public class Projectile : MonoBehaviour
 		}
 		else
 			renderer.material.color = PMat.color;
+
+		
+	}
+	void FixedUpdate()
+	{
+		RaycastHit hit;
+		if(Physics.Raycast(transform.position+transform.right, transform.right, out hit, transform.localScale.x))
+		{
+			if(hit.collider.gameObject.GetComponent<PlayerDamage>())
+			{
+				collider.isTrigger = true;
+			}
+			else if(hit.collider.gameObject.tag != "NotCollidable")
+			{
+				collider.isTrigger = false;
+			}
+		}
+		else
+			collider.isTrigger = false;
 	}
 
-	void OnCollisionStay(Collision collision)
+
+	void OnTriggerEnter(Collider other)
+	{
+		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.name != Owner)
+		{
+			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
+		}
+	}
+
+
+	void OnCollisionEnter(Collision collision)
 	{
 		if(collision.gameObject.tag != "NotCollidable")
 		{
-			if(collision.gameObject.GetComponent<PlayerDamage>())
+			if(collision.gameObject.name == Owner)
 			{
-				if(isDeadly && collision.gameObject.name != Owner)
-				{
-					collision.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
-				}
-				else if(collision.gameObject.name == Owner)
-				{
-					collision.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
+				collision.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
 					Destroy(gameObject);
-				}
 			}
 
 			//VELOCITY REFLECTION:
