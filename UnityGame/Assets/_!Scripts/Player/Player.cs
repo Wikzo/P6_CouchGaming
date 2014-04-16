@@ -47,10 +47,15 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public PlayerIndex PlayerController;
 	public ControllerState PlayerControllerState;
+
+	public float RespawnIdleTime = 3;
+	private float respawnIdleTimer;
 	
 	private PlayerAim playerAim;
 	private PlayerMove playerMove;
 	private PlayerJump playerJump;
+
+
 
 	private Transform pTran;
 
@@ -112,6 +117,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+    	respawnIdleTimer = RespawnIdleTime;
         resetCounter = 0;
         Reset();
     }
@@ -176,6 +182,8 @@ public class Player : MonoBehaviour
 	    {
 	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
 	        renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+
+	        respawnIdleTimer -= Time.deltaTime;
 
 	        //Make sure the player can't aim
 	    	playerAim.TurnOffAim();
@@ -310,7 +318,12 @@ public class Player : MonoBehaviour
 
 	void CheckMovement()
 	{
-		if(PlayerControllerState.GetCurrentState().ThumbSticks.Left.X != 0 || PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y != 0 || PlayerControllerState.ButtonDownA)
+
+
+		if(PlayerControllerState.GetCurrentState().ThumbSticks.Left.X != 0
+		|| PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y != 0
+		|| PlayerControllerState.ButtonDownA
+		|| respawnIdleTimer <= 0)
 		{
 			PState = PlayerState.Alive;
 			
@@ -318,6 +331,7 @@ public class Player : MonoBehaviour
 			SpawnZone.SetActive(false);
 
 			CancelInvoke("CheckMovement");
+			respawnIdleTimer = RespawnIdleTime;
 		}
 	}
 

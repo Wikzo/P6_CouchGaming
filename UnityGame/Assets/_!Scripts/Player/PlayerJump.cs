@@ -69,12 +69,12 @@ public class PlayerJump : MonoBehaviour {
 
 		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			Jump();
+			//Jump();
 			addJumpPhysics = true;
 		}
 		else if(CanBoostJump && playerScript.PlayerControllerState.ButtonDownA || CanBoostJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			BoostJump();
+			//BoostJump();
 			addBoostJumpPhysics = true;
 
 			boostJumpsAmount++;
@@ -107,15 +107,15 @@ public class PlayerJump : MonoBehaviour {
 
 	void FixedUpdate()
 	{
-		//if(addJumpPhysics)
-		//{
-		//	Jump();
-		//	addJumpPhysics = false;
-		//}
-		//else if(addBoostJumpPhysics)
-		//{
-		//	BoostJump();
-		//	addBoostJumpPhysics = false;
-		//}
+		if(addJumpPhysics)
+		{
+			Jump();
+			addJumpPhysics = false;
+		}
+		else if(addBoostJumpPhysics)
+		{
+			BoostJump();
+			addBoostJumpPhysics = false;
+		}
 	}
 }
