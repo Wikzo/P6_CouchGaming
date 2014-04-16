@@ -465,6 +465,10 @@ Prefab:
       propertyPath: SpawnPoints
       value: 
       objectReference: {fileID: 1944622118}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 1333197866}
@@ -7856,6 +7860,10 @@ Prefab:
       propertyPath: AirMoveSpeed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 1475358118}
@@ -11169,6 +11177,10 @@ Prefab:
       propertyPath: AirMoveSpeed
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Mass
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 1829481883}
@@ -13357,6 +13369,10 @@ Prefab:
     - target: {fileID: 11400002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: AirMoveSpeed
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Mass
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
