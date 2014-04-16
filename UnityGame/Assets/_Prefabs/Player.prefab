@@ -31,7 +31,7 @@ GameObject:
   - 23: {fileID: 2300002}
   m_Layer: 0
   m_Name: Aim
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -658,8 +658,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc1868693855a404c82720de3b48ecfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GroundMoveSpeed: 7
-  AirMoveSpeed: 5
+  GroundMoveSpeed: 10
+  AirMoveSpeed: 8
   movingLeft: 0
   movingRight: 0
 --- !u!114 &11400004
@@ -694,6 +694,7 @@ MonoBehaviour:
   Points: 0
   LoFi: 0
   Keyboard: 0
+  PlayerColor: {r: .996078432, g: 0, b: .717647076, a: 1}
   IsReadyToBegin: 0
   Score: 0
   Id: 0
