@@ -45,11 +45,15 @@ MonoBehaviour:
   Target: {fileID: 0}
   MissionType: 2
   HowToChooseTarget: 0
-  Texture: {fileID: 2100000, guid: f45df0794cc3d124cb328ae3fb9e3216, type: 2}
+  MissionMaterial: {fileID: 0}
   MissionIDRumble: 0
-  TargetIDColorState: 0
+  RumblePractice: 0
+  ShowMissionGUI: 0
+  HasHeardMissionRumble: 0
   MissionDescription: Move intel to BASE
+  DebugShowCurrentMission: 0
   IntelPropToSteal: {fileID: 0}
+  YOffset: 1.98000002
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
