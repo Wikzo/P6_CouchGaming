@@ -86,7 +86,9 @@ public class Projectile : MonoBehaviour
 
 			Physics.IgnoreCollision(collider, OwnerObject.collider, false);
 			foreach(Transform child in transform)
+			{
 				Physics.IgnoreCollision(child.collider, OwnerObject.collider, false);
+			}			
 		}
 	}
 
@@ -109,13 +111,18 @@ public class Projectile : MonoBehaviour
       		transform.position = lockPos;
 		}
 	}
-	//void OnTriggerStay(Collider other)
+
+	//void OnTriggerExit(Collider other)
 	//{
-	//	if(!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable" && other.gameObject.name != gameObject.name)
+	//	if(other.gameObject.tag == Owner)
 	//	{
-	//		rigidbody.velocity = Vector3.zero;
-    //  		rigidbody.angularVelocity = Vector3.zero;
-    //  		transform.position = lockPos;
+	//		outOfBounds = true;
+//
+	//		Physics.IgnoreCollision(collider, OwnerObject.collider, false);
+	//		foreach(Transform child in transform)
+	//		{
+	//			Physics.IgnoreCollision(child.collider, OwnerObject.collider, false);
+	//		}
 	//	}
 	//}
 

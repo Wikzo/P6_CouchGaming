@@ -433,7 +433,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &64867963
 Transform:
   m_ObjectHideFlags: 0
@@ -658,7 +658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &104461046
 Transform:
   m_ObjectHideFlags: 0
@@ -733,6 +733,66 @@ Prefab:
     - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_TagString
       value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: JumpForce
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: BoostJumpForce
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: ShotForce
+      value: 60
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6500000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -1637,12 +1697,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootKey: 9
-  ShotForce: 50
+  ShotForce: 60
   MaxChargeTime: 3
   ShotAmount: 1
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
-  ProjectilePrefab: {fileID: 100000, guid: 45e68b3920bd53c4ea08bb643382afe4, type: 2}
+  ProjectilePrefab: {fileID: 100000, guid: 1a41cc082fc35af408482493c02cc951, type: 2}
 --- !u!114 &258189785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1655,8 +1715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 27
-  BoostJumpForce: 30
+  JumpForce: 22
+  BoostJumpForce: 25
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &258189786
@@ -1727,7 +1787,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!23 &258189789
 Renderer:
   m_ObjectHideFlags: 0
@@ -2046,11 +2106,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: JumpForce
-      value: 27
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: BoostJumpForce
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalScale.x
@@ -2074,7 +2134,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ShotForce
-      value: 50
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: PlayerColor.r
@@ -2107,10 +2167,58 @@ Prefab:
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ProjectilePrefab
       value: 
-      objectReference: {fileID: 100000, guid: 46b5a8c8d1e281043b8e9c9e41cb5f9d, type: 2}
+      objectReference: {fileID: 100000, guid: 6dae4c0f3d973a849b2ed874609c745e, type: 2}
     - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_TagString
       value: Player4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2523,11 +2631,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: JumpForce
-      value: 27
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: BoostJumpForce
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalScale.x
@@ -2551,7 +2659,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ShotForce
-      value: 50
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: PlayerColor.r
@@ -2584,10 +2692,58 @@ Prefab:
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ProjectilePrefab
       value: 
-      objectReference: {fileID: 100000, guid: 45e68b3920bd53c4ea08bb643382afe4, type: 2}
+      objectReference: {fileID: 100000, guid: 1a41cc082fc35af408482493c02cc951, type: 2}
     - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_TagString
       value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -2608,7 +2764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &422714159
 Transform:
   m_ObjectHideFlags: 0
@@ -3789,12 +3945,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootKey: 9
-  ShotForce: 50
+  ShotForce: 60
   MaxChargeTime: 3
   ShotAmount: 1
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
-  ProjectilePrefab: {fileID: 100000, guid: 46b5a8c8d1e281043b8e9c9e41cb5f9d, type: 2}
+  ProjectilePrefab: {fileID: 100000, guid: 6dae4c0f3d973a849b2ed874609c745e, type: 2}
 --- !u!114 &574215421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3807,8 +3963,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 27
-  BoostJumpForce: 30
+  JumpForce: 22
+  BoostJumpForce: 25
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &574215422
@@ -3879,7 +4035,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!23 &574215425
 Renderer:
   m_ObjectHideFlags: 0
@@ -9567,7 +9723,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!114 &1333197873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9581,7 +9737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootKey: 9
-  ShotForce: 50
+  ShotForce: 60
   MaxChargeTime: 3
   ShotAmount: 1
   CurrentShotAmount: 0
@@ -9648,8 +9804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 27
-  BoostJumpForce: 30
+  JumpForce: 22
+  BoostJumpForce: 25
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &1333197877
@@ -10352,7 +10508,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1423609539}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 71.3513641, y: 14.3858624, z: 0}
+  m_LocalPosition: {x: 71.3513641, y: 14.1853313, z: 0}
   m_LocalScale: {x: .416876137, y: .739610136, z: .625147223}
   m_Children: []
   m_Father: {fileID: 1944622119}
@@ -10378,7 +10534,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1425006099}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 119.135155, y: -10.3743353, z: 0}
+  m_LocalPosition: {x: 123.515228, y: -8, z: 0}
   m_LocalScale: {x: .416876107, y: .739610136, z: .625147223}
   m_Children: []
   m_Father: {fileID: 1944622119}
@@ -11699,11 +11855,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: JumpForce
-      value: 27
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 11400010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: BoostJumpForce
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_LocalScale.x
@@ -11727,7 +11883,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ShotForce
-      value: 50
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: PlayerColor.g
@@ -11760,10 +11916,58 @@ Prefab:
     - target: {fileID: 11400004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: ProjectilePrefab
       value: 
-      objectReference: {fileID: 100000, guid: 8d73c565eb7391f488ffff5ffa5b0fe1, type: 2}
+      objectReference: {fileID: 100000, guid: 993d474b2bfb13c419aff1a7d35a6e26, type: 2}
     - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_TagString
       value: Player3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
@@ -12890,7 +13094,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1662069004}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 121.122887, y: 14.1854076, z: 0}
+  m_LocalPosition: {x: 121.122887, y: 13.9848766, z: 0}
   m_LocalScale: {x: .416876137, y: .739610136, z: .625147223}
   m_Children: []
   m_Father: {fileID: 1944622119}
@@ -13707,7 +13911,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1770021591}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 69.5057373, y: -11.113842, z: -.091804266}
+  m_LocalPosition: {x: 68.3194885, y: -8, z: -.091804266}
   m_LocalScale: {x: .416876137, y: .739610136, z: .625147223}
   m_Children: []
   m_Father: {fileID: 1944622119}
@@ -14545,12 +14749,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootKey: 9
-  ShotForce: 50
+  ShotForce: 60
   MaxChargeTime: 3
   ShotAmount: 1
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
-  ProjectilePrefab: {fileID: 100000, guid: 8d73c565eb7391f488ffff5ffa5b0fe1, type: 2}
+  ProjectilePrefab: {fileID: 100000, guid: 993d474b2bfb13c419aff1a7d35a6e26, type: 2}
 --- !u!114 &1898107644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14563,8 +14767,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpForce: 27
-  BoostJumpForce: 30
+  JumpForce: 22
+  BoostJumpForce: 25
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &1898107645
@@ -14635,7 +14839,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 2
+  m_CollisionDetection: 0
 --- !u!23 &1898107648
 Renderer:
   m_ObjectHideFlags: 0
@@ -16445,7 +16649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2138796014
 Transform:
   m_ObjectHideFlags: 0

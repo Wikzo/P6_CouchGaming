@@ -264,6 +264,12 @@ public class Player : MonoBehaviour
         else if (resetCounter == 1) // unique case between PRACTICE and WAIT mode --> don't find new spawn point, just go to existing one
             pTran.position = ChosenSpawn.transform.position;
 
+        // Gustav: unsure if this should be PracticeMode or ControllerCalibration mode
+	    if (GameManager.Instance.PlayingState != PlayingState.ControllerCalibration)
+	    {
+	        SpawnZone.SetActive(true);
+	    }
+
         CancelInvoke("CheckMovement");
 
         // TODO: unsure if this sometimes doesn't get called due to State check
@@ -309,6 +315,12 @@ public class Player : MonoBehaviour
 
 		ChooseSpawnPoint();
 
+		// Gustav: unsure if this should be PracticeMode or ControllerCalibration mode
+	    if (GameManager.Instance.PlayingState != PlayingState.ControllerCalibration)
+	    {
+	        SpawnZone.SetActive(true);
+	    }
+
 		InvokeRepeating("CheckMovement", 0, 0.01f);
 	}
 
@@ -324,8 +336,6 @@ public class Player : MonoBehaviour
 
 	void CheckMovement()
 	{
-
-
 		if(PlayerControllerState.GetCurrentState().ThumbSticks.Left.X != 0
 		|| PlayerControllerState.GetCurrentState().ThumbSticks.Left.Y != 0
 		|| PlayerControllerState.ButtonDownA
@@ -343,12 +353,6 @@ public class Player : MonoBehaviour
 
 	void ChooseSpawnPoint()
 	{
-        // Gustav: unsure if this should be PracticeMode or ControllerCalibration mode
-	    if (GameManager.Instance.PlayingState != PlayingState.ControllerCalibration)
-	    {
-	        SpawnZone.SetActive(true);
-	    }
-
 	    spawnsToChoose = new List<GameObject>(); // copy of original
 
 		//Finds all active spawnpoints and stores them

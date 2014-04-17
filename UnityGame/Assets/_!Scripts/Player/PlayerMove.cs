@@ -83,14 +83,14 @@ public class PlayerMove : MonoBehaviour
 		RaycastHit hit;
 
 		//Check if we are walking into something
-		//if(Physics.Raycast(pTran.position, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(upPos, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(downPos, pTran.forward, out hit, pTran.localScale.x/2))
-		//{
-		//	if(hit.collider.gameObject.tag == "NotCollidable")
-		//		isMovingIntoObject = false;
-		//	else
-		//		isMovingIntoObject = true;
-		//}
-		//else if(!Physics.Raycast(pTran.position, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(upPos, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(downPos, pTran.forward, pTran.localScale.x/2))
+		if(Physics.Raycast(pTran.position, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(upPos, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(downPos, pTran.forward, out hit, pTran.localScale.x/2))
+		{
+			if(hit.collider.gameObject.tag == "NotCollidable")
+				isMovingIntoObject = false;
+			else
+				isMovingIntoObject = true;
+		}
+		else if(!Physics.Raycast(pTran.position, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(upPos, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(downPos, pTran.forward, pTran.localScale.x/2))
 			isMovingIntoObject = false;	
 
 		
@@ -98,17 +98,19 @@ public class PlayerMove : MonoBehaviour
 		{
 			if(playerJump.CanJump)
 			{
-				rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*GroundMoveSpeed);
+				//rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*GroundMoveSpeed);
+				pTran.Translate(direction*Time.deltaTime*GroundMoveSpeed, Space.World);
 				rigidbody.drag = 0;
 			}
 			else //Give the player a different movement speed if he is in the air
 			{
-				rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*AirMoveSpeed);
+				//rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*AirMoveSpeed);
+				pTran.Translate(direction*Time.deltaTime*AirMoveSpeed, Space.World);
 				rigidbody.drag = 1;
 			}
 			if(direction == Vector3.right)
 				MovingRight = true;
-			else
+			else if(direction == Vector3.left)
 			{
 				MovingLeft = true;
 			}
