@@ -74,17 +74,15 @@ public class Projectile : MonoBehaviour
 		}
 		else
 			renderer.material.color = PMat.color;
-
-
 	}
 	void FixedUpdate()
 	{
-		//Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/1.7f;
+		//What is working now, just with raycasts
+		/*Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/1.7f;
 		RaycastHit hit;
-		if(Physics.Raycast(transform.position-transform.right*transform.localScale.x/2, -transform.right, out hit, transform.localScale.x/2) || Physics.Raycast(transform.position+transform.right*transform.localScale.x/2, transform.right, out hit, transform.localScale.x/2))
+		if(Physics.Raycast(transform.position-transform.right*transform.localScale.x/2, -transform.right, out hit, 0.1f) || Physics.Raycast(transform.position+transform.right*transform.localScale.x/2, transform.right, out hit, 0.1f))
 		{
 			lockPos = transform.position;
-
 			if(isDeadly && hit.collider.gameObject.GetComponent<PlayerDamage>() && hit.collider.gameObject.name != Owner)
 				hit.collider.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
 			
@@ -99,7 +97,9 @@ public class Projectile : MonoBehaviour
       			rigidbody.angularVelocity = Vector3.zero;
       			transform.position = lockPos;
 			}
-		}
+		}*/
+			//Debug.DrawRay(transform.position+transform.right*transform.localScale.x/2, transform.right);
+			//Debug.DrawRay(transform.position-transform.right*transform.localScale.x/2, -transform.right);
 
 		if(!collider.bounds.Intersects(OwnerObject.collider.bounds))
 		{	
@@ -110,6 +110,26 @@ public class Projectile : MonoBehaviour
 				Physics.IgnoreCollision(child.collider, OwnerObject.collider, false);
 		}
 	}
+	void OnTriggerEnter(Collider other)
+	{
+		lockPos = transform.position;
+
+		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.name != Owner)
+			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
+		
+		if(other.gameObject.name == Owner && outOfBounds)
+		{
+			other.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
+				Destroy(gameObject);
+		}
+		if(!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable")
+		{
+			rigidbody.velocity = Vector3.zero;
+      		rigidbody.angularVelocity = Vector3.zero;
+      		transform.position = lockPos;
+		}
+	}
+
 	//Not working version
 	/*void FixedUpdate()
 	{

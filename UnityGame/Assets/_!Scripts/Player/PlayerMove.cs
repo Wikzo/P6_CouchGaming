@@ -83,14 +83,14 @@ public class PlayerMove : MonoBehaviour
 		RaycastHit hit;
 
 		//Check if we are walking into something
-		if(Physics.Raycast(pTran.position, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(upPos, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(downPos, pTran.forward, out hit, pTran.localScale.x/2))
-		{
-			if(hit.collider.gameObject.tag == "NotCollidable")
-				isMovingIntoObject = false;
-			else
-				isMovingIntoObject = true;
-		}
-		else if(!Physics.Raycast(pTran.position, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(upPos, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(downPos, pTran.forward, pTran.localScale.x/2))
+		//if(Physics.Raycast(pTran.position, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(upPos, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(downPos, pTran.forward, out hit, pTran.localScale.x/2))
+		//{
+		//	if(hit.collider.gameObject.tag == "NotCollidable")
+		//		isMovingIntoObject = false;
+		//	else
+		//		isMovingIntoObject = true;
+		//}
+		//else if(!Physics.Raycast(pTran.position, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(upPos, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(downPos, pTran.forward, pTran.localScale.x/2))
 			isMovingIntoObject = false;	
 
 		

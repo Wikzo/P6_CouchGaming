@@ -122,15 +122,24 @@ public class PlayerAim : MonoBehaviour
 					//Give the position an offset, so the bar is positioned outside of the player and then add its scale to make it charge in one direction.
 					chargeBar.position = new Vector3(pTran.position.x-pTran.localScale.x/2+chargeBar.localScale.x, pTran.position.y+pTran.localScale.y/2+chargeBar.localScale.y, pTran.position.z);	
 				}			
-			}			
+			}		
 		}
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
-			Projectile = Instantiate(ProjectileObj, aimTran.position+aimTran.forward*ProjectileObj.transform.localScale.x, Quaternion.identity) as GameObject;
+			Projectile = Instantiate(ProjectileObj, pTran.position, Quaternion.identity) as GameObject;
 			Projectile.GetComponent<Projectile>().Owner = name;
+			Projectile.GetComponent<Projectile>().OwnerObject = gameObject;
 			Projectile.GetComponent<Projectile>().PMat = renderer.material;
 			Projectile.transform.right = aimTran.forward;
 			addPhysics = true;
+			//Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
+			//Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
+
+			//Projectile = Instantiate(ProjectileObj, aimTran.position+aimTran.forward*ProjectileObj.transform.localScale.x, Quaternion.identity) as GameObject;
+			//Projectile.GetComponent<Projectile>().Owner = name;
+			//Projectile.GetComponent<Projectile>().PMat = renderer.material;
+			//Projectile.transform.right = aimTran.forward;
+			//addPhysics = true;
 			//Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
 			//Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
 		}
