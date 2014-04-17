@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        // reset whole game - DEBUG
+	    // reset whole game - DEBUG
         if (GameManager.Instance.DebugMode && PlayerControllerState.ButtonDownBack)
            GameManager.Instance.ResetWholeGame();
 

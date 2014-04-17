@@ -126,13 +126,23 @@ public class PlayerAim : MonoBehaviour
 		}
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
+            // original projectile
 			Projectile = Instantiate(ProjectileObj, aimTran.position+aimTran.forward*ProjectileObj.transform.localScale.x, Quaternion.identity) as GameObject;
-			Projectile.GetComponent<Projectile>().Owner = name;
-			Projectile.GetComponent<Projectile>().PMat = renderer.material;
+		    Projectile projectileOriginal = Projectile.GetComponent<Projectile>();
+            projectileOriginal.Owner = name;
+            projectileOriginal.PMat = renderer.material;
 			Projectile.transform.right = aimTran.forward;
 			addPhysics = true;
-			//Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
-			//Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
+
+            // clone projectile (for screen wrapping)
+            GameObject clone = Projectile.GetComponent<InstantiateCloneProjectile>().MakeProjectileClone(Projectile); // used to make screen wrapping clone
+		    Projectile cloneProjectile = clone.GetComponent<Projectile>();
+		    cloneProjectile.Owner = name;
+		    cloneProjectile.PMat = renderer.material;
+            clone.transform.right = aimPivotTran.forward;
+
+		    //Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
+		    //Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
 		}
 		else
 		{

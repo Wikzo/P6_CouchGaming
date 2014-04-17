@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
     {
         TimeLeft = TimePerRound;
 
-        CurrentRound = NumberOfRoundsPerGame;
+        CurrentRound = NumberOfRoundsPerGame+1;
 
         TargetChosenSoFar = new List<int>();
 

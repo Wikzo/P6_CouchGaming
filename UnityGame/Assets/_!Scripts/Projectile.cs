@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Projectile : MonoBehaviour 
+public class Projectile : MonoBehaviour
 {
 	public float KillVelocity = 1;
 	public float DeadlyBlinkRate = 0.1f;

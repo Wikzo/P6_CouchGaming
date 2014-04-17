@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerDamage : MonoBehaviour {
+public class PlayerDamage : MonoBehaviour
+{
+
+    public bool IsClone;
+    public GameObject OriginalPlayer;
 
 	//public AudioClip missionSound;
 	private Player playerScript;
@@ -11,11 +15,19 @@ public class PlayerDamage : MonoBehaviour {
 	private bool shieldEnabled = false;
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
-		playerScript = GetComponent<Player>();	
+	    if (IsClone)
+	    {
+            if (OriginalPlayer == null)
+                Debug.Log("ERROR - clone needs to have assigned link to original player");
+	        
+            playerScript = OriginalPlayer.GetComponent<Player>();
+	    }
+	    else
+	        playerScript = GetComponent<Player>();
 
-		//LO-FI
+	    //LO-FI
 		if(playerScript.LoFi && playerScript.Id == 0)
 		{
 			shield = transform.Find("Shield");
