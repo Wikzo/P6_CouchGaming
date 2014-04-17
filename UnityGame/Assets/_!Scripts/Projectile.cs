@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour 
 {
+	public GameObject TwinProjectileToDestroy;
+	public bool IsOriginal = true;
+
 	public float KillVelocity = 1;
 	public float DeadlyBlinkRate = 0.1f;
 	public float DeadlyTimer = 0.5f;
@@ -14,7 +17,6 @@ public class Projectile : MonoBehaviour
 	[HideInInspector]
 	public Material PMat;
 
-	[HideInInspector]
 	public GameObject OwnerObject;
 
 	private bool isDeadly = false;
@@ -75,32 +77,9 @@ public class Projectile : MonoBehaviour
 		else
 			renderer.material.color = PMat.color;
 	}
+
 	void FixedUpdate()
 	{
-		//What is working now, just with raycasts
-		/*Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/1.7f;
-		RaycastHit hit;
-		if(Physics.Raycast(transform.position-transform.right*transform.localScale.x/2, -transform.right, out hit, 0.1f) || Physics.Raycast(transform.position+transform.right*transform.localScale.x/2, transform.right, out hit, 0.1f))
-		{
-			lockPos = transform.position;
-			if(isDeadly && hit.collider.gameObject.GetComponent<PlayerDamage>() && hit.collider.gameObject.name != Owner)
-				hit.collider.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
-			
-			if(hit.collider.gameObject.name == Owner && outOfBounds)
-			{
-				hit.collider.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
-					Destroy(gameObject);
-			}
-			if(!hit.collider.gameObject.GetComponent<PlayerDamage>() && hit.collider.gameObject.tag != "NotCollidable")
-			{
-				rigidbody.velocity = Vector3.zero;
-      			rigidbody.angularVelocity = Vector3.zero;
-      			transform.position = lockPos;
-			}
-		}*/
-			//Debug.DrawRay(transform.position+transform.right*transform.localScale.x/2, transform.right);
-			//Debug.DrawRay(transform.position-transform.right*transform.localScale.x/2, -transform.right);
-
 		if(!collider.bounds.Intersects(OwnerObject.collider.bounds))
 		{	
 			outOfBounds = true;
@@ -110,189 +89,47 @@ public class Projectile : MonoBehaviour
 				Physics.IgnoreCollision(child.collider, OwnerObject.collider, false);
 		}
 	}
+
 	void OnTriggerEnter(Collider other)
 	{
 		lockPos = transform.position;
 
-		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.name != Owner)
+		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != Owner)
 			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
 		
-		if(other.gameObject.name == Owner && outOfBounds)
+		if(other.gameObject.tag == Owner && outOfBounds)
 		{
-			other.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
-				Destroy(gameObject);
+			if(other.gameObject.GetComponent<PlayerAim>())
+				DestroyProjectileAndTwin(other.gameObject.GetComponent<PlayerAim>());
 		}
-		if(!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable")
+		if(!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable" && other.gameObject.tag != gameObject.tag)
 		{
 			rigidbody.velocity = Vector3.zero;
       		rigidbody.angularVelocity = Vector3.zero;
       		transform.position = lockPos;
 		}
 	}
+	//void OnTriggerStay(Collider other)
+	//{
+	//	if(!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable" && other.gameObject.name != gameObject.name)
+	//	{
+	//		rigidbody.velocity = Vector3.zero;
+    //  		rigidbody.angularVelocity = Vector3.zero;
+    //  		transform.position = lockPos;
+	//	}
+	//}
 
-	//Not working version
-	/*void FixedUpdate()
+	void OnDestroy()
 	{
-		RaycastHit hit;
-		if(Physics.Raycast(transform.position+transform.right, transform.right, out hit, transform.localScale.x))
-		{
-			if(hit.collider.gameObject.GetComponent<PlayerDamage>())
-			{
-				collider.isTrigger = true;
-			}
-			else if(hit.collider.gameObject.tag != "NotCollidable")
-			{
-				collider.isTrigger = false;
-			}
-		}
-		else
-			collider.isTrigger = false;
+		if(TwinProjectileToDestroy != null)
+			Destroy(TwinProjectileToDestroy);
 	}
 
-
-	void OnTriggerEnter(Collider other)
+	void DestroyProjectileAndTwin(PlayerAim playerAim)
 	{
-		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.name != Owner)
-		{
-			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
-		}
+		if (IsOriginal)
+			playerAim.CurrentShotAmount++;
+		
+		Destroy(gameObject);
 	}
-
-
-	void OnCollisionEnter(Collision collision)
-	{
-		if(collision.gameObject.tag != "NotCollidable")
-		{
-			if(collision.gameObject.name == Owner)
-			{
-				collision.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
-					Destroy(gameObject);
-			}
-
-			//VELOCITY REFLECTION:
-			if(VelocityReflection)
-			{
-				if(reflectionCount < MaxReflections)
-				{
-					Vector3 oldVelocity = rigidbody.velocity;
-      				ContactPoint contact = collision.contacts[0];
-      				Vector3 reflectedVelocity = Vector3.Reflect(oldVelocity, contact.normal);    
-      				rigidbody.velocity = reflectedVelocity;
-      				Quaternion rotation = Quaternion.FromToRotation(oldVelocity, reflectedVelocity);
-      				transform.rotation = rotation * transform.rotation;
-      			}
-      			else
-      			{
-      				rigidbody.velocity = Vector3.zero;
-      				rigidbody.angularVelocity = Vector3.zero;
-      			}
-      			reflectionCount++;
-      		}
-      		
-      		//FORCE REFLECTION:
-      		else if(ForceReflection)
-      		{
-      			if(reflectionCount < MaxReflections)
-      			{
-      				ContactPoint contact = collision.contacts[0];
-      				Vector3 reflectedForce = Vector3.Reflect(transform.right, contact.normal);
-      				rigidbody.AddForce(reflectedForce*300);
-      				Quaternion rotation = Quaternion.FromToRotation(transform.forward, reflectedForce);
-      				transform.rotation = rotation * transform.rotation;
-      			}
-      			else
-      			{
-      				rigidbody.velocity = Vector3.zero;
-      				rigidbody.angularVelocity = Vector3.zero;
-      			}
-      			reflectionCount++;
-      		}
-      		else
-      		{
-      			rigidbody.velocity = Vector3.zero;
-      			rigidbody.angularVelocity = Vector3.zero;
-      		}
-		}	
-	}*/
-
-	//Working version
-	/*void OnCollisionStay(Collision collision)
-	{
-		if(collision.gameObject.tag != "NotCollidable")
-		{
-			if(isDeadly && collision.gameObject.GetComponent<PlayerDamage>() && collision.gameObject.name != Owner)
-			{
-				collision.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
-			}
-			else if(collision.gameObject.name == Owner)
-			{
-				collision.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
-					Destroy(gameObject);
-			}
-
-			//VELOCITY REFLECTION:
-			if(VelocityReflection)
-			{
-				if(reflectionCount < MaxReflections)
-				{
-					Vector3 oldVelocity = rigidbody.velocity;
-      				ContactPoint contact = collision.contacts[0];
-      				Vector3 reflectedVelocity = Vector3.Reflect(oldVelocity, contact.normal);    
-      				rigidbody.velocity = reflectedVelocity;
-      				Quaternion rotation = Quaternion.FromToRotation(oldVelocity, reflectedVelocity);
-      				transform.rotation = rotation * transform.rotation;
-      			}
-      			else
-      			{
-      				rigidbody.velocity = Vector3.zero;
-      				rigidbody.angularVelocity = Vector3.zero;
-      			}
-      			reflectionCount++;
-      		}
-      		//FORCE REFLECTION:
-      		else if(ForceReflection)
-      		{
-      			if(reflectionCount < MaxReflections)
-      			{
-      				ContactPoint contact = collision.contacts[0];
-      				Vector3 reflectedForce = Vector3.Reflect(transform.right, contact.normal);
-      				rigidbody.AddForce(reflectedForce*300);
-      				Quaternion rotation = Quaternion.FromToRotation(transform.forward, reflectedForce);
-      				transform.rotation = rotation * transform.rotation;
-      			}
-      			else
-      			{
-      				rigidbody.velocity = Vector3.zero;
-      				rigidbody.angularVelocity = Vector3.zero;
-      			}
-      			reflectionCount++;
-      		}
-      		else
-      		{
-      			rigidbody.velocity = Vector3.zero;
-      			rigidbody.angularVelocity = Vector3.zero;
-      		}
-		}	
-	}*/
-
-	//LaserDisk continuing in the determined direction
-	/*void OnTriggerStay(Collider other)
-	{
-		lockPos = transform.position;
-		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.name != Owner)
-		{
-			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
-		}
-		else if(other.gameObject.name == Owner)
-		{
-			other.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
-				Destroy(gameObject);
-		}
-		else if(!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable")
-		{
-			rigidbody.velocity = Vector3.zero;
-      		rigidbody.angularVelocity = Vector3.zero;
-      		transform.position = lockPos;
-		}
-	}*/
 }
