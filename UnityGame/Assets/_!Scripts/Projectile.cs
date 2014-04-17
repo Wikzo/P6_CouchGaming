@@ -14,8 +14,12 @@ public class Projectile : MonoBehaviour
 	[HideInInspector]
 	public Material PMat;
 
+	[HideInInspector]
+	public GameObject OwnerObject;
+
 	private bool isDeadly = false;
 	private bool isHittingPlayer = false;
+	private bool outOfBounds = false;
 
 	private int reflectionCount = 0;
 
@@ -33,8 +37,10 @@ public class Projectile : MonoBehaviour
 	void Start () 	
 	{
 		renderer.material.color = PMat.color;
-		if(GetComponent<TrailRenderer>() != null)
-			GetComponent<TrailRenderer>().material.color = PMat.color;
+
+		Physics.IgnoreCollision(collider, OwnerObject.collider, true);
+		foreach(Transform child in transform)
+			Physics.IgnoreCollision(child.collider, OwnerObject.collider, true);
 	}
 	
 	// Update is called once per frame
@@ -73,15 +79,16 @@ public class Projectile : MonoBehaviour
 	}
 	void FixedUpdate()
 	{
+		//Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/1.7f;
 		RaycastHit hit;
-		if(Physics.Raycast(transform.position, -transform.right, out hit, transform.localScale.x/2) || Physics.Raycast(transform.position, transform.right, out hit, transform.localScale.x/2))
+		if(Physics.Raycast(transform.position-transform.right*transform.localScale.x/2, -transform.right, out hit, transform.localScale.x/2) || Physics.Raycast(transform.position+transform.right*transform.localScale.x/2, transform.right, out hit, transform.localScale.x/2))
 		{
 			lockPos = transform.position;
 
 			if(isDeadly && hit.collider.gameObject.GetComponent<PlayerDamage>() && hit.collider.gameObject.name != Owner)
 				hit.collider.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
 			
-			if(hit.collider.gameObject.name == Owner)
+			if(hit.collider.gameObject.name == Owner && outOfBounds)
 			{
 				hit.collider.gameObject.GetComponent<PlayerAim>().CurrentShotAmount++;
 					Destroy(gameObject);
@@ -92,6 +99,15 @@ public class Projectile : MonoBehaviour
       			rigidbody.angularVelocity = Vector3.zero;
       			transform.position = lockPos;
 			}
+		}
+
+		if(!collider.bounds.Intersects(OwnerObject.collider.bounds))
+		{	
+			outOfBounds = true;
+
+			Physics.IgnoreCollision(collider, OwnerObject.collider, false);
+			foreach(Transform child in transform)
+				Physics.IgnoreCollision(child.collider, OwnerObject.collider, false);
 		}
 	}
 	//Not working version
