@@ -15,14 +15,24 @@ public class MissionIntel : MissionBase
     private float counter;
     private float goalTime = 2f;
 
+    private Vector3 intelStartPosition;
+
     public override void InitializeMission(GameObject player, MissionBase Template)
     {
         base.InitializeMission(player, Template);
         counter = 0;
         this.TargetPool = Template.TargetPool; // needs to know about all potential targets (bases) to see if somebody else won before me
         SetTargetBaseAndIntel(Template);
+
     }
 
+
+    public override void TemplateSetUp()
+    {
+        base.TemplateSetUp();
+        intelStartPosition = IntelPropToSteal.transform.position;
+
+    }
     void SetTargetBaseAndIntel(MissionBase template)
     {
         if (template is MissionIntel)
@@ -90,7 +100,10 @@ public class MissionIntel : MissionBase
                                                              Target.renderer.bounds.max.y,
                                                              IntelPropToSteal.transform.position.z));
                 _missionIsActive = false;
+                IntelPropToSteal.transform.position = intelStartPosition; // reset intel position
+
                 return true;
+
             }
         }
         else

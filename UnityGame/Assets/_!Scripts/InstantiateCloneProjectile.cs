@@ -7,12 +7,14 @@ public class InstantiateCloneProjectile : MonoBehaviour
 
     private GameObject CloneProjectile;
 
-    private GameObject originalParent;
+    private GameObject originalParents;
 
     public GameObject MakeProjectileClone(GameObject parent)
     {
         CloneProjectile = (GameObject)Instantiate(ProjectileToSpawn, transform.position, Quaternion.identity);
+        CloneProjectile.name = parent.name;
         Destroy(CloneProjectile.GetComponent<TrailRenderer>());
+        //CloneProjectile.rigidbody.isKinematic = true;
 
         gameObject.AddComponent<ScreenWrapping>();
         ScreenWrapping s = gameObject.GetComponent<ScreenWrapping>();
@@ -22,7 +24,7 @@ public class InstantiateCloneProjectile : MonoBehaviour
         s.OriginalToFollow = gameObject;
         s.UseRotation = true;
 
-        originalParent = parent;
+        CloneProjectile.GetComponent<Projectile>().TwinProjectileToDestroy = parent;
 
         return CloneProjectile;
     }
@@ -32,7 +34,6 @@ public class InstantiateCloneProjectile : MonoBehaviour
     {
         if (CloneProjectile != null)
         {
-            Destroy(originalParent);
             Destroy(CloneProjectile);
         }
     }

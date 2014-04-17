@@ -13,6 +13,7 @@ public class ScreenWrapping : MonoBehaviour
     private Transform OriginalToFollowTransform;
 
     private BoxCollider cloneBoxCollider;
+    private Rigidbody cloneRigidbody;
     private bool standingAtScreenEdgeRightNow;
 
     private Camera myCam;
@@ -41,8 +42,18 @@ public class ScreenWrapping : MonoBehaviour
         if (OriginalToFollow == null)
             Debug.Log("Error. Needs to assigne OriginalToFollow to follow");
 
-        RootToDetectScreenEdgeTransform = RootToDetectScreenEdge.transform;
-        OriginalToFollowTransform = OriginalToFollow.transform;
+        if (OnlyScreenWrapNoClone)
+        {
+            RootToDetectScreenEdgeTransform = gameObject.transform;
+            OriginalToFollowTransform = gameObject.transform;
+
+        }
+        else
+        {
+            RootToDetectScreenEdgeTransform = RootToDetectScreenEdge.transform;
+            OriginalToFollowTransform = OriginalToFollow.transform;
+        }
+
 
         if (myCam == null)
             Debug.Log("Error. Needs to assigne main camera for screen wrapping!");
@@ -55,8 +66,15 @@ public class ScreenWrapping : MonoBehaviour
 
         if (Clone.GetComponent<BoxCollider>() != null)
             cloneBoxCollider = Clone.GetComponent<BoxCollider>();
-        else
-            Debug.Log("Has no trigger attached");
+        //else
+          //  Debug.Log("Has no trigger attached");
+
+        if (Clone.GetComponent<Rigidbody>() != null)
+           cloneRigidbody = Clone.GetComponent<Rigidbody>();
+        //else
+          //  Debug.Log("Has no rigidbody attached");
+
+        
 
     }
 
@@ -92,7 +110,8 @@ public class ScreenWrapping : MonoBehaviour
             RootToDetectScreenEdgeTransform.position = new Vector3(RootToDetectScreenEdgeTransform.position.x, leftSidePosWorldPoint.y - RootToDetectScreenEdgeTransform.localScale.y / 2, RootToDetectScreenEdgeTransform.position.z);
         }
 
-        Clone.renderer.enabled = OriginalToFollow.renderer.enabled;
+        if(Clone != null)
+            Clone.renderer.enabled = OriginalToFollow.renderer.enabled;
 
         // show clone
         if (OnlyScreenWrapNoClone)
@@ -145,10 +164,12 @@ public class ScreenWrapping : MonoBehaviour
 
         if (!standingAtScreenEdgeRightNow)
         {
-            
+
 
             if (cloneBoxCollider != null)
+            {
                 cloneBoxCollider.isTrigger = true; // dont collide with yourself
+            }
 
             Clone.transform.position = OriginalToFollowTransform.position;
         }
