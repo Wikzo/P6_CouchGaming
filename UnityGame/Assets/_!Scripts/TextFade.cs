@@ -45,7 +45,7 @@ public class TextFade : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (true)
+        if (GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
         {
             shouldFade = false;
             Player[] players = new Player[4];
