@@ -377,8 +377,8 @@ public abstract class MissionBase : MonoBehaviour
 
     public void OnGUI()
     {
-        if (isInstanceMission && GameManager.Instance.PlayingState == PlayingState.PraticeMode && ShowMissionGUI)
-        //if (isInstanceMission && GameManager.Instance.DebugMode)
+        //if (isInstanceMission && GameManager.Instance.PlayingState == PlayingState.PraticeMode && ShowMissionGUI)
+        if (isInstanceMission && GameManager.Instance.DebugMode)
         {
 
             // TODO: fix offset

@@ -16,10 +16,10 @@ public class PlayerAim : MonoBehaviour
 	[HideInInspector]
 	public float CurrentShotAmount;
 
-	public GameObject ProjectileObj;
-
 	[HideInInspector]
-	public GameObject Projectile;
+	public GameObject ProjectileOriginalObject;
+
+    public GameObject ProjectilePrefab;
 
 	private float chargeTimer = 0;
 
@@ -126,6 +126,7 @@ public class PlayerAim : MonoBehaviour
 		}
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
+<<<<<<< HEAD
 			Projectile = Instantiate(ProjectileObj, pTran.position, Quaternion.identity) as GameObject;
 			Projectile.GetComponent<Projectile>().Owner = name;
 			Projectile.GetComponent<Projectile>().OwnerObject = gameObject;
@@ -142,6 +143,32 @@ public class PlayerAim : MonoBehaviour
 			//addPhysics = true;
 			//Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
 			//Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
+=======
+            // original projectile
+            ProjectileOriginalObject = Instantiate(ProjectilePrefab, aimTran.position + aimTran.forward * ProjectilePrefab.transform.localScale.x, Quaternion.identity) as GameObject;
+            Projectile projectileOriginalScript = ProjectileOriginalObject.GetComponent<Projectile>();
+            projectileOriginalScript.Owner = name;
+            projectileOriginalScript.PMat = renderer.material;
+            ProjectileOriginalObject.transform.right = aimTran.forward;
+			addPhysics = true;
+
+            // clone projectile (for screen wrapping)
+            if (ProjectileOriginalObject.GetComponent<InstantiateCloneProjectile>() != null)
+		    {
+                GameObject cloneObject = ProjectileOriginalObject.GetComponent<InstantiateCloneProjectile>().MakeProjectileClone(ProjectileOriginalObject); // used to make screen wrapping clone
+                Projectile cloneScript = cloneObject.GetComponent<Projectile>();
+                cloneScript.Owner = name;
+                cloneScript.PMat = renderer.material;
+                cloneObject.transform.right = aimPivotTran.forward;
+
+                projectileOriginalScript.TwinProjectileToDestroy = cloneObject;
+                cloneScript.TwinProjectileToDestroy = ProjectileOriginalObject;
+
+		    }
+
+		    //Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
+		    //Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
+>>>>>>> c9e84e5bd45ec6df2e4fbd80574fd2e6abe67ac6
 		}
 		else
 		{
@@ -168,7 +195,7 @@ public class PlayerAim : MonoBehaviour
 	{
 		if(addPhysics)
 		{
-			Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
+            ProjectileOriginalObject.rigidbody.velocity = aimTran.forward * ShotForce * chargeTimer;
 			
 			chargeTimer = 0;
 			CurrentShotAmount -= 1;

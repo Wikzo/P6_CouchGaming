@@ -127,7 +127,7 @@ public class Player : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-        // reset whole game - DEBUG
+	    // reset whole game - DEBUG
         if (GameManager.Instance.DebugMode && PlayerControllerState.ButtonDownBack)
            GameManager.Instance.ResetWholeGame();
 
@@ -224,8 +224,8 @@ public class Player : MonoBehaviour
 		rigidbody.angularVelocity = Vector3.zero;
 
 		playerAim.CurrentShotAmount = playerAim.ShotAmount;
-		if(playerAim.Projectile != null)
-        	Destroy(playerAim.Projectile);
+        if (playerAim.ProjectileOriginalObject != null)
+            Destroy(playerAim.ProjectileOriginalObject);
 
 		yield return new WaitForSeconds(DeathTime);
 		Respawn();
@@ -253,8 +253,8 @@ public class Player : MonoBehaviour
         rigidbody.angularVelocity = Vector3.zero;
 
         playerAim.CurrentShotAmount = playerAim.ShotAmount;
-        if(playerAim.Projectile != null)
-        	Destroy(playerAim.Projectile);
+        if (playerAim.ProjectileOriginalObject != null)
+            Destroy(playerAim.ProjectileOriginalObject);
 
 
         if (resetCounter != 1) // 
