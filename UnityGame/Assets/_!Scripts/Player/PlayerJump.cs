@@ -51,7 +51,14 @@ public class PlayerJump : MonoBehaviour {
 		RaycastHit hit;
 		if(Physics.Raycast(pTran.position, Vector3.down, out hit, pTran.localScale.y/2) || Physics.Raycast(leftPos, Vector3.down, out hit, pTran.localScale.y/2) || Physics.Raycast(rightPos, Vector3.down, out hit, pTran.localScale.y/2))
 		{
-			if(hit.collider.gameObject.tag != "NotCollidable")
+			bool ownProjInBounds = false;
+
+			GameObject hitObject = hit.collider.gameObject;
+
+			//if(hitObject.tag == "Projectile" && hitObject.GetComponent<Projectile>().Owner == gameObject.name && hitObject.GetComponent<Projectile>().OutOfBounds == false)
+			//	ownProjInBounds = true;
+
+			if(hitObject.tag != "NotCollidable")
 			{
 				CanJump = true;
 				boostJumpsAmount = 0;

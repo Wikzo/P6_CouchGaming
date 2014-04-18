@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 
+//TODO: Remove collisions when player has intel equipped
 [RequireComponent(typeof(AudioSource))]
 public class MissionIntel : MissionBase
 {

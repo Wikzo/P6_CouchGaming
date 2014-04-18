@@ -53,15 +53,12 @@ public class PlayerDamage : MonoBehaviour
 		}*/
 	}
 
-	public void CalculateDeath(string killObjectTag, string objectOwner)
+	public void CalculateDeath(string objectOwner)
 	{
-		if(playerScript.PState == PlayerState.Alive)
+		if(playerScript.PState == PlayerState.Alive && shieldEnabled == false)
 		{	
-			if(killObjectTag == "Projectile" && shieldEnabled == false)
-			{
-				playerScript.KilledBy = objectOwner;
-				StartCoroutine(playerScript.Die());
-			}
+			playerScript.KilledBy = objectOwner;
+			StartCoroutine(playerScript.Die());
 		}
 	}
 }

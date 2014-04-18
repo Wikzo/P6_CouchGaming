@@ -35,14 +35,26 @@ public class Projectile : MonoBehaviour
 		set{owner = value;}
 	}
 
+	public bool OutOfBounds
+	{
+		get{return outOfBounds;}
+		set{outOfBounds = value;}
+	}
+
 	// Use this for initialization
 	void Start () 	
 	{
 		renderer.material.color = PMat.color;
 
-		Physics.IgnoreCollision(collider, OwnerObject.collider, true);
+		Physics.IgnoreCollision(collider, OwnerObject.collider, true); //Make sure that the player's physics are not affected by the collider of the projectile
+		gameObject.tag = "NotCollidable"; //Make sure that the player's raycasting in playerMove and playerJump is not affected by the collider of the projectile
 		foreach(Transform child in transform)
+		{
+			Physics.IgnoreCollision(collider, child.collider, true);
 			Physics.IgnoreCollision(child.collider, OwnerObject.collider, true);
+
+			child.gameObject.tag = "NotCollidable";
+		}
 	}
 	
 	// Update is called once per frame
@@ -82,12 +94,16 @@ public class Projectile : MonoBehaviour
 	{
 		if(!collider.bounds.Intersects(OwnerObject.collider.bounds))
 		{	
-			outOfBounds = true;
+			OutOfBounds = true;
 
 			Physics.IgnoreCollision(collider, OwnerObject.collider, false);
+			gameObject.tag = "Projectile";
 			foreach(Transform child in transform)
 			{
+				Physics.IgnoreCollision(collider, child.collider, false);
 				Physics.IgnoreCollision(child.collider, OwnerObject.collider, false);
+
+				child.gameObject.tag = "Untagged";
 			}			
 		}
 	}
@@ -97,9 +113,9 @@ public class Projectile : MonoBehaviour
 		lockPos = transform.position;
 
 		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != Owner)
-			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(tag, Owner);
+			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(Owner);
 		
-		if(other.gameObject.tag == Owner && outOfBounds)
+		if(other.gameObject.tag == Owner && OutOfBounds)
 		{
 			if(other.gameObject.GetComponent<PlayerAim>())
 				DestroyProjectileAndTwin(other.gameObject.GetComponent<PlayerAim>());

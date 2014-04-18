@@ -32,7 +32,8 @@ public class PlayerAim : MonoBehaviour
 	private Transform aimTran;
 	private Transform chargeBar;
 
-	private Player playerScript;
+	[HideInInspector]
+	public Player playerScript;
 	private PlayerMove playerMove;
 	private PlayerJump playerJump;
 

@@ -176,7 +176,7 @@ GameObject:
   - 114: {fileID: 46133047}
   m_Layer: 0
   m_Name: P1_Clone
-  m_TagString: Finish
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -575,7 +575,7 @@ Prefab:
       objectReference: {fileID: 966471459}
     - target: {fileID: 100014, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
       propertyPath: m_TagString
-      value: Player
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 100014, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
       propertyPath: m_Name
@@ -1647,6 +1647,7 @@ MonoBehaviour:
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
   ProjectilePrefab: {fileID: 100000, guid: 1a41cc082fc35af408482493c02cc951, type: 2}
+  playerScript: {fileID: 0}
 --- !u!114 &258189785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,6 +1678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundMoveSpeed: 10
   AirMoveSpeed: 8
+  WallCheckRayLength: .100000001
   movingLeft: 0
   movingRight: 0
 --- !u!114 &258189787
@@ -3808,6 +3810,7 @@ MonoBehaviour:
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
   ProjectilePrefab: {fileID: 100000, guid: 6dae4c0f3d973a849b2ed874609c745e, type: 2}
+  playerScript: {fileID: 0}
 --- !u!114 &574215421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3838,6 +3841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundMoveSpeed: 10
   AirMoveSpeed: 8
+  WallCheckRayLength: .100000001
   movingLeft: 0
   movingRight: 0
 --- !u!114 &574215423
@@ -9566,7 +9570,7 @@ GameObject:
   - 114: {fileID: 1333197880}
   m_Layer: 0
   m_Name: P1
-  m_TagString: Player
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9585,6 +9589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundMoveSpeed: 10
   AirMoveSpeed: 8
+  WallCheckRayLength: .100000001
   movingLeft: 0
   movingRight: 0
 --- !u!23 &1333197868
@@ -9679,6 +9684,7 @@ MonoBehaviour:
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
   ProjectilePrefab: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+  playerScript: {fileID: 0}
 --- !u!114 &1333197874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14320,6 +14326,7 @@ MonoBehaviour:
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
   ProjectilePrefab: {fileID: 100000, guid: 993d474b2bfb13c419aff1a7d35a6e26, type: 2}
+  playerScript: {fileID: 0}
 --- !u!114 &1898107644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14350,6 +14357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GroundMoveSpeed: 10
   AirMoveSpeed: 8
+  WallCheckRayLength: .100000001
   movingLeft: 0
   movingRight: 0
 --- !u!114 &1898107646
@@ -14562,7 +14570,7 @@ Prefab:
       objectReference: {fileID: 1333197866}
     - target: {fileID: 100000, guid: 499f4316884454041a2033a6d9ec14cd, type: 2}
       propertyPath: m_TagString
-      value: Finish
+      value: Player1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 499f4316884454041a2033a6d9ec14cd, type: 2}
       propertyPath: m_Name

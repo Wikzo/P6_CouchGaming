@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
 	public float GroundMoveSpeed = 3;
 	public float AirMoveSpeed = 2;
+	public float WallCheckRayLength = 0.1f;
 
 	[HideInInspector]
 	public bool movingLeft = false;
@@ -72,6 +73,7 @@ public class PlayerMove : MonoBehaviour
 				MovingRight = false;
 			}
 		}
+		//Debug.DrawRay(pTran.position+pTran.forward*pTran.localScale.x/2, pTran.forward);
 	}
 
 	//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
@@ -83,14 +85,16 @@ public class PlayerMove : MonoBehaviour
 		RaycastHit hit;
 
 		//Check if we are walking into something
-		if(Physics.Raycast(pTran.position, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(upPos, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(downPos, pTran.forward, out hit, pTran.localScale.x/2))
+		if(Physics.Raycast(pTran.position+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, WallCheckRayLength) || Physics.Raycast(upPos+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, WallCheckRayLength) || Physics.Raycast(downPos+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, WallCheckRayLength))
 		{
-			if(hit.collider.gameObject.tag == "NotCollidable")
+			GameObject hitObject = hit.collider.gameObject;
+			if(hitObject.tag == "NotCollidable"
+			/*|| hitObject.tag == "Projectile" && hitObject.GetComponent<Projectile>().Owner == gameObject.name && hitObject.GetComponent<Projectile>().OutOfBounds == false*/)
 				isMovingIntoObject = false;
 			else
 				isMovingIntoObject = true;
 		}
-		else if(!Physics.Raycast(pTran.position, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(upPos, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(downPos, pTran.forward, pTran.localScale.x/2))
+		else if(!Physics.Raycast(pTran.position+pTran.forward*pTran.localScale.x/2, pTran.forward, WallCheckRayLength) && !Physics.Raycast(upPos+pTran.forward*pTran.localScale.x/2, pTran.forward, WallCheckRayLength) && !Physics.Raycast(downPos+pTran.forward*pTran.localScale.x/2, pTran.forward, WallCheckRayLength))
 			isMovingIntoObject = false;	
 
 		
