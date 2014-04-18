@@ -26,6 +26,7 @@ public class ScreenWrapping : MonoBehaviour
     public bool UseRotation;
     public bool UseScale;
     public bool IsAlwaysTrigger;
+    private bool UseColor = true;
 
     // Use this for initialization
     private void Start()
@@ -159,13 +160,15 @@ public class ScreenWrapping : MonoBehaviour
         if (UseRotation)
             Clone.transform.rotation = OriginalToFollowTransform.rotation;
 
+        if (UseColor)
+            Clone.transform.renderer.material.color = OriginalToFollow.renderer.material.color;
+
+
         if (cloneBoxCollider != null && IsAlwaysTrigger)
             cloneBoxCollider.isTrigger = true;
 
         if (!standingAtScreenEdgeRightNow)
         {
-
-
             if (cloneBoxCollider != null)
             {
                 cloneBoxCollider.isTrigger = true; // dont collide with yourself

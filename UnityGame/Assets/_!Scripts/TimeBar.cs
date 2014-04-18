@@ -27,11 +27,10 @@ public class TimeBar : MonoBehaviour
     {
         totalLength = (GameManager.Instance.TimePerRound / BarRatio) - (BarRatio / (GameManager.Instance.TimePerRound / BarRatio));
         currentLength = (GameManager.Instance.TimeLeft / BarRatio) - (BarRatio / (GameManager.Instance.TimeLeft / BarRatio));
-        
         if (BarRatio <= 0)
             Debug.Log("ERROR - time bar ratio cannot be lower than zero!");
 
-        BarPosition = new Vector2(Screen.width/2, Screen.height / YOffset);
+        BarPosition = new Vector2(Screen.width / 2, Screen.height / YOffset);
 
         for (int i = TimeMarks.Count - 1; i >= 0; i--)
         {

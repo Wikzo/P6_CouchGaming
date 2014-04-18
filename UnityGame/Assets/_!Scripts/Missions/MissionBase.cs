@@ -279,8 +279,8 @@ public abstract class MissionBase : MonoBehaviour
                     MissionManager.Instance.PracticeControllerRumbleGUI(GameManager.Instance.GUIRumbleCounter - 1);
                 else if (PracticeHUDRumble)
                     MissionManager.Instance.PracticeMissionHUDRumble(this.MissionIDRumble - 1);
-
             }
+            
 
         }
         else if (missionTimeCounter < interval * 3)
