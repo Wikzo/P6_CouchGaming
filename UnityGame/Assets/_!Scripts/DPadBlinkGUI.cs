@@ -46,6 +46,7 @@ public class DPadBlinkGUI : MonoBehaviour
             {
                 timer = 0;
                 blinkRender.enabled = !blinkRender.enabled;
+                gameObject.renderer.enabled = !blinkRender.enabled;
             }
         }
 

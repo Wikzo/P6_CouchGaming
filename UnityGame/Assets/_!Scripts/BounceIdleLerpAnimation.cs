@@ -4,7 +4,7 @@ using System.Collections;
 public class BounceIdleLerpAnimation : MonoBehaviour
 {
     private Vector3 start;
-    private float Offset = 0.2f;
+    public float Offset = 0.2f;
 
     // Use this for initialization
     private void Start()

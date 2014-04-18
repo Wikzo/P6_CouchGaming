@@ -56,8 +56,9 @@ public class TextFade : MonoBehaviour
 
                 ScoreText[i] = string.Format("{0} points: {1}", players[i].Name, players[i].Points);
 
-
-                ScoreStylesColor[i].normal.textColor = players[i].PlayerColor;
+                Color playerColorWithZeroAlpha = players[i].PlayerColor;
+                Color colorToUse = new Color(playerColorWithZeroAlpha.r, playerColorWithZeroAlpha.g, playerColorWithZeroAlpha.b, 255);
+                ScoreStylesColor[i].normal.textColor = colorToUse;// players[i].PlayerColor;
 
 
             }

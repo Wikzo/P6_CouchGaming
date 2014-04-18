@@ -119,6 +119,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        PlayerColor = renderer.material.color;
     	respawnIdleTimer = RespawnIdleTime;
         resetCounter = 0;
         Reset();

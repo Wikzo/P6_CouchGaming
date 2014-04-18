@@ -27,20 +27,21 @@ public class MissionDefend : MissionBase
         {
             deadlineTime = Random.Range(GameManager.Instance.TimeLeft - minIntervalForDeadline,
                                     GameManager.Instance.TimeLeft - maxIntervalForDeadline);
-
             tries++;
+            
         }
-        /*else if (tries >= 10)
+
+        if (deadlineTime <= 0) // get new mission
         {
-            deadlineTime = 0;
-            Debug.Log("Time is set to zero! " + this);
-        }*/
-
-        StuffToShowInGUI = "Deadline: " + deadlineTime.ToString();
-
-        GameManager.Instance.TimeBar.TimeMarks.Add(deadlineTime);
-
-        targetHasNotDiedYet = true;
+            //Debug.Log(this.Player + " Not enough time for defend mission. Getting new mission instead...");
+            MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
+        }
+        else // add mission timer mark
+        {
+            GameManager.Instance.TimeBar.TimeMarks.Add(deadlineTime);
+            StuffToShowInGUI = "Deadline: " + deadlineTime.ToString();
+            targetHasNotDiedYet = true;
+        }
 
     }
 

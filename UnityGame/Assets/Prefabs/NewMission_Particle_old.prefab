@@ -12,7 +12,7 @@ GameObject:
   - 199: {fileID: 19900000}
   - 114: {fileID: 11400000}
   m_Layer: 0
-  m_Name: NewMission_Particle
+  m_Name: NewMission_Particle_old
   m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,6 +41,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerToFollow: {fileID: 0}
+  CloneToUse: {fileID: 0}
 --- !u!198 &19800000
 ParticleSystem:
   m_ObjectHideFlags: 1

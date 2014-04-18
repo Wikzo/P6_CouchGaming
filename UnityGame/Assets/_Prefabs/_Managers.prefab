@@ -342,14 +342,28 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   AllObjectsToReset: []
-  NumberOfRoundsPerGame: 5
+  NumberOfRoundsPerGame: 6
   CurrentRound: 0
   WaitForReady: 1
+  TimePerRound: 100
+  TimeLeft: 0
   CurrentRoundJustEnded: 0
   PlayingState: 0
   HasPlayedAtLeastOnce: 0
   TargetChosenSoFar: 
+  MissionInitializedParticles: {fileID: 100004, guid: 4d16329d24757ce4ca0b0d7a9ce3b146,
+    type: 2}
   DebugMode: 1
+  GUIRumbleCounter: 1
+  ControllerGUIToRumble: {fileID: 0}
+  RumbleStepsGUI:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  GUIMissionHud: {fileID: 0}
+  TimeBar: {fileID: 0}
+  MainLight: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -375,6 +389,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  TargetHuds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ChanceOfGettingUniqueMissions: 5
 --- !u!114 &11400006
 MonoBehaviour:
@@ -387,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9044801350130824ea9344476a716f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 10
+  Points: 1
   Player: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
@@ -395,7 +414,10 @@ MonoBehaviour:
   HowToChooseTarget: 1
   MissionMaterial: {fileID: 2100000, guid: 40fbacd733175e94fac6108293e47781, type: 2}
   MissionIDRumble: 0
-  MissionDescription: Defend PLAYER
+  RumblePractice: 0
+  ShowMissionGUI: 0
+  HasHeardMissionRumble: 0
+  MissionDescription: Defend PLAYER time
   DebugShowCurrentMission: 0
 --- !u!114 &11400008
 MonoBehaviour:
@@ -433,7 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a2f7cf7cd9c484499467f2b9c208e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 6
+  Points: 1
   Player: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
@@ -441,6 +463,9 @@ MonoBehaviour:
   HowToChooseTarget: 0
   MissionMaterial: {fileID: 2100000, guid: 70222324cc54a744dbdb8397274dcac0, type: 2}
   MissionIDRumble: 0
+  RumblePractice: 0
+  ShowMissionGUI: 0
+  HasHeardMissionRumble: 0
   MissionDescription: Stay in ZONE
   DebugShowCurrentMission: 0
   ZoneAreas:
@@ -474,14 +499,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec3a90ed372322408a035c0482bc495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 4
+  Points: 1
   Player: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 0
-  HowToChooseTarget: 1
+  HowToChooseTarget: 2
   MissionMaterial: {fileID: 2100000, guid: b0676b0a8118d584b8a1801ca52f4326, type: 2}
   MissionIDRumble: 0
+  RumblePractice: 0
+  ShowMissionGUI: 0
+  HasHeardMissionRumble: 0
   MissionDescription: Kill PLAYER
   DebugShowCurrentMission: 0
 --- !u!114 &11400020
@@ -507,7 +535,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202eb986c43a6824f99df8b20cbce108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 7
+  Points: 1
   Player: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
@@ -515,6 +543,9 @@ MonoBehaviour:
   HowToChooseTarget: 0
   MissionMaterial: {fileID: 2100000, guid: f45df0794cc3d124cb328ae3fb9e3216, type: 2}
   MissionIDRumble: 0
+  RumblePractice: 0
+  ShowMissionGUI: 0
+  HasHeardMissionRumble: 0
   MissionDescription: Move intel to BASE
   DebugShowCurrentMission: 0
   IntelPropToSteal: {fileID: 0}
@@ -531,6 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetList:
+  - {fileID: 0}
   - {fileID: 0}
   IntelToSteal: {fileID: 0}
 --- !u!1001 &100100000

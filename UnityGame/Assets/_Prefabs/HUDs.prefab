@@ -1209,7 +1209,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100038}
   m_LocalRotation: {x: 3.09086232e-08, y: .707106829, z: -.707106829, w: -3.09086232e-08}
-  m_LocalPosition: {x: -15.2496929, y: .106669664, z: 2.02882695}
+  m_LocalPosition: {x: -15.249733, y: .166312814, z: 2.02883053}
   m_LocalScale: {x: .37200132, y: .530457556, z: .530457556}
   m_Children:
   - {fileID: 400056}
@@ -1473,7 +1473,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100082}
   m_LocalRotation: {x: 3.09086232e-08, y: .707106829, z: -.707106829, w: -3.09086232e-08}
-  m_LocalPosition: {x: -7.96582937, y: .106660038, z: 2.02882695}
+  m_LocalPosition: {x: -7.9657793, y: .166303158, z: 2.02883053}
   m_LocalScale: {x: .37200132, y: .530457556, z: .530457556}
   m_Children:
   - {fileID: 400026}
@@ -1522,7 +1522,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100090}
   m_LocalRotation: {x: 3.09086232e-08, y: .707106829, z: -.707106829, w: -3.09086232e-08}
-  m_LocalPosition: {x: -20.6982193, y: .106666192, z: 2.02882695}
+  m_LocalPosition: {x: -20.6983471, y: .166309193, z: 2.02883053}
   m_LocalScale: {x: .37200132, y: .530457556, z: .530457556}
   m_Children:
   - {fileID: 400024}
@@ -1578,7 +1578,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100100}
   m_LocalRotation: {x: 3.09086232e-08, y: .707106829, z: -.707106829, w: -3.09086232e-08}
-  m_LocalPosition: {x: -2.53494263, y: .106663704, z: 2.02882695}
+  m_LocalPosition: {x: -2.53481913, y: .16630666, z: 2.02883053}
   m_LocalScale: {x: .37200132, y: .530457556, z: .530457556}
   m_Children:
   - {fileID: 400042}
@@ -1633,7 +1633,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -1696,7 +1696,7 @@ Renderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_LightmapIndex: 255
@@ -3616,7 +3616,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillTexture: {fileID: 2800000, guid: 8e72a36f537469b4f87b9626c09a13a0, type: 3}
   backgroundTexture: {fileID: 2800000, guid: 31ddd09353522874b87e7593c15baedd, type: 3}
+  DefendMarkTexture: {fileID: 2800000, guid: fa36dd861349d6e4aa168f00e5887efd, type: 3}
   BarHeight: 10
+  TimeMarks: []
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

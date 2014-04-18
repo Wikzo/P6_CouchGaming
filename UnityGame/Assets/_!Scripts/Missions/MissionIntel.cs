@@ -15,8 +15,6 @@ public class MissionIntel : MissionBase
     private float counter;
     private float goalTime = 2f;
 
-    private Vector3 intelStartPosition;
-
     public override void InitializeMission(GameObject player, MissionBase Template)
     {
         base.InitializeMission(player, Template);
@@ -30,8 +28,6 @@ public class MissionIntel : MissionBase
     public override void TemplateSetUp()
     {
         base.TemplateSetUp();
-        intelStartPosition = IntelPropToSteal.transform.position;
-
     }
     void SetTargetBaseAndIntel(MissionBase template)
     {
@@ -96,11 +92,8 @@ public class MissionIntel : MissionBase
             {
                 audio.Stop();
 
-                PickUpObject.GoToBaseAndStayIdle(new Vector3(IntelPropToSteal.transform.position.x,
-                                                             Target.renderer.bounds.max.y,
-                                                             IntelPropToSteal.transform.position.z));
+                PickUpObject.GoToBaseAndStayIdle();
                 _missionIsActive = false;
-                IntelPropToSteal.transform.position = intelStartPosition; // reset intel position
 
                 return true;
 

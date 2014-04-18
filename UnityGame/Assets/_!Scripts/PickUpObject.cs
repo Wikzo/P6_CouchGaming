@@ -8,10 +8,23 @@ public class PickUpObject : MonoBehaviour
     public Vector3 Offset = new Vector3(0, 0.9f, 0);
     public GameObject PlayerToFollow;
 
+    Vector3 StartPosition;
+
+    string tagToLookFor = "Player";
+    public GameObject RenderObject;
+
     // idle times (when it has been placed and is currently inactive for some seconds)
     private bool Idle = false;
     private float IdleBlinkRate = 0.5f;
     private float IdleBlinkTimeTotal = 3f;
+
+    void Start()
+    {
+        if (RenderObject == null)
+            Debug.Log("ERROR - needs render object (child)");
+
+        StartPosition = transform.position;
+    }
   
     //TODO: consider if using OnTrigger instead
     void OnCollisionEnter(Collision col)
@@ -22,7 +35,7 @@ public class PickUpObject : MonoBehaviour
         if (IsPickedUpRightNow) // can only be picked up once at a time
             return;
 
-        if (col.gameObject.tag == "Player")
+        if (col.gameObject.tag.Contains(tagToLookFor))
         {
             if (col.gameObject.GetComponent<Player>().PState == PlayerState.Alive) // only works on living players
             {
@@ -59,7 +72,7 @@ public class PickUpObject : MonoBehaviour
         if (Idle)
         {
             float lerp = Mathf.PingPong(Time.time, IdleBlinkRate) / IdleBlinkRate;
-            renderer.material.color = Color.Lerp(Color.white, Color.black, lerp);
+            RenderObject.renderer.material.color = Color.Lerp(Color.white, Color.black, lerp);
         }
     }
 
@@ -73,10 +86,10 @@ public class PickUpObject : MonoBehaviour
         gameObject.collider.isTrigger = false;
         rigidbody.isKinematic = false;
         rigidbody.useGravity = true;
-        renderer.material.color = Color.white;
+        RenderObject.renderer.material.color = Color.white;
     }
 
-    public void GoToBaseAndStayIdle(Vector3 pos)
+    public void GoToBaseAndStayIdle()
     {
         CanBeUsedRightNow = false;
         gameObject.collider.isTrigger = true;
@@ -85,7 +98,7 @@ public class PickUpObject : MonoBehaviour
         rigidbody.isKinematic = true;
         rigidbody.useGravity = false;
 
-        transform.position = pos + new Vector3(0, transform.localScale.y / 2, 0);
+        transform.position = StartPosition;
         StartCoroutine(BecomeIdle());
 
 

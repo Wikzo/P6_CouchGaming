@@ -111,6 +111,8 @@ public abstract class MissionBase : MonoBehaviour
 
         GameObject Particles = (GameObject)Instantiate(GameManager.Instance.MissionInitializedParticles);
         Particles.GetComponent<MissionParticle>().PlayerToFollow = this;
+        GameObject ParticlesClone = (GameObject)Instantiate(GameManager.Instance.MissionInitializedParticles);
+        Particles.GetComponent<MissionParticle>().SetUpParticleClone(ParticlesClone, this.Player);
 
         HasHeardMissionRumble = false;
 
@@ -281,7 +283,6 @@ public abstract class MissionBase : MonoBehaviour
                     MissionManager.Instance.PracticeMissionHUDRumble(this.MissionIDRumble - 1);
             }
             
-
         }
         else if (missionTimeCounter < interval * 3)
         {
@@ -365,6 +366,7 @@ public abstract class MissionBase : MonoBehaviour
 
     public void GivePointsToPlayer()
     {
+        HasHeardMissionRumble = true;
         this.PlayerScript.Points += this.Points;
 
         MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
@@ -372,6 +374,7 @@ public abstract class MissionBase : MonoBehaviour
 
     public virtual void DestroyMission()
     {
+        HasHeardMissionRumble = true;
         DestroyImmediate(this);
     }
 
