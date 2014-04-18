@@ -98,17 +98,19 @@ public class PlayerMove : MonoBehaviour
 		{
 			if(playerJump.CanJump)
 			{
-				rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*GroundMoveSpeed);
+				//rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*GroundMoveSpeed);
+				pTran.Translate(direction*Time.deltaTime*GroundMoveSpeed, Space.World);
 				rigidbody.drag = 0;
 			}
 			else //Give the player a different movement speed if he is in the air
 			{
-				rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*AirMoveSpeed);
+				//rigidbody.MovePosition(rigidbody.position + direction*Time.deltaTime*AirMoveSpeed);
+				pTran.Translate(direction*Time.deltaTime*AirMoveSpeed, Space.World);
 				rigidbody.drag = 1;
 			}
 			if(direction == Vector3.right)
 				MovingRight = true;
-			else
+			else if(direction == Vector3.left)
 			{
 				MovingLeft = true;
 			}

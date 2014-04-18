@@ -90,7 +90,6 @@ public class PlayerJump : MonoBehaviour {
 	//TODO: Fix so it's the same velocity for each jump
 	public void Jump()
 	{
-		//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
 		//rigidbody.AddForce(Vector3.up*JumpForce, ForceMode.VelocityChange);
 		rigidbody.velocity = new Vector3(0,JumpForce,0);
 
@@ -98,7 +97,6 @@ public class PlayerJump : MonoBehaviour {
 	}
 	public void BoostJump()
 	{
-		//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
 		//rigidbody.AddForce(Vector3.up*BoostJumpForce, ForceMode.VelocityChange);
 		rigidbody.velocity = new Vector3(0, BoostJumpForce, 0);
 

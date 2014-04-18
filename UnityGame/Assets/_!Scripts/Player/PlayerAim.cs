@@ -122,34 +122,36 @@ public class PlayerAim : MonoBehaviour
 					//Give the position an offset, so the bar is positioned outside of the player and then add its scale to make it charge in one direction.
 					chargeBar.position = new Vector3(pTran.position.x-pTran.localScale.x/2+chargeBar.localScale.x, pTran.position.y+pTran.localScale.y/2+chargeBar.localScale.y, pTran.position.z);	
 				}			
-			}			
+			}		
 		}
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
             // original projectile
-            ProjectileOriginalObject = Instantiate(ProjectilePrefab, aimTran.position + aimTran.forward * ProjectilePrefab.transform.localScale.x, Quaternion.identity) as GameObject;
+            ProjectileOriginalObject = Instantiate(ProjectilePrefab, pTran.position, Quaternion.identity) as GameObject;
             Projectile projectileOriginalScript = ProjectileOriginalObject.GetComponent<Projectile>();
-            projectileOriginalScript.Owner = name;
+            projectileOriginalScript.Owner = gameObject.tag;
+            projectileOriginalScript.OwnerObject = gameObject;
             projectileOriginalScript.PMat = renderer.material;
             ProjectileOriginalObject.transform.right = aimTran.forward;
 			addPhysics = true;
+
+			//Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
+		    //Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
 
             // clone projectile (for screen wrapping)
             if (ProjectileOriginalObject.GetComponent<InstantiateCloneProjectile>() != null)
 		    {
                 GameObject cloneObject = ProjectileOriginalObject.GetComponent<InstantiateCloneProjectile>().MakeProjectileClone(ProjectileOriginalObject); // used to make screen wrapping clone
                 Projectile cloneScript = cloneObject.GetComponent<Projectile>();
-                cloneScript.Owner = name;
+                cloneScript.Owner = gameObject.tag;
+                cloneScript.OwnerObject = gameObject;
                 cloneScript.PMat = renderer.material;
                 cloneObject.transform.right = aimPivotTran.forward;
+                cloneScript.IsOriginal = false;
 
                 projectileOriginalScript.TwinProjectileToDestroy = cloneObject;
                 cloneScript.TwinProjectileToDestroy = ProjectileOriginalObject;
-
 		    }
-
-		    //Projectile.rigidbody.velocity = aimTran.forward*ShotForce*chargeTimer;
-		    //Projectile.rigidbody.AddForce(aimTran.forward*ShotForce*chargeTimer); REMEMBER TO SET SHOTFORCE TO 200
 		}
 		else
 		{
