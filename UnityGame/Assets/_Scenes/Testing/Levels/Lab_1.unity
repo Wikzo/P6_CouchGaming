@@ -169,6 +169,7 @@ GameObject:
   - 23: {fileID: 46133044}
   - 54: {fileID: 46133043}
   - 114: {fileID: 46133042}
+  - 114: {fileID: 46133047}
   m_Layer: 0
   m_Name: P1_Pink_Clone
   m_TagString: Player
@@ -261,6 +262,19 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 46133040}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &46133047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 46133040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d1a03658882414a8b7611d42196018, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsClone: 1
+  OriginalPlayer: {fileID: 1333197866}
 --- !u!1 &64666896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1974,6 +1988,7 @@ GameObject:
   - 54: {fileID: 428892448}
   - 114: {fileID: 428892449}
   - 114: {fileID: 428892450}
+  - 114: {fileID: 428892452}
   m_Layer: 0
   m_Name: intelToSteal_USBKey
   m_TagString: Untagged
@@ -2029,7 +2044,7 @@ Transform:
   m_GameObject: {fileID: 428892442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.107479095, y: 4.72178602, z: 0}
-  m_LocalScale: {x: 2.91533566, y: 2.5104754, z: 2.91533566}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!114 &428892447
@@ -2085,6 +2100,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetIDColorState: 1
+--- !u!114 &428892452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 428892442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c6cda28e819cf43be958b9d2a79e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &462527006
 GameObject:
   m_ObjectHideFlags: 0

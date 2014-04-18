@@ -266,7 +266,7 @@ public abstract class MissionBase : MonoBehaviour
     public void MissionRumbler(float interval) // display mission (rumble)
     {
         //print("rumble " + missionRumbleCounter + " " + this);
-        HasHeardMissionRumble = true;
+        HasHeardMissionRumble = true;  // TODO: sometimes doesn't work??
         if (missionTimeCounter < interval)
         {
             missionTimeCounter += Time.deltaTime;
