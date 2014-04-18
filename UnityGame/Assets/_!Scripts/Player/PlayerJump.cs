@@ -53,12 +53,7 @@ public class PlayerJump : MonoBehaviour {
 		{
 			bool ownProjInBounds = false;
 
-			GameObject hitObject = hit.collider.gameObject;
-
-			//if(hitObject.tag == "Projectile" && hitObject.GetComponent<Projectile>().Owner == gameObject.name && hitObject.GetComponent<Projectile>().OutOfBounds == false)
-			//	ownProjInBounds = true;
-
-			if(hitObject.tag != "NotCollidable")
+			if(hit.collider.gameObject.tag != "NotCollidable")
 			{
 				CanJump = true;
 				boostJumpsAmount = 0;

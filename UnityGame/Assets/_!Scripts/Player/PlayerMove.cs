@@ -87,9 +87,7 @@ public class PlayerMove : MonoBehaviour
 		//Check if we are walking into something
 		if(Physics.Raycast(pTran.position+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, WallCheckRayLength) || Physics.Raycast(upPos+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, WallCheckRayLength) || Physics.Raycast(downPos+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, WallCheckRayLength))
 		{
-			GameObject hitObject = hit.collider.gameObject;
-			if(hitObject.tag == "NotCollidable"
-			/*|| hitObject.tag == "Projectile" && hitObject.GetComponent<Projectile>().Owner == gameObject.name && hitObject.GetComponent<Projectile>().OutOfBounds == false*/)
+			if(hit.collider.gameObject.tag == "NotCollidable")
 				isMovingIntoObject = false;
 			else
 				isMovingIntoObject = true;
