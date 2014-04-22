@@ -45,8 +45,8 @@ public class PlayerJump : MonoBehaviour {
 	public void JumpUpdate () 
 	{
 		//Rays will be cast on both sides of the player, so edges are also detected
-		Vector3 leftPos = pTran.position+Vector3.left*pTran.localScale.x/1.7f; //1.7 puts the ray further out, causing the player to make less mistakes
-		Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/1.7f;
+		Vector3 leftPos = pTran.position+Vector3.left*pTran.localScale.x/2f; //1.7 puts the ray further out, causing the player to make less mistakes
+		Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/2f;
 
 		RaycastHit hit;
 		if(Physics.Raycast(pTran.position, Vector3.down, out hit, pTran.localScale.y/2) || Physics.Raycast(leftPos, Vector3.down, out hit, pTran.localScale.y/2) || Physics.Raycast(rightPos, Vector3.down, out hit, pTran.localScale.y/2))

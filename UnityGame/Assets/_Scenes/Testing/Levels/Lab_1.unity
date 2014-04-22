@@ -593,6 +593,39 @@ Prefab:
       propertyPath: m_Size.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400004, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
+      propertyPath: Keyboard
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
+      propertyPath: m_Mass
+      value: 1.00000001e-07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500010, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea542d178328d9a418de82e86ddf428e, type: 2}
   m_RootGameObject: {fileID: 1333197866}
@@ -1738,14 +1771,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 384228541}
   m_GameObject: {fileID: 258189776}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: .0500000007
+  m_Mass: 1.00000001e-07
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &258189789
 Renderer:
   m_ObjectHideFlags: 0
@@ -1775,7 +1808,7 @@ BoxCollider:
     type: 2}
   m_PrefabInternal: {fileID: 384228541}
   m_GameObject: {fileID: 258189776}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -2517,7 +2550,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Mass
-      value: 1
+      value: 1.00000001e-07
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: IsScreenWrappingClone
@@ -2577,7 +2610,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_CollisionDetection
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6500004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
       propertyPath: m_Size.x
@@ -2591,6 +2624,23 @@ Prefab:
       propertyPath: m_Size.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500004, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 96687a9be80bbe14db92abc3549c759b, type: 2}
   m_RootGameObject: {fileID: 258189776}
@@ -2766,6 +2816,35 @@ Prefab:
       propertyPath: m_Size.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: 941f418ac551be6478cb06a7bfc06cc9, type: 2}
+      propertyPath: Keyboard
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 941f418ac551be6478cb06a7bfc06cc9, type: 2}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 941f418ac551be6478cb06a7bfc06cc9, type: 2}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 941f418ac551be6478cb06a7bfc06cc9, type: 2}
+      propertyPath: m_Mass
+      value: 1.00000001e-07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 941f418ac551be6478cb06a7bfc06cc9, type: 2}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 941f418ac551be6478cb06a7bfc06cc9, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500012, guid: 941f418ac551be6478cb06a7bfc06cc9, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 941f418ac551be6478cb06a7bfc06cc9, type: 2}
   m_RootGameObject: {fileID: 1898107635}
@@ -3906,7 +3985,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 1
+  Keyboard: 0
   PlayerColor: {r: .996078432, g: .870588243, b: .717647076, a: 1}
   IsReadyToBegin: 0
   Score: 0
@@ -3937,14 +4016,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 579502680}
   m_GameObject: {fileID: 574215412}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: .0500000007
+  m_Mass: 1.00000001e-07
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &574215425
 Renderer:
   m_ObjectHideFlags: 0
@@ -3974,7 +4053,7 @@ BoxCollider:
     type: 2}
   m_PrefabInternal: {fileID: 579502680}
   m_GameObject: {fileID: 574215412}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -4055,6 +4134,35 @@ Prefab:
       propertyPath: m_Size.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400018, guid: ba79c26932d3e814582b8a10f97bf964, type: 2}
+      propertyPath: Keyboard
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ba79c26932d3e814582b8a10f97bf964, type: 2}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ba79c26932d3e814582b8a10f97bf964, type: 2}
+      propertyPath: m_Drag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ba79c26932d3e814582b8a10f97bf964, type: 2}
+      propertyPath: m_Mass
+      value: 1.00000001e-07
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ba79c26932d3e814582b8a10f97bf964, type: 2}
+      propertyPath: m_Interpolate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: ba79c26932d3e814582b8a10f97bf964, type: 2}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: ba79c26932d3e814582b8a10f97bf964, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba79c26932d3e814582b8a10f97bf964, type: 2}
   m_RootGameObject: {fileID: 574215412}
@@ -9693,7 +9801,7 @@ BoxCollider:
     type: 2}
   m_PrefabInternal: {fileID: 71541198}
   m_GameObject: {fileID: 1333197866}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -9729,14 +9837,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 71541198}
   m_GameObject: {fileID: 1333197866}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: .0500000007
+  m_Mass: 1.00000001e-07
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1333197873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9771,7 +9879,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 0
+  Keyboard: 1
   PlayerColor: {r: .996078432, g: 0, b: .717647076, a: 1}
   IsReadyToBegin: 0
   Score: 0
@@ -14124,6 +14232,14 @@ Prefab:
       propertyPath: NumberOfRoundsPerGame
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: DebugMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: WaitForReady
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
   m_RootGameObject: {fileID: 1360649201}
@@ -14458,7 +14574,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 0
   LoFi: 0
-  Keyboard: 1
+  Keyboard: 0
   PlayerColor: {r: .996078432, g: .996078432, b: .470588237, a: 1}
   IsReadyToBegin: 0
   Score: 0
@@ -14489,14 +14605,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 435229639}
   m_GameObject: {fileID: 1898107635}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: .0500000007
+  m_Mass: 1.00000001e-07
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!23 &1898107648
 Renderer:
   m_ObjectHideFlags: 0
@@ -14526,7 +14642,7 @@ BoxCollider:
     type: 2}
   m_PrefabInternal: {fileID: 435229639}
   m_GameObject: {fileID: 1898107635}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
