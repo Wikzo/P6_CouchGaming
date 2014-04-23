@@ -24,6 +24,7 @@ public class PlayerMove : MonoBehaviour
 	private Quaternion startRotation;
 	private Vector3 pForwardDir;
 
+	private ForwardCollider forwardCollider;
 
 	public bool CanMove
 	{
@@ -49,34 +50,42 @@ public class PlayerMove : MonoBehaviour
 		playerScript = GetComponent<Player>();
 		playerJump = GetComponent<PlayerJump>();
 
+		if(transform.Find("ForwardCollider").GetComponent<ForwardCollider>() != null)
+			forwardCollider = transform.Find("ForwardCollider").GetComponent<ForwardCollider>();
+		else
+			print("ForwardCollider is needed on " + name);
+
 		startRotation = pTran.rotation;
 	}
 	
 	// Update is called once per frame
 	public void MoveUpdate () 
 	{
-		Vector3 upPos = pTran.position+Vector3.up*pTran.localScale.y/2;
-		Vector3 downPos = pTran.position+Vector3.down*pTran.localScale.y/2;
-		
-		RaycastHit hit;
-		
-		//Check if we are walking into something
-		if(Physics.Raycast(pTran.position+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(upPos+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, pTran.localScale.x) || Physics.Raycast(downPos+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, pTran.localScale.x))
-		{
-			if(hit.collider.gameObject.tag == "NotCollidable")
-				isMovingIntoObject = false;
-			else
-			{
-				isMovingIntoObject = true;
-				print("stuff");
-			}
-		}
-		else if(!Physics.Raycast(pTran.position+pTran.forward*pTran.localScale.x/2, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(upPos+pTran.forward*pTran.localScale.x/2, pTran.forward, pTran.localScale.x) && !Physics.Raycast(downPos+pTran.forward*pTran.localScale.x/2, pTran.forward, pTran.localScale.x))
-			isMovingIntoObject = false;
+		//FOR CHECKING IF THERE IS SOMETHING IN FRONT OF THE PLAYER. THIS IS NOW DONE IN FORWARDCOLLIDER
+		//Vector3 upPos = pTran.position+Vector3.up*pTran.localScale.y/2;
+		//Vector3 downPos = pTran.position+Vector3.down*pTran.localScale.y/2;
+		//
+		//RaycastHit hit;
+		//
+		////Check if we are walking into something
+		//if(Physics.Raycast(pTran.position+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, pTran.localScale.x/2) || Physics.Raycast(upPos+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, pTran.localScale.x) || Physics.Raycast(downPos+pTran.forward*pTran.localScale.x/2, pTran.forward, out hit, pTran.localScale.x))
+		//{
+		//	if(hit.collider.gameObject.tag == "NotCollidable")
+		//		isMovingIntoObject = false;
+		//	else
+		//	{
+		//		isMovingIntoObject = true;
+		//		print("stuff");
+		//	}
+		//}
+		//else if(!Physics.Raycast(pTran.position+pTran.forward*pTran.localScale.x/2, pTran.forward, pTran.localScale.x/2) && !Physics.Raycast(upPos+pTran.forward*pTran.localScale.x/2, pTran.forward, pTran.localScale.x) && !Physics.Raycast(downPos+pTran.forward*pTran.localScale.x/2, pTran.forward, pTran.localScale.x))
+		//	isMovingIntoObject = false;
 		
 		//Debug.DrawRay(pTran.position+pTran.forward*pTran.localScale.x/2, pTran.forward);
 		//Debug.DrawRay(upPos+pTran.forward*pTran.localScale.x/2, pTran.forward);
 		//Debug.DrawRay(downPos+pTran.forward*pTran.localScale.x/2, pTran.forward);ad
+
+
 
 		if(CanMove)
 		{
@@ -101,7 +110,7 @@ public class PlayerMove : MonoBehaviour
 	//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
 	public void Move(Vector3 direction)
 	{	
-		if(isMovingIntoObject == false)
+		if(forwardCollider.IsColliding == false)
 		{
 			if(playerJump.CanJump)
 			{
