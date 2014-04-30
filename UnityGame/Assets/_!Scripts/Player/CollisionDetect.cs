@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ForwardCollider : MonoBehaviour {
+public class CollisionDetect : MonoBehaviour {
 
 	public bool IsColliding = false;
 
