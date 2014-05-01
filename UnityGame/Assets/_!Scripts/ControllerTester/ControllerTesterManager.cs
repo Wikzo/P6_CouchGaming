@@ -141,6 +141,8 @@ public class ControllerTesterManager : MonoBehaviour
 
         if (GUILayout.Button("Varying Intensity rumble")) // Benjamin
         {
+            CurrentRumble = new ControllerTesterRumbleVaryingIntensity(ControllerPlayers, this);
+
             if (CurrentRumble != null)
                 CurrentRumble.StartRumble(pattern);
         }
