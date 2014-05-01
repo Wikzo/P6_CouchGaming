@@ -127,9 +127,9 @@ public class ControllerTesterManager : MonoBehaviour
             return;
         }
 
-        pattern = GUI.SelectionGrid(new Rect(600, 0, 300, 200), pattern, patternString, 1);
+        pattern = GUI.SelectionGrid(new Rect(800, 0, 300, 200), pattern, patternString, 1);
 
-        GUILayout.BeginArea(new Rect(0, 0, 500, 500));
+        GUILayout.BeginArea(new Rect(0, 0, 700, 700));
 
         if (GUILayout.Button("Static Intensity rumble"))
         {
@@ -169,11 +169,21 @@ public class ControllerTesterManager : MonoBehaviour
 
     }
 
+    public void RemoveRumble()
+    {
+        CurrentRumble = null;
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (CurrentRumble != null)
             CurrentRumble.UpdateRumble();
+
+        if (RumblingRightNow)
+            RumbleTimer += Time.deltaTime;
+        
+        print(RumbleTimer);
 
         foreach (ControllerPlayer p in ControllerPlayers)
         {

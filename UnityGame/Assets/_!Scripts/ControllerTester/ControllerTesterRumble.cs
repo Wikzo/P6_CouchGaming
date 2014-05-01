@@ -25,6 +25,7 @@ public abstract class ControllerTesterRumble
             System.Random random = new System.Random();
             this.pattern = (ButtonsToPress)random.Next(0, 4);
         }
+
     }
     public abstract void UpdateRumble();
     
@@ -35,6 +36,9 @@ public abstract class ControllerTesterRumble
 
         manager.RumblingRightNow = false;
         manager.RumbleTimer = 0;
+
+        manager.RemoveRumble();
+
     }
 
     public override string ToString()

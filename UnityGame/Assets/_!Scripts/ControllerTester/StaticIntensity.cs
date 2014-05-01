@@ -15,6 +15,8 @@ public class StaticIntensity : ControllerTesterRumble
 
     public override void UpdateRumble()
     {
+        
+
         switch ((int)pattern)
         {
             case 0:
@@ -37,6 +39,11 @@ public class StaticIntensity : ControllerTesterRumble
                     GamePad.SetVibration(player.Index, 0.8f, 0.8f);
                 break;
 
+        }
+
+        if (manager.RumbleTimer > 2)
+        {
+            StopRumble();
         }
     }
 }
