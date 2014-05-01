@@ -25,7 +25,7 @@ public abstract class ControllerTesterRumble
         }
 
         manager.RumblingRightNow = true;
-        manager.ReadyToGetInput = true;
+        manager.ReadyToGetInputPreTime = true;
 
     }
     public abstract void UpdateRumble();
@@ -38,6 +38,9 @@ public abstract class ControllerTesterRumble
     
     public void StopRumble()
     {
+        manager.ReadyToGetInput = true;
+        manager.ReadyToGetInputPreTime = true;
+
         manager.RumblingRightNow = false;
         manager.RumbleTimer = 0;
 

@@ -91,8 +91,10 @@ public class ControllerTesterManager : MonoBehaviour
     public float RumbleTimer;
     public float RumbleInterval;
     public bool ReadyToGetInput;
+    public bool ReadyToGetInputPreTime;
     int inputCounter;
     public float InputTime;
+    public float PreTime;
 
     private int pattern = 0;
     private string[] patternString = { "A", "B", "X", "Y" , "Random"};
@@ -115,6 +117,8 @@ public class ControllerTesterManager : MonoBehaviour
 
     void Start()
     {
+        Application.runInBackground = true;
+
         ControllerPlayers = new List<ControllerPlayer>();
         FindAllControllers();
 
@@ -186,6 +190,9 @@ public class ControllerTesterManager : MonoBehaviour
 
         if (GUILayout.Button("Morsecode rumble"))
         {
+            CurrentRumble = new MorseCode(ControllerPlayers, this);
+
+
             if (CurrentRumble != null)
                 CurrentRumble.StartRumble(pattern);
         }
@@ -208,13 +215,18 @@ public class ControllerTesterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey("escape"))
+            Application.Quit();
+
         if (RumblingRightNow)
         {
             RumbleTimer += Time.deltaTime;
-
             CurrentRumble.UpdateRumble();
 
         }
+
+        if (ReadyToGetInputPreTime)
+            PreTime += Time.deltaTime;
 
         if (ReadyToGetInput)
             InputTime += Time.deltaTime;
@@ -225,7 +237,7 @@ public class ControllerTesterManager : MonoBehaviour
         {
             p.UpdateState();
 
-            if (ReadyToGetInput)
+            if (ReadyToGetInputPreTime || ReadyToGetInput)
             {
                 if (inputCounter < ControllerPlayers.Count)
                 {
@@ -235,8 +247,14 @@ public class ControllerTesterManager : MonoBehaviour
                         p.HasInputted = true;
                         inputCounter++;
 
+                        float time;
+                        if (ReadyToGetInputPreTime && !ReadyToGetInput)
+                            time = -PreTime;
+                        else
+                            time = InputTime;
+
                         bool correct = CurrentRumble.pattern == ButtonsToPress.A;
-                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}", CurrentRumble.ToString(), CurrentRumble.pattern, RumbleInterval, (int)p.Index, InputTime, correct);
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}", CurrentRumble.ToString(), CurrentRumble.pattern, RumbleInterval, (int)p.Index, time, correct);
 
                         LoggingManager.AddTextNoTimeStamp(test);
                     }
@@ -262,8 +280,10 @@ public class ControllerTesterManager : MonoBehaviour
                 else
                 {
                     ReadyToGetInput = false;
+                    ReadyToGetInputPreTime = false;
                     inputCounter = 0;
                     InputTime = 0;
+                    PreTime = 0;
 
                     if (!RumblingRightNow)
                         RemoveRumble();
