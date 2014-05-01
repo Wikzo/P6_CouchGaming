@@ -7,10 +7,13 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 
 	private float intensityTimer;
 
-	private float lowSpeed = 3;
-	private float highSpeed = 2;
+	private float increasingLowTarget = 0.5f;
+	private float increasingHighTarget = 1f;
+	private float decreasingLowTarget = 0f;
+	private float decreasingHighTarget = 0.5f;
 
-	private bool intensityTimerInitialized = false;
+	private float lerpValue = 0;
+	private float normalizedTimer = 0;
 	
 	public ControllerTesterRumbleVaryingIntensity(List<ControllerPlayer> controllerPlayers, ControllerTesterManager controllerManager) : base(controllerPlayers, controllerManager)
 	{
@@ -23,67 +26,53 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 	}
     public override void UpdateRumble()
     {
+		normalizedTimer = manager.RumbleTimer/manager.RumbleInterval;
 		switch((int)pattern)
 		{
+			//Output = (1 - t) * Input1 + t * Input2
 			case 0:
-				if(intensityTimerInitialized == false)
+				lerpValue = (1-normalizedTimer) * 0 + normalizedTimer * increasingLowTarget;
+				if(lerpValue < increasingLowTarget)
 				{
-					intensityTimer = 0;
-					intensityTimerInitialized = true;
-				}
-
-				if(intensityTimer <= 1)
-				{
-					intensityTimer += manager.RumbleTimer/lowSpeed;
-					GamePad.SetVibration(PlayerIndex.One, intensityTimer, intensityTimer);
+					foreach (ControllerPlayer player in players)
+						GamePad.SetVibration(player.Index, lerpValue, lerpValue);
 				}
 				else
 					StopRumble();
+		
 				break;
 			case 1:
-				if(intensityTimerInitialized == false)
+				lerpValue = (1-normalizedTimer) * 0 + normalizedTimer * increasingHighTarget;
+				if(lerpValue < increasingHighTarget)
 				{
-					intensityTimer = 0;
-					intensityTimerInitialized = true;
-				}
-
-				if(intensityTimer <= 1)
-				{
-					intensityTimer += manager.RumbleTimer/highSpeed;
-					GamePad.SetVibration(PlayerIndex.One, intensityTimer, intensityTimer);
+					foreach (ControllerPlayer player in players)
+						GamePad.SetVibration(player.Index, lerpValue, lerpValue);
 				}
 				else
 					StopRumble();
+		
 				break;
 			case 2:
-				if(intensityTimerInitialized == false)
+				lerpValue = (1-normalizedTimer) * 1 + normalizedTimer * decreasingLowTarget;
+				if(lerpValue > decreasingLowTarget)
 				{
-					intensityTimer = 1;
-					intensityTimerInitialized = true;
-				}
-
-				if(intensityTimer >= 0.01f)
-				{
-					intensityTimer -= manager.RumbleTimer/lowSpeed;
-					GamePad.SetVibration(PlayerIndex.One, intensityTimer, intensityTimer);
+					foreach (ControllerPlayer player in players)
+						GamePad.SetVibration(player.Index, lerpValue, lerpValue);
 				}
 				else
 					StopRumble();
+
 				break;
 			case 3:
-				if(intensityTimerInitialized == false)
+				lerpValue = (1-normalizedTimer) * 1 + normalizedTimer * decreasingHighTarget;
+				if(lerpValue > decreasingHighTarget)
 				{
-					intensityTimer = 1;
-					intensityTimerInitialized = true;
-				}
-
-				if(intensityTimer >= 0.01f)
-				{
-					intensityTimer -= manager.RumbleTimer/highSpeed;
-					GamePad.SetVibration(PlayerIndex.One, intensityTimer, intensityTimer);
+					foreach (ControllerPlayer player in players)
+						GamePad.SetVibration(player.Index, lerpValue, lerpValue);
 				}
 				else
 					StopRumble();
+
 				break;
 		}
     }
