@@ -28,6 +28,20 @@ public static class LoggingManager
         }
     }
 
+    public static void CreateTextFile(string fileName)
+    {
+        fileName = fileName + DateTime.Now.ToString(formatToCreateFileFrom);
+
+        path = fileName + fileEnding;
+
+        using (FileStream fs = File.Create(path))
+        {
+            CreateText(fs, "");
+            //Debug.Log("text file created");
+
+        }
+    }
+
 
     private static void CreateText(FileStream fs, string value)
     {
@@ -42,6 +56,16 @@ public static class LoggingManager
             string date = DateTime.Now.ToString(format);
 
             file.WriteLine("\n" + date + ": " + text);
+        }
+    }
+
+    public static void AddTextNoTimeStamp(string text)
+    {
+        using (System.IO.StreamWriter file = new System.IO.StreamWriter(path, true))
+        {
+            string date = DateTime.Now.ToString(format);
+
+            file.WriteLine("\n" + text);
         }
     }
 

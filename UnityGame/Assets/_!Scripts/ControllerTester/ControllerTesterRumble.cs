@@ -8,7 +8,7 @@ public abstract class ControllerTesterRumble
     protected List<ControllerPlayer> players;
     protected ControllerTesterManager manager;
 
-    protected ButtonsToPress pattern; // A = 0, B = 1, X = 2, Y = 3
+    public ButtonsToPress pattern; // A = 0, B = 1, X = 2, Y = 3
 
     public ControllerTesterRumble(List<ControllerPlayer> controllerPlayers, ControllerTesterManager controllerManager)
     {
@@ -17,8 +17,6 @@ public abstract class ControllerTesterRumble
     }
     public virtual void StartRumble(int patternToUse)
     {
-        manager.RumblingRightNow = true;
-
         this.pattern = (ButtonsToPress)patternToUse;
         if (patternToUse == 4) // random
         {
@@ -26,25 +24,30 @@ public abstract class ControllerTesterRumble
             this.pattern = (ButtonsToPress)random.Next(0, 4);
         }
 
+        manager.RumblingRightNow = true;
+        manager.ReadyToGetInput = true;
+
     }
     public abstract void UpdateRumble();
-    
-    public void StopRumble()
+
+    void CheckIfActive()
     {
         foreach (ControllerPlayer player in players)
             GamePad.SetVibration(player.Index, 0, 0);
-
+    }
+    
+    public void StopRumble()
+    {
         manager.RumblingRightNow = false;
         manager.RumbleTimer = 0;
 
-        manager.RemoveRumble();
-
+        foreach (ControllerPlayer player in players)
+            GamePad.SetVibration(player.Index, 0, 0);
     }
 
     public override string ToString()
     {
-        string text = this.GetType().Name + " (" + pattern + ")";// returns excact name of C# file (no spaces)
-        return text;
+        return this.GetType().Name;// returns excact name of C# file (no spaces)
     }
 
 }

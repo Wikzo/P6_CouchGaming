@@ -15,8 +15,6 @@ public class StaticIntensity : ControllerTesterRumble
 
     public override void UpdateRumble()
     {
-        
-
         switch ((int)pattern)
         {
             case 0:
@@ -41,7 +39,7 @@ public class StaticIntensity : ControllerTesterRumble
 
         }
 
-        if (manager.RumbleTimer > 2)
+        if (manager.RumbleTimer > manager.RumbleInterval)
         {
             StopRumble();
         }

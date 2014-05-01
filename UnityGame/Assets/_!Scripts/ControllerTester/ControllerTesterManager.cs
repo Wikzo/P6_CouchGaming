@@ -23,6 +23,7 @@ public class ControllerPlayer
     public PlayerIndex Index;
     public GamePadState state;
     public GamePadState previousState;
+    public bool HasInputted;
 
     public void UpdateState()
     {
@@ -88,6 +89,10 @@ public class ControllerTesterManager : MonoBehaviour
     public bool RumblingRightNow;
     public ControllerTesterRumble CurrentRumble;
     public float RumbleTimer;
+    public float RumbleInterval;
+    public bool ReadyToGetInput;
+    int inputCounter;
+    public float InputTime;
 
     private int pattern = 0;
     private string[] patternString = { "A", "B", "X", "Y" , "Random"};
@@ -115,22 +120,46 @@ public class ControllerTesterManager : MonoBehaviour
 
         RumblingRightNow = false;
         RumbleTimer = 0;
+        RumbleInterval = 1;
+        ReadyToGetInput = false;
+        inputCounter = 0;
+        InputTime = 0;
+
+        LoggingManager.CreateTextFile("ControllerTest_");
+        LoggingManager.AddText("\n");
+        LoggingManager.AddTextNoTimeStamp("RumbleType, RumbleVariation, RumbleDuration, PlayerID, ReactionTime, CorrectButtonPress\n\n");
     }
 
     void OnGUI()
     {
-        if (RumblingRightNow)
+        if (RumblingRightNow || ReadyToGetInput)
         {
             string text = string.Format("Rumbling now ... {0}", CurrentRumble.ToString());
+
+            if (ReadyToGetInput)
+            {
+                string readyText = string.Format("\nREADY FOR INPUT: {0}", inputCounter);
+                text += readyText;
+            }
+            
             GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 500, 500), text);
 
             return;
         }
 
+        // choose pattern time interval
+        RumbleInterval = GUI.HorizontalSlider(new Rect(800, 400, 100, 30), RumbleInterval, 0.1f, 5f);
+        GUI.Label(new Rect(910, 400, 100, 30), RumbleInterval.ToString());
+        GUI.Label(new Rect(800, 380, 100, 30), "Time interval:");
+
+
+        // choose pattern message (A, B, X, Y)
         pattern = GUI.SelectionGrid(new Rect(800, 0, 300, 200), pattern, patternString, 1);
 
         GUILayout.BeginArea(new Rect(0, 0, 700, 700));
 
+
+        // choose pattern type
         if (GUILayout.Button("Static Intensity rumble"))
         {
             CurrentRumble = new StaticIntensity(ControllerPlayers, this);
@@ -149,6 +178,8 @@ public class ControllerTesterManager : MonoBehaviour
 
         if (GUILayout.Button("Right/left rumble"))
         {
+            CurrentRumble = new RightLeft(ControllerPlayers, this);
+
             if (CurrentRumble != null)
                 CurrentRumble.StartRumble(pattern);
         }
@@ -177,11 +208,16 @@ public class ControllerTesterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CurrentRumble != null)
+        if (RumblingRightNow)
+        {
+            RumbleTimer += Time.deltaTime;
+
             CurrentRumble.UpdateRumble();
 
-        if (RumblingRightNow)
-            RumbleTimer += Time.deltaTime;
+        }
+
+        if (ReadyToGetInput)
+            InputTime += Time.deltaTime;
         
         print(RumbleTimer);
 
@@ -189,23 +225,54 @@ public class ControllerTesterManager : MonoBehaviour
         {
             p.UpdateState();
 
-            // pressed
-            if (p.ButtonPressedRightNow(ButtonsToPress.A) == true)
-                print("A is down");
+            if (ReadyToGetInput)
+            {
+                if (inputCounter < ControllerPlayers.Count)
+                {
+                    // pressed
+                    if (p.ButtonPressedRightNow(ButtonsToPress.A) == true)
+                    {
+                        p.HasInputted = true;
+                        inputCounter++;
 
-            if (p.ButtonPressedRightNow(ButtonsToPress.B) == true)
-                print("B is down");
+                        bool correct = CurrentRumble.pattern == ButtonsToPress.A;
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}", CurrentRumble.ToString(), CurrentRumble.pattern, RumbleInterval, (int)p.Index, InputTime, correct);
 
-            if (p.ButtonPressedRightNow(ButtonsToPress.X) == true)
-                print("X is down");
+                        LoggingManager.AddTextNoTimeStamp(test);
+                    }
 
-            if (p.ButtonPressedRightNow(ButtonsToPress.Y) == true)
-                print("Y is down");
+                    if (p.ButtonPressedRightNow(ButtonsToPress.B) == true)
+                    {
+                        p.HasInputted = true;
+                        inputCounter++;
+                    }
+
+                    if (p.ButtonPressedRightNow(ButtonsToPress.X) == true)
+                    {
+                        p.HasInputted = true;
+                        inputCounter++;
+                    }
+
+                    if (p.ButtonPressedRightNow(ButtonsToPress.Y) == true)
+                    {
+                        p.HasInputted = true;
+                        inputCounter++;
+                    }
+                }
+                else
+                {
+                    ReadyToGetInput = false;
+                    inputCounter = 0;
+                    InputTime = 0;
+
+                    if (!RumblingRightNow)
+                        RemoveRumble();
+                }
+            }
 
             p.previousState = p.state;
 
         }
-        //this.previousState = this.state;
 
     }
 
