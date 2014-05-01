@@ -3,22 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using XInputDotNetPure;
 
-
 public abstract class ControllerTesterRumble
 {
-    List<PlayerIndex> playerIndex;
+    List<ControllerPlayer> players;
+    ControllerTesterManager manager;
 
-    public ControllerTesterRumble(List<PlayerIndex> playerIndexes)
+    int pattern; // A = 0, B = 1, X = 2, Y = 3
+
+    public ControllerTesterRumble(List<ControllerPlayer> controllerPlayers, ControllerTesterManager controllerManager)
     {
-        playerIndex = playerIndexes;
+        players = controllerPlayers;
+        manager = controllerManager;
     }
-    public abstract void StartRumble(int pattern);
+    public virtual void StartRumble(int patternToUse)
+    {
+        manager.RumblingRightNow = true;
+
+        this.pattern = patternToUse;
+        if (patternToUse == 4) // random
+        {
+            System.Random random = new System.Random();
+            this.pattern = random.Next(0, 4);
+        }
+    }
     public abstract void UpdateRumble();
     
     public void StopRumble()
     {
-        foreach(PlayerIndex player in playerIndex)
-            GamePad.SetVibration(player, 0, 0);
+        foreach (ControllerPlayer player in players)
+            GamePad.SetVibration(player.Index, 0, 0);
     }
 
 }
