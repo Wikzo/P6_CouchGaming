@@ -7,10 +7,10 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 
 	private float intensityTimer;
 
-	private float upLowTarget = 0.5f;
-	private float upHighTarget = 1f;
-	private float downLowTarget = 0f;
-	private float downHighTarget = 0.5f;
+	private float increasingLowTarget = 0.5f;
+	private float increasingHighTarget = 1f;
+	private float decreasingLowTarget = 0f;
+	private float decreasingHighTarget = 0.5f;
 
 	private float lerpValue = 0;
 	private float normalizedTimer = 0;
@@ -31,8 +31,8 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 		{
 			//Output = (1 - t) * Input1 + t * Input2
 			case 0:
-				lerpValue = (1-normalizedTimer) * 0 + normalizedTimer * upLowTarget;
-				if(lerpValue < upLowTarget)
+				lerpValue = (1-normalizedTimer) * 0 + normalizedTimer * increasingLowTarget;
+				if(lerpValue < increasingLowTarget)
 				{
 					foreach (ControllerPlayer player in players)
 						GamePad.SetVibration(player.Index, lerpValue, lerpValue);
@@ -42,8 +42,8 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 		
 				break;
 			case 1:
-				lerpValue = (1-normalizedTimer) * 0 + normalizedTimer * upHighTarget;
-				if(lerpValue < upHighTarget)
+				lerpValue = (1-normalizedTimer) * 0 + normalizedTimer * increasingHighTarget;
+				if(lerpValue < increasingHighTarget)
 				{
 					foreach (ControllerPlayer player in players)
 						GamePad.SetVibration(player.Index, lerpValue, lerpValue);
@@ -53,8 +53,8 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 		
 				break;
 			case 2:
-				lerpValue = (1-normalizedTimer) * 1 + normalizedTimer * downLowTarget;
-				if(lerpValue > downLowTarget)
+				lerpValue = (1-normalizedTimer) * 1 + normalizedTimer * decreasingLowTarget;
+				if(lerpValue > decreasingLowTarget)
 				{
 					foreach (ControllerPlayer player in players)
 						GamePad.SetVibration(player.Index, lerpValue, lerpValue);
@@ -64,8 +64,8 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 
 				break;
 			case 3:
-				lerpValue = (1-normalizedTimer) * 1 + normalizedTimer * downHighTarget;
-				if(lerpValue > downHighTarget)
+				lerpValue = (1-normalizedTimer) * 1 + normalizedTimer * decreasingHighTarget;
+				if(lerpValue > decreasingHighTarget)
 				{
 					foreach (ControllerPlayer player in players)
 						GamePad.SetVibration(player.Index, lerpValue, lerpValue);
