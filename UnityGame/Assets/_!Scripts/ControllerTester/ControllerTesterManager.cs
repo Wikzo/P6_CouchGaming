@@ -87,6 +87,7 @@ public class ControllerTesterManager : MonoBehaviour
 
     public bool RumblingRightNow;
     public ControllerTesterRumble CurrentRumble;
+    public float RumbleTimer;
 
     private int pattern = 0;
     private string[] patternString = { "A", "B", "X", "Y" , "Random"};
@@ -113,12 +114,18 @@ public class ControllerTesterManager : MonoBehaviour
         FindAllControllers();
 
         RumblingRightNow = false;
+        RumbleTimer = 0;
     }
 
     void OnGUI()
     {
         if (RumblingRightNow)
+        {
+            string text = string.Format("Rumbling now ... {0}", CurrentRumble.ToString());
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 500, 500), text);
+
             return;
+        }
 
         pattern = GUI.SelectionGrid(new Rect(600, 0, 300, 200), pattern, patternString, 1);
 
@@ -126,7 +133,9 @@ public class ControllerTesterManager : MonoBehaviour
 
         if (GUILayout.Button("Static Intensity rumble"))
         {
-                if (CurrentRumble != null)
+            CurrentRumble = new StaticIntensity(ControllerPlayers, this);
+                
+            if (CurrentRumble != null)
                     CurrentRumble.StartRumble(pattern);
         }
 
@@ -161,6 +170,8 @@ public class ControllerTesterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (CurrentRumble != null)
+            CurrentRumble.UpdateRumble();
 
         foreach (ControllerPlayer p in ControllerPlayers)
         {
@@ -184,5 +195,13 @@ public class ControllerTesterManager : MonoBehaviour
         }
         //this.previousState = this.state;
 
+    }
+
+    private void OnApplicationQuit()
+    {
+        foreach (ControllerPlayer p in ControllerPlayers)
+        {
+            GamePad.SetVibration(p.Index, 0, 0);
+        }
     }
 }

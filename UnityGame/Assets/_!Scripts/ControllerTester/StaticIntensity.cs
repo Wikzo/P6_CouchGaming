@@ -15,7 +15,7 @@ public class StaticIntensity : ControllerTesterRumble
 
     public override void UpdateRumble()
     {
-        switch (pattern)
+        switch ((int)pattern)
         {
             case 0:
                 foreach (ControllerPlayer player in players)
