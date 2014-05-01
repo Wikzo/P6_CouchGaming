@@ -20,6 +20,8 @@ public class PlayerJump : MonoBehaviour {
 	private Transform pTran;
 	private float groundDetectLength;
 
+	private CollisionDetect downCollider;
+
 	public bool CanJump
 	{
 		get{return canJump;}
@@ -39,26 +41,27 @@ public class PlayerJump : MonoBehaviour {
 		playerScript = GetComponent<Player>();
 
 		groundDetectLength = pTran.localScale.y/2;
+
+		//if(transform.Find("ForwardCollider").GetComponent<CollisionDetect>() != null)
+		//	downCollider = transform.Find("DownCollider").GetComponent<CollisionDetect>();
+		//else
+		//	print("DownCollider is needed on " + name);
 	}
 
 	// Update is called once per frame
 	public void JumpUpdate () 
 	{
 		//Rays will be cast on both sides of the player, so edges are also detected
-		Vector3 leftPos = pTran.position+Vector3.left*pTran.localScale.x/1.7f; //1.7 puts the ray further out, causing the player to make less mistakes
-		Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/1.7f;
+		
+		Vector3 leftPos = pTran.position+Vector3.left*pTran.localScale.x/2f; //1.7 puts the ray further out, causing the player to make less mistakes
+		Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/2f;
 
 		RaycastHit hit;
 		if(Physics.Raycast(pTran.position, Vector3.down, out hit, pTran.localScale.y/2) || Physics.Raycast(leftPos, Vector3.down, out hit, pTran.localScale.y/2) || Physics.Raycast(rightPos, Vector3.down, out hit, pTran.localScale.y/2))
 		{
 			bool ownProjInBounds = false;
 
-			GameObject hitObject = hit.collider.gameObject;
-
-			//if(hitObject.tag == "Projectile" && hitObject.GetComponent<Projectile>().Owner == gameObject.name && hitObject.GetComponent<Projectile>().OutOfBounds == false)
-			//	ownProjInBounds = true;
-
-			if(hitObject.tag != "NotCollidable")
+			if(hit.collider.gameObject.tag != "NotCollidable")
 			{
 				CanJump = true;
 				boostJumpsAmount = 0;
@@ -89,7 +92,25 @@ public class PlayerJump : MonoBehaviour {
 			boostJumpEffect = Instantiate(BoostJumpEffect, pTran.position, Quaternion.identity) as GameObject;
 			Destroy(boostJumpEffect, 3);
 		}
+		
+		/*
+		if(downCollider.IsColliding == true)
+		{
+			bool ownProjInBounds = false;
 
+			CanJump = true;
+			boostJumpsAmount = 0;
+			rigidbody.velocity = Vector3.zero;
+		}
+		else //We are in the air
+		{
+			CanJump = false;
+			if(boostJumpsAmount < MaxBoostJumpsAmount)
+				CanBoostJump = true;
+			else
+				CanBoostJump = false;
+		}
+		*/
 		//Debug.DrawRay(leftPos, Vector3.down);
 		//Debug.DrawRay(rightPos, Vector3.down);
 	}

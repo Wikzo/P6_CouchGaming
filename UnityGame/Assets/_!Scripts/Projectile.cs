@@ -46,6 +46,9 @@ public class Projectile : MonoBehaviour
 	{
 		renderer.material.color = PMat.color;
 
+		if(OwnerObject.transform.Find("ForwardCollider") != null)
+			Physics.IgnoreCollision(collider, OwnerObject.transform.Find("ForwardCollider").collider, true);
+
 		Physics.IgnoreCollision(collider, OwnerObject.collider, true); //Make sure that the player's physics are not affected by the collider of the projectile
 		gameObject.tag = "NotCollidable"; //Make sure that the player's raycasting in playerMove and playerJump is not affected by the collider of the projectile
 		foreach(Transform child in transform)
