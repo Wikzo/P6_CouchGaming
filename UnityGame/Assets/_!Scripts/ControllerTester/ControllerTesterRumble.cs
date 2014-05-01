@@ -5,10 +5,10 @@ using XInputDotNetPure;
 
 public abstract class ControllerTesterRumble
 {
-    List<ControllerPlayer> players;
-    ControllerTesterManager manager;
+    protected List<ControllerPlayer> players;
+    protected ControllerTesterManager manager;
 
-    int pattern; // A = 0, B = 1, X = 2, Y = 3
+    protected int pattern; // A = 0, B = 1, X = 2, Y = 3
 
     public ControllerTesterRumble(List<ControllerPlayer> controllerPlayers, ControllerTesterManager controllerManager)
     {

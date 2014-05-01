@@ -125,12 +125,12 @@ public class ControllerTesterManager : MonoBehaviour
         GUILayout.BeginArea(new Rect(0, 0, 500, 500));
 
         if (GUILayout.Button("Static Intensity rumble"))
-            {
+        {
                 if (CurrentRumble != null)
                     CurrentRumble.StartRumble(pattern);
-            }
+        }
 
-        if (GUILayout.Button("Varying Intensity rumble"))
+        if (GUILayout.Button("Varying Intensity rumble")) // Benjamin
         {
             if (CurrentRumble != null)
                 CurrentRumble.StartRumble(pattern);
