@@ -129,15 +129,18 @@ public class ControllerTesterManager : MonoBehaviour
         ReadyToGetInput = false;
         inputCounter = 0;
         InputTime = 0;
-        usingHelpPaper = false;
+        usingHelpPaper = true;
 
         LoggingManager.CreateTextFile("ControllerTest_");
-        LoggingManager.AddText("\n");
         LoggingManager.AddTextNoTimeStamp("PlayerID, UsingHelpPaper, RumbleType, RumbleVariation, PlayerAnswer, RumbleDuration, ReactionTime, ReactionTimeMinusRumbleDuration, CorrectButtonPress\n\n");
     }
 
     void OnGUI()
     {
+
+        // controller counter
+        GUI.Label(new Rect(10, 500, 500, 200), "Controllers connected: " + ControllerPlayers.Count);
+
         if (RumblingRightNow || ReadyToGetInput)
         {
             string text = string.Format("Rumbling now ... {0}", CurrentRumble.ToString());
@@ -321,7 +324,7 @@ public class ControllerTesterManager : MonoBehaviour
                             if (CurrentRumble.pattern == ButtonsToPress.Y || CurrentRumble.pattern == ButtonsToPress.X)
                                 correct = true;
 
-                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.Y.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index+1, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.Y.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
 
                         LoggingManager.AddTextNoTimeStamp(test);
                     }

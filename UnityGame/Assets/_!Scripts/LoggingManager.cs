@@ -65,7 +65,7 @@ public static class LoggingManager
         {
             string date = DateTime.Now.ToString(format);
 
-            file.WriteLine("\n" + text);
+            file.WriteLine(text);
         }
     }
 
