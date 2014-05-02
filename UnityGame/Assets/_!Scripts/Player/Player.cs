@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
 			pMat = Materials[3];
 			break;
 		}
-		renderer.material = pMat;
+		//renderer.material = pMat;
 
 		spawnPoints = new GameObject[SpawnPoints.transform.GetChildCount()];
 
@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        PlayerColor = renderer.material.color;
+        //PlayerColor = renderer.material.color;
     	respawnIdleTimer = RespawnIdleTime;
         resetCounter = 0;
         Reset();
@@ -188,7 +188,7 @@ public class Player : MonoBehaviour
 	    if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
 	    {
 	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
-	        renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+	        //renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
 
 	        respawnIdleTimer -= Time.deltaTime;
 
@@ -199,7 +199,7 @@ public class Player : MonoBehaviour
 	    else
 	    {
             //Destroy(renderer.material); // just to be sure no memory garbage
-	        renderer.material.color = pMat.color;
+	        //renderer.material.color = pMat.color;
 	    }
 	}
 
@@ -218,7 +218,7 @@ public class Player : MonoBehaviour
 	{
 		PState = PlayerState.Dead;
 
-		renderer.enabled = false;
+		//renderer.enabled = false;
 		pTran.position = new Vector3(-1000,-1000,-1000);
 
 		rigidbody.velocity = Vector3.zero;
@@ -234,7 +234,7 @@ public class Player : MonoBehaviour
 
     void Hide()
     {
-        renderer.enabled = false;
+        //renderer.enabled = false;
 
         pTran.position = new Vector3(-1000, -1000, -1000);
 
@@ -248,7 +248,7 @@ public class Player : MonoBehaviour
         KilledBy = "";
         IsReadyToBegin = false;
 
-        renderer.enabled = true;
+        //renderer.enabled = true;
 
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
@@ -311,7 +311,7 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Respawning;
 		KilledBy = "";
 		
-		renderer.enabled = true;
+		//renderer.enabled = true;
 		//pTran.position = spawnPoint;
 
 		ChooseSpawnPoint();
