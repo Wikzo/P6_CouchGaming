@@ -39,7 +39,7 @@ public class StaticIntensity : ControllerTesterRumble
 
         }
 
-        if (manager.RumbleTimer > manager.RumbleInterval)
+        if (manager.RumbleTimer > RumbleDuration)
         {
             StopRumble();
         }
