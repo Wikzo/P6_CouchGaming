@@ -268,7 +268,7 @@ public class ControllerTesterManager : MonoBehaviour
                             if (CurrentRumble.pattern == ButtonsToPress.A || CurrentRumble.pattern == ButtonsToPress.B)
                                 correct = true;
 
-                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.A.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index+1, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.A.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
 
                         LoggingManager.AddTextNoTimeStamp(test);
                     }
@@ -287,7 +287,7 @@ public class ControllerTesterManager : MonoBehaviour
                             if (CurrentRumble.pattern == ButtonsToPress.B || CurrentRumble.pattern == ButtonsToPress.A)
                                 correct = true;
 
-                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.B.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index+1, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.B.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
                         LoggingManager.AddTextNoTimeStamp(test);
                     }
 
@@ -305,7 +305,7 @@ public class ControllerTesterManager : MonoBehaviour
                             if (CurrentRumble.pattern == ButtonsToPress.X || CurrentRumble.pattern == ButtonsToPress.Y)
                                 correct = true;
 
-                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.X.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index+1, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.X.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
                         
                         
                         LoggingManager.AddTextNoTimeStamp(test);

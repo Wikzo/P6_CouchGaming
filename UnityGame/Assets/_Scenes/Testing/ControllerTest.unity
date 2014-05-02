@@ -109,9 +109,7 @@ MonoBehaviour:
   RumbleTimer: 0
   RumbleInterval: 0
   ReadyToGetInput: 0
-  ReadyToGetInputPreTime: 0
   InputTime: 0
-  PreTime: 0
 --- !u!81 &1365016506
 AudioListener:
   m_ObjectHideFlags: 0
