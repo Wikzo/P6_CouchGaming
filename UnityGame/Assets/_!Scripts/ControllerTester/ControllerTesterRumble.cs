@@ -8,12 +8,21 @@ public abstract class ControllerTesterRumble
     protected List<ControllerPlayer> players;
     protected ControllerTesterManager manager;
 
+    public float RumbleDuration;
+
     public ButtonsToPress pattern; // A = 0, B = 1, X = 2, Y = 3
 
     public ControllerTesterRumble(List<ControllerPlayer> controllerPlayers, ControllerTesterManager controllerManager)
     {
         players = controllerPlayers;
         manager = controllerManager;
+
+        manager.RumbleTimer = 0;
+        RumbleDuration = manager.RumbleInterval;
+
+        foreach (ControllerPlayer player in players)
+            player.HasInputted = false;
+
     }
     public virtual void StartRumble(int patternToUse)
     {
@@ -25,7 +34,8 @@ public abstract class ControllerTesterRumble
         }
 
         manager.RumblingRightNow = true;
-        manager.ReadyToGetInputPreTime = true;
+        manager.ReadyToGetInput = true;
+        //manager.ReadyToGetInputPreTime = true;
 
     }
     public abstract void UpdateRumble();
@@ -38,8 +48,7 @@ public abstract class ControllerTesterRumble
     
     public void StopRumble()
     {
-        manager.ReadyToGetInput = true;
-        manager.ReadyToGetInputPreTime = true;
+        //manager.ReadyToGetInputPreTime = true;
 
         manager.RumblingRightNow = false;
         manager.RumbleTimer = 0;

@@ -17,12 +17,12 @@ public class RightLeft : ControllerTesterRumble
     {
         base.StartRumble(patternToUse);
 
-        // we only use two patterns, so convert if neccessary
-        if (pattern == ButtonsToPress.A) // 0
-            pattern = ButtonsToPress.X; // 2
+        /*// we only use two patterns, so convert if neccessary
+        if (pattern == ButtonsToPress.B) // 0
+            pattern = ButtonsToPress.A; // 1
         
         if (pattern == ButtonsToPress.Y) // 3
-            pattern = ButtonsToPress.B; // 1
+            pattern = ButtonsToPress.X; // 2*/
     }
 
     public override void UpdateRumble()
@@ -30,19 +30,19 @@ public class RightLeft : ControllerTesterRumble
         switch ((int)pattern)
         {
             case 0: // A (left)
-            case 2: // X (left)
+            case 1: // B (left)
                 foreach (ControllerPlayer player in players)
                     GamePad.SetVibration(player.Index, 0, 1f);
                 break;
 
-            case 1: // B (right)
+            case 2: // X (right)
             case 3: // Y (right)
                 foreach (ControllerPlayer player in players)
-                    GamePad.SetVibration(player.Index, 0f, 1f);
+                    GamePad.SetVibration(player.Index, 1f, 0f);
                 break;
         }
 
-        if (manager.RumbleTimer > manager.RumbleInterval)
+        if (manager.RumbleTimer > RumbleDuration)
         {
             StopRumble();
         }

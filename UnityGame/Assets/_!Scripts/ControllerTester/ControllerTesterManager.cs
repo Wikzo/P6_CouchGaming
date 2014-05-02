@@ -91,10 +91,11 @@ public class ControllerTesterManager : MonoBehaviour
     public float RumbleTimer;
     public float RumbleInterval;
     public bool ReadyToGetInput;
-    public bool ReadyToGetInputPreTime;
+    //public bool ReadyToGetInputPreTime;
     int inputCounter;
     public float InputTime;
-    public float PreTime;
+    //public float PreTime;
+    bool usingHelpPaper;
 
     private int pattern = 0;
     private string[] patternString = { "A", "B", "X", "Y" , "Random"};
@@ -128,14 +129,18 @@ public class ControllerTesterManager : MonoBehaviour
         ReadyToGetInput = false;
         inputCounter = 0;
         InputTime = 0;
+        usingHelpPaper = true;
 
         LoggingManager.CreateTextFile("ControllerTest_");
-        LoggingManager.AddText("\n");
-        LoggingManager.AddTextNoTimeStamp("RumbleType, RumbleVariation, RumbleDuration, PlayerID, ReactionTime, CorrectButtonPress\n\n");
+        LoggingManager.AddTextNoTimeStamp("PlayerID, UsingHelpPaper, RumbleType, RumbleVariation, PlayerAnswer, RumbleDuration, ReactionTime, ReactionTimeMinusRumbleDuration, CorrectButtonPress\n\n");
     }
 
     void OnGUI()
     {
+
+        // controller counter
+        GUI.Label(new Rect(10, 500, 500, 200), "Controllers connected: " + ControllerPlayers.Count);
+
         if (RumblingRightNow || ReadyToGetInput)
         {
             string text = string.Format("Rumbling now ... {0}", CurrentRumble.ToString());
@@ -151,10 +156,13 @@ public class ControllerTesterManager : MonoBehaviour
             return;
         }
 
+        // use help paper
+        usingHelpPaper = GUI.Toggle(new Rect(800, 300, 200, 30), usingHelpPaper, "Using help paper");
+
         // choose pattern time interval
         RumbleInterval = GUI.HorizontalSlider(new Rect(800, 400, 100, 30), RumbleInterval, 0.1f, 5f);
         GUI.Label(new Rect(910, 400, 100, 30), RumbleInterval.ToString());
-        GUI.Label(new Rect(800, 380, 100, 30), "Time interval:");
+        GUI.Label(new Rect(800, 380, 300, 30), "Time interval (only for *):");
 
 
         // choose pattern message (A, B, X, Y)
@@ -164,7 +172,7 @@ public class ControllerTesterManager : MonoBehaviour
 
 
         // choose pattern type
-        if (GUILayout.Button("Static Intensity rumble"))
+        if (GUILayout.Button("Static Intensity rumble*"))
         {
             CurrentRumble = new StaticIntensity(ControllerPlayers, this);
                 
@@ -172,7 +180,7 @@ public class ControllerTesterManager : MonoBehaviour
                     CurrentRumble.StartRumble(pattern);
         }
 
-        if (GUILayout.Button("Varying Intensity rumble")) // Benjamin
+        if (GUILayout.Button("Varying Intensity rumble*")) // Benjamin
         {
             CurrentRumble = new ControllerTesterRumbleVaryingIntensity(ControllerPlayers, this);
 
@@ -180,7 +188,7 @@ public class ControllerTesterManager : MonoBehaviour
                 CurrentRumble.StartRumble(pattern);
         }
 
-        if (GUILayout.Button("Right/left rumble"))
+        if (GUILayout.Button("Right/left rumble*"))
         {
             CurrentRumble = new RightLeft(ControllerPlayers, this);
 
@@ -199,6 +207,9 @@ public class ControllerTesterManager : MonoBehaviour
 
         if (GUILayout.Button("Interval rumble"))
         {
+            CurrentRumble = new Interval(ControllerPlayers, this);
+
+
             if (CurrentRumble != null)
                 CurrentRumble.StartRumble(pattern);
         }
@@ -215,6 +226,7 @@ public class ControllerTesterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKey("escape"))
             Application.Quit();
 
@@ -225,65 +237,106 @@ public class ControllerTesterManager : MonoBehaviour
 
         }
 
-        if (ReadyToGetInputPreTime)
-            PreTime += Time.deltaTime;
+        //if (ReadyToGetInputPreTime)
+          //  PreTime += Time.deltaTime;
 
         if (ReadyToGetInput)
             InputTime += Time.deltaTime;
         
-        print(RumbleTimer);
+        //print(RumbleTimer);
 
         foreach (ControllerPlayer p in ControllerPlayers)
         {
             p.UpdateState();
 
-            if (ReadyToGetInputPreTime || ReadyToGetInput)
+            if (ReadyToGetInput)
             {
                 if (inputCounter < ControllerPlayers.Count)
                 {
                     // pressed
-                    if (p.ButtonPressedRightNow(ButtonsToPress.A) == true)
+                    if (p.ButtonPressedRightNow(ButtonsToPress.A) == true && !p.HasInputted)
                     {
                         p.HasInputted = true;
                         inputCounter++;
 
                         float time;
-                        if (ReadyToGetInputPreTime && !ReadyToGetInput)
-                            time = -PreTime;
-                        else
-                            time = InputTime;
+                        time = InputTime;
 
                         bool correct = CurrentRumble.pattern == ButtonsToPress.A;
-                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}", CurrentRumble.ToString(), CurrentRumble.pattern, RumbleInterval, (int)p.Index, time, correct);
+
+                        if (CurrentRumble is RightLeft)
+                            if (CurrentRumble.pattern == ButtonsToPress.A || CurrentRumble.pattern == ButtonsToPress.B)
+                                correct = true;
+
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index+1, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.A.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
 
                         LoggingManager.AddTextNoTimeStamp(test);
                     }
 
-                    if (p.ButtonPressedRightNow(ButtonsToPress.B) == true)
+                    if (p.ButtonPressedRightNow(ButtonsToPress.B) == true && !p.HasInputted)
                     {
                         p.HasInputted = true;
                         inputCounter++;
+
+                        float time;
+                        time = InputTime;
+
+                        bool correct = CurrentRumble.pattern == ButtonsToPress.B;
+
+                        if (CurrentRumble is RightLeft)
+                            if (CurrentRumble.pattern == ButtonsToPress.B || CurrentRumble.pattern == ButtonsToPress.A)
+                                correct = true;
+
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index+1, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.B.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
+                        LoggingManager.AddTextNoTimeStamp(test);
                     }
 
-                    if (p.ButtonPressedRightNow(ButtonsToPress.X) == true)
+                    if (p.ButtonPressedRightNow(ButtonsToPress.X) == true && !p.HasInputted)
                     {
                         p.HasInputted = true;
                         inputCounter++;
+
+                        float time;
+                        time = InputTime;
+
+                        bool correct = CurrentRumble.pattern == ButtonsToPress.X;
+
+                        if (CurrentRumble is RightLeft)
+                            if (CurrentRumble.pattern == ButtonsToPress.X || CurrentRumble.pattern == ButtonsToPress.Y)
+                                correct = true;
+
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index+1, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.X.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
+                        
+                        
+                        LoggingManager.AddTextNoTimeStamp(test);
                     }
 
-                    if (p.ButtonPressedRightNow(ButtonsToPress.Y) == true)
+                    if (p.ButtonPressedRightNow(ButtonsToPress.Y) == true && !p.HasInputted)
                     {
                         p.HasInputted = true;
                         inputCounter++;
+
+                        float time;
+                        time = InputTime;
+
+                        bool correct = CurrentRumble.pattern == ButtonsToPress.Y;
+                        if (CurrentRumble is RightLeft)
+                            if (CurrentRumble.pattern == ButtonsToPress.Y || CurrentRumble.pattern == ButtonsToPress.X)
+                                correct = true;
+
+                        string test = string.Format("{0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}", (int)p.Index+1, usingHelpPaper, CurrentRumble.ToString(), CurrentRumble.pattern, ButtonsToPress.Y.ToString(), CurrentRumble.RumbleDuration, time, time - CurrentRumble.RumbleDuration, correct);
+
+                        LoggingManager.AddTextNoTimeStamp(test);
                     }
+                    
                 }
                 else
                 {
                     ReadyToGetInput = false;
-                    ReadyToGetInputPreTime = false;
+                    //ReadyToGetInputPreTime = false;
                     inputCounter = 0;
                     InputTime = 0;
-                    PreTime = 0;
+                    //PreTime = 0;
 
                     if (!RumblingRightNow)
                         RemoveRumble();

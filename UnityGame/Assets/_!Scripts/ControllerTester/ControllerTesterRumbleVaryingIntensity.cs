@@ -42,7 +42,7 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 		
 				break;
 			case 1:
-				lerpValue = (1-normalizedTimer) * 0 + normalizedTimer * increasingHighTarget;
+				lerpValue = (1-normalizedTimer) * 0.5f + normalizedTimer * increasingHighTarget;
 				if(lerpValue < increasingHighTarget)
 				{
 					foreach (ControllerPlayer player in players)
@@ -53,7 +53,7 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 		
 				break;
 			case 2:
-				lerpValue = (1-normalizedTimer) * 1 + normalizedTimer * decreasingLowTarget;
+				lerpValue = (1-normalizedTimer) * 0.5f + normalizedTimer * decreasingLowTarget;
 				if(lerpValue > decreasingLowTarget)
 				{
 					foreach (ControllerPlayer player in players)
@@ -64,7 +64,7 @@ public class ControllerTesterRumbleVaryingIntensity : ControllerTesterRumble {
 
 				break;
 			case 3:
-				lerpValue = (1-normalizedTimer) * 1 + normalizedTimer * decreasingHighTarget;
+				lerpValue = (1-normalizedTimer) * 1f + normalizedTimer * decreasingHighTarget;
 				if(lerpValue > decreasingHighTarget)
 				{
 					foreach (ControllerPlayer player in players)

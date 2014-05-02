@@ -45,7 +45,9 @@ public class MorseCode : ControllerTesterRumble
             if (currentNode + 1 < durations.Length)
                 currentNode++;
             else
+            {
                 StopRumble();
+            }
         }
     }
 
@@ -54,18 +56,30 @@ public class MorseCode : ControllerTesterRumble
         switch ((int)pattern)
         {
             case 0: // A
+                RumbleDuration = 0;
+                foreach (float f in durationsA)
+                    RumbleDuration += f;
                 PlayPattern(nodesA, durationsA);
                 break;
 
             case 1: // B
+                RumbleDuration = 0;
+                foreach (float f in durationsB)
+                    RumbleDuration += f;
                 PlayPattern(nodesB, durationsB);
                 break;
 
             case 2: // X
+                RumbleDuration = 0;
+                foreach (float f in durationsX)
+                    RumbleDuration += f;
                 PlayPattern(nodesX, durationsX);
                 break;
 
             case 3: // Y
+                RumbleDuration = 0;
+                foreach (float f in durationsY)
+                    RumbleDuration += f;
                 PlayPattern(nodesY, durationsY);
                 break;
 
