@@ -204,7 +204,7 @@ public class ControllerTesterManager : MonoBehaviour
 
         if (GUILayout.Button("Interval rumble"))
         {
-            CurrentRumble = new InteralRumble(ControllerPlayers, this);
+            CurrentRumble = new Interval(ControllerPlayers, this);
 
 
             if (CurrentRumble != null)
@@ -240,7 +240,7 @@ public class ControllerTesterManager : MonoBehaviour
         if (ReadyToGetInput)
             InputTime += Time.deltaTime;
         
-        print(RumbleTimer);
+        //print(RumbleTimer);
 
         foreach (ControllerPlayer p in ControllerPlayers)
         {
