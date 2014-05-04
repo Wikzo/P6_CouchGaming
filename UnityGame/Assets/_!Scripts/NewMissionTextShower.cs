@@ -7,6 +7,7 @@ public class NewMissionTextShower : MonoBehaviour
     public float direction = 1;
     float counter;
     public float RotationAmount = 0.61f;
+    bool Rotate = false;
 
     // scale
     Vector3 start;
@@ -28,15 +29,18 @@ public class NewMissionTextShower : MonoBehaviour
         Vector3 add = new Vector3(lerp, lerp, lerp);
         transform.localScale = start + add;
 
-        counter += Time.deltaTime;
-
-        if (counter >= RotationAmount)
+        if (Rotate)
         {
-            direction *= -1;
-            counter = 0;
-        }
+            counter += Time.deltaTime;
 
-        transform.Rotate(Vector3.forward * direction);
+            if (counter >= RotationAmount)
+            {
+                direction *= -1;
+                counter = 0;
+            }
+
+            transform.Rotate(Vector3.forward * direction);
+        }
 
     }
 }

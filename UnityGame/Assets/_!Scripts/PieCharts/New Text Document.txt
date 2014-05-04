@@ -1,0 +1,7 @@
+How many wins
+How many points
+What missions players had
+How many jumps
+How many shoots
+How many "laser surfings"
+How many rumble presses (mission/target)
