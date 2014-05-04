@@ -128,11 +128,16 @@ public class PlayerAim : MonoBehaviour
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
             // original projectile
-            ProjectileOriginalObject = Instantiate(ProjectilePrefab, pTran.position, Quaternion.identity) as GameObject;
+            ProjectileOriginalObject = Instantiate(ProjectilePrefab, pTran.position+Vector3.up*pTran.localScale.y/2, Quaternion.identity) as GameObject;
             Projectile projectileOriginalScript = ProjectileOriginalObject.GetComponent<Projectile>();
             projectileOriginalScript.Owner = gameObject.tag;
             projectileOriginalScript.OwnerObject = gameObject;
-            projectileOriginalScript.PMat = renderer.material;
+
+            if(playerScript.PlayerRenderer != null)
+            	projectileOriginalScript.PMat = playerScript.PlayerRenderer.material;
+            else
+            	projectileOriginalScript.PMat = renderer.material;
+
             ProjectileOriginalObject.transform.right = aimTran.forward;
 			addPhysics = true;
 
@@ -146,7 +151,12 @@ public class PlayerAim : MonoBehaviour
                 Projectile cloneScript = cloneObject.GetComponent<Projectile>();
                 cloneScript.Owner = gameObject.tag;
                 cloneScript.OwnerObject = gameObject;
-                cloneScript.PMat = renderer.material;
+
+                if(playerScript.PlayerRenderer != null)
+            		cloneScript.PMat = playerScript.PlayerRenderer.material;
+           		else
+            		cloneScript.PMat = renderer.material;
+
                 cloneObject.transform.right = aimPivotTran.forward;
                 cloneScript.IsOriginal = false;
 

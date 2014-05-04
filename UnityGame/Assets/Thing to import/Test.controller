@@ -29,9 +29,35 @@ AnimatorController:
     m_SyncedLayerIndex: -1
     m_StateMachineMotionSetIndex: 0
     m_DefaultWeight: 0
-    m_IKPass: 0
+    m_IKPass: 1
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
+--- !u!206 &20600000
+BlendTree:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Blend Tree
+  m_Childs: []
+  m_BlendParameter: Speed
+  m_BlendParameterY: Speed
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_BlendType: 0
+--- !u!206 &20644859
+BlendTree:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Blend Tree
+  m_Childs: []
+  m_BlendParameter: Speed
+  m_BlendParameterY: Speed
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_BlendType: 0
 --- !u!1101 &110100000
 Transition:
   m_ObjectHideFlags: 3
@@ -116,7 +142,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: Jump
     m_EventTreshold: 0
     m_ExitTime: .929245293
   m_Atomic: 1
@@ -134,7 +160,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: Jump
     m_EventTreshold: 0
     m_ExitTime: .758064568
   m_Atomic: 1
@@ -152,7 +178,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: Jump
     m_EventTreshold: 0
     m_ExitTime: .929245293
   m_Atomic: 1
@@ -170,7 +196,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 5
-    m_ConditionEvent: 
+    m_ConditionEvent: Jump
     m_EventTreshold: 0
     m_ExitTime: .929245293
   m_Atomic: 1
@@ -248,7 +274,7 @@ State:
   - {fileID: 7400014, guid: 7333bec06e04c4b6e9d78bd6e890dfb1, type: 3}
   m_ParentStateMachine: {fileID: 110700000}
   m_Position: {x: -180, y: 120, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_Mirror: 0
   m_Tag: 
 --- !u!1107 &110700000
@@ -292,5 +318,5 @@ StateMachine:
       - {fileID: 110138443}
       - {fileID: 110105546}
   m_MotionSetCount: 1
-  m_AnyStatePosition: {x: -384, y: 12, z: 0}
+  m_AnyStatePosition: {x: -396, y: 48, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

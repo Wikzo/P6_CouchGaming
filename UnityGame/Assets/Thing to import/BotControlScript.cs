@@ -7,6 +7,9 @@ using System.Collections;
 [RequireComponent(typeof (Rigidbody))]
 public class BotControlScript : MonoBehaviour
 {
+	private PlayerMove playerMove;
+	private PlayerJump playerJump;
+
 	[System.NonSerialized]					
 	public float lookWeight;					// the amount to transition when using head look
 	
@@ -37,6 +40,9 @@ public class BotControlScript : MonoBehaviour
 
 	void Start ()
 	{
+		playerMove = GetComponent<PlayerMove>();
+		playerJump = GetComponent<PlayerJump>();
+
 		// initialising reference variables
 		anim = GetComponent<Animator>();					  
 		col = GetComponent<CapsuleCollider>();				
@@ -48,10 +54,10 @@ public class BotControlScript : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
-		float h = Input.GetAxis("Horizontal");				// setup h variable as our horizontal input axis
-		float v = Input.GetAxis("Vertical");				// setup v variables as our vertical input axis
-		anim.SetFloat("Speed", v);							// set our animator's float parameter 'Speed' equal to the vertical input axis				
-		anim.SetFloat("Direction", h); 						// set our animator's float parameter 'Direction' equal to the horizontal input axis		
+		//float h = Input.GetAxis("Horizontal");				// setup h variable as our horizontal input axis
+		//float v = Input.GetAxis("Vertical");				// setup v variables as our vertical input axis
+		//anim.SetFloat("Speed", v);							// set our animator's float parameter 'Speed' equal to the vertical input axis				
+		//anim.SetFloat("Direction", h); 						// set our animator's float parameter 'Direction' equal to the horizontal input axis		
 		anim.speed = animSpeed;								// set the speed of our animator to the public variable 'animSpeed'
 		anim.SetLookAtWeight(lookWeight);					// set the Look At Weight - amount to use look at IK vs using the head's animation
 		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);	// set our currentState variable to the current state of the Base Layer (0) of animation
@@ -59,7 +65,25 @@ public class BotControlScript : MonoBehaviour
 		if(anim.layerCount ==2)		
 			layer2CurrentState = anim.GetCurrentAnimatorStateInfo(1);	// set our layer2CurrentState variable to the current state of the second Layer (1) of animation
 		
-		
+		/*if(playerJump.HasJumped == true || playerJump.HasDoubleJumped == true)
+		{
+			anim.SetBool("Jump", true);
+		}
+		else
+		{
+			anim.SetBool("Jump", false);
+		}*/
+
+		if(playerMove.movingLeft || playerMove.movingRight)
+		{
+			anim.SetFloat("Speed", 1);
+		}
+		else
+		{
+			anim.SetFloat("Speed", 0);
+		}
+
+
 		// LOOK AT ENEMY
 		
 		// if we hold Alt..
@@ -80,7 +104,7 @@ public class BotControlScript : MonoBehaviour
 		// if we are currently in a state called Runmotion (see line 25), then allow Jump input (Space) to set the Jump bool parameter in the Animator to true
 		if (currentBaseState.nameHash == runState)
 		{
-			if(Input.GetKeyDown(KeyCode.Space))
+			if(playerJump.HasJumped == true || playerJump.HasDoubleJumped == true)
 			{
 				anim.SetBool("Jump", true);
 			}

@@ -5,8 +5,11 @@ public class CollisionDetect : MonoBehaviour {
 
 	public bool IsColliding = false;
 
+	private Animator anim;
+
 	// Use this for initialization
 	void Start () {
+
 	
 	}
 	

@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public bool IsReadyToBegin = false;
 
+	public SkinnedMeshRenderer PlayerRenderer;
+
 	public int Score;
 	public int Id;
 	public int DeathTime = 5;
@@ -56,8 +58,6 @@ public class Player : MonoBehaviour
 	private PlayerAim playerAim;
 	private PlayerMove playerMove;
 	private PlayerJump playerJump;
-
-
 
 	private Transform pTran;
 
@@ -93,7 +93,10 @@ public class Player : MonoBehaviour
 			pMat = Materials[3];
 			break;
 		}
-		//renderer.material = pMat;
+		if(PlayerRenderer != null)
+			PlayerRenderer.material = pMat;
+		else
+			renderer.material = pMat;
 
 		spawnPoints = new GameObject[SpawnPoints.transform.GetChildCount()];
 
@@ -119,7 +122,13 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        //PlayerColor = renderer.material.color;
+        
+
+        if(PlayerRenderer != null)
+        	PlayerColor = PlayerRenderer.material.color;
+		else
+			PlayerColor = renderer.material.color;
+
     	respawnIdleTimer = RespawnIdleTime;
         resetCounter = 0;
         Reset();
@@ -188,7 +197,12 @@ public class Player : MonoBehaviour
 	    if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
 	    {
 	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
-	        //renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+	        
+
+	        if(PlayerRenderer != null)
+				PlayerRenderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+			else
+				renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
 
 	        respawnIdleTimer -= Time.deltaTime;
 
@@ -199,7 +213,12 @@ public class Player : MonoBehaviour
 	    else
 	    {
             //Destroy(renderer.material); // just to be sure no memory garbage
-	        //renderer.material.color = pMat.color;
+	        
+
+	        if(PlayerRenderer != null)
+	        	PlayerRenderer.material.color = pMat.color;
+			else
+				renderer.material.color = pMat.color;
 	    }
 	}
 
@@ -218,7 +237,12 @@ public class Player : MonoBehaviour
 	{
 		PState = PlayerState.Dead;
 
-		//renderer.enabled = false;
+		
+		if(PlayerRenderer != null)
+			PlayerRenderer.enabled = false;
+		else
+			renderer.enabled = false;
+
 		pTran.position = new Vector3(-1000,-1000,-1000);
 
 		rigidbody.velocity = Vector3.zero;
@@ -234,7 +258,10 @@ public class Player : MonoBehaviour
 
     void Hide()
     {
-        //renderer.enabled = false;
+        if(PlayerRenderer != null)
+        	PlayerRenderer.enabled = false;
+		else
+			renderer.enabled = false;
 
         pTran.position = new Vector3(-1000, -1000, -1000);
 
@@ -248,7 +275,11 @@ public class Player : MonoBehaviour
         KilledBy = "";
         IsReadyToBegin = false;
 
-        //renderer.enabled = true;
+        if(PlayerRenderer != null)
+        	PlayerRenderer.enabled = true;
+		else
+			renderer.enabled = true;
+
 
         rigidbody.velocity = Vector3.zero;
         rigidbody.angularVelocity = Vector3.zero;
@@ -310,8 +341,12 @@ public class Player : MonoBehaviour
 	{
 		PState = PlayerState.Respawning;
 		KilledBy = "";
+
+		if(PlayerRenderer != null)
+			PlayerRenderer.enabled = true;
+		else
+			renderer.enabled = true;
 		
-		//renderer.enabled = true;
 		//pTran.position = spawnPoint;
 
 		ChooseSpawnPoint();

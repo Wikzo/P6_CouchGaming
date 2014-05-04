@@ -13,6 +13,10 @@ public class PlayerJump : MonoBehaviour {
 	private int boostJumpsAmount = 0;
 	private bool canJump = true;
 	private bool canBoostJump = false;
+	private bool hasJumped = false;
+	private bool hasDoubleJumped = false;
+	private bool readyToLand = false;
+	private bool isLanding = false;
 	private bool addJumpPhysics = false;
 	private bool addBoostJumpPhysics = false;
 	private Player playerScript;
@@ -31,6 +35,21 @@ public class PlayerJump : MonoBehaviour {
 	{
 		get{return canBoostJump;}
 		set{canBoostJump = value;}	
+	}
+	public bool HasJumped
+	{
+		get{return hasJumped;}
+		set{hasJumped = value;}	
+	}
+	public bool HasDoubleJumped
+	{
+		get{return hasDoubleJumped;}
+		set{hasDoubleJumped = value;}	
+	}
+	public bool IsLanding
+	{
+		get{return isLanding;}
+		set{isLanding = value;}
 	}
 
 	// Use this for initialization
@@ -63,7 +82,16 @@ public class PlayerJump : MonoBehaviour {
 
 			if(hit.collider.gameObject.tag != "NotCollidable")
 			{
+				if(readyToLand == true)
+				{
+					IsLanding = true;
+					readyToLand = false;
+				}
+
 				CanJump = true;
+				HasJumped = false;
+				HasDoubleJumped = false;
+
 				boostJumpsAmount = 0;
 				rigidbody.velocity = Vector3.zero;
 			}
@@ -75,17 +103,25 @@ public class PlayerJump : MonoBehaviour {
 				CanBoostJump = true;
 			else
 				CanBoostJump = false;
+
+			if(HasJumped == true)
+				readyToLand = true;
 		}
 
 		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
 			//Jump();
+			
 			addJumpPhysics = true;
+			
+			HasJumped = true;		//Used for animation		
 		}
 		else if(CanBoostJump && playerScript.PlayerControllerState.ButtonDownA || CanBoostJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
 			//BoostJump();
+			
 			addBoostJumpPhysics = true;
+			HasDoubleJumped = true;		//Used for animation
 
 			boostJumpsAmount++;
 
@@ -111,8 +147,8 @@ public class PlayerJump : MonoBehaviour {
 				CanBoostJump = false;
 		}
 		*/
-		//Debug.DrawRay(leftPos, Vector3.down);
-		//Debug.DrawRay(rightPos, Vector3.down);
+		Debug.DrawRay(leftPos, Vector3.down);
+		Debug.DrawRay(rightPos, Vector3.down);
 	}
 
 	//TODO: Fix so it's the same velocity for each jump

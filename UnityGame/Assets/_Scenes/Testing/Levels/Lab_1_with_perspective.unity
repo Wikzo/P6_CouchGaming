@@ -22357,6 +22357,7 @@ MonoBehaviour:
   Keyboard: 1
   PlayerColor: {r: .996078432, g: .996078432, b: .470588237, a: 1}
   IsReadyToBegin: 0
+  PlayerRenderer: {fileID: 0}
   Score: 0
   Id: 2
   DeathTime: 2
@@ -25617,6 +25618,7 @@ MonoBehaviour:
   Keyboard: 0
   PlayerColor: {r: .996078432, g: 0, b: .717647076, a: 1}
   IsReadyToBegin: 0
+  PlayerRenderer: {fileID: 0}
   Score: 0
   Id: 0
   DeathTime: 2
@@ -29876,6 +29878,7 @@ MonoBehaviour:
   Keyboard: 1
   PlayerColor: {r: .996078432, g: .870588243, b: .717647076, a: 1}
   IsReadyToBegin: 0
+  PlayerRenderer: {fileID: 0}
   Score: 0
   Id: 3
   DeathTime: 2
@@ -35309,6 +35312,7 @@ MonoBehaviour:
   Keyboard: 0
   PlayerColor: {r: .141176477, g: 0, b: .996078432, a: 1}
   IsReadyToBegin: 0
+  PlayerRenderer: {fileID: 0}
   Score: 0
   Id: 1
   DeathTime: 2
