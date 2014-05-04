@@ -75,8 +75,14 @@ public class MissionIntel : MissionBase
                                                   IntelPropToSteal.transform.localScale.z));
         }*/
 
+        Renderer playerRenderer;
+        if(Player.GetComponent<Player>().PlayerRenderer != null)
+            playerRenderer = Player.GetComponent<Player>().PlayerRenderer;
+        else
+            playerRenderer = Player.renderer;
+
         // bounds intersects looks at if objects touch each other
-        if (Target.renderer.bounds.Intersects(Player.renderer.bounds)
+        if (Target.renderer.bounds.Intersects(playerRenderer.bounds)
             && PickUpObject.PlayerToFollow == Player)
         {
             counter += Time.deltaTime;
