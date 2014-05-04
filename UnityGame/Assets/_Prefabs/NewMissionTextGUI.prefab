@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 400000}
   - 33: {fileID: 3300000}
   - 23: {fileID: 2300000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BlinkDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   - 33: {fileID: 3300002}
   - 23: {fileID: 2300002}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Dpad_blinkUpAndDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - 102: {fileID: 10200000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400004}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: NewMissionTextGUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
