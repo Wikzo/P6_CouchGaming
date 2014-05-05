@@ -128,7 +128,7 @@ public class PlayerAim : MonoBehaviour
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
             // original projectile
-            ProjectileOriginalObject = Instantiate(ProjectilePrefab, pTran.position+Vector3.up*pTran.localScale.y/2, Quaternion.identity) as GameObject;
+            ProjectileOriginalObject = Instantiate(ProjectilePrefab, pTran.position+Vector3.up*2.5f, Quaternion.identity) as GameObject;
             Projectile projectileOriginalScript = ProjectileOriginalObject.GetComponent<Projectile>();
             projectileOriginalScript.Owner = gameObject.tag;
             projectileOriginalScript.OwnerObject = gameObject;
