@@ -35,7 +35,7 @@ public class ScreenWrapping : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        myCam = GameObject.Find("Main Camera").camera;
+        myCam = GameObject.Find("MainCamera_ortographic").camera;
         screen = myCam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
         zeroPosWorldPoint = myCam.ViewportToWorldPoint(new Vector3(0, 0, 0));
         rightSidePosWorldPoint = myCam.ViewportToWorldPoint(new Vector3(1, 0, 0));
