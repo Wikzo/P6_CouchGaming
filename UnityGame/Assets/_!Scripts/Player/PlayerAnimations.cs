@@ -7,7 +7,8 @@ public class PlayerAnimations : MonoBehaviour {
 	private PlayerJump playerJump;
 	private Animator anim;
 
-	private AnimatorStateInfo currentBaseState;			
+	[HideInInspector]
+	public AnimatorStateInfo CurrentBaseState;			
 	private AnimatorStateInfo layer2CurrentState;	
 
 	private float animSpeed = 1.5f;
@@ -84,11 +85,10 @@ public class PlayerAnimations : MonoBehaviour {
 		//}
 
 		anim.speed = animSpeed;								
-		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);	
+		CurrentBaseState = anim.GetCurrentAnimatorStateInfo(0);	
 		
 		if(anim.layerCount ==2)		
-			layer2CurrentState = anim.GetCurrentAnimatorStateInfo(1);	
-
+			layer2CurrentState = anim.GetCurrentAnimatorStateInfo(1);
 
 		if(playerJump.HasJumped == true)
 		{
@@ -130,11 +130,11 @@ public class PlayerAnimations : MonoBehaviour {
 		else
 		{
 			runTimer += Time.deltaTime;
-			if(runTimer >= 0.1f)
-			{
+			//if(runTimer >= 0.1f)
+			//{
 				anim.SetBool("Run", false);
 				runTimer = 0;
-			}
+			//}
 		}
 	}
 }

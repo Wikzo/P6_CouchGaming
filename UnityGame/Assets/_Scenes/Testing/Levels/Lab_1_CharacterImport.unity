@@ -3956,6 +3956,7 @@ MonoBehaviour:
   Clone: {fileID: 185259735}
   UseRotation: 0
   UseScale: 1
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &143760510
 MonoBehaviour:
@@ -3974,6 +3975,7 @@ MonoBehaviour:
   Clone: {fileID: 335468907}
   UseRotation: 1
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &143760511
 MonoBehaviour:
@@ -4004,6 +4006,7 @@ MonoBehaviour:
   Clone: {fileID: 1056955423}
   UseRotation: 0
   UseScale: 0
+  UseAnimations: 1
   IsAlwaysTrigger: 0
 --- !u!114 &143760513
 MonoBehaviour:
@@ -4406,15 +4409,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400388, guid: 5905fa4e3038c9a4d80922b573dba0e5, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -36.9426651
+      value: -42.0027733
       objectReference: {fileID: 0}
     - target: {fileID: 400388, guid: 5905fa4e3038c9a4d80922b573dba0e5, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.88206625
+      value: 1.86515391
       objectReference: {fileID: 0}
     - target: {fileID: 400388, guid: 5905fa4e3038c9a4d80922b573dba0e5, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 50.3030548
+      value: 50.3030891
       objectReference: {fileID: 0}
     - target: {fileID: 400220, guid: 5905fa4e3038c9a4d80922b573dba0e5, type: 2}
       propertyPath: m_LocalPosition.x
@@ -7361,6 +7364,7 @@ MonoBehaviour:
   Clone: {fileID: 152729448}
   UseRotation: 0
   UseScale: 1
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &258189779
 MonoBehaviour:
@@ -7379,6 +7383,7 @@ MonoBehaviour:
   Clone: {fileID: 1465680982}
   UseRotation: 1
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &258189780
 MonoBehaviour:
@@ -7397,6 +7402,7 @@ MonoBehaviour:
   Clone: {fileID: 1829481894}
   UseRotation: 0
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &258189781
 MonoBehaviour:
@@ -7653,6 +7659,7 @@ MonoBehaviour:
   Clone: {fileID: 185259735}
   UseRotation: 0
   UseScale: 1
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &263807531
 MonoBehaviour:
@@ -7671,6 +7678,7 @@ MonoBehaviour:
   Clone: {fileID: 335468907}
   UseRotation: 1
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &263807532
 MonoBehaviour:
@@ -7701,6 +7709,7 @@ MonoBehaviour:
   Clone: {fileID: 469119822}
   UseRotation: 0
   UseScale: 0
+  UseAnimations: 1
   IsAlwaysTrigger: 0
 --- !u!114 &263807534
 MonoBehaviour:
@@ -8788,6 +8797,10 @@ Prefab:
     - target: {fileID: 100088, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
       propertyPath: m_Layer
       value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
+      propertyPath: UseAnimations
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
@@ -11724,6 +11737,7 @@ MonoBehaviour:
   Clone: {fileID: 412720088}
   UseRotation: 0
   UseScale: 1
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &404873076
 MonoBehaviour:
@@ -11742,6 +11756,7 @@ MonoBehaviour:
   Clone: {fileID: 89496328}
   UseRotation: 1
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &404873077
 MonoBehaviour:
@@ -11772,6 +11787,7 @@ MonoBehaviour:
   Clone: {fileID: 1338182800}
   UseRotation: 0
   UseScale: 0
+  UseAnimations: 1
   IsAlwaysTrigger: 0
 --- !u!114 &404873079
 MonoBehaviour:
@@ -15986,6 +16002,7 @@ MonoBehaviour:
   Clone: {fileID: 246443756}
   UseRotation: 0
   UseScale: 1
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &574215415
 MonoBehaviour:
@@ -16005,6 +16022,7 @@ MonoBehaviour:
   Clone: {fileID: 227267136}
   UseRotation: 1
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &574215416
 MonoBehaviour:
@@ -16024,6 +16042,7 @@ MonoBehaviour:
   Clone: {fileID: 1596579675}
   UseRotation: 0
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &574215417
 MonoBehaviour:
@@ -22609,6 +22628,7 @@ MonoBehaviour:
   Clone: {fileID: 91457565}
   UseRotation: 0
   UseScale: 0
+  UseAnimations: 1
   IsAlwaysTrigger: 0
 --- !u!114 &794842725
 MonoBehaviour:
@@ -22758,6 +22778,7 @@ MonoBehaviour:
   Clone: {fileID: 1986468897}
   UseRotation: 0
   UseScale: 1
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &794842733
 MonoBehaviour:
@@ -22776,6 +22797,7 @@ MonoBehaviour:
   Clone: {fileID: 1227455727}
   UseRotation: 1
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &794842734
 MonoBehaviour:
@@ -25285,6 +25307,10 @@ Prefab:
       propertyPath: m_Layer
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
+      propertyPath: UseAnimations
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
     - {fileID: 13600000, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
@@ -27583,6 +27609,10 @@ Prefab:
     - target: {fileID: 100026, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
       propertyPath: m_Layer
       value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
+      propertyPath: UseAnimations
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
@@ -31509,6 +31539,10 @@ Prefab:
     - target: {fileID: 100070, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
       propertyPath: m_Layer
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400002, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
+      propertyPath: UseAnimations
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400000, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
@@ -39545,6 +39579,7 @@ MonoBehaviour:
   Clone: {fileID: 46133041}
   UseRotation: 0
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &1333197880
 MonoBehaviour:
@@ -39564,6 +39599,7 @@ MonoBehaviour:
   Clone: {fileID: 345715144}
   UseRotation: 0
   UseScale: 1
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &1333197881
 MonoBehaviour:
@@ -39583,6 +39619,7 @@ MonoBehaviour:
   Clone: {fileID: 966471459}
   UseRotation: 1
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!1 &1338088710
 GameObject:
@@ -43792,7 +43829,7 @@ Transform:
   m_PrefabInternal: {fileID: 149458144}
   m_GameObject: {fileID: 1489674131}
   m_LocalRotation: {x: .49999994, y: .500000119, z: .500000119, w: .49999994}
-  m_LocalPosition: {x: -36.9426651, y: 1.88206625, z: 50.3030548}
+  m_LocalPosition: {x: -42.0027733, y: 1.86515391, z: 50.3030891}
   m_LocalScale: {x: 37.898262, y: .373655021, z: 52.0626335}
   m_Children: []
   m_Father: {fileID: 472865101}
@@ -54216,6 +54253,7 @@ MonoBehaviour:
   Clone: {fileID: 1964610963}
   UseRotation: 0
   UseScale: 1
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &1898107638
 MonoBehaviour:
@@ -54235,6 +54273,7 @@ MonoBehaviour:
   Clone: {fileID: 1029490555}
   UseRotation: 1
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &1898107639
 MonoBehaviour:
@@ -54254,6 +54293,7 @@ MonoBehaviour:
   Clone: {fileID: 1475358119}
   UseRotation: 0
   UseScale: 0
+  UseAnimations: 0
   IsAlwaysTrigger: 0
 --- !u!114 &1898107640
 MonoBehaviour:
@@ -60998,7 +61038,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2129707828}
   m_LocalRotation: {x: .5, y: .5, z: .5, w: .5}
-  m_LocalPosition: {x: 47.1433105, y: 2.16354656, z: 50.3030472}
+  m_LocalPosition: {x: 40.8824081, y: 2.14261723, z: 50.3030739}
   m_LocalScale: {x: 37.8987923, y: .373654991, z: 52.0633583}
   m_Children: []
   m_Father: {fileID: 472865101}

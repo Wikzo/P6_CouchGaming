@@ -27,14 +27,20 @@ public class ScreenWrapping : MonoBehaviour
     private SkinnedMeshRenderer cloneRenderer;
     private SkinnedMeshRenderer[] cloneRenderers;
 
+    private PlayerAnimations originalAnimations;
+    private Animator anim;
+
     public bool UseRotation;
     public bool UseScale;
+    public bool UseAnimations;
     public bool IsAlwaysTrigger;
     private bool UseColor = true;
 
     // Use this for initialization
     private void Start()
-    {
+    {   
+
+
         myCam = GameObject.Find("MainCamera_ortographic").camera;
         screen = myCam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
         zeroPosWorldPoint = myCam.ViewportToWorldPoint(new Vector3(0, 0, 0));
@@ -99,6 +105,17 @@ public class ScreenWrapping : MonoBehaviour
                 }
             }
         }
+
+        if(OriginalToFollow.GetComponent<PlayerAnimations>() != null)
+            originalAnimations = OriginalToFollow.GetComponent<PlayerAnimations>();
+
+        if(GetComponent<Animator>() != null && UseAnimations == true)
+        {
+            anim = Clone.GetComponent<Animator>();
+            anim.speed = 1.5f;
+        }
+
+
     }
 
     // Update is called once per frame
@@ -193,6 +210,20 @@ public class ScreenWrapping : MonoBehaviour
             if(cloneRenderer != null && originalRenderer != null)
                 cloneRenderer.material.color = originalRenderer.material.color; 
             //Clone.transform.renderer.material.color = OriginalToFollow.renderer.material.color;
+
+        if (UseAnimations)
+        {
+            //anim.SetBool(originalAnimations.CurrentBaseState.nameHash, true);
+            //anim.Play(originalAnimations.CurrentBaseState.nameHash, 0, Mathf.NegativeInfinity);
+            
+            //TODO: Get them to run at the same time and do this for all animations
+            if(originalAnimations.CurrentBaseState.nameHash == Animator.StringToHash("Base Layer.Run"))
+                anim.SetBool("Run", true);
+            else
+                anim.SetBool("Run", false);
+
+            Clone.transform.rotation = OriginalToFollowTransform.rotation;
+        }
 
 
         if (cloneBoxCollider != null && IsAlwaysTrigger)
