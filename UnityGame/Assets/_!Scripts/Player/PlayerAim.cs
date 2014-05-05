@@ -133,8 +133,8 @@ public class PlayerAim : MonoBehaviour
             projectileOriginalScript.Owner = gameObject.tag;
             projectileOriginalScript.OwnerObject = gameObject;
 
-            if(playerScript.PlayerRenderer != null)
-            	projectileOriginalScript.PMat = playerScript.PlayerRenderer.material;
+            if(playerScript.PlayerBodyRenderer != null)
+            	projectileOriginalScript.PMat = playerScript.PlayerBodyRenderer.material;
             else
             	projectileOriginalScript.PMat = renderer.material;
 
@@ -152,8 +152,8 @@ public class PlayerAim : MonoBehaviour
                 cloneScript.Owner = gameObject.tag;
                 cloneScript.OwnerObject = gameObject;
 
-                if(playerScript.PlayerRenderer != null)
-            		cloneScript.PMat = playerScript.PlayerRenderer.material;
+                if(playerScript.PlayerBodyRenderer != null)
+            		cloneScript.PMat = playerScript.PlayerBodyRenderer.material;
            		else
             		cloneScript.PMat = renderer.material;
 

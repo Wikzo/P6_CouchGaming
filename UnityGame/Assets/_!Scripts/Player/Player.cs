@@ -25,7 +25,10 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public bool IsReadyToBegin = false;
 
-	public SkinnedMeshRenderer PlayerRenderer;
+	[HideInInspector]
+	public SkinnedMeshRenderer[] PlayerRenderers;
+	[HideInInspector]
+	public SkinnedMeshRenderer PlayerBodyRenderer;
 
 	public int Score;
 	public int Id;
@@ -72,6 +75,18 @@ public class Player : MonoBehaviour
     // Use this for initialization
 	void Awake () 
 	{
+        if(GetComponentsInChildren<SkinnedMeshRenderer>() != null)
+        {
+        	PlayerRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
+        	foreach(SkinnedMeshRenderer rend in PlayerRenderers)
+        	{
+        		if(rend.gameObject.name == "Body")
+        		{
+        			PlayerBodyRenderer = rend;
+        		}
+        	}
+        }
+
 		pTran = transform;
 
 		switch(Id)
@@ -93,8 +108,8 @@ public class Player : MonoBehaviour
 			pMat = Materials[3];
 			break;
 		}
-		if(PlayerRenderer != null)
-			PlayerRenderer.material = pMat;
+		if(PlayerBodyRenderer != null)
+			PlayerBodyRenderer.material = pMat;
 		else
 			renderer.material = pMat;
 
@@ -122,10 +137,8 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        
-
-        if(PlayerRenderer != null)
-        	PlayerColor = PlayerRenderer.material.color;
+        if(PlayerBodyRenderer != null)
+        	PlayerColor = PlayerBodyRenderer.material.color;
 		else
 			PlayerColor = renderer.material.color;
 
@@ -199,8 +212,8 @@ public class Player : MonoBehaviour
 	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
 	        
 
-	        if(PlayerRenderer != null)
-				PlayerRenderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+	        if(PlayerBodyRenderer != null)
+				PlayerBodyRenderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
 			else
 				renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
 
@@ -215,8 +228,8 @@ public class Player : MonoBehaviour
             //Destroy(renderer.material); // just to be sure no memory garbage
 	        
 
-	        if(PlayerRenderer != null)
-	        	PlayerRenderer.material.color = pMat.color;
+	        if(PlayerBodyRenderer != null)
+	        	PlayerBodyRenderer.material.color = pMat.color;
 			else
 				renderer.material.color = pMat.color;
 	    }
@@ -238,8 +251,8 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Dead;
 
 		
-		if(PlayerRenderer != null)
-			PlayerRenderer.enabled = false;
+		if(PlayerBodyRenderer != null)
+			PlayerBodyRenderer.enabled = false;
 		else
 			renderer.enabled = false;
 
@@ -258,8 +271,8 @@ public class Player : MonoBehaviour
 
     void Hide()
     {
-        if(PlayerRenderer != null)
-        	PlayerRenderer.enabled = false;
+        if(PlayerBodyRenderer != null)
+        	PlayerBodyRenderer.enabled = false;
 		else
 			renderer.enabled = false;
 
@@ -275,8 +288,8 @@ public class Player : MonoBehaviour
         KilledBy = "";
         IsReadyToBegin = false;
 
-        if(PlayerRenderer != null)
-        	PlayerRenderer.enabled = true;
+        if(PlayerBodyRenderer != null)
+        	PlayerBodyRenderer.enabled = true;
 		else
 			renderer.enabled = true;
 
@@ -342,8 +355,8 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Respawning;
 		KilledBy = "";
 
-		if(PlayerRenderer != null)
-			PlayerRenderer.enabled = true;
+		if(PlayerBodyRenderer != null)
+			PlayerBodyRenderer.enabled = true;
 		else
 			renderer.enabled = true;
 		

@@ -21,8 +21,6 @@ public class PlayRenderMovie : MonoBehaviour {
 
             current.Play();
         }
-        else
-            Destroy(gameObject);
     }
 
     void Update()

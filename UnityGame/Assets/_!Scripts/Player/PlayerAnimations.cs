@@ -130,7 +130,7 @@ public class PlayerAnimations : MonoBehaviour {
 		else
 		{
 			runTimer += Time.deltaTime;
-			if(runTimer >= 0.25f)
+			if(runTimer >= 0.1f)
 			{
 				anim.SetBool("Run", false);
 				runTimer = 0;

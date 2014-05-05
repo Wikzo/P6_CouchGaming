@@ -23,6 +23,10 @@ public class ScreenWrapping : MonoBehaviour
     private Vector3 rightSidePosWorldPoint;
     private Vector3 leftSidePosWorldPoint;
 
+    private SkinnedMeshRenderer originalRenderer;
+    private SkinnedMeshRenderer cloneRenderer;
+    private SkinnedMeshRenderer[] cloneRenderers;
+
     public bool UseRotation;
     public bool UseScale;
     public bool IsAlwaysTrigger;
@@ -55,7 +59,6 @@ public class ScreenWrapping : MonoBehaviour
             OriginalToFollowTransform = OriginalToFollow.transform;
         }
 
-
         if (myCam == null)
             Debug.Log("Error. Needs to assigne main camera for screen wrapping!");
 
@@ -75,8 +78,27 @@ public class ScreenWrapping : MonoBehaviour
         //else
           //  Debug.Log("Has no rigidbody attached");
 
-        
+        if(OriginalToFollow.GetComponent<Player>() != null)
+        {
+            if(OriginalToFollow.GetComponent<Player>().PlayerBodyRenderer != null)
+                originalRenderer = OriginalToFollow.GetComponent<Player>().PlayerBodyRenderer;
+        }
 
+        if(Clone != null)
+        {
+            if(Clone.GetComponentsInChildren<SkinnedMeshRenderer>() != null)
+            {
+                cloneRenderers = Clone.GetComponentsInChildren<SkinnedMeshRenderer>();
+            
+                foreach(SkinnedMeshRenderer rend in cloneRenderers)
+                {
+                    if(rend.gameObject.name == "Body")
+                    {
+                        cloneRenderer = rend;
+                    }
+                }
+            }
+        }
     }
 
     // Update is called once per frame
@@ -112,7 +134,14 @@ public class ScreenWrapping : MonoBehaviour
         }
 
         if(Clone != null)
-            Clone.renderer.enabled = OriginalToFollow.renderer.enabled;
+        {
+            if(cloneRenderer != null && originalRenderer != null)
+            {
+                cloneRenderer.enabled = originalRenderer.enabled;
+            }
+            else if(Clone.renderer != null && OriginalToFollow.renderer != null)
+                Clone.renderer.enabled = OriginalToFollow.renderer.enabled;
+        }
 
         // show clone
         if (OnlyScreenWrapNoClone)
@@ -161,7 +190,9 @@ public class ScreenWrapping : MonoBehaviour
             Clone.transform.rotation = OriginalToFollowTransform.rotation;
 
         if (UseColor)
-            Clone.transform.renderer.material.color = OriginalToFollow.renderer.material.color;
+            if(cloneRenderer != null && originalRenderer != null)
+                cloneRenderer.material.color = originalRenderer.material.color; 
+            //Clone.transform.renderer.material.color = OriginalToFollow.renderer.material.color;
 
 
         if (cloneBoxCollider != null && IsAlwaysTrigger)

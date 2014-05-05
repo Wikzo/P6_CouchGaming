@@ -76,8 +76,8 @@ public class MissionIntel : MissionBase
         }*/
 
         Renderer playerRenderer;
-        if(Player.GetComponent<Player>().PlayerRenderer != null)
-            playerRenderer = Player.GetComponent<Player>().PlayerRenderer;
+        if(Player.GetComponent<Player>().PlayerBodyRenderer != null)
+            playerRenderer = Player.GetComponent<Player>().PlayerBodyRenderer;
         else
             playerRenderer = Player.renderer;
 
