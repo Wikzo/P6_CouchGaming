@@ -3518,8 +3518,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 143760507}
   OriginalToFollow: {fileID: 815393460}
   Clone: {fileID: 185259735}
@@ -3540,8 +3539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 143760507}
   OriginalToFollow: {fileID: 1898841626}
   Clone: {fileID: 335468907}
@@ -3574,8 +3572,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 1574182705}
   RootToDetectScreenEdge: {fileID: 143760507}
   OriginalToFollow: {fileID: 143760507}
   Clone: {fileID: 1056955423}
@@ -3687,7 +3684,7 @@ MonoBehaviour:
   Id: 2
   DeathTime: 2
   RespawnTime: 3
-  RespawnBlinkRate: .5
+  RespawnBlinkRate: .300000012
   Materials:
   - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
   - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
@@ -6552,8 +6549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 258189776}
   OriginalToFollow: {fileID: 1966072185}
   Clone: {fileID: 152729448}
@@ -6574,8 +6570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 258189776}
   OriginalToFollow: {fileID: 1426901077}
   Clone: {fileID: 1465680982}
@@ -6596,8 +6591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 258189776}
   OriginalToFollow: {fileID: 258189776}
   Clone: {fileID: 1829481894}
@@ -6856,8 +6850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 1633362717}
   RootToDetectScreenEdge: {fileID: 263807528}
   OriginalToFollow: {fileID: 815393460}
   Clone: {fileID: 185259735}
@@ -6878,8 +6871,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 1633362717}
   RootToDetectScreenEdge: {fileID: 263807528}
   OriginalToFollow: {fileID: 1898841626}
   Clone: {fileID: 335468907}
@@ -6912,8 +6904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 1235277590}
-  Helmet: {fileID: 718868790}
+  RendererObject: {fileID: 1633362717}
   RootToDetectScreenEdge: {fileID: 263807528}
   OriginalToFollow: {fileID: 263807528}
   Clone: {fileID: 469119822}
@@ -7025,7 +7016,7 @@ MonoBehaviour:
   Id: 0
   DeathTime: 2
   RespawnTime: 3
-  RespawnBlinkRate: .5
+  RespawnBlinkRate: .300000012
   Materials:
   - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
   - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
@@ -9921,8 +9912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 395626345}
-  Helmet: {fileID: 264732034}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 404873073}
   OriginalToFollow: {fileID: 1069381777}
   Clone: {fileID: 412720088}
@@ -9943,8 +9933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 2069200772}
-  Helmet: {fileID: 1782808748}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 404873073}
   OriginalToFollow: {fileID: 1022928629}
   Clone: {fileID: 89496328}
@@ -9977,8 +9966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 118012266}
-  Helmet: {fileID: 2089578864}
+  RendererObject: {fileID: 1168725404}
   RootToDetectScreenEdge: {fileID: 404873073}
   OriginalToFollow: {fileID: 404873073}
   Clone: {fileID: 1338182800}
@@ -10090,7 +10078,7 @@ MonoBehaviour:
   Id: 1
   DeathTime: 2
   RespawnTime: 3
-  RespawnBlinkRate: .5
+  RespawnBlinkRate: .300000012
   Materials:
   - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
   - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
@@ -14084,8 +14072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 574215412}
   OriginalToFollow: {fileID: 1680880880}
   Clone: {fileID: 246443756}
@@ -14107,8 +14094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 574215412}
   OriginalToFollow: {fileID: 1020328960}
   Clone: {fileID: 227267136}
@@ -14130,8 +14116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 574215412}
   OriginalToFollow: {fileID: 574215412}
   Clone: {fileID: 1596579675}
@@ -20212,8 +20197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 114200420}
   RootToDetectScreenEdge: {fileID: 794842719}
   OriginalToFollow: {fileID: 794842719}
   Clone: {fileID: 91457565}
@@ -20325,7 +20309,7 @@ MonoBehaviour:
   Id: 3
   DeathTime: 2
   RespawnTime: 3
-  RespawnBlinkRate: .5
+  RespawnBlinkRate: .300000012
   Materials:
   - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
   - {fileID: 2100000, guid: b6b4ae61ea2c6cf43a5caba0d8b5b47f, type: 2}
@@ -20367,8 +20351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 794842719}
   OriginalToFollow: {fileID: 837973790}
   Clone: {fileID: 1986468897}
@@ -20389,8 +20372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 794842719}
   OriginalToFollow: {fileID: 844922875}
   Clone: {fileID: 1227455727}
@@ -35713,8 +35695,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 1333197866}
   OriginalToFollow: {fileID: 1333197866}
   Clone: {fileID: 46133041}
@@ -35736,8 +35717,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 1333197866}
   OriginalToFollow: {fileID: 241142683}
   Clone: {fileID: 345715144}
@@ -35759,8 +35739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 1333197866}
   OriginalToFollow: {fileID: 721268263}
   Clone: {fileID: 966471459}
@@ -49914,8 +49893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 1898107635}
   OriginalToFollow: {fileID: 51333798}
   Clone: {fileID: 1964610963}
@@ -49937,8 +49915,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 1898107635}
   OriginalToFollow: {fileID: 1256767080}
   Clone: {fileID: 1029490555}
@@ -49960,8 +49937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyScreenWrapNoClone: 0
-  Body: {fileID: 0}
-  Helmet: {fileID: 0}
+  RendererObject: {fileID: 0}
   RootToDetectScreenEdge: {fileID: 1898107635}
   OriginalToFollow: {fileID: 1898107635}
   Clone: {fileID: 1475358119}

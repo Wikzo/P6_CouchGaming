@@ -6,8 +6,7 @@ public class ScreenWrapping : MonoBehaviour
 {
     public bool OnlyScreenWrapNoClone = false;
 
-    public Transform Body;
-    public Transform Helmet;
+    public GameObject RendererObject;
 
     public GameObject RootToDetectScreenEdge;
     public GameObject OriginalToFollow;
@@ -19,6 +18,12 @@ public class ScreenWrapping : MonoBehaviour
     private BoxCollider cloneBoxCollider;
     private Rigidbody cloneRigidbody;
     private bool standingAtScreenEdgeRightNow;
+
+    private SkinnedMeshRenderer originalBodyRenderer;
+    private MeshRenderer[] originalHelmetRenderers;
+
+    private SkinnedMeshRenderer cloneBodyRenderer;
+    private MeshRenderer[] cloneHelmetRenderers;
 
     private Camera myCam;
     private Vector3 screenToWorldPos;
@@ -91,7 +96,17 @@ public class ScreenWrapping : MonoBehaviour
         if(Clone != null && UseAnimations)
         {
             cloneBody = Clone.transform.Find("Armature").gameObject;
-            cloneBody.SetActive(false);
+
+            originalBodyRenderer = OriginalToFollow.GetComponent<Player>().BodyRenderer;
+            originalHelmetRenderers = OriginalToFollow.GetComponent<Player>().HelmetRenderers;
+
+            if(RendererObject.GetComponent<SkinnedMeshRenderer>() != null)
+                cloneBodyRenderer = RendererObject.GetComponent<SkinnedMeshRenderer>();
+            if(RendererObject.GetComponentsInChildren<MeshRenderer>() != null)
+            {
+                cloneHelmetRenderers = RendererObject.GetComponentsInChildren<MeshRenderer>();
+                cloneBody.SetActive(false);
+            }
         }
 
         if(OriginalToFollow.GetComponent<PlayerAnimations>() != null)
@@ -194,9 +209,8 @@ public class ScreenWrapping : MonoBehaviour
         //    if(cloneBodyRenderer != null && originalRenderer != null)
         //        cloneBodyRenderer.material.color = originalRenderer.material.color; 
 
-        if (UseAnimations)
+        if (Clone != null && UseAnimations && cloneBody.activeInHierarchy == true)
         {            
-            //TODO: Do this for all animations
             if(originalAnimations.CurrentBaseState.nameHash == PlayerAnimations.runState)    
                 anim.SetBool("Run", true);
             else   
@@ -211,13 +225,10 @@ public class ScreenWrapping : MonoBehaviour
 
                 if(startBoostEffect == false)
                 {
-                    if(cloneBody.activeInHierarchy == true)
-                    {
-                        boostJumpEffect = Instantiate(BoostJumpEffect, Clone.position, Quaternion.identity) as GameObject;
-                        Destroy(boostJumpEffect, 3);
+                    boostJumpEffect = Instantiate(BoostJumpEffect, Clone.position, Quaternion.identity) as GameObject;
+                    Destroy(boostJumpEffect, 3);
 
-                        startBoostEffect = true;
-                    }
+                    startBoostEffect = true;
                 }
             }
             else
@@ -228,8 +239,14 @@ public class ScreenWrapping : MonoBehaviour
             if(originalAnimations.CurrentBaseState.nameHash == PlayerAnimations.JumpLandState)    
                 anim.CrossFade(PlayerAnimations.JumpLandState, 0, 0, Mathf.NegativeInfinity);    
 
-
             Clone.transform.rotation = OriginalToFollowTransform.rotation;
+
+            cloneBodyRenderer.material.color = originalBodyRenderer.material.color;
+            cloneBodyRenderer.materials[1].color = originalBodyRenderer.materials[1].color;
+            for(int i=0; i<cloneHelmetRenderers.Length; i++)
+            {
+                cloneHelmetRenderers[i].material.color = originalHelmetRenderers[i].material.color;
+            }
         }
 
 

@@ -30,6 +30,7 @@ public class Player : MonoBehaviour
 	public SkinnedMeshRenderer BodyRenderer;
 	[HideInInspector]
 	public MeshRenderer[] HelmetRenderers;
+	private Color[] originalHelmetColors;
 
 	public int Score;
 	public int Id;
@@ -82,10 +83,17 @@ public class Player : MonoBehaviour
 
 		if(RendererObject != null)
 		{
-			if(RendererObject.GetComponentInChildren<SkinnedMeshRenderer>() != null)
-        		BodyRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+			if(RendererObject.GetComponent<SkinnedMeshRenderer>() != null)
+        		BodyRenderer = RendererObject.GetComponent<SkinnedMeshRenderer>();
         	if(RendererObject.GetComponentsInChildren<MeshRenderer>() != null)
-        		HelmetRenderers = GetComponentsInChildren<MeshRenderer>();
+        	{
+        		HelmetRenderers = RendererObject.GetComponentsInChildren<MeshRenderer>();
+        		originalHelmetColors = new Color[HelmetRenderers.Length];
+        		for(int i=0; i<originalHelmetColors.Length; i++)
+        		{
+        			originalHelmetColors[i] = HelmetRenderers[i].material.color;
+        		}
+        	}
         }
 
 		switch(Id)
@@ -109,7 +117,8 @@ public class Player : MonoBehaviour
 		}
 		if(BodyRenderer != null)
 		{
-			BodyRenderer.material = pMat;
+			BodyRenderer.material.color = pMat.color;
+			BodyRenderer.materials[1].color = pMat.color;
 			PlayerColor = pMat.color;
 		}
 		else
@@ -212,35 +221,51 @@ public class Player : MonoBehaviour
 	    }
 
 
-	    //if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
-	    //{
-	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
-	        
-
-	        if(BodyRenderer != null)
-				BodyRenderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+	    if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
+	    {
+	      	float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
+	      	
+	
+	      	if(BodyRenderer != null)
+	      	{
+					BodyRenderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+					BodyRenderer.materials[1].color = Color.Lerp(pMat.color, Color.white, lerp);
+	      	}
 			else
 				renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
 
 			if(HelmetRenderers[0] != null)
 			{
-				foreach(MeshRenderer rend in HelmetRenderers)
-				rend.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+				for(int i=0; i<HelmetRenderers.Length; i++)
+				{
+					HelmetRenderers[i].material.color = Color.Lerp(originalHelmetColors[i], Color.white, lerp);
+				}
 			}
 
-	        respawnIdleTimer -= Time.deltaTime;
+	      respawnIdleTimer -= Time.deltaTime;
 
-	        //Make sure the player can't aim
+	      //Make sure the player can't aim
 	    	playerAim.TurnOffAim();
 
-	    //}
-	    //else
-	    //{
-	    //    if(PlayerRenderers != null)
-	    //    	PlayerRenderers.material.color = pMat.color;
-		//	else
-		//		renderer.material.color = pMat.color;
-	    //}
+	    }
+	    else
+	    {
+	       	if(BodyRenderer != null)
+	      	{
+				BodyRenderer.material.color = pMat.color;
+				BodyRenderer.materials[1].color = pMat.color;
+	      	}
+			else
+				renderer.material.color = pMat.color;
+
+			if(HelmetRenderers[0] != null)
+			{
+				for(int i=0; i<HelmetRenderers.Length; i++)
+				{
+					HelmetRenderers[i].material.color = originalHelmetColors[i];
+				}
+			}
+	    }
 	}
 
     public void RemoveAllMissionsOnMeDontUseThis()
@@ -257,12 +282,12 @@ public class Player : MonoBehaviour
 	public IEnumerator Die()
 	{
 		PState = PlayerState.Dead;
-
 		
-		if(BodyRenderer != null)
-			BodyRenderer.enabled = false;
-		else
-			renderer.enabled = false;
+		EnableRenderers(false);
+		//if(BodyRenderer != null)
+		//	BodyRenderer.enabled = false;
+		//else
+		//	renderer.enabled = false;
 
 		pTran.position = new Vector3(-1000,-1000,-1000);
 
@@ -279,10 +304,11 @@ public class Player : MonoBehaviour
 
     void Hide()
     {
-        if(BodyRenderer != null)
-        	BodyRenderer.enabled = false;
-		else
-			renderer.enabled = false;
+        EnableRenderers(false);
+        //if(BodyRenderer != null)
+        //	BodyRenderer.enabled = false;
+		//else
+		//	renderer.enabled = false;
 
         pTran.position = new Vector3(-1000, -1000, -1000);
 
@@ -296,10 +322,11 @@ public class Player : MonoBehaviour
         KilledBy = "";
         IsReadyToBegin = false;
 
-        if(BodyRenderer != null)
-        	BodyRenderer.enabled = true;
-		else
-			renderer.enabled = true;
+        EnableRenderers(true);
+        //if(BodyRenderer != null)
+        //	BodyRenderer.enabled = true;
+		//else
+		//	renderer.enabled = true;
 
 
         rigidbody.velocity = Vector3.zero;
@@ -363,10 +390,11 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Respawning;
 		KilledBy = "";
 
-		if(BodyRenderer != null)
-			BodyRenderer.enabled = true;
-		else
-			renderer.enabled = true;
+		EnableRenderers(true);
+		//if(BodyRenderer != null)
+		//	BodyRenderer.enabled = true;
+		//else
+		//	renderer.enabled = true;
 		
 		//pTran.position = spawnPoint;
 
@@ -437,5 +465,21 @@ public class Player : MonoBehaviour
         }
 
         ChosenSpawn.SetActive(false);
+	}
+
+	void EnableRenderers(bool on)
+	{
+		if(BodyRenderer != null)
+			BodyRenderer.enabled = on;
+		else
+			renderer.enabled = on;
+
+		if(HelmetRenderers[0] != null)
+		{
+			for(int i=0; i<HelmetRenderers.Length; i++)
+			{
+				HelmetRenderers[i].enabled = on;
+			}
+		}
 	}
 }

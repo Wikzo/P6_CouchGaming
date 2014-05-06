@@ -39,56 +39,8 @@ public class PlayerAnimations : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () 
 	{
-		//anim.speed = animSpeed;								
-		//currentBaseState = anim.GetCurrentAnimatorStateInfo(0);	
-		//
-		//if(anim.layerCount ==2)		
-		//	layer2CurrentState = anim.GetCurrentAnimatorStateInfo(1);	
-//
-//
-		//if(playerJump.HasJumped == true)
-		//{
-		//	anim.SetBool("Jump", true);
-//
-		//	if(playerJump.HasDoubleJumped == true)
-		//		anim.SetBool("DoubleJump", true);
-		//}
-		//else
-		//{
-		//	anim.SetBool("Jump", false);
-		//	anim.SetBool("DoubleJump", false);
-		//}
-		//
-//
-		//if(playerJump.IsLanding == true)
-		//{
-		//	playerJump.IsLanding = false;
-		//	if(playerMove.movingLeft || playerMove.movingRight)
-		//	{
-		//		anim.CrossFade(runState, 0, 0, Mathf.NegativeInfinity);
-		//		anim.SetFloat("Speed", 1f);
-		//	}
-		//	else
-		//	{
-		//		anim.CrossFade(JumpLandState, 0, 0, Mathf.NegativeInfinity);
-		//		anim.SetFloat("Speed", 0);
-		//	}			
-		//}
-//
-		//if(playerMove.movingLeft || playerMove.movingRight)
-		//{
-		//	anim.SetFloat("Speed", 1f);
-		//}
-		//else
-		//{
-		//	anim.SetFloat("Speed", 0);
-		//}
-
 		anim.speed = animSpeed;								
 		CurrentBaseState = anim.GetCurrentAnimatorStateInfo(0);	
-		
-		if(anim.layerCount ==2)		
-			layer2CurrentState = anim.GetCurrentAnimatorStateInfo(1);
 
 		if(playerJump.HasJumped == true)
 		{
@@ -119,11 +71,11 @@ public class PlayerAnimations : MonoBehaviour {
 		else
 		{
 			runTimer += Time.deltaTime;
-			//if(runTimer >= 0.1f)
-			//{
+			if(runTimer >= 0.1f)
+			{
 				anim.SetBool("Run", false);
 				runTimer = 0;
-			//}
+			}
 		}
 	}
 }
