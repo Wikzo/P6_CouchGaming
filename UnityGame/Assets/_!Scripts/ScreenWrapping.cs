@@ -211,10 +211,13 @@ public class ScreenWrapping : MonoBehaviour
 
                 if(startBoostEffect == false)
                 {
-                    boostJumpEffect = Instantiate(BoostJumpEffect, Clone.position, Quaternion.identity) as GameObject;
-                    Destroy(boostJumpEffect, 3);
+                    if(cloneBody.activeInHierarchy == true)
+                    {
+                        boostJumpEffect = Instantiate(BoostJumpEffect, Clone.position, Quaternion.identity) as GameObject;
+                        Destroy(boostJumpEffect, 3);
 
-                    startBoostEffect = true;
+                        startBoostEffect = true;
+                    }
                 }
             }
             else

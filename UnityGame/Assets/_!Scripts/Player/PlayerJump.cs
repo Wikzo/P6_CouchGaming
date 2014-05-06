@@ -8,7 +8,6 @@ public class PlayerJump : MonoBehaviour {
 	public int BoostJumpForce = 350;
 	public int MaxBoostJumpsAmount = 1;
 	public GameObject BoostJumpEffect;
-
 	private GameObject boostJumpEffect;
 	private int boostJumpsAmount = 0;
 	private bool canJump = true;
@@ -110,23 +109,15 @@ public class PlayerJump : MonoBehaviour {
 
 		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			//Jump();
+			Jump();
 			
-			addJumpPhysics = true;
-			
-			HasJumped = true;		//Used for animation		
+			//addJumpPhysics = true;
 		}
 		else if(CanBoostJump && playerScript.PlayerControllerState.ButtonDownA || CanBoostJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			//BoostJump();
+			BoostJump();
 			
-			addBoostJumpPhysics = true;
-			HasDoubleJumped = true;		//Used for animation
-
-			boostJumpsAmount++;
-
-			boostJumpEffect = Instantiate(BoostJumpEffect, pTran.position, Quaternion.identity) as GameObject;
-			Destroy(boostJumpEffect, 3);
+			//addBoostJumpPhysics = true;
 		}
 		
 		/*
@@ -154,6 +145,8 @@ public class PlayerJump : MonoBehaviour {
 	//TODO: Fix so it's the same velocity for each jump
 	public void Jump()
 	{
+		HasJumped = true;		//Used for animation
+
 		//rigidbody.AddForce(Vector3.up*JumpForce, ForceMode.VelocityChange);
 		rigidbody.velocity = new Vector3(0,JumpForce,0);
 
@@ -161,6 +154,13 @@ public class PlayerJump : MonoBehaviour {
 	}
 	public void BoostJump()
 	{
+		HasDoubleJumped = true;		//Used for animation
+
+		boostJumpsAmount++;
+		
+		boostJumpEffect = Instantiate(BoostJumpEffect, pTran.position, Quaternion.identity) as GameObject;
+		Destroy(boostJumpEffect, 3);
+
 		//rigidbody.AddForce(Vector3.up*BoostJumpForce, ForceMode.VelocityChange);
 		rigidbody.velocity = new Vector3(0, BoostJumpForce, 0);
 

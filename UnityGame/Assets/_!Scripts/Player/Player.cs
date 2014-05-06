@@ -25,10 +25,11 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public bool IsReadyToBegin = false;
 
+	public GameObject RendererObject;
 	[HideInInspector]
-	public SkinnedMeshRenderer[] PlayerRenderers;
+	public SkinnedMeshRenderer BodyRenderer;
 	[HideInInspector]
-	public SkinnedMeshRenderer PlayerBodyRenderer;
+	public MeshRenderer[] HelmetRenderers;
 
 	public int Score;
 	public int Id;
@@ -77,19 +78,15 @@ public class Player : MonoBehaviour
     // Use this for initialization
 	void Awake () 
 	{
-        if(GetComponentsInChildren<SkinnedMeshRenderer>() != null)
-        {
-        	PlayerRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
-        	foreach(SkinnedMeshRenderer rend in PlayerRenderers)
-        	{
-        		if(rend.gameObject.name == "Body")
-        		{
-        			PlayerBodyRenderer = rend;
-        		}
-        	}
-        }
-
 		pTran = transform;
+
+		if(RendererObject != null)
+		{
+			if(RendererObject.GetComponentInChildren<SkinnedMeshRenderer>() != null)
+        		BodyRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        	if(RendererObject.GetComponentsInChildren<MeshRenderer>() != null)
+        		HelmetRenderers = GetComponentsInChildren<MeshRenderer>();
+        }
 
 		switch(Id)
 		{
@@ -110,10 +107,16 @@ public class Player : MonoBehaviour
 			pMat = Materials[3];
 			break;
 		}
-		if(PlayerBodyRenderer != null)
-			PlayerBodyRenderer.material = pMat;
+		if(BodyRenderer != null)
+		{
+			BodyRenderer.material = pMat;
+			PlayerColor = pMat.color;
+		}
 		else
+		{
 			renderer.material = pMat;
+			PlayerColor = pMat.color;
+		}
 
 		spawnPoints = new GameObject[SpawnPoints.transform.GetChildCount()];
 
@@ -143,11 +146,6 @@ public class Player : MonoBehaviour
 			ForwardCollider = transform.Find("ForwardCollider").GetComponent<CollisionDetect>();
 		else
 			print("ForwardCollider is needed on " + name);
-
-        if(PlayerBodyRenderer != null)
-        	PlayerColor = PlayerBodyRenderer.material.color;
-		else
-			PlayerColor = renderer.material.color;
 
     	respawnIdleTimer = RespawnIdleTime;
         resetCounter = 0;
@@ -214,32 +212,35 @@ public class Player : MonoBehaviour
 	    }
 
 
-	    if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
-	    {
+	    //if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
+	    //{
 	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
 	        
 
-	        if(PlayerBodyRenderer != null)
-				PlayerBodyRenderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+	        if(BodyRenderer != null)
+				BodyRenderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
 			else
 				renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+
+			if(HelmetRenderers[0] != null)
+			{
+				foreach(MeshRenderer rend in HelmetRenderers)
+				rend.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+			}
 
 	        respawnIdleTimer -= Time.deltaTime;
 
 	        //Make sure the player can't aim
 	    	playerAim.TurnOffAim();
 
-	    }
-	    else
-	    {
-            //Destroy(renderer.material); // just to be sure no memory garbage
-	        
-
-	        if(PlayerBodyRenderer != null)
-	        	PlayerBodyRenderer.material.color = pMat.color;
-			else
-				renderer.material.color = pMat.color;
-	    }
+	    //}
+	    //else
+	    //{
+	    //    if(PlayerRenderers != null)
+	    //    	PlayerRenderers.material.color = pMat.color;
+		//	else
+		//		renderer.material.color = pMat.color;
+	    //}
 	}
 
     public void RemoveAllMissionsOnMeDontUseThis()
@@ -258,8 +259,8 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Dead;
 
 		
-		if(PlayerBodyRenderer != null)
-			PlayerBodyRenderer.enabled = false;
+		if(BodyRenderer != null)
+			BodyRenderer.enabled = false;
 		else
 			renderer.enabled = false;
 
@@ -278,8 +279,8 @@ public class Player : MonoBehaviour
 
     void Hide()
     {
-        if(PlayerBodyRenderer != null)
-        	PlayerBodyRenderer.enabled = false;
+        if(BodyRenderer != null)
+        	BodyRenderer.enabled = false;
 		else
 			renderer.enabled = false;
 
@@ -295,8 +296,8 @@ public class Player : MonoBehaviour
         KilledBy = "";
         IsReadyToBegin = false;
 
-        if(PlayerBodyRenderer != null)
-        	PlayerBodyRenderer.enabled = true;
+        if(BodyRenderer != null)
+        	BodyRenderer.enabled = true;
 		else
 			renderer.enabled = true;
 
@@ -362,8 +363,8 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Respawning;
 		KilledBy = "";
 
-		if(PlayerBodyRenderer != null)
-			PlayerBodyRenderer.enabled = true;
+		if(BodyRenderer != null)
+			BodyRenderer.enabled = true;
 		else
 			renderer.enabled = true;
 		
