@@ -6,7 +6,7 @@ public class MissionParticle : MonoBehaviour
     [HideInInspector]
     public MissionBase PlayerToFollow;
 
-    private Vector3 Offset = new Vector3(0, 1.5f, 0);
+    private Vector3 Offset = new Vector3(0, 4.5f, -3f);
 
     public GameObject CloneToUse;
     bool isOriginal = false;

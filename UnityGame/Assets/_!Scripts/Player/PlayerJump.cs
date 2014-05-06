@@ -110,17 +110,17 @@ public class PlayerJump : MonoBehaviour {
 
 		if(CanJump && playerScript.PlayerControllerState.ButtonDownA || CanJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			//Jump();
+			Jump();
 			
-			addJumpPhysics = true;
+			//addJumpPhysics = true;
 			
 			HasJumped = true;		//Used for animation		
 		}
 		else if(CanBoostJump && playerScript.PlayerControllerState.ButtonDownA || CanBoostJump && playerScript.Keyboard && Input.GetKeyDown(KeyCode.Space))
 		{
-			//BoostJump();
+			BoostJump();
 			
-			addBoostJumpPhysics = true;
+			//addBoostJumpPhysics = true;
 			HasDoubleJumped = true;		//Used for animation
 
 			boostJumpsAmount++;

@@ -16,7 +16,7 @@ public class PickUpObject : MonoBehaviour
     // idle times (when it has been placed and is currently inactive for some seconds)
     private bool Idle = false;
     private float IdleBlinkRate = 0.5f;
-    private float IdleBlinkTimeTotal = 3f;
+    private float IdleBlinkTimeTotal = 0.5f;
 
     void Start()
     {
@@ -59,6 +59,7 @@ public class PickUpObject : MonoBehaviour
             PlayerToFollow = null;
             IsPickedUpRightNow = false;
             gameObject.collider.enabled = true;
+            gameObject.collider.isTrigger = false;
         }
 
         // follow player
@@ -94,7 +95,8 @@ public class PickUpObject : MonoBehaviour
     public void GoToBaseAndStayIdle()
     {
         CanBeUsedRightNow = false;
-        gameObject.collider.isTrigger = true;
+        gameObject.collider.enabled = true;
+        gameObject.collider.isTrigger = false;
         PlayerToFollow = null;
         IsPickedUpRightNow = false;
         rigidbody.isKinematic = true;

@@ -98,8 +98,6 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         this.PlayingState = PlayingState.ControllerCalibration;
-
-
     }
 
     void Start()
@@ -247,6 +245,9 @@ public class GameManager : MonoBehaviour
             Camera.GetComponent<GlitchEffect>().enabled = true;
         else
             Camera.GetComponent<GlitchEffect>().enabled = false;*/
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
 
     }
 
