@@ -43,6 +43,7 @@ public class PickUpObject : MonoBehaviour
                 PlayerToFollow = col.gameObject;
                 
                 gameObject.collider.isTrigger = true;
+                gameObject.collider.enabled = false;
                 
                 rigidbody.isKinematic = true;
                 rigidbody.useGravity = false;
@@ -57,6 +58,7 @@ public class PickUpObject : MonoBehaviour
         {
             PlayerToFollow = null;
             IsPickedUpRightNow = false;
+            gameObject.collider.enabled = true;
         }
 
         // follow player

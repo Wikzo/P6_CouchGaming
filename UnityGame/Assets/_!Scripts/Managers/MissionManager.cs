@@ -18,7 +18,9 @@ public class MissionManager : MonoBehaviour
 
     public List<TextMesh> MissionTexts; 
     public List<GameObject> MissionIcons;
-    public List<GameObject> TargetHuds; 
+    public List<GameObject> TargetHuds;
+
+    public GameObject RingPrefabForIntelMission;
 
     public int ChanceOfGettingUniqueMissions = 5; // higher value = bigger chance of NOT getting same mission 
                                                   //(20-50 seems like a good value if you want to ABSOLUTELY make sure that they won't get same mission!)
@@ -59,6 +61,9 @@ public class MissionManager : MonoBehaviour
 
         // Furthermore we make sure that we don't destroy between scenes (this is optional)
         DontDestroyOnLoad(gameObject);
+
+        if (RingPrefabForIntelMission == null)
+            Debug.Log("ERROR - MissionManager needs to have RingPrefabForIntelMission assigned!");
     }
 
     
@@ -110,7 +115,13 @@ public class MissionManager : MonoBehaviour
         {
             //Players[i].GetComponent<Player>().RemoveAllMissionsOnMe(); // does not work
             MissionBase m = Players[i].GetComponent<MissionBase>();
-            DestroyImmediate(m);
+            //DestroyImmediate(m);
+
+            if (m != null)
+            {
+                InstantiatedMissions.Remove(m);
+                m.DestroyMission();
+            }
         }
 
         // assign new missions
@@ -134,8 +145,11 @@ public class MissionManager : MonoBehaviour
     {
         // destroy old
         MissionBase oldMission = Player.GetComponent<MissionBase>();
-        InstantiatedMissions.Remove(oldMission);
-        oldMission.DestroyMission();
+        if (oldMission != null)
+        {
+            InstantiatedMissions.Remove(oldMission);
+            oldMission.DestroyMission();
+        }
 
 
         // get new mission

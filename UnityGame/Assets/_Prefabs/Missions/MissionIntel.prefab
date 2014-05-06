@@ -54,6 +54,7 @@ MonoBehaviour:
   DebugShowCurrentMission: 0
   IntelPropToSteal: {fileID: 0}
   YOffset: 1.98000002
+  RingPrefab: {fileID: 100000, guid: bfabc6c7b8a60374a8d7fa1b9ce6b53d, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

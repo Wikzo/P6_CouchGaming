@@ -739,8 +739,8 @@ GameObject:
   - 23: {fileID: 35745182}
   - 114: {fileID: 35745181}
   m_Layer: 0
-  m_Name: intelBaseTargetBlue
-  m_TagString: Untagged
+  m_Name: IntelBaseBlue
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -788,7 +788,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 905415947}
   m_GameObject: {fileID: 35745180}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -808,8 +808,8 @@ Transform:
   m_PrefabInternal: {fileID: 905415947}
   m_GameObject: {fileID: 35745180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.2898712, y: -.141838074, z: 0}
-  m_LocalScale: {x: 2.16018963, y: 1.58018649, z: 2.16018963}
+  m_LocalPosition: {x: -25.0591679, y: 5.8445344, z: 0}
+  m_LocalScale: {x: 3.00131726, y: 2.19547439, z: 3.00131726}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!1 &46133040
@@ -1872,7 +1872,7 @@ MonoBehaviour:
   TargetChosenSoFar: 
   MissionInitializedParticles: {fileID: 100004, guid: 4d16329d24757ce4ca0b0d7a9ce3b146,
     type: 2}
-  DebugMode: 0
+  DebugMode: 1
   GUIRumbleCounter: 1
   ControllerGUIToRumble: {fileID: 533850937}
   RumbleStepsGUI:
@@ -4124,6 +4124,7 @@ MonoBehaviour:
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
   RespawnIdleTime: 6
+  ForwardCollider: {fileID: 0}
   Name: 
   MyColorIDName: GreenThree
 --- !u!114 &143760519
@@ -7533,6 +7534,7 @@ MonoBehaviour:
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
   RespawnIdleTime: 6
+  ForwardCollider: {fileID: 0}
   Name: 
   MyColorIDName: BlueTwo
 --- !u!54 &258189788
@@ -7618,7 +7620,7 @@ GameObject:
   - 114: {fileID: 263807530}
   m_Layer: 16
   m_Name: P1
-  m_TagString: Untagged
+  m_TagString: Player1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7827,6 +7829,7 @@ MonoBehaviour:
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
   RespawnIdleTime: 6
+  ForwardCollider: {fileID: 0}
   Name: 
   MyColorIDName: PinkOne
 --- !u!114 &263807540
@@ -11905,6 +11908,7 @@ MonoBehaviour:
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
   RespawnIdleTime: 6
+  ForwardCollider: {fileID: 0}
   Name: 
   MyColorIDName: BlueTwo
 --- !u!114 &404873085
@@ -16173,6 +16177,7 @@ MonoBehaviour:
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
   RespawnIdleTime: 6
+  ForwardCollider: {fileID: 0}
   Name: 
   MyColorIDName: OrangeFour
 --- !u!54 &574215424
@@ -19216,7 +19221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &684377532
 Transform:
   m_ObjectHideFlags: 0
@@ -22746,6 +22751,7 @@ MonoBehaviour:
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
   RespawnIdleTime: 6
+  ForwardCollider: {fileID: 0}
   Name: 
   MyColorIDName: OrangeFour
 --- !u!114 &794842731
@@ -25947,11 +25953,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -25.2898712
+      value: -25.0591679
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.141838074
+      value: 5.8445344
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -25975,7 +25981,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 3.00131726
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2.19547439
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 3.00131726
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
+      propertyPath: m_TagString
+      value: NotCollidable
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
+      propertyPath: m_Name
+      value: IntelBaseBlue
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d9e747fb3ffaaf349a34ec8742635b4b, type: 2}
@@ -27612,6 +27638,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
       propertyPath: UseAnimations
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100030, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
+      propertyPath: m_TagString
+      value: Player1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100070, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100030, guid: 0d989cdeec671c442889ef9ff6ae72fa, type: 2}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -39180,7 +39218,6 @@ MonoBehaviour:
   MissionDescription: Move intel to BASE
   DebugShowCurrentMission: 0
   IntelPropToSteal: {fileID: 0}
-  YOffset: 1
 --- !u!1 &1329889731
 GameObject:
   m_ObjectHideFlags: 0
@@ -39504,6 +39541,7 @@ MonoBehaviour:
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
   RespawnIdleTime: 6
+  ForwardCollider: {fileID: 0}
   Name: 
   MyColorIDName: PinkOne
 --- !u!114 &1333197875
@@ -41756,7 +41794,7 @@ GameObject:
   - 114: {fileID: 1404192850}
   m_Layer: 0
   m_Name: intelToSteal_USBKey_collider
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41839,7 +41877,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 1770239159}
   m_GameObject: {fileID: 1404192848}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -51298,6 +51336,14 @@ Prefab:
       propertyPath: RenderObject
       value: 
       objectReference: {fileID: 428892442}
+    - target: {fileID: 100000, guid: 0b7ffbe54d1cafc449d6a17c0eb6b932, type: 2}
+      propertyPath: m_TagString
+      value: NotCollidable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 0b7ffbe54d1cafc449d6a17c0eb6b932, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b7ffbe54d1cafc449d6a17c0eb6b932, type: 2}
   m_RootGameObject: {fileID: 1404192848}
@@ -51646,8 +51692,8 @@ GameObject:
   - 23: {fileID: 1790708550}
   - 114: {fileID: 1790708554}
   m_Layer: 0
-  m_Name: intelBaseTargetGreen
-  m_TagString: Untagged
+  m_Name: IntelBaseGreen
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51680,7 +51726,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1790708549}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -51699,8 +51745,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1790708549}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.7954597, y: -.141838074, z: 0}
-  m_LocalScale: {x: 2.16018963, y: 1.58018649, z: 2.16018963}
+  m_LocalPosition: {x: 11.6467381, y: -5.29163647, z: 0}
+  m_LocalScale: {x: 3.86295176, y: 2.8257637, z: 3.86295176}
   m_Children: []
   m_Father: {fileID: 0}
 --- !u!114 &1790708554
@@ -53219,12 +53265,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
       propertyPath: DebugMode
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
       propertyPath: WaitForReady
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11400022, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: RingPrefab
+      value: 
+      objectReference: {fileID: 100000, guid: bfabc6c7b8a60374a8d7fa1b9ce6b53d, type: 2}
+    - target: {fileID: 11400004, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: RingPrefabForIntelMission
+      value: 
+      objectReference: {fileID: 100000, guid: bfabc6c7b8a60374a8d7fa1b9ce6b53d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
   m_RootGameObject: {fileID: 1360649201}
@@ -53991,6 +54045,8 @@ MonoBehaviour:
   - {fileID: 1580506025}
   - {fileID: 926593752}
   - {fileID: 1760812341}
+  RingPrefabForIntelMission: {fileID: 100000, guid: bfabc6c7b8a60374a8d7fa1b9ce6b53d,
+    type: 2}
   ChanceOfGettingUniqueMissions: 5
 --- !u!4 &1886009436
 Transform:
@@ -54424,6 +54480,7 @@ MonoBehaviour:
   PlayerController: 0
   PlayerControllerState: {fileID: 0}
   RespawnIdleTime: 6
+  ForwardCollider: {fileID: 0}
   Name: 
   MyColorIDName: GreenThree
 --- !u!54 &1898107647

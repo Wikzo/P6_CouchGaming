@@ -10,11 +10,17 @@ public class MissionIntel : MissionBase
     // IntelToSteal = prop to steal
 
     public GameObject IntelPropToSteal;
-    public float YOffset = 1.98f;
     private PickUpObject PickUpObject;
 
     private float counter;
-    private float goalTime = 2f;
+    private float goalTime = 5f;
+
+    GameObject ring;
+    bool missionIsDone;
+
+    Vector3 ringOffset = new Vector3(0, 2, -5);
+
+    private float TargetOffsetY = 2;
 
     public override void InitializeMission(GameObject player, MissionBase Template)
     {
@@ -23,8 +29,19 @@ public class MissionIntel : MissionBase
         this.TargetPool = Template.TargetPool; // needs to know about all potential targets (bases) to see if somebody else won before me
         SetTargetBaseAndIntel(Template);
 
+        ring = (GameObject)Instantiate(MissionManager.Instance.RingPrefabForIntelMission, this.Player.transform.position, Quaternion.identity);
+        ring.renderer.enabled = false;
+        ring.name = "_ring_ "+ this.Player;
+        ring.transform.localEulerAngles = new Vector3(90, 180, 0);
+
+        missionIsDone = false;
     }
 
+    public override void DestroyMission()
+    {
+        Destroy(ring);
+        base.DestroyMission();
+    }
 
     public override void TemplateSetUp()
     {
@@ -38,6 +55,7 @@ public class MissionIntel : MissionBase
             this.IntelPropToSteal = intel.IntelPropToSteal;
             PickUpObject = IntelPropToSteal.GetComponent<PickUpObject>();
             //Debug.Log("Successfully casted from MissionBase to MissionIntel");
+
         }
         else
             Debug.Log("ERROR - could not cast from MissionBase to MissionIntel!");
@@ -55,14 +73,92 @@ public class MissionIntel : MissionBase
             audio.Stop();
     }
 
+    bool RectIntersect(Vector3 aPos, Vector3 aScale, Rect b)
+    {
+        Rect a = new Rect(aPos.x - aScale.x / 2, aPos.y - aScale.y / 2, aScale.x, aScale.y);
+
+        bool c1 = a.x < b.xMax;
+        bool c2 = a.xMax > b.x;
+        bool c3 = a.y < b.yMax;
+        bool c4 = a.yMax > b.y;
+
+        return c1 && c2 && c3 && c4;
+    }
+
+    bool CheckPlayerCollidingWithBaseTarget(Transform player, Transform target)
+    {
+        bool x1 = player.position.x - player.localScale.x / 2 > target.position.x - target.localScale.x / 2;
+        bool x2 = player.position.x + player.localScale.x / 2 < target.position.x + target.localScale.x / 2;
+
+        bool y1 = player.position.y - player.localScale.y / 2 > target.position.y - target.localScale.y / 2 - TargetOffsetY;
+        bool y2 = player.position.y + player.localScale.y / 2 < target.position.y + target.localScale.y / 2 + TargetOffsetY;
+
+        return x1 && x2 && y1 && y2;
+
+    }
+
+    void CheckOnTriggerStayViaPlayer()
+    {
+        if (!PickUpObject.PlayerToFollow == Player) // only if holding USB intel right now
+        {
+            counter = 0;
+            return;
+        }
+
+        if (!CheckPlayerCollidingWithBaseTarget(this.Player.transform, this.Target.transform)) // only if colliding with target base
+        {
+            ring.renderer.enabled = false;
+            audio.Stop();
+            missionIsDone = false;
+
+            counter = 0;
+            return;
+        }
+
+        ring.renderer.enabled = true;
+
+        counter += Time.deltaTime;
+
+        ring.renderer.enabled = true;
+        ring.renderer.material.SetFloat("_Cutoff", Mathf.InverseLerp(0, goalTime, counter));
+
+
+        if (!audio.isPlaying)
+        {
+            gameObject.audio.clip = AudioManager.Instance.IntelKeyboardPressingSound;
+            gameObject.audio.loop = true;
+            audio.Play();
+        }
+
+
+        if (counter > goalTime)
+        {
+            audio.Stop();
+
+            PickUpObject.GoToBaseAndStayIdle();
+            _missionIsActive = false;
+            missionIsDone = true;
+        }
+    }
+
     public override bool MissionAccomplished()
     {
         // winning condition: if intel is inside a base that is MINE
+
+        //print("last hit: " + collisionDetect.LastTriggerStayName + "; myTarget: " + this.Target.name);
+
 
         if (IntelPropToSteal == null) // e.g. another player has already solved mission (destroyed intel)
             _missionIsActive = false;
         else
             _missionIsActive = true;
+
+        ring.transform.position = this.Player.transform.position + ringOffset;
+
+        CheckOnTriggerStayViaPlayer();
+        //CheckOnTriggerExitViaPlayer();
+
+        return missionIsDone;
 
         // OLD STUFF FOR WHEN INTEL COULD JUST TOUCH BASE WITHOUT PLAYER BEING THERE
         /*Bounds intelBounds = IntelPropToSteal.renderer.bounds;
@@ -75,6 +171,9 @@ public class MissionIntel : MissionBase
                                                   IntelPropToSteal.transform.localScale.z));
         }*/
 
+        /*ring.transform.position = this.Player.transform.position;
+        ring.renderer.enabled = true;
+
         Renderer playerRenderer;
         if(Player.GetComponent<Player>().PlayerBodyRenderer != null)
             playerRenderer = Player.GetComponent<Player>().PlayerBodyRenderer;
@@ -86,6 +185,12 @@ public class MissionIntel : MissionBase
             && PickUpObject.PlayerToFollow == Player)
         {
             counter += Time.deltaTime;
+
+            ring.transform.position = this.Player.transform.position;
+            ring.renderer.enabled = true;
+
+            ring.renderer.material.SetFloat("_Cutoff", Mathf.InverseLerp(0, goalTime, counter)); 
+
 
             if (!audio.isPlaying)
             {
@@ -108,10 +213,11 @@ public class MissionIntel : MissionBase
         }
         else
         {
+            ring.renderer.enabled = false;
             audio.Stop();
         }
 
 
-        return false;
+        return false;*/
     }
 }
