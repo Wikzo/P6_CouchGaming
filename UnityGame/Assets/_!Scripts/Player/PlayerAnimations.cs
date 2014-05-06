@@ -14,15 +14,15 @@ public class PlayerAnimations : MonoBehaviour {
 	private float animSpeed = 1.5f;
 	private float runTimer = 0;				
 
-	static int idleState = Animator.StringToHash("Base Layer.Idle");	
-	static int runState = Animator.StringToHash("Base Layer.Run");			
-	static int jumpState = Animator.StringToHash("Base Layer.Jump");
-	static int doubleJumpState = Animator.StringToHash("Base Layer.DoubleJump");
-	static int JumpLandState = Animator.StringToHash ("Base Layer.JumpLand");
-	static int jumpDownState = Animator.StringToHash("Base Layer.JumpDown");		
-	static int fallState = Animator.StringToHash("Base Layer.Fall");
-	static int rollState = Animator.StringToHash("Base Layer.Roll");
-	static int waveState = Animator.StringToHash("Layer2.Wave");
+	public static int idleState = Animator.StringToHash("Base Layer.Idle");	
+	public static int runState = Animator.StringToHash("Base Layer.Run");			
+	public static int jumpState = Animator.StringToHash("Base Layer.Jump");
+	public static int doubleJumpState = Animator.StringToHash("Base Layer.DoubleJump");
+	public static int JumpLandState = Animator.StringToHash ("Base Layer.JumpLand");
+	public static int jumpDownState = Animator.StringToHash("Base Layer.JumpDown");		
+	public static int fallState = Animator.StringToHash("Base Layer.Fall");
+	public static int rollState = Animator.StringToHash("Base Layer.Roll");
+	public static int waveState = Animator.StringToHash("Layer2.Wave");
 
 	// Use this for initialization
 	void Start ()
@@ -109,18 +109,7 @@ public class PlayerAnimations : MonoBehaviour {
 			anim.SetBool("JumpLand", true);
 			playerJump.IsLanding = false;
 
-			anim.CrossFade(JumpLandState, 0, 0, Mathf.NegativeInfinity);
-			
-			/*if(playerMove.movingLeft || playerMove.movingRight)
-			{
-				anim.CrossFade(runState, 0, 0, Mathf.NegativeInfinity);
-				anim.SetBool("Run", true);
-			}
-			else
-			{
-				anim.CrossFade(JumpLandState, 0, 0, Mathf.NegativeInfinity);
-				anim.SetBool("Run", false);
-			}*/			
+			anim.CrossFade(JumpLandState, 0, 0, Mathf.NegativeInfinity);		
 		}
 		else
 			anim.SetBool("JumpLand", false);
