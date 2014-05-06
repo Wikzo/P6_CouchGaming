@@ -24,8 +24,6 @@ public class PlayerMove : MonoBehaviour
 	private Quaternion startRotation;
 	private Vector3 pForwardDir;
 
-	private CollisionDetect forwardCollider;
-
 	public bool CanMove
 	{
 		get{return canMove;}
@@ -48,12 +46,7 @@ public class PlayerMove : MonoBehaviour
 		pTran = transform;
 
 		playerScript = GetComponent<Player>();
-		playerJump = GetComponent<PlayerJump>();
-
-		if(transform.Find("ForwardCollider").GetComponent<CollisionDetect>() != null)
-			forwardCollider = transform.Find("ForwardCollider").GetComponent<CollisionDetect>();
-		else
-			print("ForwardCollider is needed on " + name);
+		playerJump = GetComponent<PlayerJump>();		
 
 		startRotation = pTran.rotation;
 	}
@@ -110,7 +103,7 @@ public class PlayerMove : MonoBehaviour
 	//THIS SHOULD PROBABLY BE CALLED FROM FIXED UPDATE:
 	public void Move(Vector3 direction)
 	{	
-		if(forwardCollider.IsColliding == false)
+		if(playerScript.ForwardCollider.IsColliding == false)
 		{
 			if(playerJump.CanJump)
 			{

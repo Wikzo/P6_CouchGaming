@@ -62,6 +62,8 @@ public class Player : MonoBehaviour
 	private PlayerMove playerMove;
 	private PlayerJump playerJump;
 
+	public CollisionDetect ForwardCollider;
+
 	private Transform pTran;
 
 	private Material pMat;
@@ -137,6 +139,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+    	if(transform.Find("ForwardCollider").GetComponent<CollisionDetect>() != null)
+			ForwardCollider = transform.Find("ForwardCollider").GetComponent<CollisionDetect>();
+		else
+			print("ForwardCollider is needed on " + name);
+
         if(PlayerBodyRenderer != null)
         	PlayerColor = PlayerBodyRenderer.material.color;
 		else
