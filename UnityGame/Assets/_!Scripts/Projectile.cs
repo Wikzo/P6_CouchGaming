@@ -100,7 +100,7 @@ public class Projectile : MonoBehaviour
 			OutOfBounds = true;
 
 			Physics.IgnoreCollision(collider, OwnerObject.collider, false);
-			gameObject.tag = "Projectile";
+			//gameObject.tag = "Projectile";
 			foreach(Transform child in transform)
 			{
 				Physics.IgnoreCollision(collider, child.collider, false);
@@ -120,8 +120,13 @@ public class Projectile : MonoBehaviour
 		
 		if(other.gameObject.tag == Owner && OutOfBounds)
 		{
-			if(other.gameObject.GetComponent<PlayerAim>())
-				DestroyProjectileAndTwin(other.gameObject.GetComponent<PlayerAim>());
+            if (other.gameObject.GetComponent<PlayerAim>())
+            {
+                if (!IsOriginal)
+                    return;
+
+                DestroyProjectileAndTwin(other.gameObject.GetComponent<PlayerAim>());
+            }
 		}
 		if(!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable" && other.gameObject.tag != gameObject.tag)
 		{
