@@ -1357,7 +1357,7 @@ MonoBehaviour:
   TargetChosenSoFar: 
   MissionInitializedParticles: {fileID: 100004, guid: 4d16329d24757ce4ca0b0d7a9ce3b146,
     type: 2}
-  DebugMode: 1
+  DebugMode: 0
   GUIRumbleCounter: 1
   ControllerGUIToRumble: {fileID: 533850937}
   RumbleStepsGUI:
@@ -2742,8 +2742,8 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4cf116273f63a3341866db5ca9207917, type: 2}
-  - {fileID: 2100000, guid: ff45ba5533932744b9c0faa3f1a37a6f, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -9651,8 +9651,8 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4cf116273f63a3341866db5ca9207917, type: 2}
-  - {fileID: 2100000, guid: ff45ba5533932744b9c0faa3f1a37a6f, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -48869,7 +48869,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
       propertyPath: DebugMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
       propertyPath: WaitForReady
@@ -54925,8 +54925,8 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4cf116273f63a3341866db5ca9207917, type: 2}
-  - {fileID: 2100000, guid: ff45ba5533932744b9c0faa3f1a37a6f, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
