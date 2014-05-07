@@ -24,6 +24,11 @@ public class PlayerAim : MonoBehaviour
 	private float chargeTimer = 0;
 
 	private bool cancelAim = false;
+	private bool shootingRightNow = false;
+    public bool ShootingRightNow
+    {
+        get { return shootingRightNow; }
+    }
 
 	private bool addPhysics = false;
 
@@ -57,10 +62,13 @@ public class PlayerAim : MonoBehaviour
 	// Update is called once per frame
 	public void AimUpdate ()
 	{
+        shootingRightNow = false;
+
 		//THIS SHOULD BE DONE SMARTER WITHOUT CHECKING SHOTAMOUNT SO MANY TIMES
 		if(playerScript.PlayerControllerState.GetCurrentState().Buttons.X == ButtonState.Pressed && CurrentShotAmount > 0 || playerScript.Keyboard && Input.GetKey(ShootKey) && CurrentShotAmount > 0)
 		{
 			playerMove.CanMove = false;
+            shootingRightNow = true;
 
 			//Give the player momentum in the air, but remove it as soon as he hits the ground (CanJump)
 			if(playerMove.MovingLeft)
@@ -94,6 +102,10 @@ public class PlayerAim : MonoBehaviour
 			{
 				pTran.forward = Vector3.right;
 			}
+
+            // only pressing down, not aiming
+            //if (direction.y == -1)
+              //  pressingDownButNotAiming = true;
 
 			//Cancel the aim if the player is aiming downwards
 			if(direction.y == -1 && playerJump.CanJump)

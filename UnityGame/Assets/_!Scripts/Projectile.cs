@@ -100,7 +100,7 @@ public class Projectile : MonoBehaviour
 			OutOfBounds = true;
 
 			Physics.IgnoreCollision(collider, OwnerObject.collider, false);
-			//gameObject.tag = "Projectile";
+			gameObject.tag = "Projectile";
 			foreach(Transform child in transform)
 			{
 				Physics.IgnoreCollision(collider, child.collider, false);

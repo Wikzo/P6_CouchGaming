@@ -18,6 +18,8 @@ public class PickUpObject : MonoBehaviour
     private float IdleBlinkRate = 0.5f;
     private float IdleBlinkTimeTotal = 0.5f;
 
+    bool DroppingRightNow;
+
     void Start()
     {
         if (RenderObject == null)
@@ -53,6 +55,12 @@ public class PickUpObject : MonoBehaviour
 
     void Update()
     {
+        // drop if pressing down
+        if (PlayerToFollow != null && PlayerToFollow.GetComponent<PlayerAim>().ShootingRightNow)
+        {
+            StartCoroutine(SetTriggerToFalseForSomeTime());
+        }
+
         // my player just died
         if (PlayerToFollow != null && PlayerToFollow.GetComponent<Player>().PState != PlayerState.Alive)
         {
@@ -63,9 +71,9 @@ public class PickUpObject : MonoBehaviour
         }
 
         // follow player
-        if (IsPickedUpRightNow)
+        if (IsPickedUpRightNow && !DroppingRightNow)
             transform.position = PlayerToFollow.transform.position + Offset;
-        else if (CanBeUsedRightNow)// standard
+        else if (CanBeUsedRightNow && !DroppingRightNow)// standard
         {
             gameObject.collider.isTrigger = false;
             rigidbody.isKinematic = false;
@@ -79,9 +87,31 @@ public class PickUpObject : MonoBehaviour
         }
     }
 
+
+    IEnumerator SetTriggerToFalseForSomeTime()
+    {
+        gameObject.collider.enabled = true;
+        PlayerToFollow = null;
+        IsPickedUpRightNow = false;
+        CanBeUsedRightNow = false;
+        gameObject.layer = 20; // DontCollideWithPlayer
+        DroppingRightNow = true;
+        rigidbody.useGravity = true;
+
+        //rigidbody.isKinematic = false;
+        //rigidbody.useGravity = true;
+
+        yield return new WaitForSeconds(0.5f);
+        DroppingRightNow = false;
+        CanBeUsedRightNow = true;
+        gameObject.collider.isTrigger = false;
+        gameObject.layer = 0; // default
+        DroppingRightNow = false;
+    }
     public IEnumerator BecomeIdle()
     {
         Idle = true;
+        gameObject.collider.isTrigger = true;        
         yield return new WaitForSeconds(IdleBlinkTimeTotal);
         Idle = false;
 

@@ -61,6 +61,7 @@ public class Player : MonoBehaviour
 	private float respawnIdleTimer;
 	
 	private PlayerAim playerAim;
+
 	private PlayerMove playerMove;
 	private PlayerJump playerJump;
 
