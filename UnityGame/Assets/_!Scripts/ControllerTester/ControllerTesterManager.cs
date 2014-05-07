@@ -8,7 +8,11 @@ public enum ButtonsToPress
     A = 0,
     B = 1,
     X = 2,
-    Y = 3
+    Y = 3,
+    LB,
+    RB,
+    LT,
+    RT
 }
 
 public class ControllerPlayer
@@ -32,6 +36,9 @@ public class ControllerPlayer
 
     public bool ButtonPressedRightNow(ButtonsToPress button)
     {
+        if (!state.IsConnected)
+            return false;
+
         switch (button)
         {
             case ButtonsToPress.A:
@@ -50,13 +57,43 @@ public class ControllerPlayer
                 return this.state.Buttons.Y == ButtonState.Pressed && this.previousState.Buttons.Y == ButtonState.Released;
                 break;
 
+            case ButtonsToPress.LB:
+                return this.state.Buttons.LeftShoulder == ButtonState.Pressed && this.previousState.Buttons.LeftShoulder == ButtonState.Released;
+                break;
+
+            case ButtonsToPress.RB:
+                return this.state.Buttons.RightShoulder == ButtonState.Pressed && this.previousState.Buttons.RightShoulder == ButtonState.Released;
+                break;
+
+            case ButtonsToPress.LT:
+                return this.state.Triggers.Left > 0.1f && this.previousState.Triggers.Left < 0.1f;
+                break;
+
+            case ButtonsToPress.RT:
+                return this.state.Triggers.Right > 0.1f && this.previousState.Triggers.Right < 0.1f;
+                break;
+
             default:
                 return false;
         
         }  
     }
+
+    public Vector2 LeftStick()
+    {
+        return new Vector2(this.state.ThumbSticks.Left.X, this.state.ThumbSticks.Left.Y);
+    }
+
+    public bool IsControllerConnected()
+    {
+        return GamePad.GetState(Index).IsConnected;
+    }
+
     public bool ButtonReleasedRightNow(ButtonsToPress button)
     {
+        if (!state.IsConnected)
+            return false;
+
         switch (button)
         {
             case ButtonsToPress.A:

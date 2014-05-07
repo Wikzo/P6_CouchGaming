@@ -41,8 +41,9 @@ public class MissionParticle : MonoBehaviour
 
         screenWrap.Clone = CloneToUse.transform;
         screenWrap.UseRotation = true;
+        screenWrap.UsePosition = false;
         screenWrap.UseScale = true;
-        screenWrap.RootToDetectScreenEdge = playerToFollow;
+        screenWrap.RootToDetectScreenEdge = gameObject;
         screenWrap.OriginalToFollow = gameObject;
     }
 

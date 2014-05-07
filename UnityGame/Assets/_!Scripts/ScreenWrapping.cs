@@ -43,15 +43,17 @@ public class ScreenWrapping : MonoBehaviour
     private PlayerAnimations originalAnimations;
     private Animator anim;
 
+    public bool UsePosition = true;
     public bool UseRotation;
     public bool UseScale;
     public bool UseAnimations;
     public bool IsAlwaysTrigger;
     private bool UseColor = true;
 
+
     // Use this for initialization
     private void Start()
-    {   
+    {
         myCam = GameObject.Find("MainCamera_ortographic").camera;
         screen = myCam.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
         zeroPosWorldPoint = myCam.ViewportToWorldPoint(new Vector3(0, 0, 0));
@@ -83,7 +85,7 @@ public class ScreenWrapping : MonoBehaviour
             return;
 
         if (Clone == null)
-            Debug.Log("Error. Needs to assigne a clone for screen wrapping!");
+            Debug.Log("Error. Needs to assigne a clone for screen wrapping!" + gameObject);
 
         if (Clone.GetComponent<BoxCollider>() != null)
             cloneBoxCollider = Clone.GetComponent<BoxCollider>();
@@ -120,6 +122,10 @@ public class ScreenWrapping : MonoBehaviour
             anim = Clone.GetComponent<Animator>();
             anim.speed = 1.5f;
         }
+
+
+
+
     }
 
     // Update is called once per frame
@@ -133,6 +139,8 @@ public class ScreenWrapping : MonoBehaviour
         Vector3 upperSidePosInViewPort = myCam.WorldToViewportPoint(new Vector3(0, RootToDetectScreenEdgeTransform.position.y + RootToDetectScreenEdgeTransform.localScale.y / 2, 0));
         Vector3 bottomSidePosInViewPort = myCam.WorldToViewportPoint(new Vector3(0, RootToDetectScreenEdgeTransform.position.y - RootToDetectScreenEdgeTransform.localScale.y / 2, 0));
 
+        if (UsePosition)
+            {
         // checking screen edges (move original)
         if (leftSidePosInViewPort.x > 1) // check right side
         {
@@ -153,6 +161,7 @@ public class ScreenWrapping : MonoBehaviour
         {
             RootToDetectScreenEdgeTransform.position = new Vector3(RootToDetectScreenEdgeTransform.position.x, leftSidePosWorldPoint.y - RootToDetectScreenEdgeTransform.localScale.y / 2, RootToDetectScreenEdgeTransform.position.z);
         }
+            }
 
         // show clone
         if (OnlyScreenWrapNoClone)

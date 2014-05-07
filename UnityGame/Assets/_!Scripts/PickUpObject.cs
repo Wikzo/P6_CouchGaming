@@ -45,7 +45,6 @@ public class PickUpObject : MonoBehaviour
                 PlayerToFollow = col.gameObject;
                 
                 gameObject.collider.isTrigger = true;
-                gameObject.collider.enabled = false;
                 
                 rigidbody.isKinematic = true;
                 rigidbody.useGravity = false;
@@ -101,7 +100,7 @@ public class PickUpObject : MonoBehaviour
         //rigidbody.isKinematic = false;
         //rigidbody.useGravity = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         DroppingRightNow = false;
         CanBeUsedRightNow = true;
         gameObject.collider.isTrigger = false;

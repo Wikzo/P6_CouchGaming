@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 
 
@@ -17,6 +18,9 @@ public class StressTestGUI : MonoBehaviour
 	private float timez;
 	private Vector3 endPt; 
 	private int i;
+
+    public float x, y, z;
+    public List<GameObject> Buildings;
 	
 	
 	void Start()
@@ -30,9 +34,12 @@ public class StressTestGUI : MonoBehaviour
 		
 		for( i = 0; i < cubes.Length; i++ )
 		{
+            
 			var cube = GameObject.CreatePrimitive( PrimitiveType.Cube );
+            //int r = Random.Range(0, Buildings.Count);
+            //var cube = (GameObject)Instantiate(Buildings[r]);
 			Destroy( cube.GetComponent<BoxCollider>() );
-			cube.transform.position = new Vector3( i * 0.1f - 10, cube.transform.position.y, i % 10 );
+			cube.transform.position = new Vector3( i * 0.1f - 10, cube.transform.position.y, i % 100 );
 			cubes[i] = cube;
 			origPos[i] = cube.transform.position;
 			
@@ -56,19 +63,19 @@ public class StressTestGUI : MonoBehaviour
 		{
 			for( var i = 0; i < cubes.Length; i++ )
 			{
-				timex = updateChange * 0.1365143f;
-				timey = updateChange * 0.3365143f;
-				timez = updateChange * 2.5564f;
+                timex = updateChange * 0.1365143f;
+                timey = updateChange * 0.3365143f;
+                timez = updateChange * 2.5564f;
 				
-				endPt.x = noise.Noise( timex ) * 100 + origPos[i].x;
-				endPt.y = noise.Noise( timey ) * 100 + origPos[i].y;
-				endPt.z = noise.Noise( timez ) * 100 + origPos[i].z;
+				endPt.x = noise.Noise( timex ) * (100+x) + origPos[i].x;
+				endPt.y = noise.Noise( timey ) * (100+y) + origPos[i].y;
+				endPt.z = noise.Noise( timez ) * (100+z) + origPos[i].z;
 				
 				var tween = tweens[i];
 				props[i].resetWithNewEndValue( endPt );
 				tween.restart( true );
 				
-				updateChange += Time.deltaTime * 100;
+				updateChange += Time.deltaTime *5;
 			}
 			
 			yield return waiter;

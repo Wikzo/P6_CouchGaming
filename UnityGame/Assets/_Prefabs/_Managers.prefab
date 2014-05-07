@@ -342,18 +342,18 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   AllObjectsToReset: []
-  NumberOfRoundsPerGame: 6
+  NumberOfRoundsPerGame: 5
   CurrentRound: 0
   WaitForReady: 1
-  TimePerRound: 100
+  TimePerRound: 500
   TimeLeft: 0
   CurrentRoundJustEnded: 0
   PlayingState: 0
   HasPlayedAtLeastOnce: 0
   TargetChosenSoFar: 
-  MissionInitializedParticles: {fileID: 100004, guid: 4d16329d24757ce4ca0b0d7a9ce3b146,
+  MissionInitializedParticles: {fileID: 100000, guid: 88bda155ebed0d844aa0c6542ba37af6,
     type: 2}
-  DebugMode: 1
+  DebugMode: 0
   GUIRumbleCounter: 1
   ControllerGUIToRumble: {fileID: 0}
   RumbleStepsGUI:
@@ -394,6 +394,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  RingPrefabForIntelMission: {fileID: 100000, guid: bfabc6c7b8a60374a8d7fa1b9ce6b53d,
+    type: 2}
   ChanceOfGettingUniqueMissions: 5
 --- !u!114 &11400006
 MonoBehaviour:
@@ -486,7 +488,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissionAccomplishedSound: {fileID: 8300000, guid: 8d2adaaba1248944ead40b5698b0aa52,
     type: 3}
-  IntelKeyboardPressingSound: {fileID: 8300000, guid: f6dd63ee53203a145a0e639dad9c3c0a,
+  IntelKeyboardPressingSound: {fileID: 8300000, guid: 4257e06bb0fa9f14d99e38f4a7a99794,
     type: 3}
 --- !u!114 &11400018
 MonoBehaviour:
@@ -549,7 +551,6 @@ MonoBehaviour:
   MissionDescription: Move intel to BASE
   DebugShowCurrentMission: 0
   IntelPropToSteal: {fileID: 0}
-  YOffset: 1
 --- !u!114 &11400024
 MonoBehaviour:
   m_ObjectHideFlags: 1

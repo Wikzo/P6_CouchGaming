@@ -125,6 +125,8 @@ public class Projectile : MonoBehaviour
                 if (!IsOriginal)
                     return;
 
+                print(other.name + other.transform.position);
+
                 DestroyProjectileAndTwin(other.gameObject.GetComponent<PlayerAim>());
             }
 		}

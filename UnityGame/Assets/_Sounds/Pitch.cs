@@ -6,8 +6,6 @@ public class Pitch : MonoBehaviour {
 
     void Update()
     {
-        
-
         audio.pitch = Mathf.Pow(2, note / 12);
     }
 
