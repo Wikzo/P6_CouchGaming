@@ -1,6 +1,7 @@
 ﻿Shader "Custom/OutlineToonShader" {
     Properties {
         _MainTex ("Base (RGB)", 2D) = "white" {}
+        _Color ("Main Color", Color) = (.5,.5,.5,1)
         _Bump ("Bump", 2D) = "bump" {}
         _ColorMerge ("Color Merge", Range(0.1,20000)) = 8
         _Ramp ("Ramp Texture", 2D) = "white" {}
@@ -35,6 +36,7 @@
             };
  
             float _Outline;
+            uniform float4 _Color;
  
             v2f vert (a2v v)
             {
@@ -50,7 +52,7 @@
  
             float4 frag (v2f IN) : COLOR
             {
-                return float(0);
+                return _Color;;
             }
  
             ENDCG
