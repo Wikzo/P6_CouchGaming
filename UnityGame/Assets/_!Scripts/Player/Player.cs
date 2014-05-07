@@ -25,10 +25,12 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public bool IsReadyToBegin = false;
 
+	public GameObject RendererObject;
 	[HideInInspector]
-	public SkinnedMeshRenderer[] PlayerRenderers;
+	public SkinnedMeshRenderer BodyRenderer;
 	[HideInInspector]
-	public SkinnedMeshRenderer PlayerBodyRenderer;
+	public MeshRenderer[] HelmetRenderers;
+	private Color[] originalHelmetColors;
 
 	public int Score;
 	public int Id;
@@ -77,19 +79,22 @@ public class Player : MonoBehaviour
     // Use this for initialization
 	void Awake () 
 	{
-        if(GetComponentsInChildren<SkinnedMeshRenderer>() != null)
-        {
-        	PlayerRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
-        	foreach(SkinnedMeshRenderer rend in PlayerRenderers)
+		pTran = transform;
+
+		if(RendererObject != null)
+		{
+			if(RendererObject.GetComponent<SkinnedMeshRenderer>() != null)
+        		BodyRenderer = RendererObject.GetComponent<SkinnedMeshRenderer>();
+        	if(RendererObject.GetComponentsInChildren<MeshRenderer>() != null)
         	{
-        		if(rend.gameObject.name == "Body")
+        		HelmetRenderers = RendererObject.GetComponentsInChildren<MeshRenderer>();
+        		originalHelmetColors = new Color[HelmetRenderers.Length];
+        		for(int i=0; i<originalHelmetColors.Length; i++)
         		{
-        			PlayerBodyRenderer = rend;
+        			originalHelmetColors[i] = HelmetRenderers[i].material.color;
         		}
         	}
         }
-
-		pTran = transform;
 
 		switch(Id)
 		{
@@ -110,10 +115,17 @@ public class Player : MonoBehaviour
 			pMat = Materials[3];
 			break;
 		}
-		if(PlayerBodyRenderer != null)
-			PlayerBodyRenderer.material = pMat;
+		if(BodyRenderer != null)
+		{
+			BodyRenderer.material.color = pMat.color;
+			BodyRenderer.materials[1].color = pMat.color;
+			PlayerColor = pMat.color;
+		}
 		else
+		{
 			renderer.material = pMat;
+			PlayerColor = pMat.color;
+		}
 
 		spawnPoints = new GameObject[SpawnPoints.transform.GetChildCount()];
 
@@ -143,11 +155,6 @@ public class Player : MonoBehaviour
 			ForwardCollider = transform.Find("ForwardCollider").GetComponent<CollisionDetect>();
 		else
 			print("ForwardCollider is needed on " + name);
-
-        if(PlayerBodyRenderer != null)
-        	PlayerColor = PlayerBodyRenderer.material.color;
-		else
-			PlayerColor = renderer.material.color;
 
     	respawnIdleTimer = RespawnIdleTime;
         resetCounter = 0;
@@ -216,29 +223,48 @@ public class Player : MonoBehaviour
 
 	    if (PState != PlayerState.Alive && GameManager.Instance.PlayingState == PlayingState.Playing)
 	    {
-	        float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
-	        
-
-	        if(PlayerBodyRenderer != null)
-				PlayerBodyRenderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+	      	float lerp = Mathf.PingPong(Time.time, RespawnBlinkRate)/RespawnBlinkRate;
+	      	
+	
+	      	if(BodyRenderer != null)
+	      	{
+					BodyRenderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
+					BodyRenderer.materials[1].color = Color.Lerp(pMat.color, Color.white, lerp);
+	      	}
 			else
 				renderer.material.color = Color.Lerp(pMat.color, Color.white, lerp);
 
-	        respawnIdleTimer -= Time.deltaTime;
+			if(HelmetRenderers[0] != null)
+			{
+				for(int i=0; i<HelmetRenderers.Length; i++)
+				{
+					HelmetRenderers[i].material.color = Color.Lerp(originalHelmetColors[i], Color.white, lerp);
+				}
+			}
 
-	        //Make sure the player can't aim
+	      respawnIdleTimer -= Time.deltaTime;
+
+	      //Make sure the player can't aim
 	    	playerAim.TurnOffAim();
 
 	    }
 	    else
 	    {
-            //Destroy(renderer.material); // just to be sure no memory garbage
-	        
-
-	        if(PlayerBodyRenderer != null)
-	        	PlayerBodyRenderer.material.color = pMat.color;
+	       	if(BodyRenderer != null)
+	      	{
+				BodyRenderer.material.color = pMat.color;
+				BodyRenderer.materials[1].color = pMat.color;
+	      	}
 			else
 				renderer.material.color = pMat.color;
+
+			if(HelmetRenderers[0] != null)
+			{
+				for(int i=0; i<HelmetRenderers.Length; i++)
+				{
+					HelmetRenderers[i].material.color = originalHelmetColors[i];
+				}
+			}
 	    }
 	}
 
@@ -256,12 +282,12 @@ public class Player : MonoBehaviour
 	public IEnumerator Die()
 	{
 		PState = PlayerState.Dead;
-
 		
-		if(PlayerBodyRenderer != null)
-			PlayerBodyRenderer.enabled = false;
-		else
-			renderer.enabled = false;
+		EnableRenderers(false);
+		//if(BodyRenderer != null)
+		//	BodyRenderer.enabled = false;
+		//else
+		//	renderer.enabled = false;
 
 		pTran.position = new Vector3(-1000,-1000,-1000);
 
@@ -278,10 +304,11 @@ public class Player : MonoBehaviour
 
     void Hide()
     {
-        if(PlayerBodyRenderer != null)
-        	PlayerBodyRenderer.enabled = false;
-		else
-			renderer.enabled = false;
+        EnableRenderers(false);
+        //if(BodyRenderer != null)
+        //	BodyRenderer.enabled = false;
+		//else
+		//	renderer.enabled = false;
 
         pTran.position = new Vector3(-1000, -1000, -1000);
 
@@ -295,10 +322,11 @@ public class Player : MonoBehaviour
         KilledBy = "";
         IsReadyToBegin = false;
 
-        if(PlayerBodyRenderer != null)
-        	PlayerBodyRenderer.enabled = true;
-		else
-			renderer.enabled = true;
+        EnableRenderers(true);
+        //if(BodyRenderer != null)
+        //	BodyRenderer.enabled = true;
+		//else
+		//	renderer.enabled = true;
 
 
         rigidbody.velocity = Vector3.zero;
@@ -362,10 +390,11 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Respawning;
 		KilledBy = "";
 
-		if(PlayerBodyRenderer != null)
-			PlayerBodyRenderer.enabled = true;
-		else
-			renderer.enabled = true;
+		EnableRenderers(true);
+		//if(BodyRenderer != null)
+		//	BodyRenderer.enabled = true;
+		//else
+		//	renderer.enabled = true;
 		
 		//pTran.position = spawnPoint;
 
@@ -436,5 +465,21 @@ public class Player : MonoBehaviour
         }
 
         ChosenSpawn.SetActive(false);
+	}
+
+	void EnableRenderers(bool on)
+	{
+		if(BodyRenderer != null)
+			BodyRenderer.enabled = on;
+		else
+			renderer.enabled = on;
+
+		if(HelmetRenderers[0] != null)
+		{
+			for(int i=0; i<HelmetRenderers.Length; i++)
+			{
+				HelmetRenderers[i].enabled = on;
+			}
+		}
 	}
 }

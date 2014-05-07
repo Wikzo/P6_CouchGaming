@@ -6,8 +6,7 @@ public class ScreenWrapping : MonoBehaviour
 {
     public bool OnlyScreenWrapNoClone = false;
 
-    public Transform Body;
-    public Transform Helmet;
+    public GameObject RendererObject;
 
     public GameObject RootToDetectScreenEdge;
     public GameObject OriginalToFollow;
@@ -16,9 +15,17 @@ public class ScreenWrapping : MonoBehaviour
     private Transform RootToDetectScreenEdgeTransform;
     private Transform OriginalToFollowTransform;
 
+    private bool renderersEnabled = false;
+
     private BoxCollider cloneBoxCollider;
     private Rigidbody cloneRigidbody;
     private bool standingAtScreenEdgeRightNow;
+
+    private SkinnedMeshRenderer originalBodyRenderer;
+    private MeshRenderer[] originalHelmetRenderers;
+
+    private SkinnedMeshRenderer cloneBodyRenderer;
+    private MeshRenderer[] cloneHelmetRenderers;
 
     private Camera myCam;
     private Vector3 screenToWorldPos;
@@ -91,7 +98,18 @@ public class ScreenWrapping : MonoBehaviour
         if(Clone != null && UseAnimations)
         {
             cloneBody = Clone.transform.Find("Armature").gameObject;
-            cloneBody.SetActive(false);
+
+            originalBodyRenderer = OriginalToFollow.GetComponent<Player>().BodyRenderer;
+            originalHelmetRenderers = OriginalToFollow.GetComponent<Player>().HelmetRenderers;
+
+            if(RendererObject.GetComponent<SkinnedMeshRenderer>() != null)
+                cloneBodyRenderer = RendererObject.GetComponent<SkinnedMeshRenderer>();
+            if(RendererObject.GetComponentsInChildren<MeshRenderer>() != null)
+            {
+                cloneHelmetRenderers = RendererObject.GetComponentsInChildren<MeshRenderer>();
+                EnableRenderers(false);
+                renderersEnabled = false;
+            }
         }
 
         if(OriginalToFollow.GetComponent<PlayerAnimations>() != null)
@@ -157,20 +175,29 @@ public class ScreenWrapping : MonoBehaviour
         {
             standingAtScreenEdgeRightNow = true;
             Clone.transform.position = new Vector3(OriginalToFollowTransform.position.x - screen.x * 2, OriginalToFollowTransform.position.y, OriginalToFollowTransform.position.z);
-            if(cloneBody != null)
-                cloneBody.SetActive(true);
+            if(cloneBodyRenderer != null)
+            {
+                EnableRenderers(true);
+                renderersEnabled = true;
+            }
         }
         else if (leftSidePosInViewPort.x < 0) // check left side
         {
             standingAtScreenEdgeRightNow = true;
             Clone.transform.position = new Vector3(OriginalToFollowTransform.position.x + screen.x * 2, OriginalToFollowTransform.position.y, OriginalToFollowTransform.position.z);
-            if(cloneBody != null)
-                cloneBody.SetActive(true);
+            if(cloneBodyRenderer != null)
+            {
+                EnableRenderers(true);
+                renderersEnabled = true;
+            }
         }
         else
         {
-            if(cloneBody != null)
-                cloneBody.SetActive(false);
+            if(cloneBodyRenderer != null)
+            {
+                EnableRenderers(false);
+                renderersEnabled = false;
+            }
         }
 
         if (upperSidePosInViewPort.y > 1) // check upper side
@@ -194,9 +221,8 @@ public class ScreenWrapping : MonoBehaviour
         //    if(cloneBodyRenderer != null && originalRenderer != null)
         //        cloneBodyRenderer.material.color = originalRenderer.material.color; 
 
-        if (UseAnimations)
+        if (Clone != null && UseAnimations)
         {            
-            //TODO: Do this for all animations
             if(originalAnimations.CurrentBaseState.nameHash == PlayerAnimations.runState)    
                 anim.SetBool("Run", true);
             else   
@@ -209,7 +235,7 @@ public class ScreenWrapping : MonoBehaviour
             {    
                 anim.SetBool("DoubleJump", true);
 
-                if(startBoostEffect == false)
+                if(startBoostEffect == false && renderersEnabled)
                 {
                     boostJumpEffect = Instantiate(BoostJumpEffect, Clone.position, Quaternion.identity) as GameObject;
                     Destroy(boostJumpEffect, 3);
@@ -225,8 +251,17 @@ public class ScreenWrapping : MonoBehaviour
             if(originalAnimations.CurrentBaseState.nameHash == PlayerAnimations.JumpLandState)    
                 anim.CrossFade(PlayerAnimations.JumpLandState, 0, 0, Mathf.NegativeInfinity);    
 
-
             Clone.transform.rotation = OriginalToFollowTransform.rotation;
+
+            if(renderersEnabled == true)
+            {
+                cloneBodyRenderer.material.color = originalBodyRenderer.material.color;
+                cloneBodyRenderer.materials[1].color = originalBodyRenderer.materials[1].color;
+                for(int i=0; i<cloneHelmetRenderers.Length; i++)
+                {
+                    cloneHelmetRenderers[i].material.color = originalHelmetRenderers[i].material.color;
+                }
+            }
         }
 
 
@@ -248,5 +283,21 @@ public class ScreenWrapping : MonoBehaviour
                 cloneBoxCollider.isTrigger = false; // can collide with stuff
         }
 
+    }
+
+    void EnableRenderers(bool on)
+    {
+        if(cloneBodyRenderer != null)
+            cloneBodyRenderer.enabled = on;
+        else
+            renderer.enabled = on;
+
+        if(cloneHelmetRenderers[0] != null)
+        {
+            for(int i=0; i<cloneHelmetRenderers.Length; i++)
+            {
+                cloneHelmetRenderers[i].enabled = on;
+            }
+        }
     }
 }
