@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: OutlineToony
-  m_Shader: {fileID: 4800000, guid: 6933718a2b8ee1e46af7993e0fdbbb00, type: 3}
+  m_Name: Transparency_KrausStyle
+  m_Shader: {fileID: 4800000, guid: 3826cf3e33749d24aa3032182aa504f6, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -17,46 +17,34 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: c9ff70172215455458ba7918a026b0d9, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _Bump
         second:
-          m_Texture: {fileID: 2800000, guid: c9ff70172215455458ba7918a026b0d9, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _Ramp
         second:
-          m_Texture: {fileID: 2800000, guid: c9ff70172215455458ba7918a026b0d9, type: 3}
+          m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _Outline
-        second: .0803571492
+        second: .0455357134
       data:
         first:
           name: _ColorMerge
-        second: 20000
-      data:
-        first:
-          name: _Exponent
-        second: 50
+        second: 8214.34473
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .324137688, g: 0, b: 1, a: 1}
-      data:
-        first:
-          name: _OutlineColor
-        second: {r: .944827557, g: 0, b: 1, a: 0}
-      data:
-        first:
-          name: _ColorTrans
-        second: {r: 1, g: 1, b: 1, a: 0}
+        second: {r: 1, g: 0, b: .889655113, a: 0}

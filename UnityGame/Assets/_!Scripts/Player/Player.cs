@@ -92,7 +92,8 @@ public class Player : MonoBehaviour
         		originalHelmetColors = new Color[HelmetRenderers.Length];
         		for(int i=0; i<originalHelmetColors.Length; i++)
         		{
-        			originalHelmetColors[i] = HelmetRenderers[i].material.color;
+                    // removed by Gustav
+        			//originalHelmetColors[i] = HelmetRenderers[i].material.color;
         		}
         	}
         }
@@ -119,7 +120,7 @@ public class Player : MonoBehaviour
 		if(BodyRenderer != null)
 		{
 			BodyRenderer.material.color = pMat.color;
-			BodyRenderer.materials[1].color = pMat.color;
+			//BodyRenderer.materials[1].color = pMat.color;
 			PlayerColor = pMat.color;
 		}
 		else
@@ -239,7 +240,8 @@ public class Player : MonoBehaviour
 			{
 				for(int i=0; i<HelmetRenderers.Length; i++)
 				{
-					HelmetRenderers[i].material.color = Color.Lerp(originalHelmetColors[i], Color.white, lerp);
+                    // removed by Gustav
+					//HelmetRenderers[i].material.color = Color.Lerp(originalHelmetColors[i], Color.white, lerp);
 				}
 			}
 
@@ -263,7 +265,8 @@ public class Player : MonoBehaviour
 			{
 				for(int i=0; i<HelmetRenderers.Length; i++)
 				{
-					HelmetRenderers[i].material.color = originalHelmetColors[i];
+                    // removed by Gustav
+					//HelmetRenderers[i].material.color = originalHelmetColors[i];
 				}
 			}
 	    }
