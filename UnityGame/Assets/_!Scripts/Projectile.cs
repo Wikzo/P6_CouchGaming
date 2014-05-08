@@ -87,7 +87,7 @@ public class Projectile : MonoBehaviour
 		if(isDeadly)
 		{
 			float lerp = Mathf.PingPong(Time.time, DeadlyBlinkRate) / DeadlyBlinkRate;
-			renderer.material.color = Color.Lerp(PMat.color, Color.red, lerp);
+			renderer.material.color = Color.Lerp(PMat.color, Color.white, lerp);
 		}
 		else
 			renderer.material.color = PMat.color;
