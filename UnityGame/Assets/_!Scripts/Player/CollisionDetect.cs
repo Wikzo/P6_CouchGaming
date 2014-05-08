@@ -12,8 +12,9 @@ public class CollisionDetect : MonoBehaviour {
 		if(other.collider.gameObject.tag != "NotCollidable")
 			IsColliding = true;
 
-		//Make an extra check for the projectile, as it can be deleted, if it is our own, making it impossible to detect an OnTriggerExit
-		if(other.gameObject.GetComponent<Projectile>() || other.gameObject.transform.parent.GetComponent<Projectile>())
+		//Make an extra check for the projectile, as it can be deleted, if it is our own, making it impossible to detect an OnTriggerExit.
+		//Two checks here are needed to both check if we are hitting the laser itself and the plates below and above.
+		if(other.gameObject.GetComponent<Projectile>() || other.gameObject.transform.parent != null && other.gameObject.transform.parent.GetComponent<Projectile>())
 		{
 			collidingWithProjectile = true;
 		}
@@ -24,8 +25,9 @@ public class CollisionDetect : MonoBehaviour {
 		if(other.collider.gameObject.tag != "NotCollidable")
 			IsColliding = false;
 
-		//Make an extra check for the projectile, as it can be deleted, if it is our own, making it impossible to detect an OnTriggerExit
-		if(other.gameObject.GetComponent<Projectile>() || other.gameObject.transform.parent.GetComponent<Projectile>())
+		//Make an extra check for the projectile, as it can be deleted, if it is our own, making it impossible to detect an OnTriggerExit.
+		//Two checks here are needed to both check if we are hitting the laser itself and the plates below and above.
+		if(other.gameObject.GetComponent<Projectile>() || other.gameObject.transform.parent != null && other.gameObject.transform.parent.GetComponent<Projectile>())
 		{
 			collidingWithProjectile = false;
 		}
