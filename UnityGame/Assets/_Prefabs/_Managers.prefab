@@ -107,6 +107,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400012}
   - 114: {fileID: 11400014}
+  - 82: {fileID: 8200002}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -313,6 +314,64 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!82 &8200002
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -345,7 +404,7 @@ MonoBehaviour:
   NumberOfRoundsPerGame: 5
   CurrentRound: 0
   WaitForReady: 1
-  TimePerRound: 500
+  TimePerRound: 120
   TimeLeft: 0
   CurrentRoundJustEnded: 0
   PlayingState: 0
@@ -354,6 +413,7 @@ MonoBehaviour:
   MissionInitializedParticles: {fileID: 100000, guid: 88bda155ebed0d844aa0c6542ba37af6,
     type: 2}
   DebugMode: 0
+  UseAnnouncer: 1
   GUIRumbleCounter: 1
   ControllerGUIToRumble: {fileID: 0}
   RumbleStepsGUI:
@@ -363,6 +423,8 @@ MonoBehaviour:
   - {fileID: 0}
   GUIMissionHud: {fileID: 0}
   TimeBar: {fileID: 0}
+  GetReady: {fileID: 100000, guid: 6cd6c117be10df8479fa4ee8893392b1, type: 2}
+  ReadyNotYetSpawned: 0
   MainLight: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
@@ -488,8 +550,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissionAccomplishedSound: {fileID: 8300000, guid: 8d2adaaba1248944ead40b5698b0aa52,
     type: 3}
-  IntelKeyboardPressingSound: {fileID: 8300000, guid: 4257e06bb0fa9f14d99e38f4a7a99794,
+  IntelKeyboardPressingSound: {fileID: 8300000, guid: e7fa144c0cd1c6244b72cf2a6c2e6a29,
     type: 3}
+  CalibrationAudio: {fileID: 8300000, guid: 1376de98470c3ff4babbe722de1177fb, type: 3}
+  PracticeAudio: {fileID: 8300000, guid: 86a688484ba6d964388edbbdc95c1a26, type: 3}
+  NewMissionsFirstTime: {fileID: 8300000, guid: c25bf5c4d8675d44b992009dd559fab0,
+    type: 3}
+  ReadyGo: {fileID: 8300000, guid: 05ee09a64860a4c4d8a651797df44461, type: 3}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
