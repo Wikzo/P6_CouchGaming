@@ -12,7 +12,9 @@ public enum ButtonsToPress
     LB,
     RB,
     LT,
-    RT
+    RT,
+    Start,
+    Select
 }
 
 public class ControllerPlayer
@@ -71,6 +73,14 @@ public class ControllerPlayer
 
             case ButtonsToPress.RT:
                 return this.state.Triggers.Right > 0.1f && this.previousState.Triggers.Right < 0.1f;
+                break;
+
+            case ButtonsToPress.Start:
+                return this.state.Buttons.Start == ButtonState.Pressed && this.previousState.Buttons.Start == ButtonState.Released;
+                break;
+
+            case ButtonsToPress.Select:
+                return this.state.Buttons.Back == ButtonState.Pressed && this.previousState.Buttons.Back == ButtonState.Released;
                 break;
 
             default:

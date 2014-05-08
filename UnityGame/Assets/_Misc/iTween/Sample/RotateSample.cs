@@ -13,12 +13,18 @@ public class RotateSample : MonoBehaviour
     public ControllerPlayer Player;
     List<ControllerPlayer> ControllerPlayers; // all four players
 
+    public AudioSource MusicAudioSource;
+
     public List<GameObject> FourCamerasSpots;
     public List<GameObject> FourSlots;
     public List<GameObject> PlaneSlots;
+    Vector3[] OriginalScales;
+    Vector3[] OriginalPositions;
     public List<RunAnimDummy> CharacterSelect;
     public List<AudioClip> SelectSounds;
     public AudioClip CancelSound;
+    public AudioClip ForwardMenuSound;
+    public AudioClip BackwardMenuSound;
 
     
     int[] currentSlots;
@@ -46,10 +52,14 @@ public class RotateSample : MonoBehaviour
         currentSlots = new int[4];
         readyToMoveSlot = new bool[4];
         MyCharacter = new RunAnimDummy[4];
+        OriginalScales = new Vector3[4];
+        OriginalPositions = new Vector3[4];
         for (int i = 0; i < 4; i++)
         {
             FourCamerasSpots[i].transform.position = FourSlots[i].transform.position;
             currentSlots[i] = i;
+            OriginalScales[i] = PlaneSlots[i].transform.localScale;
+            OriginalPositions[i] = PlaneSlots[i].transform.position;
 
             readyToMoveSlot[i] = false;
         }
@@ -83,6 +93,13 @@ public class RotateSample : MonoBehaviour
             else
                 PlaneSlots[i].SetActive(true);
 
+
+            if (p.ButtonPressedRightNow(ButtonsToPress.Start))
+            {
+                //if (counter > 2)
+                Application.LoadLevel(1);
+            }
+
             // can move when thumbstick resets
             if (p.LeftStick().x == 0)
                 readyToMoveSlot[i] = true;
@@ -98,6 +115,7 @@ public class RotateSample : MonoBehaviour
                 FourCamerasSpots[i].transform.position = FourSlots[currentSlots[i]].transform.position;
 
                 readyToMoveSlot[i] = false;
+                audio.PlayOneShot(ForwardMenuSound);
             }
             // go left (character select)
             else if (p.LeftStick().x < -0.7 && readyToMoveSlot[i] && MyCharacter[i] == null)
@@ -105,21 +123,34 @@ public class RotateSample : MonoBehaviour
                 if (currentSlots[i] - 1 > 0)
                     currentSlots[i]--;
                 else
-                    currentSlots[i] = 4;
+                    currentSlots[i] = 3;
 
                 FourCamerasSpots[i].transform.position = FourSlots[currentSlots[i]].transform.position;
 
                 readyToMoveSlot[i] = false;
+                audio.PlayOneShot(BackwardMenuSound);
+
 
             }
 
             // character already selected by another player?
             if (CharacterSelect[currentSlots[i]].Selected && CharacterSelect[currentSlots[i]] != MyCharacter[i])
             {
-                PlaneSlots[i].renderer.material.color = new Color(0.1f, 0.1f, 0.1f);               
+                PlaneSlots[i].renderer.material.color = new Color(0.1f, 0.1f, 0.1f);
+                PlaneSlots[i].GetComponent<CharPlaneMenuNav>().CanUseAButtonRightNow(false);
+            
             }
-            else
-                PlaneSlots[i].renderer.material.color = Color.white;   
+            else if (CharacterSelect[currentSlots[i]] == MyCharacter[i]) // I selected the character
+            {
+                PlaneSlots[i].renderer.material.color = Color.white;
+                PlaneSlots[i].GetComponent<CharPlaneMenuNav>().CanUseAButtonRightNow(false);
+            }
+            else // character not selected by anybody
+            {
+                PlaneSlots[i].renderer.material.color = new Color(0.4f, 0.4f, 0.4f);
+                PlaneSlots[i].GetComponent<CharPlaneMenuNav>().CanUseAButtonRightNow(true);
+
+            }
 
 
             // select character
@@ -131,6 +162,12 @@ public class RotateSample : MonoBehaviour
                     MyCharacter[i] = CharacterSelect[currentSlots[i]];
                     selected++;
                     audio.PlayOneShot(SelectSounds[selected]);
+
+                    PlaneSlots[i].transform.position = OriginalPositions[i];
+                    PlaneSlots[i].transform.localScale = OriginalScales[i];
+
+                    PlaneSlots[i].GetComponent<CharPlaneMenuNav>().SetReadyState(true);
+
                     GoKitTweenExtensions.shake(PlaneSlots[i].transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
                 }
             }
@@ -143,6 +180,12 @@ public class RotateSample : MonoBehaviour
                     CharacterSelect[currentSlots[i]].Selected = false;
                     MyCharacter[i] = null;
                     selected--;
+
+                    PlaneSlots[i].transform.position = OriginalPositions[i];
+                    PlaneSlots[i].transform.localScale = OriginalScales[i];
+
+                    PlaneSlots[i].GetComponent<CharPlaneMenuNav>().SetReadyState(false);
+
                     GoKitTweenExtensions.shake(PlaneSlots[i].transform, 0.5f, new Vector3(0.1f, 0.1f, 0.1f), GoShakeType.Scale);
 
                 }
@@ -180,12 +223,12 @@ public class RotateSample : MonoBehaviour
             timer += Time.deltaTime * 5;
             float fracJourney = timer / 5;
             float lerp = Mathf.Lerp(1, 2f, fracJourney);
-            audio.pitch = lerp;
+            MusicAudioSource.pitch = lerp;
 
-            if (audio.pitch >= 2f)
+            if (MusicAudioSource.pitch >= 2f)
             {
                 pitch = false;
-                audio.pitch = 1;
+                MusicAudioSource.pitch = 1;
                 timer = 0;
             }
         }
