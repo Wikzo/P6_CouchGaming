@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: unnamed
-  m_Shader: {fileID: 32, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Scroll_Middle
+  m_Shader: {fileID: 33, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -36,8 +36,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .139705896, g: .139705896, b: .139705896, a: .411764711}
+        second: {r: .153222322, g: .560053766, b: .801470578, a: .337254912}
       data:
         first:
           name: _SpecColor
-        second: {r: .5, g: .5, b: .5, a: 0}
+        second: {r: .625, g: .00919118524, b: .00919118524, a: 0}
