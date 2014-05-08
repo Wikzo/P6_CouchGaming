@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     // Debug stuff
     public bool DebugMode = true;
+    public bool UseAnnouncer = true;
 
     [HideInInspector]
     public int GUIRumbleCounter = 1;
@@ -61,6 +62,9 @@ public class GameManager : MonoBehaviour
     public GameObject GUIMissionHud;
     private bool RumblePracticeStart = true;
     public TimeBar TimeBar;
+    public GameObject GetReady;
+    [HideInInspector]
+    public bool ReadyNotYetSpawned = false;
 
     public Light MainLight;
 
@@ -98,6 +102,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         this.PlayingState = PlayingState.ControllerCalibration;
+        ReadyNotYetSpawned = false;
     }
 
     void Start()
@@ -109,6 +114,8 @@ public class GameManager : MonoBehaviour
         TargetChosenSoFar = new List<int>();
 
         HasPlayedAtLeastOnce = false;
+
+        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.CalibrationAudio);
 
         // TODO: make practice rumble things
         /*foreach (GameObject g in Players)
@@ -271,6 +278,8 @@ public class GameManager : MonoBehaviour
         StartCoroutine(RemoveAnimations());
 
         PlayingState = PlayingState.PraticeMode;
+        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.PracticeAudio);
+
     }
 
     public void ResetLevel()
@@ -297,6 +306,7 @@ public class GameManager : MonoBehaviour
         }
 
         PlayingState = PlayingState.WaitingForEverbodyToGetReady;
+        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.NewMissionsFirstTime);
 
         foreach (GameObject p in Players)
             p.GetComponent<Player>().Reset();
@@ -382,7 +392,10 @@ public class GameManager : MonoBehaviour
             }
             CancelInvoke("AllReady");
 
-            PlayingState = PlayingState.Playing;
+            //PlayingState = PlayingState.Playing;
+            ReadyNotYetSpawned = true;
+            AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.ReadyGo);
+            Instantiate(GetReady); // ready object sets the state to playing
         }
     }
 }

@@ -140,7 +140,7 @@ public class ScreenWrapping : MonoBehaviour
         Vector3 bottomSidePosInViewPort = myCam.WorldToViewportPoint(new Vector3(0, RootToDetectScreenEdgeTransform.position.y - RootToDetectScreenEdgeTransform.localScale.y / 2, 0));
 
         if (UsePosition)
-            {
+        {
         // checking screen edges (move original)
         if (leftSidePosInViewPort.x > 1) // check right side
         {

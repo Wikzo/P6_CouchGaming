@@ -9,6 +9,13 @@ public class AudioManager : MonoBehaviour
     // Missions audio
     public AudioClip MissionAccomplishedSound;
     public AudioClip IntelKeyboardPressingSound;
+    public AudioClip CalibrationAudio;
+    public AudioClip PracticeAudio;
+    public AudioClip NewMissionsFirstTime;
+    public AudioClip ReadyGo;
+
+    float timer;
+    bool isPlayingSound;
 
     //  public static Instance  
     public static AudioManager Instance
@@ -42,6 +49,44 @@ public class AudioManager : MonoBehaviour
 
         // Furthermore we make sure that we don't destroy between scenes (this is optional)
         DontDestroyOnLoad(gameObject);
+
+        timer = 0;
+        isPlayingSound = false;
+    }
+
+    public void PlayAnnouncerVoice(AudioClip audioToPlay)
+    {
+        if (!GameManager.Instance.UseAnnouncer)
+            return;
+
+        // stop and start next audio clip
+        audio.Stop();
+        audio.PlayOneShot(audioToPlay);
+        return;
+
+        // no overlapping
+        /*if (!isPlayingSound)
+        {
+            timer = audioToPlay.length;
+            isPlayingSound = true;
+            audio.PlayOneShot(audioToPlay);
+            
+            audio.Stop();
+            audio.PlayOneShot(audioToPlay);
+
+
+        }
+
+        if (isPlayingSound)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer <= 0)
+            {
+                isPlayingSound = false;
+            }
+        }*/
+
     }
 
 }

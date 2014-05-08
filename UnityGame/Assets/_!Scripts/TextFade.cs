@@ -4,8 +4,8 @@ using System.Collections;
 public class TextFade : MonoBehaviour
 {
 
-    string TutorialText = "Calibrating controller rumble ...\nPress Start to skip";
-    string PracticeText = "PRACTICE MODE\nUse ↑ and ↓\nPress Start to skip";
+    string TutorialText = "Calibrating controllers";
+    string PracticeText = "Press Start to begin game";
     private string GetReadyText = "Receiving missions ...\nUse ↑ and ↓";
     private string PauseText = "*Paused*";
     
@@ -76,10 +76,10 @@ public class TextFade : MonoBehaviour
         if (shouldFade)
         {
             FadeTime = Mathf.PingPong(Time.time, 1);
-            FadingTextStyle.normal.textColor = new Color(1, 0, 0, FadeTime);
+            FadingTextStyle.normal.textColor = new Color(0, 0, 0, FadeTime);
         }
         else
-            FadingTextStyle.normal.textColor = new Color(1, 0, 0, 1);
+            FadingTextStyle.normal.textColor = new Color(0, 0, 0, 1);
 
     }
 
@@ -95,7 +95,8 @@ public class TextFade : MonoBehaviour
                     break;
 
             case PlayingState.WaitingForEverbodyToGetReady:
-                GUI.Label(MidRect, GetReadyText, FadingTextStyle);
+                if (!GameManager.Instance.ReadyNotYetSpawned)
+                    GUI.Label(MidRect, GetReadyText, FadingTextStyle);
                 break;
 
             case PlayingState.Paused:
