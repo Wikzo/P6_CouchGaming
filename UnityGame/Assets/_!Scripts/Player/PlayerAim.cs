@@ -122,12 +122,15 @@ public class PlayerAim : MonoBehaviour
 				aimTran.renderer.enabled = true;
 				chargeBar.renderer.enabled = true;
 
-				//Only rotate the aim if the player is aiming someplace 
+				Quaternion aimRotation;
+
+				//Only rotate the aim if the player is aiming someplace. Or else just use the forward rotation of the player
 				if(direction != Vector3.zero)
-				{
-					Quaternion rotation = Quaternion.LookRotation(direction, Vector3.forward);
-					aimPivotTran.rotation = rotation;
-				}
+					aimRotation = Quaternion.LookRotation(direction, Vector3.forward);
+				else
+					aimRotation = Quaternion.LookRotation(pTran.forward, Vector3.forward);
+
+				aimPivotTran.rotation = aimRotation;
 
 				//Scale the charge bar with a timer
 				if(chargeTimer < MaxChargeTime)
