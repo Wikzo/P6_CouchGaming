@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: LaserDiskOverlay
-  m_Shader: {fileID: 4800000, guid: ce9299110836fd64eadefc19d64629f6, type: 3}
+  m_Name: LaserDiskMetal
+  m_Shader: {fileID: 3, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -20,9 +20,17 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    m_Floats:
+      data:
+        first:
+          name: _Shininess
+        second: .238947332
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .735294104, g: .735294104, b: .735294104, a: 1}
+        second: {r: .720588207, g: .720588207, b: .720588207, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: .242647052, g: .242647052, b: .242647052, a: 1}
