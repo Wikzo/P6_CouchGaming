@@ -287,19 +287,19 @@ TrailRenderer:
   m_Colors:
     m_Color[0]:
       serializedVersion: 2
-      rgba: 4278222847
+      rgba: 4293656830
     m_Color[1]:
       serializedVersion: 2
-      rgba: 4278221311
+      rgba: 4293591293
     m_Color[2]:
       serializedVersion: 2
-      rgba: 4278224127
+      rgba: 4293525756
     m_Color[3]:
       serializedVersion: 2
-      rgba: 4278215935
+      rgba: 4293460219
     m_Color[4]:
       serializedVersion: 2
-      rgba: 4278215935
+      rgba: 4293394682
   m_MinVertexDistance: .100000001
   m_Autodestruct: 0
 --- !u!114 &11400000

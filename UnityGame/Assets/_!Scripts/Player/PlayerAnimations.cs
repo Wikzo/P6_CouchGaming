@@ -84,12 +84,8 @@ public class PlayerAnimations : MonoBehaviour {
 		}
 
 		if(playerJump.CanJump == false && playerJump.HasJumped == false && playerJump.HasDoubleJumped == false)
-		{
 			anim.SetBool("Fall", true);
-		}
 		else
-		{
 			anim.SetBool("Fall", false);
-		}
 	}
 }

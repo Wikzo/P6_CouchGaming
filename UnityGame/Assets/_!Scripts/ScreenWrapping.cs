@@ -257,6 +257,12 @@ public class ScreenWrapping : MonoBehaviour
                 anim.SetBool("DoubleJump", false);
                 startBoostEffect = false;
             }
+
+            if(originalAnimations.CurrentBaseState.nameHash == PlayerAnimations.fallState)
+                anim.SetBool("Fall", true);
+            else
+                anim.SetBool("Fall", false);
+                
             if(originalAnimations.CurrentBaseState.nameHash == PlayerAnimations.JumpLandState)    
                 anim.CrossFade(PlayerAnimations.JumpLandState, 0, 0, Mathf.NegativeInfinity);    
 

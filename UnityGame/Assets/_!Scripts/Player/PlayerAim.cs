@@ -37,6 +37,8 @@ public class PlayerAim : MonoBehaviour
 	private Transform aimTran;
 	private Transform chargeBar;
 
+	private Vector3 chargeBarStartPos;
+
 	[HideInInspector]
 	public Player playerScript;
 	private PlayerMove playerMove;
@@ -51,6 +53,7 @@ public class PlayerAim : MonoBehaviour
 		chargeBar = aimTran.Find("ChargeBar");
 
 		chargeBar.forward = Vector3.forward;
+		
 
 		CurrentShotAmount = ShotAmount;
 
@@ -139,7 +142,8 @@ public class PlayerAim : MonoBehaviour
 					chargeBar.localScale = new Vector3(chargeTimer/MaxChargeTime, 1, aimTran.localScale.y*3); //Y is and Z, and Z is Y
 
 					//Give the position an offset, so the bar is positioned outside of the player and then add its scale to make it charge in one direction.
-					chargeBar.localPosition = new Vector3(aimTran.position.x-chargeBar.localScale.x/2, 0, 0f);
+					//chargeBar.localPosition = new Vector3(0, 0, chargeBarStartPos.z-chargeBar.localScale.x/2);
+					chargeBar.localPosition = new Vector3(-0.5f, 0, -0.5f+chargeBar.localScale.x/2);
 				}			
 			}		
 		}
