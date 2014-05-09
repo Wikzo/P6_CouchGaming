@@ -143,7 +143,7 @@ public class PlayerAim : MonoBehaviour
 
 					//Give the position an offset, so the bar is positioned outside of the player and then add its scale to make it charge in one direction.
 					//chargeBar.localPosition = new Vector3(0, 0, chargeBarStartPos.z-chargeBar.localScale.x/2);
-					chargeBar.localPosition = new Vector3(-0.5f, 0, -0.5f+chargeBar.localScale.x/2);
+					chargeBar.localPosition = new Vector3(-1f, 0, -0.5f+chargeBar.localScale.x/2); //X is Z, and Z is X
 				}			
 			}		
 		}
