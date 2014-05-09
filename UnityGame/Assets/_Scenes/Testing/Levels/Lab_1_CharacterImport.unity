@@ -2485,8 +2485,8 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4cf116273f63a3341866db5ca9207917, type: 2}
-  - {fileID: 2100000, guid: ff45ba5533932744b9c0faa3f1a37a6f, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -30946,8 +30946,8 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4cf116273f63a3341866db5ca9207917, type: 2}
-  - {fileID: 2100000, guid: ff45ba5533932744b9c0faa3f1a37a6f, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -31122,7 +31122,7 @@ BoxCollider:
   m_GameObject: {fileID: 1172795720}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -39477,7 +39477,7 @@ BoxCollider:
   m_GameObject: {fileID: 1428900989}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -42810,8 +42810,8 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4cf116273f63a3341866db5ca9207917, type: 2}
-  - {fileID: 2100000, guid: ff45ba5533932744b9c0faa3f1a37a6f, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -44883,8 +44883,8 @@ SkinnedMeshRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 4cf116273f63a3341866db5ca9207917, type: 2}
-  - {fileID: 2100000, guid: ff45ba5533932744b9c0faa3f1a37a6f, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+  - {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -56055,6 +56055,38 @@ Prefab:
       propertyPath: SpawnPoints
       value: 
       objectReference: {fileID: 1944622118}
+    - target: {fileID: 13700000, guid: 24cdb78850703c44894237125cdafada, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+    - target: {fileID: 13700006, guid: 24cdb78850703c44894237125cdafada, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+    - target: {fileID: 13700010, guid: 24cdb78850703c44894237125cdafada, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+    - target: {fileID: 13700012, guid: 24cdb78850703c44894237125cdafada, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+    - target: {fileID: 13700000, guid: 24cdb78850703c44894237125cdafada, type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+    - target: {fileID: 13700006, guid: 24cdb78850703c44894237125cdafada, type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+    - target: {fileID: 13700010, guid: 24cdb78850703c44894237125cdafada, type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
+    - target: {fileID: 13700012, guid: 24cdb78850703c44894237125cdafada, type: 2}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 13f3635a7a048ad4cad194f99caf0d27, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 24cdb78850703c44894237125cdafada, type: 2}
   m_RootGameObject: {fileID: 962535402}

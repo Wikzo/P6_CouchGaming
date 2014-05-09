@@ -133,10 +133,6 @@ Transition:
     m_ConditionEvent: Fall
     m_EventTreshold: 0
     m_ExitTime: .558824182
-  - m_ConditionMode: 5
-    m_ConditionEvent: Fall
-    m_EventTreshold: 0
-    m_ExitTime: .899999976
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
@@ -487,11 +483,6 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110226148}
-      second:
-      - {fileID: 110158842}
-      - {fileID: 110146924}
-    data:
       first: {fileID: 110212741}
       second:
       - {fileID: 110100000}
@@ -520,6 +511,11 @@ StateMachine:
       first: {fileID: 110242876}
       second:
       - {fileID: 110196881}
+    data:
+      first: {fileID: 110226148}
+      second:
+      - {fileID: 110158842}
+      - {fileID: 110146924}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: -396, y: 48, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
