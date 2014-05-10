@@ -32,6 +32,9 @@ public class PlayerAim : MonoBehaviour
 
 	private bool addPhysics = false;
 
+	public Material aimMat;
+	public Material aimCrossesMat;
+
 	private Transform pTran;
 	private Transform aimPivotTran;
 	private Transform aimTran;
@@ -72,7 +75,7 @@ public class PlayerAim : MonoBehaviour
 
 
 		//THIS SHOULD BE DONE SMARTER WITHOUT CHECKING SHOTAMOUNT SO MANY TIMES
-		if(playerScript.PlayerControllerState.GetCurrentState().Buttons.X == ButtonState.Pressed && CurrentShotAmount > 0 || playerScript.Keyboard && Input.GetKey(ShootKey) && CurrentShotAmount > 0)
+		if(playerScript.PlayerControllerState.GetCurrentState().Buttons.X == ButtonState.Pressed || playerScript.Keyboard && Input.GetKey(ShootKey) && CurrentShotAmount > 0)
 		{
 			playerMove.CanMove = false;
 
@@ -122,9 +125,6 @@ public class PlayerAim : MonoBehaviour
 			{
 				cancelAim = false;
 
-				aimTran.renderer.enabled = true;
-				chargeBar.renderer.enabled = true;
-
 				Quaternion aimRotation;
 
 				//Only rotate the aim if the player is aiming someplace. Or else just use the forward rotation of the player
@@ -135,16 +135,37 @@ public class PlayerAim : MonoBehaviour
 
 				aimPivotTran.rotation = aimRotation;
 
-				//Scale the charge bar with a timer
-				if(chargeTimer < MaxChargeTime)
-				{
-					chargeTimer += Time.deltaTime;
-					chargeBar.localScale = new Vector3(chargeTimer/MaxChargeTime, 1, aimTran.localScale.y*3); //Y is and Z, and Z is Y
+				aimTran.renderer.enabled = true;	
 
-					//Give the position an offset, so the bar is positioned outside of the player and then add its scale to make it charge in one direction.
-					//chargeBar.localPosition = new Vector3(0, 0, chargeBarStartPos.z-chargeBar.localScale.x/2);
-					chargeBar.localPosition = new Vector3(-1f, 0, -0.5f+chargeBar.localScale.x/2); //X is Z, and Z is X
-				}			
+				if(CurrentShotAmount > 0)
+				{
+					//Scale the charge bar with a timer
+					if(chargeTimer < MaxChargeTime)
+					{
+						chargeTimer += Time.deltaTime;
+						chargeBar.localScale = new Vector3(chargeTimer/MaxChargeTime, 1, aimTran.localScale.y*3); //Y is and Z, and Z is Y
+	
+						//Give the position an offset, so the bar is positioned outside of the player and then add its scale to make it charge in one direction.
+						//chargeBar.localPosition = new Vector3(0, 0, chargeBarStartPos.z-chargeBar.localScale.x/2);
+						chargeBar.localPosition = new Vector3(-1f, 0, -0.5f+chargeBar.localScale.x/2); //X is Z, and Z is X
+					}
+
+					if(aimCrossesMat != null)
+					{
+						Destroy(aimTran.renderer.material);
+						aimTran.renderer.material = aimMat;
+						chargeBar.renderer.enabled = true;
+					}
+				}
+				else
+				{
+					if(aimMat != null)
+					{
+						Destroy(aimTran.renderer.material);
+						aimTran.renderer.material = aimCrossesMat;
+						chargeBar.renderer.enabled = false;
+					}
+				}
 			}		
 		}
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)

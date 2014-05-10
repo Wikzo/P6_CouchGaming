@@ -221,10 +221,18 @@ public class ScreenWrapping : MonoBehaviour
         }
 
         if (UseScale)
+        {
+            //if(Clone.renderer != null && renderersEnabled == false)
+            //    Clone.renderer.enabled = OriginalToFollow.renderer.enabled;
             Clone.transform.localScale = OriginalToFollowTransform.localScale;
+        }
 
         if (UseRotation)
+        {
+            //if(Clone.renderer != null && renderersEnabled == false)
+            //    Clone.renderer.enabled = OriginalToFollow.renderer.enabled;
             Clone.transform.rotation = OriginalToFollowTransform.rotation;
+        }
 
         //if (UseColor)
         //    if(cloneBodyRenderer != null && originalRenderer != null)

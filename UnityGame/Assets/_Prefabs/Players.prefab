@@ -13373,11 +13373,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootKey: 9
   ShotForce: 60
-  MaxChargeTime: 3
+  MaxChargeTime: 2
   ShotAmount: 1
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
   ProjectilePrefab: {fileID: 100000, guid: 993d474b2bfb13c419aff1a7d35a6e26, type: 2}
+  aimMat: {fileID: 2100000, guid: 3b16fc15c086c6a43bc8b8795f606552, type: 2}
+  aimCrossesMat: {fileID: 2100000, guid: d55dadfc12ec3ff44830c7d7dfb21467, type: 2}
   playerScript: {fileID: 0}
 --- !u!114 &11400026
 MonoBehaviour:
@@ -13588,11 +13590,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootKey: 9
   ShotForce: 60
-  MaxChargeTime: 3
+  MaxChargeTime: 2
   ShotAmount: 1
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
   ProjectilePrefab: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
+  aimMat: {fileID: 2100000, guid: 3b16fc15c086c6a43bc8b8795f606552, type: 2}
+  aimCrossesMat: {fileID: 2100000, guid: d55dadfc12ec3ff44830c7d7dfb21467, type: 2}
   playerScript: {fileID: 0}
 --- !u!114 &11400050
 MonoBehaviour:
@@ -13791,11 +13795,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootKey: 9
   ShotForce: 60
-  MaxChargeTime: 3
+  MaxChargeTime: 2
   ShotAmount: 1
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
   ProjectilePrefab: {fileID: 100000, guid: 1a41cc082fc35af408482493c02cc951, type: 2}
+  aimMat: {fileID: 2100000, guid: 3b16fc15c086c6a43bc8b8795f606552, type: 2}
+  aimCrossesMat: {fileID: 2100000, guid: d55dadfc12ec3ff44830c7d7dfb21467, type: 2}
   playerScript: {fileID: 0}
 --- !u!114 &11400072
 MonoBehaviour:
@@ -13964,11 +13970,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShootKey: 9
   ShotForce: 60
-  MaxChargeTime: 3
+  MaxChargeTime: 2
   ShotAmount: 1
   CurrentShotAmount: 0
   ProjectileOriginalObject: {fileID: 0}
   ProjectilePrefab: {fileID: 100000, guid: 6dae4c0f3d973a849b2ed874609c745e, type: 2}
+  aimMat: {fileID: 2100000, guid: 3b16fc15c086c6a43bc8b8795f606552, type: 2}
+  aimCrossesMat: {fileID: 2100000, guid: d55dadfc12ec3ff44830c7d7dfb21467, type: 2}
   playerScript: {fileID: 0}
 --- !u!114 &11400092
 MonoBehaviour:
