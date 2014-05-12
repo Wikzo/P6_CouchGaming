@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 	public bool Keyboard = false;
 
     public Color PlayerColor;
-    static int readyCounter = 0;
+    static int readyCounter = -1;
 
 	[HideInInspector]
 	public bool IsReadyToBegin = false;
@@ -370,7 +370,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public void OnGUI()
+    /*public void OnGUI()
     {
         if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
         {
@@ -393,10 +393,10 @@ public class Player : MonoBehaviour
 
             GUI.Label(new Rect(point.x + xOffset, Screen.currentResolution.height - point.y - 200 + yOffset, 200, 200), text);
              * 
-             * */
+             * 
         }
 
-    }
+    }*/
 	public void Respawn()
 	{
 		PState = PlayerState.Respawning;
@@ -440,10 +440,12 @@ public class Player : MonoBehaviour
             if (IsReadyToBegin) // use player color + alpha
             {
                 c = new Color(pMat.color.r, pMat.color.g, pMat.color.b, 255);
+                
+                
+                readyCounter++;
 
                 AudioManager.Instance.PlaySound(AudioManager.Instance.ReadySounds[readyCounter]);
 
-                readyCounter++;
             }
             else
             {

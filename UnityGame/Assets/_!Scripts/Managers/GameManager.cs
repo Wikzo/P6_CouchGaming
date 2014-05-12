@@ -220,7 +220,15 @@ public class GameManager : MonoBehaviour
                     m.StopPracticeRumbleController();
 
                     if (ControllerGUIToRumble.GetComponent<Animator>() != null)
-                        ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
+                    {
+                        if (ControllerGUIToRumble.GetComponent<Animator>().enabled == false)
+                        {
+                            AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.VibrationExplain);
+                            yield return new WaitForSeconds(AudioManager.Instance.VibrationExplain.length - 2.5f);
+                            ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
+                        }
+
+                    }
 
                     StartCoroutine(RemoveAnimations());
                 }
@@ -265,7 +273,7 @@ public class GameManager : MonoBehaviour
     {
         // removes uneccesary animators on controller/mission huds
 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(18f);
         Animator hud = GUIMissionHud.GetComponent<Animator>();
 
         if (ControllerGUIToRumble != null)
@@ -308,6 +316,11 @@ public class GameManager : MonoBehaviour
         StopCoroutine("StartCalibrationVoice");
         StopCoroutine("StartRumblePractices"); 
         RumblePracticeStart = false;
+
+        //AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.VibrationExplain);
+
+        //yield return new WaitForSeconds(AudioManager.Instance.VibrationExplain.length);
+
 
 
         if (ControllerGUIToRumble != null)
@@ -427,6 +440,7 @@ public class GameManager : MonoBehaviour
         {
             foreach(GameObject player in Players)
             {
+                AudioManager.Instance.StopAllAudio();
                 Player playerScript = player.GetComponent<Player>();
 
                 playerScript.PState = PlayerState.Alive;

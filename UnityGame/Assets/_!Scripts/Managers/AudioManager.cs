@@ -10,12 +10,19 @@ public class AudioManager : MonoBehaviour
     public AudioClip MissionAccomplishedSound;
     public AudioClip IntelKeyboardPressingSound;
     public AudioClip CalibrationAudio;
+    public AudioClip VibrationExplain;
     public AudioClip PracticeAudio;
     public AudioClip NewMissionsFirstTime;
     public AudioClip ReadyGo;
 
     public AudioClip[] ReadySounds;
     public AudioClip Unready;
+
+    public AudioClip MissionCompletedPink;
+    public AudioClip MissionCompletedBlue;
+    public AudioClip MissionCompletedGreen;
+    public AudioClip MissionCompletedOrange;
+    public AudioClip MissionCompletedDefault;
 
     float timer;
     bool isPlayingSound;
@@ -60,6 +67,11 @@ public class AudioManager : MonoBehaviour
     public void PlaySound(AudioClip a)
     {
         audio.PlayOneShot(a);
+    }
+
+    public void StopAllAudio()
+    {
+        audio.Stop();
     }
 
     public void PlayAnnouncerVoice(AudioClip audioToPlay)

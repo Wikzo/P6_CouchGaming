@@ -31,7 +31,9 @@ public abstract class MissionBase : MonoBehaviour
 
     [HideInInspector]
     public GameObject Player;
-    protected Player PlayerScript;
+
+    [HideInInspector]
+    public Player PlayerScript;
 
     //[HideInInspector]
     public List<GameObject> TargetPool;
@@ -73,6 +75,37 @@ public abstract class MissionBase : MonoBehaviour
     protected string StuffToShowInGUI = "";
 
     public virtual void TemplateSetUp() { }
+
+    public AudioClip ChooseCompletedSound()
+    {
+        TargetIDColorState t = Player.GetComponent<TargetIDColor>().TargetIDColorState;
+
+        if (t == null)
+            return AudioManager.Instance.MissionCompletedDefault;
+
+        switch (t)
+        {
+            case TargetIDColorState.RedOne:
+                return AudioManager.Instance.MissionCompletedPink;
+                break;
+            case TargetIDColorState.BlueTwo:
+                return AudioManager.Instance.MissionCompletedBlue;
+                break;
+
+            case TargetIDColorState.GreenThree:
+                return AudioManager.Instance.MissionCompletedGreen;
+                break;
+
+            case TargetIDColorState.PinkFour:
+                return AudioManager.Instance.MissionCompletedOrange;
+
+                break;
+
+            default:
+                return AudioManager.Instance.MissionCompletedDefault;
+                break;
+        }
+    }
 
     // An abstract function has to be overridden while a virtual function may be overridden.
     public virtual void InitializeMission(GameObject player, MissionBase Template)
@@ -150,6 +183,10 @@ public abstract class MissionBase : MonoBehaviour
                         tempTarget = template.TargetPool[randomExceptMyself];
                         counter++;
                     }
+
+                    /*if (tempTarget == this.Player)
+                        print("got myself");*/
+
                 }
                 return template.TargetPool[randomExceptMyself];
                 break;
@@ -380,7 +417,7 @@ public abstract class MissionBase : MonoBehaviour
         DestroyImmediate(this);
     }
 
-    public void OnGUI()
+    /*public void OnGUI()
     {
         //if (isInstanceMission && GameManager.Instance.PlayingState == PlayingState.PraticeMode && ShowMissionGUI)
         if (isInstanceMission && GameManager.Instance.DebugMode)
@@ -405,7 +442,7 @@ public abstract class MissionBase : MonoBehaviour
 
             GUI.Label(new Rect(point.x + xOffset, Screen.currentResolution.height - point.y - 200 + yOffset, 200, 200), text);
         }
-    }
+    }*/
 
     public abstract bool MissionAccomplished();
 

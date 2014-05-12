@@ -9,6 +9,9 @@ public class Projectile : MonoBehaviour
 	public float KillVelocity = 1;
 	public float DeadlyBlinkRate = 0.1f;
 	public float DeadlyTimer = 0.5f;
+	public float MaxInvisibleTime = 0.1f;
+
+	private float visibleTimer = 0;
 
 	public int MaxReflections = 2;
 	public bool VelocityReflection = false;
@@ -19,9 +22,12 @@ public class Projectile : MonoBehaviour
 
 	public GameObject OwnerObject;
 
+	private StuckDetector stuckDetector;
+
 	private bool isDeadly = false;
 	private bool isHittingPlayer = false;
 	private bool outOfBounds = false;
+	private bool outOfCameraView = false;
 
 	private int reflectionCount = 0;
 
@@ -53,11 +59,19 @@ public class Projectile : MonoBehaviour
 		gameObject.tag = "NotCollidable"; //Make sure that the player's raycasting in playerMove and playerJump is not affected by the collider of the projectile
 		foreach(Transform child in transform)
 		{
-			Physics.IgnoreCollision(collider, child.collider, true);
-			Physics.IgnoreCollision(child.collider, OwnerObject.collider, true);
+			if(child.collider != null)
+			{
+				Physics.IgnoreCollision(collider, child.collider, true);
+				Physics.IgnoreCollision(child.collider, OwnerObject.collider, true);
+			}
 
 			child.gameObject.tag = "NotCollidable";
 		}
+
+		if(transform.Find("StuckDetector") != null)
+			stuckDetector = transform.Find("StuckDetector").gameObject.GetComponent<StuckDetector>();
+		else
+			print(gameObject.name + " needs its StuckDetector. Please add it to the object");
 	}
 	
 	// Update is called once per frame
@@ -72,6 +86,28 @@ public class Projectile : MonoBehaviour
 		}
 		else
 			renderer.material.color = PMat.color;
+
+		if(renderer.isVisible == false)
+		{
+			visibleTimer += Time.deltaTime;
+			if(visibleTimer >= MaxInvisibleTime)
+			{
+				outOfCameraView = true;
+			}
+		}
+		else
+			visibleTimer = 0;
+
+		if(outOfCameraView)
+		{
+			print(gameObject.name + " came out of the camera's view and has now been destroyed");
+			DestroyProjectileAndTwin(OwnerObject.GetComponent<PlayerAim>());
+		}
+		else if(stuckDetector.StuckInObject)
+		{
+			print(gameObject.name + " is stuck inside an object and has now been destroyed");
+			DestroyProjectileAndTwin(OwnerObject.GetComponent<PlayerAim>());
+		}
 	}
 
 	void FixedUpdate()
@@ -84,10 +120,12 @@ public class Projectile : MonoBehaviour
 			gameObject.tag = "Projectile";
 			foreach(Transform child in transform)
 			{
-				Physics.IgnoreCollision(collider, child.collider, false);
-				Physics.IgnoreCollision(child.collider, OwnerObject.collider, false);
-
-				child.gameObject.tag = "Untagged";
+				if(child.gameObject.name != "StuckDetector")
+				{
+					Physics.IgnoreCollision(collider, child.collider, false);
+					Physics.IgnoreCollision(child.collider, OwnerObject.collider, false);
+					child.gameObject.tag = "Untagged";
+				}
 			}			
 		}
 	}

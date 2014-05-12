@@ -152,7 +152,7 @@ public class ScreenWrapping : MonoBehaviour
             RootToDetectScreenEdgeTransform.position = new Vector3(rightSidePosWorldPoint.x - RootToDetectScreenEdgeTransform.localScale.x / 2, RootToDetectScreenEdgeTransform.position.y, RootToDetectScreenEdgeTransform.position.z);
         }
 
-        if (bottomSidePosInViewPort.y > 1) // check up side
+        /*if (bottomSidePosInViewPort.y > 1) // check up side
         {
             RootToDetectScreenEdgeTransform.position = new Vector3(RootToDetectScreenEdgeTransform.position.x, zeroPosWorldPoint.y + RootToDetectScreenEdgeTransform.localScale.y / 2, RootToDetectScreenEdgeTransform.position.z);
         }
@@ -160,7 +160,7 @@ public class ScreenWrapping : MonoBehaviour
         if (upperSidePosInViewPort.y < 0) // check bottom side
         {
             RootToDetectScreenEdgeTransform.position = new Vector3(RootToDetectScreenEdgeTransform.position.x, leftSidePosWorldPoint.y - RootToDetectScreenEdgeTransform.localScale.y / 2, RootToDetectScreenEdgeTransform.position.z);
-        }
+        }*/
             }
 
         // show clone
@@ -203,7 +203,7 @@ public class ScreenWrapping : MonoBehaviour
                 EnableRenderers(false);
         }
 
-        if (upperSidePosInViewPort.y > 1) // check upper side
+        /*if (upperSidePosInViewPort.y > 1) // check upper side
         {
             standingAtScreenEdgeRightNow = true;
             Clone.transform.position = new Vector3(OriginalToFollowTransform.position.x, OriginalToFollowTransform.position.y - screen.y * 2 + 2, OriginalToFollowTransform.position.z);
@@ -212,7 +212,7 @@ public class ScreenWrapping : MonoBehaviour
         {
             standingAtScreenEdgeRightNow = true;
             Clone.transform.position = new Vector3(OriginalToFollowTransform.position.x, OriginalToFollowTransform.position.y + screen.y * 2 - 2, OriginalToFollowTransform.position.z);
-        }
+        }*/
 
         if (UseScale)
         {

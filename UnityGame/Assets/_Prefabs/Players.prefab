@@ -14078,7 +14078,7 @@ MonoBehaviour:
   RespawnIdleTime: 6
   ForwardCollider: {fileID: 0}
   Name: 
-  MyColorIDName: PinkOne
+  MyColorIDName: RedOne
 --- !u!114 &11400056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14460,7 +14460,7 @@ MonoBehaviour:
   RespawnIdleTime: 6
   ForwardCollider: {fileID: 0}
   Name: 
-  MyColorIDName: OrangeFour
+  MyColorIDName: PinkFour
 --- !u!114 &11400098
 MonoBehaviour:
   m_ObjectHideFlags: 1

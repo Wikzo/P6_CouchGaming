@@ -7,7 +7,7 @@ public class MissionDefend : MissionBase
 
     private float deadlineTime;
     private float maxIntervalForDeadline = 30;
-    private float minIntervalForDeadline = 20;
+    private float minIntervalForDeadline = 10;
 
     private bool targetHasNotDiedYet;
 

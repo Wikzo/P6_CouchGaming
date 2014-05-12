@@ -4,10 +4,10 @@ using System.Collections;
 public enum TargetIDColorState
 {
     NotAssigned = 0,
-    PinkOne = 1,
+    RedOne = 1, //red
     BlueTwo = 2,
     GreenThree = 3,
-    OrangeFour = 4
+    PinkFour = 4 // pink
 }
 
 public class TargetIDColor : MonoBehaviour
