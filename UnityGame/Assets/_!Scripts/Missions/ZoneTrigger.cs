@@ -12,6 +12,7 @@ public class ZoneTrigger : MonoBehaviour {
 	private float progressCounter = 0;
 
 	private Transform pTran;
+	private Transform background;
 	private Transform progressBar;
 	private int playersColliding = 0;
 	private float progressBarY = 0;
@@ -20,9 +21,12 @@ public class ZoneTrigger : MonoBehaviour {
 	void Start () 
 	{
 		pTran = transform;
-		progressBar = pTran.Find("ZoneProgressBar");
+		if(pTran.Find("ZoneProgressBar") != null)
+			progressBar = pTran.Find("ZoneProgressBar");
+		else
+			progressBar = pTran.Find("HologramFront");
 
-		progressBarY = progressBar.localPosition.y;
+		background = pTran.Find("HologramBack");
 	}
 	
 	// Update is called once per frame
@@ -32,7 +36,7 @@ public class ZoneTrigger : MonoBehaviour {
         if (GameManager.Instance.PlayingState != PlayingState.Playing)
             return;
 
-		if(progressCounter <= AccomplishTime)
+		if(progressBar.localScale.z <= background.localScale.z)
 		{
 			if(playersColliding > 0)
 				progressCounter += Time.deltaTime;
@@ -40,8 +44,8 @@ public class ZoneTrigger : MonoBehaviour {
 			else if(progressCounter > 0)
 				progressCounter -= Time.deltaTime/DownSlowFactor;
 
-			progressBar.localScale = new Vector3(progressBar.localScale.x, progressCounter/AccomplishTime, progressBar.localScale.z);
-			progressBar.position = new Vector3(progressBar.position.x, pTran.position.y-pTran.localScale.y/2+progressBar.localScale.y, progressBar.position.z);
+			progressBar.localScale = new Vector3(progressBar.localScale.x, progressBar.localScale.y, progressCounter/AccomplishTime);
+			//progressBar.position = new Vector3(progressBar.position.x, pTran.position.y-pTran.localScale.y/2+progressBar.localScale.y, progressBar.position.z);
 		}
 		else
 			Accomplished = true;
