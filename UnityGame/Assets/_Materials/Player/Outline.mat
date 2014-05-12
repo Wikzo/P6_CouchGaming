@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: OutlineToony
+  m_Name: Outline
   m_Shader: {fileID: 4800000, guid: 6933718a2b8ee1e46af7993e0fdbbb00, type: 3}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
