@@ -33,12 +33,6 @@ public class CollisionDetect : MonoBehaviour {
 		}
 	}
 
-	void Start()
-	{
-
-
-	}
-
 	void Update()
 	{
 		if(collidingWithProjectile == true && !other)

@@ -75,7 +75,7 @@ public class TextFade : MonoBehaviour
 
         if (shouldFade)
         {
-            FadeTime = Mathf.PingPong(Time.time, 1);
+            FadeTime = Mathf.PingPong(Time.time, 1.5f);
             FadingTextStyle.normal.textColor = new Color(0, 0, 0, FadeTime);
         }
         else
@@ -87,7 +87,7 @@ public class TextFade : MonoBehaviour
     {
         switch (GameManager.Instance.PlayingState)
         {
-            case PlayingState.ControllerCalibration:
+            case PlayingState.TalkingBeforeControllerCalibration:
                 GUI.Label(MidRect, TutorialText, FadingTextStyle);
                     break;
             case PlayingState.PraticeMode:

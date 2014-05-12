@@ -24,7 +24,6 @@ public class NewMissionTextShower : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         float lerp = Mathf.PingPong(Time.time / 2, ScaleAmount);
         Vector3 add = new Vector3(lerp, lerp, lerp);
         transform.localScale = start + add;

@@ -34,6 +34,8 @@ public class RotateSample : MonoBehaviour
 
 	void Start()
     {
+        Screen.showCursor = false;
+
         Glitch = gameObject.GetComponent<GlitchEffect>();
         //iTween.RotateTo(gameObject, iTween.Hash("rotation", transform.position, iTween.EaseType.easeInOutSine, "time", 1.3f));
 		//iTween.RotateBy(gameObject, iTween.Hash("y", .25, "easeType", "easeInOutBack", "loopType", iTween.LoopType.none, "delay", .4));

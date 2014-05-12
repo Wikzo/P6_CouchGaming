@@ -21,9 +21,12 @@ public class Player : MonoBehaviour
 	public bool Keyboard = false;
 
     public Color PlayerColor;
+    static int readyCounter = 0;
 
 	[HideInInspector]
 	public bool IsReadyToBegin = false;
+
+    public GameObject YButtonReady;
 
 	public GameObject RendererObject;
 	[HideInInspector]
@@ -203,6 +206,7 @@ public class Player : MonoBehaviour
 	    {
             switch (GameManager.Instance.PlayingState)
             {
+                case PlayingState.TalkingBeforeControllerCalibration:
                 case PlayingState.ControllerCalibration:
                     GameManager.Instance.SkipTutorialAndGoToWait();
                     GameManager.Instance.ResetLevel();
@@ -349,7 +353,7 @@ public class Player : MonoBehaviour
             pTran.position = ChosenSpawn.transform.position;
 
         // Gustav: unsure if this should be PracticeMode or ControllerCalibration mode
-	    if (GameManager.Instance.PlayingState != PlayingState.ControllerCalibration)
+	    if (GameManager.Instance.PlayingState != PlayingState.TalkingBeforeControllerCalibration)
 	    {
 	        SpawnZone.SetActive(true);
 	    }
@@ -368,7 +372,7 @@ public class Player : MonoBehaviour
     {
         if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
         {
-
+            /*
             // TODO: fix offset
             string ready = (IsReadyToBegin == true) ? "Ready" : "Not Ready";
             string text = "Press Y to toggle ready\n" + ready;
@@ -386,6 +390,8 @@ public class Player : MonoBehaviour
 
 
             GUI.Label(new Rect(point.x + xOffset, Screen.currentResolution.height - point.y - 200 + yOffset, 200, 200), text);
+             * 
+             * */
         }
 
     }
@@ -413,15 +419,41 @@ public class Player : MonoBehaviour
 		InvokeRepeating("CheckMovement", 0, 0.01f);
 	}
 
-	void PlayerReady()
-	{
-		if (PlayerControllerState.ButtonDownY)
-		    IsReadyToBegin = !IsReadyToBegin;
-        
-        if (Input.GetKeyDown(KeyCode.Y))
+    void PlayerReady()
+    {
+
+        MeshRenderer[] renders = SpawnZone.GetComponentsInChildren<MeshRenderer>();
+
+
+        if (PlayerControllerState.ButtonDownY || Input.GetKeyDown(KeyCode.Y))
+        {
+            if (YButtonReady != null)
+                Destroy(YButtonReady);
+
             IsReadyToBegin = !IsReadyToBegin;
 
-	}
+            Color c = Color.white;
+
+            if (IsReadyToBegin) // use player color + alpha
+            {
+                c = new Color(pMat.color.r, pMat.color.g, pMat.color.b, 255);
+
+                AudioManager.Instance.PlaySound(AudioManager.Instance.ReadySounds[readyCounter]);
+
+                readyCounter++;
+            }
+            else
+            {
+                readyCounter--;
+            }
+
+            foreach (MeshRenderer r in renders)
+            {
+                r.material.color = c;
+            }
+        }
+    }
+        
 
 	void CheckMovement()
 	{

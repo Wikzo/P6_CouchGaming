@@ -109,11 +109,13 @@ public abstract class MissionBase : MonoBehaviour
 
         StopAllRumble();
 
-        GameObject Particles = (GameObject)Instantiate(GameManager.Instance.MissionInitializedParticles);
-        Particles.GetComponent<MissionParticle>().PlayerToFollow = this;
-        GameObject ParticlesClone = (GameObject)Instantiate(GameManager.Instance.MissionInitializedParticles);
-        Particles.GetComponent<MissionParticle>().SetUpParticleClone(ParticlesClone, this.Player);
-
+        if (GameManager.Instance.PlayingState != PlayingState.ControllerCalibration && GameManager.Instance.PlayingState != PlayingState.TalkingBeforeControllerCalibration)
+        {
+            GameObject Particles = (GameObject)Instantiate(GameManager.Instance.MissionInitializedParticles);
+            Particles.GetComponent<MissionParticle>().PlayerToFollow = this;
+            GameObject ParticlesClone = (GameObject)Instantiate(GameManager.Instance.MissionInitializedParticles);
+            Particles.GetComponent<MissionParticle>().SetUpParticleClone(ParticlesClone, this.Player);
+        }
         HasHeardMissionRumble = false;
 
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
@@ -273,7 +275,7 @@ public abstract class MissionBase : MonoBehaviour
         {
             missionTimeCounter += Time.deltaTime;
 
-            GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
+            GamePad.SetVibration(PlayerScript.PlayerController, 0.8f, 0.8f);
 
             if (GameManager.Instance.PlayingState == PlayingState.ControllerCalibration || GameManager.Instance.PlayingState == PlayingState.PraticeMode)
             {
@@ -315,7 +317,7 @@ public abstract class MissionBase : MonoBehaviour
         if (targetTimeCounter < interval)
         {
             targetTimeCounter += Time.deltaTime;
-            GamePad.SetVibration(PlayerScript.PlayerController, 0.5f, 0.5f);
+            GamePad.SetVibration(PlayerScript.PlayerController, 0.8f, 0.8f);
 
             if (GameManager.Instance.PlayingState == PlayingState.ControllerCalibration | GameManager.Instance.PlayingState == PlayingState.PraticeMode)
             {

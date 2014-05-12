@@ -14,6 +14,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip NewMissionsFirstTime;
     public AudioClip ReadyGo;
 
+    public AudioClip[] ReadySounds;
+    public AudioClip Unready;
+
     float timer;
     bool isPlayingSound;
 
@@ -52,6 +55,11 @@ public class AudioManager : MonoBehaviour
 
         timer = 0;
         isPlayingSound = false;
+    }
+
+    public void PlaySound(AudioClip a)
+    {
+        audio.PlayOneShot(a);
     }
 
     public void PlayAnnouncerVoice(AudioClip audioToPlay)

@@ -64,7 +64,7 @@ public class HighScores : MonoBehaviour
         }
     }
 
-    void Update()
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -91,7 +91,7 @@ public class HighScores : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
             SaveScoresToDataFile();
 
-    }
+    }*/
 
     private void OnApplicationQuit()
     {

@@ -4,8 +4,8 @@ using System.Collections;
 public class WhatDidColliderHit : MonoBehaviour
 {
 
-    void OnCollisionEnter(Collision collision)
+    /*void OnCollisionEnter(Collision collision)
     {
         print(collision.transform.name);
-    }
+    }*/
 }

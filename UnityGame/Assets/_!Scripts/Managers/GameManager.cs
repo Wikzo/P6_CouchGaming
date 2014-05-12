@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum PlayingState
 {
+    TalkingBeforeControllerCalibration,
     ControllerCalibration,
     PraticeMode,
     WaitingForEverbodyToGetReady,
@@ -101,7 +102,9 @@ public class GameManager : MonoBehaviour
         // Furthermore we make sure that we don't destroy between scenes (this is optional)
         DontDestroyOnLoad(gameObject);
 
-        this.PlayingState = PlayingState.ControllerCalibration;
+        Screen.showCursor = false;
+
+        this.PlayingState = PlayingState.TalkingBeforeControllerCalibration;
         ReadyNotYetSpawned = false;
     }
 
@@ -115,7 +118,6 @@ public class GameManager : MonoBehaviour
 
         HasPlayedAtLeastOnce = false;
 
-        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.CalibrationAudio);
 
         // TODO: make practice rumble things
         /*foreach (GameObject g in Players)
@@ -145,8 +147,23 @@ public class GameManager : MonoBehaviour
 
         MissionManager.Instance.GetNewMissions();
 
-        StartCoroutine(StartRumblePractices());
+        if (UseAnnouncer)
+            StartCoroutine(StartCalibrationVoice());
+        else
+            StartCoroutine(StartRumblePractices());
 
+
+    }
+
+    IEnumerator StartCalibrationVoice()
+    {
+        this.PlayingState = PlayingState.TalkingBeforeControllerCalibration;
+
+        float length = AudioManager.Instance.CalibrationAudio.length;
+        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.CalibrationAudio);
+
+        yield return new WaitForSeconds(length);
+        StartCoroutine(StartRumblePractices());
 
     }
 
@@ -172,6 +189,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartRumblePractices()
     {
+        if (RumblePracticeStart) // only if not skipped
+            this.PlayingState = PlayingState.ControllerCalibration;
+
         if (ControllerGUIToRumble != null)
         {
             ControllerGUIToRumble.SetActive(true);
@@ -181,29 +201,54 @@ public class GameManager : MonoBehaviour
         MissionBase m;
         for (int i = 0; i < Players.Count; i++)
         {
-            m = Players[i].GetComponent<MissionBase>();
-
-
-            if (GUIRumbleCounter < 5)
+            if (RumblePracticeStart) // only if not skipped
             {
-                //MissionManager.Instance.PracticeControllerRumbleGUI(number-1);
 
-                bool showPunchTween = (i == 0); // only player index 0 makes HUD iTween
+                m = Players[i].GetComponent<MissionBase>();
 
-                m.StartPracticeRumbleController(GUIRumbleCounter, showPunchTween);
-            }
-            else
-            {
-                m.StopPracticeRumbleController();
 
-                if (ControllerGUIToRumble.GetComponent<Animator>() != null)
-                    ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
+                if (GUIRumbleCounter < 5)
+                {
+                    //MissionManager.Instance.PracticeControllerRumbleGUI(number-1);
 
-                StartCoroutine(RemoveAnimations());
+                    bool showPunchTween = (i == 0); // only player index 0 makes HUD iTween
+
+                    m.StartPracticeRumbleController(GUIRumbleCounter, showPunchTween);
+                }
+                else
+                {
+                    m.StopPracticeRumbleController();
+
+                    if (ControllerGUIToRumble.GetComponent<Animator>() != null)
+                        ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
+
+                    StartCoroutine(RemoveAnimations());
+                }
             }
         }
 
-        yield return new WaitForSeconds(3);
+        float waitTime = 0;
+        switch (GUIRumbleCounter)
+        {
+            case 0:
+            case 1:
+                waitTime = 1;
+                break;
+
+            case 2:
+                waitTime = 1.8f;
+                break;
+
+            case 3:
+                waitTime = 2.3f;
+                break;
+
+            default:
+                waitTime = 2.5f;
+                break;
+
+        }
+        yield return new WaitForSeconds(waitTime);
         if (GUIRumbleCounter < 5)
         {
             GUIRumbleCounter++;
@@ -260,7 +305,8 @@ public class GameManager : MonoBehaviour
 
     public void SkipTutorialAndGoToWait() // used to go directly from "tutorial" to wait for ready
     {
-        StopCoroutine("StartRumblePractices");
+        StopCoroutine("StartCalibrationVoice");
+        StopCoroutine("StartRumblePractices"); 
         RumblePracticeStart = false;
 
 
@@ -328,9 +374,9 @@ public class GameManager : MonoBehaviour
 
     private void OnGUI()
     {
-        /*
-        GUILayout.Label(string.Format("Current state: {0}", PlayingState.ToString()));
-        GUILayout.Label(string.Format("Round: {0}", CurrentRound.ToString()));
+        
+        /*GUILayout.Label(string.Format("Current state: {0}", PlayingState.ToString()));
+        GUILayout.Label(string.Format("Round: {0}", CurrentRound.ToString()));/*
 
         switch (PlayingState)
         {

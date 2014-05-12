@@ -174,22 +174,29 @@ public class MissionManager : MonoBehaviour
     // missions
     public void PracticeMissionHUDRumble(int number)
     {
-        iTween.PunchScale(MissionManager.Instance.MissionIcons[number], new Vector3(4, 4, 0), 0.5f);
+        if (MissionManager.Instance.MissionIcons[number] != null)
+            iTween.PunchScale(MissionManager.Instance.MissionIcons[number], new Vector3(4, 4, 0), 0.5f);
     }
 
     // targets
     public void PracticeTargetHUDRumble(int number)
     {
+            if (MissionManager.Instance.TargetHuds[number] != null)
         iTween.PunchScale(MissionManager.Instance.TargetHuds[number], new Vector3(0.05f, 0.05f, 0), 0.5f);
     }
 
     // controller
     public void PracticeControllerRumbleGUI(int number)
     {
-        iTween.PunchScale(GameManager.Instance.ControllerGUIToRumble, new Vector3(2, 2, 0), 0.5f);
+        if (GameManager.Instance.ControllerGUIToRumble != null)
+            iTween.PunchScale(GameManager.Instance.ControllerGUIToRumble, new Vector3(2, 2, 0), 0.5f);
 
-        if (number < 4) // only do this initially, then stop doing it
-            GameManager.Instance.RumbleStepsGUI[number].transform.renderer.enabled = true;
+        if (number < 4)
+        {
+            // only do this initially, then stop doing it
+            if (GameManager.Instance.ControllerGUIToRumble != null)
+                GameManager.Instance.RumbleStepsGUI[number].transform.renderer.enabled = true;
+        }
     }
 
     IEnumerator PunchIcons(int howMany)
@@ -197,7 +204,8 @@ public class MissionManager : MonoBehaviour
         if (howMany+1 > 0)
         {
             print("hey" + howMany);
-            iTween.PunchScale(MissionIcons[howMany], new Vector3(5, 5), 1f);
+            if (MissionIcons[howMany] != null)
+                iTween.PunchScale(MissionIcons[howMany], new Vector3(5, 5), 1f);
             yield return new WaitForSeconds(0f);
             StartCoroutine(PunchIcons(howMany - 1));
         }

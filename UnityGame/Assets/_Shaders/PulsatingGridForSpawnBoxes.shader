@@ -1,4 +1,9 @@
 ﻿Shader "Cg shader using discard" {
+        
+        Properties
+        {
+        	_Color ("Main Color", Color) = (1.0, 1.0, 1.0, 0.5) 
+        }
    SubShader {
       Pass {
          Cull Off // turn off triangle culling, alternatives are:
@@ -10,6 +15,9 @@
          #pragma vertex vert  
          #pragma fragment frag 
  
+
+            uniform float4 _Color;
+
          struct vertexInput {
             float4 vertex : POSITION;
          };
@@ -31,13 +39,16 @@
  
          float4 frag(vertexOutput input) : COLOR 
          {
-            if (abs(fmod(input.posInObjectCoords.y , 10)) < 0.9) 
+            if (abs(fmod(input.posInObjectCoords.y , 0.8)) < 0.1) 
             {
-               //discard; // drop the fragment if y coordinate > 0
-               return float4(1.0, 1.0, 1.0, 0.5); // white
+                // drop the fragment if y coordinate > 0
+               return _Color;
             }
             else
-               return float4(0.0, 0.0, 0.0, 0.5); // black
+            {
+            discard;
+            	return float4(0.0, 0.0, 0.0, 0.5); // black
+               }
          }
  
          ENDCG  
