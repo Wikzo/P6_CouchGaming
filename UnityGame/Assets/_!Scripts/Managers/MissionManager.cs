@@ -166,6 +166,22 @@ public class MissionManager : MonoBehaviour
         InstantiatedMissions.Add(Player.GetComponent<MissionBase>());
     }
 
+    public void RemoveAllMissions()
+    {
+        for (int i = 0; i < Players.Count; i++)
+        {
+            //Players[i].GetComponent<Player>().RemoveAllMissionsOnMe(); // does not work
+            MissionBase m = Players[i].GetComponent<MissionBase>();
+            //DestroyImmediate(m);
+
+            if (m != null)
+            {
+                InstantiatedMissions.Remove(m);
+                m.DestroyMission();
+            }
+        }
+    }
+
     void SetTextAndIcons()
     {
         for (int i = 0; i < 4; i++)

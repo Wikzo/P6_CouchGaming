@@ -38,9 +38,8 @@ public class TimeBar : MonoBehaviour
                 TimeMarks.RemoveAt(i);
         }
 
-        timerText = string.Format("TIME (Round {0}/{1})",
-                                  GameManager.Instance.CurrentRound.ToString(),
-                                  GameManager.Instance.NumberOfRoundsPerGame.ToString());
+        timerText = string.Format("TIME:",
+                                  GameManager.Instance.CurrentRound.ToString());
 
 
     }

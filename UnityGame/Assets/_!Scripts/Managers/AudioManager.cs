@@ -24,6 +24,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip MissionCompletedOrange;
     public AudioClip MissionCompletedDefault;
 
+    public AudioClip WinRed;
+
     float timer;
     bool isPlayingSound;
 

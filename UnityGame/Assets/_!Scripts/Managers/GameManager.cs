@@ -50,6 +50,8 @@ public class GameManager : MonoBehaviour
 
     private Camera Camera;
 
+    public GameObject Congratulations;
+
     // Debug stuff
     public bool DebugMode = true;
     public bool UseAnnouncer = true;
@@ -295,10 +297,14 @@ public class GameManager : MonoBehaviour
         {
             TimeLeft -= Time.deltaTime;
 
-            if (TimeLeft <= 0)
+            if (TimeLeft <= 0 && CurrentRoundJustEnded == false)
             {
                 CurrentRoundJustEnded = true;
                 PlayingState = PlayingState.DisplayingScore;
+                MissionManager.Instance.RemoveAllMissions();
+                GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.8f, 0.8f, 0.8f), GoShakeType.Position);
+                AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinRed);
+                Instantiate(Congratulations);
             }
         }
         /*if (PlayingState == PlayingState.DisplayingScore)
