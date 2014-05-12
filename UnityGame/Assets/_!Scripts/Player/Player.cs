@@ -292,6 +292,7 @@ public class Player : MonoBehaviour
 		PState = PlayerState.Dead;
 		
 		EnableRenderers(false);
+		rigidbody.useGravity = false;
 		//if(BodyRenderer != null)
 		//	BodyRenderer.enabled = false;
 		//else
@@ -307,6 +308,7 @@ public class Player : MonoBehaviour
             Destroy(playerAim.ProjectileOriginalObject);
 
 		yield return new WaitForSeconds(DeathTime);
+		rigidbody.useGravity = true;
 		Respawn();
 	}
 
@@ -401,6 +403,7 @@ public class Player : MonoBehaviour
 		KilledBy = "";
 
 		EnableRenderers(true);
+		
 		//if(BodyRenderer != null)
 		//	BodyRenderer.enabled = true;
 		//else

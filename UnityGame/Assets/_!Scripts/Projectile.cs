@@ -63,25 +63,6 @@ public class Projectile : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		//if(DeadlyTimer > 0)
-		//{
-		//	DeadlyTimer -= Time.deltaTime;
-		//	isDeadly = true;
-		//}
-		//else
-		//{
-		//	//Convert to local velocity, so we know which direction the projectile is going in
-		//	Vector3 localVelocity = transform.InverseTransformDirection(rigidbody.velocity);
-		//	if(localVelocity.x > KillVelocity)
-		//	{
-		//		isDeadly = true;
-		//	}
-		//	else
-		//	{
-		//		isDeadly = false;
-		//	}
-		//}
-
 		isDeadly = true;
 
 		if(isDeadly)
@@ -135,20 +116,6 @@ public class Projectile : MonoBehaviour
       		transform.position = lockPos;
 		}
 	}
-
-	//void OnTriggerExit(Collider other)
-	//{
-	//	if(other.gameObject.tag == Owner)
-	//	{
-	//		outOfBounds = true;
-//
-	//		Physics.IgnoreCollision(collider, OwnerObject.collider, false);
-	//		foreach(Transform child in transform)
-	//		{
-	//			Physics.IgnoreCollision(child.collider, OwnerObject.collider, false);
-	//		}
-	//	}
-	//}
 
 	void OnDestroy()
 	{

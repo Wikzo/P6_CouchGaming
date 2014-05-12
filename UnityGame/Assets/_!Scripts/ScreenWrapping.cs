@@ -15,7 +15,7 @@ public class ScreenWrapping : MonoBehaviour
     private Transform RootToDetectScreenEdgeTransform;
     private Transform OriginalToFollowTransform;
 
-    private bool renderersEnabled = false;
+    private bool cloneActive = false;
 
     private BoxCollider cloneBoxCollider;
     private Rigidbody cloneRigidbody;
@@ -110,7 +110,7 @@ public class ScreenWrapping : MonoBehaviour
             {
                 cloneHelmetRenderers = RendererObject.GetComponentsInChildren<MeshRenderer>();
                 EnableRenderers(false);
-                renderersEnabled = false;
+                cloneActive = false;
             }
         }
 
@@ -184,29 +184,23 @@ public class ScreenWrapping : MonoBehaviour
         {
             standingAtScreenEdgeRightNow = true;
             Clone.transform.position = new Vector3(OriginalToFollowTransform.position.x - screen.x * 2, OriginalToFollowTransform.position.y, OriginalToFollowTransform.position.z);
+            cloneActive = true;
             if(cloneBodyRenderer != null)
-            {
                 EnableRenderers(true);
-                renderersEnabled = true;
-            }
         }
         else if (leftSidePosInViewPort.x < 0) // check left side
         {
             standingAtScreenEdgeRightNow = true;
             Clone.transform.position = new Vector3(OriginalToFollowTransform.position.x + screen.x * 2, OriginalToFollowTransform.position.y, OriginalToFollowTransform.position.z);
+            cloneActive = true;
             if(cloneBodyRenderer != null)
-            {
                 EnableRenderers(true);
-                renderersEnabled = true;
-            }
         }
         else
         {
+            cloneActive = false;
             if(cloneBodyRenderer != null)
-            {
                 EnableRenderers(false);
-                renderersEnabled = false;
-            }
         }
 
         if (upperSidePosInViewPort.y > 1) // check upper side
@@ -221,14 +215,20 @@ public class ScreenWrapping : MonoBehaviour
         }
 
         if (UseScale)
+        {
+            if(Clone.renderer != null && cloneActive == true)
+                Clone.renderer.enabled = OriginalToFollow.renderer.enabled;
+            
             Clone.transform.localScale = OriginalToFollowTransform.localScale;
+        }
 
         if (UseRotation)
+        {
+            if(Clone.renderer != null && cloneActive == true)
+                Clone.renderer.enabled = OriginalToFollow.renderer.enabled;
+            
             Clone.transform.rotation = OriginalToFollowTransform.rotation;
-
-        //if (UseColor)
-        //    if(cloneBodyRenderer != null && originalRenderer != null)
-        //        cloneBodyRenderer.material.color = originalRenderer.material.color; 
+        }
 
         if (Clone != null && UseAnimations)
         {            
@@ -244,7 +244,7 @@ public class ScreenWrapping : MonoBehaviour
             {    
                 anim.SetBool("DoubleJump", true);
 
-                if(startBoostEffect == false && renderersEnabled)
+                if(startBoostEffect == false && cloneActive)
                 {
                     boostJumpEffect = Instantiate(BoostJumpEffect, Clone.position, Quaternion.identity) as GameObject;
                     Destroy(boostJumpEffect, 3);
@@ -257,12 +257,18 @@ public class ScreenWrapping : MonoBehaviour
                 anim.SetBool("DoubleJump", false);
                 startBoostEffect = false;
             }
+
+            if(originalAnimations.CurrentBaseState.nameHash == PlayerAnimations.fallState)
+                anim.SetBool("Fall", true);
+            else
+                anim.SetBool("Fall", false);
+                
             if(originalAnimations.CurrentBaseState.nameHash == PlayerAnimations.JumpLandState)    
                 anim.CrossFade(PlayerAnimations.JumpLandState, 0, 0, Mathf.NegativeInfinity);    
 
             Clone.transform.rotation = OriginalToFollowTransform.rotation;
 
-            if(renderersEnabled == true)
+            if(cloneActive == true)
             {
                 cloneBodyRenderer.material.color = originalBodyRenderer.material.color;
                 cloneBodyRenderer.materials[1].color = originalBodyRenderer.materials[1].color;

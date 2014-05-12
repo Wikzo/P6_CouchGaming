@@ -59,12 +59,17 @@ public class PlayerAnimations : MonoBehaviour {
 		if(playerJump.IsLanding == true)
 		{
 			anim.SetBool("JumpLand", true);
+
+			anim.SetBool("Fall", false);
+			
 			playerJump.IsLanding = false;
 
 			anim.CrossFade(JumpLandState, 0, 0, Mathf.NegativeInfinity);		
 		}
 		else
+		{
 			anim.SetBool("JumpLand", false);
+		}
 
 		if(playerMove.movingLeft || playerMove.movingRight)
 			anim.SetBool("Run", true);
@@ -77,5 +82,10 @@ public class PlayerAnimations : MonoBehaviour {
 				runTimer = 0;
 			}
 		}
+
+		if(playerJump.CanJump == false && playerJump.HasJumped == false && playerJump.HasDoubleJumped == false)
+			anim.SetBool("Fall", true);
+		else
+			anim.SetBool("Fall", false);
 	}
 }

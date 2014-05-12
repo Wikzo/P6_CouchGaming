@@ -60,17 +60,17 @@ public class PlayerJump : MonoBehaviour {
 
 		groundDetectLength = pTran.localScale.y/2;
 
-		//if(transform.Find("ForwardCollider").GetComponent<CollisionDetect>() != null)
-		//	downCollider = transform.Find("DownCollider").GetComponent<CollisionDetect>();
-		//else
-		//	print("DownCollider is needed on " + name);
+		if(transform.Find("ForwardCollider").GetComponent<CollisionDetect>() != null)
+			downCollider = transform.Find("DownCollider").GetComponent<CollisionDetect>();
+		else
+			print("DownCollider is needed on " + name);
 	}
 
 	// Update is called once per frame
 	public void JumpUpdate () 
 	{
 		//Rays will be cast on both sides of the player, so edges are also detected
-		
+		/*
 		Vector3 leftPos = pTran.position+Vector3.left*pTran.localScale.x/2f; //1.7 puts the ray further out, causing the player to make less mistakes
 		Vector3 rightPos = pTran.position+Vector3.right*pTran.localScale.x/2f;
 
@@ -94,6 +94,23 @@ public class PlayerJump : MonoBehaviour {
 				boostJumpsAmount = 0;
 				rigidbody.velocity = Vector3.zero;
 			}
+		}*/
+		if(downCollider.IsColliding)
+		{
+			bool ownProjInBounds = false;
+
+			if(readyToLand == true)
+			{
+				IsLanding = true;
+				readyToLand = false;
+			}
+
+			CanJump = true;
+			HasJumped = false;
+			HasDoubleJumped = false;
+
+			boostJumpsAmount = 0;
+			rigidbody.velocity = Vector3.zero;
 		}
 		else //We are in the air
 		{
@@ -138,8 +155,8 @@ public class PlayerJump : MonoBehaviour {
 				CanBoostJump = false;
 		}
 		*/
-		Debug.DrawRay(leftPos, Vector3.down);
-		Debug.DrawRay(rightPos, Vector3.down);
+		//Debug.DrawRay(leftPos, Vector3.down);
+		//Debug.DrawRay(rightPos, Vector3.down);
 	}
 
 	//TODO: Fix so it's the same velocity for each jump
