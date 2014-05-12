@@ -16,7 +16,7 @@ public class MissionKill : MissionBase
     
     public override bool MissionAccomplished()
     {
-        if(this.Player.name == this.Target.GetComponent<Player>().KilledBy)
+        if(this.Player.tag == this.Target.GetComponent<Player>().KilledBy)
         {
            this._missionIsActive = false;
             return true;

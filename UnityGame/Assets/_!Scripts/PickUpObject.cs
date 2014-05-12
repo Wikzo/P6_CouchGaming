@@ -5,7 +5,7 @@ public class PickUpObject : MonoBehaviour
 {
     public bool IsPickedUpRightNow = false;
     public bool CanBeUsedRightNow = true;
-    public Vector3 Offset = new Vector3(0, 0.9f, 0);
+    public Vector3 Offset = new Vector3(0, -1.5f, 0);
     public GameObject PlayerToFollow;
 
     Vector3 StartPosition;
@@ -79,11 +79,11 @@ public class PickUpObject : MonoBehaviour
             rigidbody.useGravity = true;
         }
 
-        if (Idle)
+        /*if (Idle)
         {
             float lerp = Mathf.PingPong(Time.time, IdleBlinkRate) / IdleBlinkRate;
             RenderObject.renderer.material.color = Color.Lerp(Color.white, Color.black, lerp);
-        }
+        }*/
     }
 
 
@@ -118,7 +118,7 @@ public class PickUpObject : MonoBehaviour
         gameObject.collider.isTrigger = false;
         rigidbody.isKinematic = false;
         rigidbody.useGravity = true;
-        RenderObject.renderer.material.color = Color.white;
+        //RenderObject.renderer.material.color = Color.white;
     }
 
     public void GoToBaseAndStayIdle()

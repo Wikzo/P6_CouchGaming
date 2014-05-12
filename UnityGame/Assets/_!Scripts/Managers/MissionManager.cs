@@ -80,7 +80,7 @@ public class MissionManager : MonoBehaviour
         Players = GameManager.Instance.Players;
         AlreadyChosenMissions = new List<MissionBase>(Players.Count);
         AllAvailableMissionsTotal = new List<MissionBase>(4);
-        InstantiatedMissions = new List<MissionBase>(4);
+        InstantiatedMissions = new List<MissionBase>(Players.Count);
 
         if (MissionTexts.Count != 4)
             Debug.Log("ERROR - Mission Manager needs to have 4 links to TextMesh!");
@@ -225,7 +225,6 @@ public class MissionManager : MonoBehaviour
     {
         if (howMany+1 > 0)
         {
-            print("hey" + howMany);
             if (MissionIcons[howMany] != null)
                 iTween.PunchScale(MissionIcons[howMany], new Vector3(5, 5), 1f);
             yield return new WaitForSeconds(0f);
@@ -239,7 +238,7 @@ public class MissionManager : MonoBehaviour
         if (GameManager.Instance.PlayingState != PlayingState.Playing) // only check if game is playing
             return;
 
-        for (int i = 4 - 1; i >= 0; i--)
+        for (int i = InstantiatedMissions.Count - 1; i >= 0; i--)
         {
             MissionBase m = InstantiatedMissions[i];
             if (m != null)

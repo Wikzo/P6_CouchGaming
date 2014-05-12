@@ -5,13 +5,15 @@ public class RotateText : MonoBehaviour {
 
     public iTween.EaseType EaseType;
     public bool TextShouldFade;
+    public bool TextShouldRotate = true;
     TextMesh t;
 
 
 	// Use this for initialization
 	void Start ()
     {
-        iTween.RotateBy(gameObject, iTween.Hash("y", 0.01, "easeType", EaseType, "onComplete", "forward", "loopType", iTween.LoopType.none));
+        if (TextShouldRotate)
+            iTween.RotateBy(gameObject, iTween.Hash("y", 0.01, "easeType", EaseType, "onComplete", "forward", "loopType", iTween.LoopType.none));
 
         if (TextShouldFade)
             t = GetComponent<TextMesh>();

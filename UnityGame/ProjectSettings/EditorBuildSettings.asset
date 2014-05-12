@@ -17,11 +17,11 @@ EditorBuildSettings:
     path: Assets/_Scenes/Testing/ControllerTest.unity
   - enabled: 0
     path: Assets/_Scenes/IntroMenu.unity
-  - enabled: 0
+  - enabled: 1
+    path: Assets/_Scenes/Testing/Levels/Lab_1_CharacterImport.unity
+  - enabled: 1
     path: Assets/_Scenes/Testing/Levels/Lab_1_CharacterImport.unity
   - enabled: 0
     path: Assets/noWrap.unity
-  - enabled: 1
-    path: Assets/_Scenes/Testing/Levels/Lab_1_CharacterImport.unity
   - enabled: 0
     path: Assets/_Scenes/Testing/Voicer.unity

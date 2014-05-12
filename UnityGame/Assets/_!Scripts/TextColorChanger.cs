@@ -23,7 +23,11 @@ public class TextColorChanger : MonoBehaviour
 
     IEnumerator ChooseColor()
     {
-        myText.color = colors[Random.Range(0, colors.Length)];
+        Color tempColor = colors[Random.Range(0, colors.Length)];
+
+        Color newColor = new Color(tempColor.r, tempColor.g, tempColor.b, 255);
+
+        myText.color = newColor;
 
         float waitTime = Random.Range(0.2f, 1.5f);
         yield return new WaitForSeconds(waitTime);

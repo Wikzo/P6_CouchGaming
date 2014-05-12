@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
     public GameObject MissionInitializedParticles;
 
     private Camera Camera;
+    public Camera CameraOrtographic;
 
     public GameObject Congratulations;
 
@@ -119,6 +120,19 @@ public class GameManager : MonoBehaviour
         TargetChosenSoFar = new List<int>();
 
         HasPlayedAtLeastOnce = false;
+
+        for (int i = Players.Count - 1; i >= 0; i--)
+        {
+            GameObject p = Players[i];
+
+            if (!p.GetComponent<Player>().HasBeenChosen)
+            {
+                Players.Remove(p);
+                Destroy(p);
+            }
+
+
+        }
 
 
         // TODO: make practice rumble things
@@ -287,12 +301,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // turn off when calibrating/tutorial
-        if (PlayingState == PlayingState.WaitingForEverbodyToGetReady)
-            MainLight.enabled = false;
-        else
-            MainLight.enabled = true;
-
         if (PlayingState == PlayingState.Playing)
         {
             TimeLeft -= Time.deltaTime;
@@ -391,10 +399,10 @@ public class GameManager : MonoBehaviour
           //  PlayingState = PlayingState.Playing;
     }
 
-    private void OnGUI()
+    /*private void OnGUI()
     {
         
-        /*GUILayout.Label(string.Format("Current state: {0}", PlayingState.ToString()));
+        GUILayout.Label(string.Format("Current state: {0}", PlayingState.ToString()));
         GUILayout.Label(string.Format("Round: {0}", CurrentRound.ToString()));/*
 
         switch (PlayingState)
@@ -421,9 +429,9 @@ public class GameManager : MonoBehaviour
                     ResetWholeGame();
                 break;
         }
-         * */
+         *
 
-    }
+    }*/
 
     public void ResetWholeGame()
     {

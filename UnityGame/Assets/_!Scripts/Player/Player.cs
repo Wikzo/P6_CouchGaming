@@ -26,8 +26,6 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public bool IsReadyToBegin = false;
 
-    public GameObject YButtonReady;
-
 	public GameObject RendererObject;
 	[HideInInspector]
 	public SkinnedMeshRenderer BodyRenderer;
@@ -56,7 +54,8 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public PlayerState PState;
 	public string KilledBy;
-	[HideInInspector]
+	
+
 	public PlayerIndex PlayerController;
 	public ControllerState PlayerControllerState;
 
@@ -80,9 +79,26 @@ public class Player : MonoBehaviour
     public string MyColorIDName;
     private int resetCounter;
 
+    [HideInInspector]
+    public bool HasBeenChosen = false;
+
     // Use this for initialization
 	void Awake () 
 	{
+
+        if (FindRightControllers.Instance != null)
+        {
+            if (FindRightControllers.Instance.PlayersSlots[Id] != -10)
+            {
+                PlayerController = (PlayerIndex)FindRightControllers.Instance.PlayersSlots[Id];
+                HasBeenChosen = true;
+            }
+        }
+        else if (FindRightControllers.Instance != null)
+            HasBeenChosen = false;
+        else if (FindRightControllers.Instance == null)
+            HasBeenChosen = true;
+
 		pTran = transform;
 
 		if(RendererObject != null)
@@ -104,19 +120,23 @@ public class Player : MonoBehaviour
 		switch(Id)
 		{
 			case 0:
-			PlayerController = PlayerIndex.One;
+			if (FindRightControllers.Instance == null)
+                PlayerController = PlayerIndex.One;
 			pMat = Materials[0];
 			break;
 			case 1:
-			PlayerController = PlayerIndex.Two;
+            if (FindRightControllers.Instance == null)
+                PlayerController = PlayerIndex.Two;
 			pMat = Materials[1];
 			break;
 			case 2:
-			PlayerController = PlayerIndex.Three;
+            if (FindRightControllers.Instance == null)
+                PlayerController = PlayerIndex.Three;
 			pMat = Materials[2];
 			break;
 			case 3:
-			PlayerController = PlayerIndex.Four;
+            if (FindRightControllers.Instance == null)
+    			PlayerController = PlayerIndex.Four;
 			pMat = Materials[3];
 			break;
 		}
@@ -370,11 +390,20 @@ public class Player : MonoBehaviour
     }
 
 
-    /*public void OnGUI()
+    public void OnGUI()
     {
-        if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
+        // display controller slot
+            /*int controller = (int)PlayerController + 1;
+            string text = "P" + controller;
+
+            var point = GameManager.Instance.CameraOrtographic.WorldToScreenPoint(transform.position);
+
+            GUI.Label(new Rect(point.x, point.y, 50, 50), text);*/
+
+        // display ready text
+        /*if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady)
         {
-            /*
+
             // TODO: fix offset
             string ready = (IsReadyToBegin == true) ? "Ready" : "Not Ready";
             string text = "Press Y to toggle ready\n" + ready;
@@ -392,14 +421,13 @@ public class Player : MonoBehaviour
 
 
             GUI.Label(new Rect(point.x + xOffset, Screen.currentResolution.height - point.y - 200 + yOffset, 200, 200), text);
-             * 
-             * 
-        }
+        }*/
 
-    }*/
+    }
 	public void Respawn()
 	{
 		PState = PlayerState.Respawning;
+
 		KilledBy = "";
 
 		EnableRenderers(true);
@@ -430,9 +458,6 @@ public class Player : MonoBehaviour
 
         if (PlayerControllerState.ButtonDownY || Input.GetKeyDown(KeyCode.Y))
         {
-            if (YButtonReady != null)
-                Destroy(YButtonReady);
-
             IsReadyToBegin = !IsReadyToBegin;
 
             Color c = Color.white;

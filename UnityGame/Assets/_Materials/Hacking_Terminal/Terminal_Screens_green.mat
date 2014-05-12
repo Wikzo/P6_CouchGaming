@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Scroll_Middle
-  m_Shader: {fileID: 36, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: Terminal_Screens_green
+  m_Shader: {fileID: 2, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: []
   m_CustomRenderQueue: -1
   m_SavedProperties:
@@ -47,7 +47,7 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0, g: .710344791, b: 1, a: .384313732}
+        second: {r: 0, g: 1, b: .131034613, a: .545098066}
       data:
         first:
           name: _SpecColor

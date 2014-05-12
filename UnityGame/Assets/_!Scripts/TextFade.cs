@@ -5,10 +5,11 @@ public class TextFade : MonoBehaviour
 {
 
     string TutorialText = "Calibrating controllers";
-    string PracticeText = "Press Start to begin game";
-    private string GetReadyText = "Receiving missions ...\nUse ↑ and ↓";
+    string PracticeText = "Press START to begin game";
+    private string GetReadyText = "Receiving missions ...\nUse ↑ and ↓\nY to get ready";
+    private string GetReadyWithColors = "Use the D-pad ...\nUse       and                        \nPress <color=yellow>Y </color> to get ready";
     private string PauseText = "*Paused*";
-    
+
     private string[] ScoreText;
     public GUIStyle[] ScoreStylesColor;
     
@@ -21,9 +22,14 @@ public class TextFade : MonoBehaviour
 
     private bool shouldFade;
 
+    public GameObject ReadyImage;
+
+    float alpha;
+
     // Use this for initialization
     private void Start()
     {
+        ReadyImage.SetActive(false);
         shouldFade = true;
         FadingTextStyle.alignment = TextAnchor.MiddleCenter;
         
@@ -73,34 +79,76 @@ public class TextFade : MonoBehaviour
         else
             shouldFade = true;
 
+        if (GameManager.Instance.PlayingState == PlayingState.WaitingForEverbodyToGetReady && !GameManager.Instance.ReadyNotYetSpawned)
+            ReadyImage.SetActive(true);
+        else
+            ReadyImage.SetActive(false);
+
+
         if (shouldFade)
         {
-            FadeTime = Mathf.PingPong(Time.time, 1.5f);
-            FadingTextStyle.normal.textColor = new Color(0, 0, 0, FadeTime);
+            FadeTime = Mathf.PingPong(Time.time, 2f);
+            //FadingTextStyle.normal.textColor = new Color(0, 0, 0, FadeTime);
+            alpha = FadeTime;
         }
         else
-            FadingTextStyle.normal.textColor = new Color(0, 0, 0, 1);
+        {
+            //FadingTextStyle.normal.textColor = new Color(0, 0, 0, 1);
+            alpha = 1;
+        }
+
+    }
+
+    public void DrawOutline(Rect pos, string text, GUIStyle style, Color outColor, Color inColor)
+    {
+        GUIStyle backupStyle = style;
+        style.normal.textColor = new Color(outColor.r, outColor.g, outColor.b, alpha);
+        pos.x--;
+        GUI.Label(pos, text, style);
+        pos.x += 2;
+        GUI.Label(pos, text, style);
+        pos.x--;
+        pos.y--;
+        GUI.Label(pos, text, style);
+        pos.y += 2;
+        GUI.Label(pos, text, style);
+        pos.y--;
+        style.normal.textColor = new Color(inColor.r, inColor.g, inColor.b, alpha);
+        GUI.Label(pos, text, style);
+        style = backupStyle;
 
     }
 
     private void OnGUI()
     {
+
+
         switch (GameManager.Instance.PlayingState)
         {
             case PlayingState.TalkingBeforeControllerCalibration:
-                GUI.Label(MidRect, TutorialText, FadingTextStyle);
+                    //GUI.Label(MidRect, TutorialText, FadingTextStyle);
+                    DrawOutline(MidRect, TutorialText, FadingTextStyle, Color.white, Color.black);
                     break;
             case PlayingState.PraticeMode:
-                    GUI.Label(MidRect, PracticeText, FadingTextStyle);
+                    //GUI.Label(MidRect, PracticeText, FadingTextStyle);
+                    DrawOutline(MidRect, PracticeText, FadingTextStyle, Color.white, Color.black);
                     break;
 
-            case PlayingState.WaitingForEverbodyToGetReady:
+            /*case PlayingState.WaitingForEverbodyToGetReady:
                 if (!GameManager.Instance.ReadyNotYetSpawned)
-                    GUI.Label(MidRect, GetReadyText, FadingTextStyle);
-                break;
+                    //GUI.Label(MidRect, GetReadyText, FadingTextStyle);
+                    DrawOutline(MidRect, GetReadyWithColors, FadingTextStyle, Color.white, Color.black);
+                    //GUI.Label(MidRect, "Receiving missions ...\nUse <color=red> ↑ and ↓ </color>\nPress <color=yellow>Y </color> to get ready", FadingTextStyle);
+                GUI.DrawTexture(new Rect(Screen.width / 2 - MidRect.x/3, MidRect.y, 100, 100), dPadUp);
+                GUI.DrawTexture(new Rect(Screen.width / 2 + MidRect.x/2 - 50, MidRect.y, 100, 100), dPadDown);
+
+                
+
+                break;*/
 
             case PlayingState.Paused:
-                GUI.Label(MidRect, PauseText, FadingTextStyle);
+                //GUI.Label(MidRect, PauseText, FadingTextStyle);
+                DrawOutline(MidRect, PauseText, FadingTextStyle, Color.white, Color.black);
                 break;
 
             case PlayingState.DisplayingScore:
@@ -109,7 +157,11 @@ public class TextFade : MonoBehaviour
                     // TODO: make GUI resolution independent
                     if (ScoreText[i] != null && ScoreStylesColor[i] != null)
                     {
-                        GUI.Label(new Rect(MidRect.x + Screen.width * (-0.1f), MidRect.y - 200 +  2 + i * 100 + 50, Screen.height, Screen.height), ScoreText[i], ScoreStylesColor[i]);
+                        // calculate length of text
+                        var textDimensions = GUI.skin.label.CalcSize(new GUIContent(ScoreText[i]));
+
+                        //GUI.Label(new Rect(MidRect.x + Screen.width * (-0.1f), MidRect.y - 200 +  2 + i * 100 + 50, Screen.height, Screen.height), ScoreText[i], ScoreStylesColor[i]);
+                        GUI.Label(new Rect(MidRect.x - textDimensions.x / 2, MidRect.y - 200 + 2 + i * 100 + 50, Screen.height, Screen.height), ScoreText[i], ScoreStylesColor[i]);
                     }
                 }
                 break;

@@ -26,6 +26,13 @@ public class RotateSample : MonoBehaviour
     public AudioClip ForwardMenuSound;
     public AudioClip BackwardMenuSound;
 
+    public int[] playersChosenID;
+    int currentPlayersChosenSlotID; // between 0 and 3
+
+    public GameObject RememberControllers;
+
+    public GameObject StartGameText;
+
     
     int[] currentSlots;
     bool[] readyToMoveSlot;
@@ -35,7 +42,10 @@ public class RotateSample : MonoBehaviour
 	void Start()
     {
         Screen.showCursor = false;
+        playersChosenID = new int[4];
+        currentPlayersChosenSlotID = 0;
 
+        StartGameText.SetActive(false);
         Glitch = gameObject.GetComponent<GlitchEffect>();
         //iTween.RotateTo(gameObject, iTween.Hash("rotation", transform.position, iTween.EaseType.easeInOutSine, "time", 1.3f));
 		//iTween.RotateBy(gameObject, iTween.Hash("y", .25, "easeType", "easeInOutBack", "loopType", iTween.LoopType.none, "delay", .4));
@@ -80,7 +90,6 @@ public class RotateSample : MonoBehaviour
 
     void Update()
     {
-
         UpdateControllerStates();
 
         for (int i = 0; i < 4; ++i)
@@ -96,11 +105,16 @@ public class RotateSample : MonoBehaviour
                 PlaneSlots[i].SetActive(true);
 
 
-            if (p.ButtonPressedRightNow(ButtonsToPress.Start))
+            if (selected >= 2)
             {
-                //if (counter > 2)
-                Application.LoadLevel(1);
+                StartGameText.SetActive(true);
+
+                if (p.ButtonPressedRightNow(ButtonsToPress.Start))
+                    StartGameAndFindControllers();
             }
+            else
+                StartGameText.SetActive(false);
+
 
             // can move when thumbstick resets
             if (p.LeftStick().x == 0)
@@ -117,6 +131,11 @@ public class RotateSample : MonoBehaviour
                 FourCamerasSpots[i].transform.position = FourSlots[currentSlots[i]].transform.position;
 
                 readyToMoveSlot[i] = false;
+
+                Transform rightArrow = PlaneSlots[i].GetComponent<CharPlaneMenuNav>().ReadyObjects[2].transform;
+                rightArrow.localScale = new Vector3(0.2981013f, 0.1465021f, 0.1377661f);
+                GoKitTweenExtensions.shake(rightArrow, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Scale);
+
                 audio.PlayOneShot(ForwardMenuSound);
             }
             // go left (character select)
@@ -130,6 +149,11 @@ public class RotateSample : MonoBehaviour
                 FourCamerasSpots[i].transform.position = FourSlots[currentSlots[i]].transform.position;
 
                 readyToMoveSlot[i] = false;
+
+                Transform leftArrow = PlaneSlots[i].GetComponent<CharPlaneMenuNav>().ReadyObjects[1].transform;
+                leftArrow.localScale = new Vector3(0.2981013f, 0.1465021f, 0.1377661f);
+                GoKitTweenExtensions.shake(leftArrow, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Scale);
+
                 audio.PlayOneShot(BackwardMenuSound);
 
 
@@ -162,8 +186,13 @@ public class RotateSample : MonoBehaviour
                 {
                     CharacterSelect[currentSlots[i]].Selected = true;
                     MyCharacter[i] = CharacterSelect[currentSlots[i]];
+
+                    CharacterSelect[currentSlots[i]].PlayerChosenSlot = (int)p.Index;
+
                     selected++;
                     audio.PlayOneShot(SelectSounds[selected]);
+
+
 
                     PlaneSlots[i].transform.position = OriginalPositions[i];
                     PlaneSlots[i].transform.localScale = OriginalScales[i];
@@ -181,7 +210,11 @@ public class RotateSample : MonoBehaviour
                     audio.PlayOneShot(CancelSound);
                     CharacterSelect[currentSlots[i]].Selected = false;
                     MyCharacter[i] = null;
+
                     selected--;
+
+                    CharacterSelect[currentSlots[i]].PlayerChosenSlot = -10;
+
 
                     PlaneSlots[i].transform.position = OriginalPositions[i];
                     PlaneSlots[i].transform.localScale = OriginalScales[i];
@@ -256,6 +289,28 @@ public class RotateSample : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         Glitch.enabled = false;
+    }
+
+    void StartGameAndFindControllers()
+    {
+        GameObject g = (GameObject)Instantiate(RememberControllers);
+        FindRightControllers c = g.GetComponent<FindRightControllers>();
+        c.PlayersSlots = new int[4];
+
+        for (int i = 0; i < 4; i++)
+        {
+            c.PlayersSlots[i] = -10;
+        }
+
+        foreach (RunAnimDummy r in CharacterSelect)
+        {
+            if (r.PlayerChosenSlot != -10)
+            {
+                c.PlayersSlots[r.MyID] = r.PlayerChosenSlot;
+            }
+        }
+
+        Application.LoadLevel(1);
     }
 }
 
