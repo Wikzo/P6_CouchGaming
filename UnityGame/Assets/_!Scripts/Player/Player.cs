@@ -528,6 +528,7 @@ public class Player : MonoBehaviour
         {
         	ChosenSpawn = spawnsToChoose[Random.Range(0,spawnsToChoose.Count-1)];
         	pTran.position = ChosenSpawn.transform.position;
+        	pTran.forward = ChosenSpawn.transform.forward;
         }
 
         ChosenSpawn.SetActive(false);
@@ -547,5 +548,10 @@ public class Player : MonoBehaviour
 				HelmetRenderers[i].enabled = on;
 			}
 		}
+	}
+
+	void FaceMiddle()
+	{
+
 	}
 }
