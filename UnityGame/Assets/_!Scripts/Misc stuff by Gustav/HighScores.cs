@@ -98,7 +98,7 @@ public class HighScores : MonoBehaviour
         SaveScoresToDataFile();
     }
 
-    void OnGUI()
+    /*void OnGUI()
     {
         foreach (var score in highScores)
         {
@@ -106,6 +106,6 @@ public class HighScores : MonoBehaviour
                score.name, score.score, score.timesStarted));
         }
 
-    }
+    }*/
 
 }

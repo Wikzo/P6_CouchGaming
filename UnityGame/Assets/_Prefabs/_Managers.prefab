@@ -108,6 +108,8 @@ GameObject:
   - 4: {fileID: 400012}
   - 114: {fileID: 11400014}
   - 82: {fileID: 8200002}
+  - 82: {fileID: 8200004}
+  - 82: {fileID: 8200006}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -372,6 +374,122 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!82 &8200004
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &8200006
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100012}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,8 +530,8 @@ MonoBehaviour:
   TargetChosenSoFar: 
   MissionInitializedParticles: {fileID: 100000, guid: 88bda155ebed0d844aa0c6542ba37af6,
     type: 2}
-  DebugMode: 0
-  UseAnnouncer: 0
+  DebugMode: 1
+  UseAnnouncer: 1
   GUIRumbleCounter: 1
   ControllerGUIToRumble: {fileID: 0}
   RumbleStepsGUI:
@@ -458,6 +576,8 @@ MonoBehaviour:
   - {fileID: 0}
   RingPrefabForIntelMission: {fileID: 100000, guid: bfabc6c7b8a60374a8d7fa1b9ce6b53d,
     type: 2}
+  MissionIsCompletedPrefab: {fileID: 100000, guid: ce359cc51c9be534d864985e046ac165,
+    type: 2}
   ChanceOfGettingUniqueMissions: 5
 --- !u!114 &11400006
 MonoBehaviour:
@@ -472,6 +592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 1
   Player: {fileID: 0}
+  PlayerScript: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 0
@@ -481,7 +602,7 @@ MonoBehaviour:
   RumblePractice: 0
   ShowMissionGUI: 0
   HasHeardMissionRumble: 0
-  MissionDescription: Defend PLAYER time
+  MissionDescription: Defend PLAYER
   DebugShowCurrentMission: 0
 --- !u!114 &11400008
 MonoBehaviour:
@@ -521,6 +642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 1
   Player: {fileID: 0}
+  PlayerScript: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 0
@@ -553,10 +675,27 @@ MonoBehaviour:
   IntelKeyboardPressingSound: {fileID: 8300000, guid: e7fa144c0cd1c6244b72cf2a6c2e6a29,
     type: 3}
   CalibrationAudio: {fileID: 8300000, guid: 1376de98470c3ff4babbe722de1177fb, type: 3}
+  VibrationExplain: {fileID: 8300000, guid: 160b7099d1a62294a95b2705efbe1711, type: 3}
   PracticeAudio: {fileID: 8300000, guid: 86a688484ba6d964388edbbdc95c1a26, type: 3}
   NewMissionsFirstTime: {fileID: 8300000, guid: c25bf5c4d8675d44b992009dd559fab0,
     type: 3}
   ReadyGo: {fileID: 8300000, guid: 05ee09a64860a4c4d8a651797df44461, type: 3}
+  ReadySounds:
+  - {fileID: 8300000, guid: 6f5489270826da74ea922658b13866b7, type: 3}
+  - {fileID: 8300000, guid: b99647441cfa8bc4a9add9af14213c57, type: 3}
+  - {fileID: 8300000, guid: 1014fa1ed5c6f244182605c7cd55f128, type: 3}
+  - {fileID: 8300000, guid: 300f5d6b826c0d242b531b2a664fefbc, type: 3}
+  Unready: {fileID: 8300000, guid: c89ac2b2a1341f842ba0c8d97049699c, type: 3}
+  MissionCompletedPink: {fileID: 8300000, guid: 5a5cd1554d147f74c97dd3b37557c617,
+    type: 3}
+  MissionCompletedBlue: {fileID: 8300000, guid: 4abeb75beafd9634d9f604cb8306e59c,
+    type: 3}
+  MissionCompletedGreen: {fileID: 8300000, guid: c8d69d681bed40f41808a0a2627e0ca0,
+    type: 3}
+  MissionCompletedOrange: {fileID: 8300000, guid: cb1fabd153a9f8645a3066c316d14d2a,
+    type: 3}
+  MissionCompletedDefault: {fileID: 8300000, guid: a836651ec4ba7444191a8bb94ba42754,
+    type: 3}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -570,6 +709,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 1
   Player: {fileID: 0}
+  PlayerScript: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 0
@@ -606,6 +746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Points: 1
   Player: {fileID: 0}
+  PlayerScript: {fileID: 0}
   TargetPool: []
   Target: {fileID: 0}
   MissionType: 2

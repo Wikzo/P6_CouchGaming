@@ -22,6 +22,8 @@ public class MissionManager : MonoBehaviour
 
     public GameObject RingPrefabForIntelMission;
 
+    public GameObject MissionIsCompletedPrefab;
+
     public int ChanceOfGettingUniqueMissions = 5; // higher value = bigger chance of NOT getting same mission 
                                                   //(20-50 seems like a good value if you want to ABSOLUTELY make sure that they won't get same mission!)
                                                   // between 1 and 3 is "so-so"
@@ -64,6 +66,10 @@ public class MissionManager : MonoBehaviour
 
         if (RingPrefabForIntelMission == null)
             Debug.Log("ERROR - MissionManager needs to have RingPrefabForIntelMission assigned!");
+
+        if (MissionIsCompletedPrefab == null)
+            Debug.Log("ERROR - MissionIsCompletedPrefab not assigned to GameManager");
+
     }
 
     
@@ -228,8 +234,13 @@ public class MissionManager : MonoBehaviour
                 if (m.MissionAccomplished()) // look if mission has been accomplished
                 {
                     GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.2f, 0.2f, 0.2f), GoShakeType.Position);
-                    audio.PlayOneShot(AudioManager.Instance.MissionAccomplishedSound);
-                    Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
+
+                    GameObject g = (GameObject)Instantiate(MissionIsCompletedPrefab);
+                    MissionCompletedText t = g.GetComponent<MissionCompletedText>();
+                    t.SoundToPlay = m.ChooseCompletedSound();
+                    t.ColorToUse = new Color(m.PlayerScript.PlayerColor.r, m.PlayerScript.PlayerColor.g, m.PlayerScript.PlayerColor.b, 255);
+
+                    //Debug.Log(string.Format("{0} mission accomplished ({1} points)", m.ToString(), m.Points));
                     m.GivePointsToPlayer();
                 }
             }
