@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetIDColorState: 0
+  TargetIDColorState: 1
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1041,7 +1041,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetIDColorState: 0
+  TargetIDColorState: 3
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1053,7 +1053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetIDColorState: 0
+  TargetIDColorState: 2
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1093,7 +1093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa44ce6d28e5664d9d7766ca79ae294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetIDColorState: 0
+  TargetIDColorState: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
