@@ -63,7 +63,7 @@ public class Door : MonoBehaviour
         StartCoroutine(CloseDoor());
     }
 
-    /*void Update()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.D) && !going)
             StartCoroutine(CloseDoor());
@@ -71,7 +71,7 @@ public class Door : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.U) && !going)
             StartCoroutine(OpenDoor());
 
-    }*/
+    }
 
     IEnumerator CloseDoor()
     {
