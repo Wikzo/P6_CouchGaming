@@ -35,21 +35,22 @@ public class MissionCompletedText : MonoBehaviour
 
     }
 
-    IEnumerator PlayAudio() // used to delay if other missions are playing right now
+    void OnEnable()
     {
-        print(AudioManager.Instance.AudioIsPlaying());
-        float time = 0;
-        if (AudioManager.Instance.AudioIsPlaying() == true)
-            time = 2f;
-
-        yield return new WaitForSeconds(time);
-
-        MoveIn();
+        AudioManager.OnAudio += MoveIn;
     }
+
+    void OnDisable()
+    {
+        AudioManager.OnAudio -= MoveIn;
+    }
+
 
     public void MoveIn()
     {
         iTween.MoveTo(gameObject, iTween.Hash("position", destMiddle, "oncomplete", "MoveOut", "easeType", iTween.EaseType.easeOutBack));
+
+        AudioManager.OnAudio -= MoveIn;
 
         //AudioManager.Instance.StopAllAudio();
         

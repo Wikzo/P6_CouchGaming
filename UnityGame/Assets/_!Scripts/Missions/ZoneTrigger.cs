@@ -67,5 +67,8 @@ public class ZoneTrigger : MonoBehaviour {
 	{
 		Accomplished = false;
 		progressCounter = 0;
+
+        // TODO: for BENJAMIN:
+        // this reset function does not work! I call it from MissionZone.cs, but it needs to reset the progressBar scale things
 	}
 }

@@ -31,6 +31,9 @@ public class AudioManager : MonoBehaviour
     float timer;
     bool isPlayingSound;
 
+    public delegate void AudioAction();
+    public static event AudioAction OnAudio;
+
     //  public static Instance  
     public static AudioManager Instance
     {
@@ -93,8 +96,10 @@ public class AudioManager : MonoBehaviour
     {
         StartCoroutine(AudioTimerCountdown(a.length));
         yield return new WaitForSeconds(delayLength);
-        
-        m.MoveIn();
+
+        if (OnAudio != null)
+            OnAudio(); // make MissionCompletedText call
+        //m.MoveIn();
 
         audio.PlayOneShot(a);
 

@@ -15,6 +15,7 @@ public class MissionZone : MissionBase
         if(this.Target.GetComponent<ZoneTrigger>().Accomplished)
         {
         	this._missionIsActive = false;
+            this.Target.GetComponent<ZoneTrigger>().RestartZone();
 			return true;
         }
 		else
