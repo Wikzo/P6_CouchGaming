@@ -9,10 +9,10 @@ public class TimeBar : MonoBehaviour
     public Texture2D backgroundTexture;
     public Texture2D DefendMarkTexture;
     private Vector2 BarPosition;
-    string timerText = "TIME:";
+    string timerText = "GAME TIME:";
 
     public float BarHeight = 10;
-    private float YOffset = 7.1f;
+    private float YOffset = 6.8f;
 
     private float BarRatio = 0.25f; // cannot be lower than 0!
 
@@ -53,7 +53,7 @@ public class TimeBar : MonoBehaviour
         var textDimensions = GUI.skin.label.CalcSize(new GUIContent(timerText));
 
         // draw string
-        GUI.Label(new Rect(BarPosition.x - textDimensions.x / 2, BarPosition.y - 20, 300, 50), timerText);
+        GUI.Label(new Rect(BarPosition.x - textDimensions.x / 2, BarPosition.y - 30, 300, 50), timerText);
 
         // Draw black border
         GUI.DrawTexture(new Rect(BarPosition.x - totalLength/2, BarPosition.y, totalLength, BarHeight), backgroundTexture, ScaleMode.StretchToFill, true, 10.0F);

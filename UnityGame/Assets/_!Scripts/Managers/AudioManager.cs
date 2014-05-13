@@ -31,6 +31,10 @@ public class AudioManager : MonoBehaviour
     float timer;
     bool isPlayingSound;
 
+    public GameObject MusicPlayer;
+    AudioLowPassFilter lowPass;
+    bool lowPassIsMuted;
+
     public delegate void AudioAction();
     public static event AudioAction OnAudio;
 
@@ -69,6 +73,13 @@ public class AudioManager : MonoBehaviour
 
         timer = 0;
         isPlayingSound = false;
+
+        lowPass = MusicPlayer.GetComponent<AudioLowPassFilter>();
+        if (lowPass == null)
+            Debug.Log("ERROR - music player needs to have low pass filter!");
+
+        lowPass.enabled = false;
+        lowPassIsMuted = false;
     }
 
 
@@ -87,7 +98,8 @@ public class AudioManager : MonoBehaviour
         
         if (delayLength > 0)
             audio.Stop();
-        
+
+        StartCoroutine(EnableLowPassFilter(a.length));
         audio.PlayOneShot(a);
 
     }
@@ -99,9 +111,10 @@ public class AudioManager : MonoBehaviour
 
         if (OnAudio != null)
             OnAudio(); // make MissionCompletedText call
-        //m.MoveIn();
 
         audio.PlayOneShot(a);
+        StartCoroutine(EnableLowPassFilter(a.length));
+
 
     }
 
@@ -115,7 +128,7 @@ public class AudioManager : MonoBehaviour
         if (!isPlayingSound)
             StartCoroutine(PlayAudioWithDelay(a, 0, m));
         else
-            StartCoroutine(PlayAudioWithDelay(a, 1f, m));
+            StartCoroutine(PlayAudioWithDelay(a, 1.5f, m));
 
     }
 
@@ -130,6 +143,20 @@ public class AudioManager : MonoBehaviour
         audio.Stop();
     }
 
+    IEnumerator EnableLowPassFilter(float time)
+    {
+        if (!lowPassIsMuted)
+        {
+            lowPass.enabled = true;
+            lowPassIsMuted = true;
+
+            yield return new WaitForSeconds(time - 0.5f);
+            
+            lowPass.enabled = false;
+            lowPassIsMuted = false;
+        }
+    }
+
     public void PlayAnnouncerVoice(AudioClip audioToPlay)
     {
         if (!GameManager.Instance.UseAnnouncer)
@@ -138,6 +165,8 @@ public class AudioManager : MonoBehaviour
         // stop and start next audio clip
         audio.Stop();
         audio.PlayOneShot(audioToPlay);
+
+        StartCoroutine(EnableLowPassFilter(audioToPlay.length));
         return;
 
         // no overlapping
