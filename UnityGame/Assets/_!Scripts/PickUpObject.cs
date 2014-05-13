@@ -5,8 +5,11 @@ public class PickUpObject : MonoBehaviour
 {
     public bool IsPickedUpRightNow = false;
     public bool CanBeUsedRightNow = true;
-    public Vector3 Offset = new Vector3(0, -1.5f, 0);
+    Vector3 PickupOffset = new Vector3(0, 3.89f, 0);
     public GameObject PlayerToFollow;
+
+    Vector3 ScrollScaleOriginal;
+    Vector3 ScrollScaleSmall = new Vector3(0.6813736f, 0.7912574f, 0.6813736f);
 
     Vector3 StartPosition;
 
@@ -18,12 +21,18 @@ public class PickUpObject : MonoBehaviour
     private float IdleBlinkRate = 0.5f;
     private float IdleBlinkTimeTotal = 0.5f;
 
+    bool isPuttingOnTerminalRightNow = false;
+
     bool DroppingRightNow;
+
+    Vector3 terminalPos;
 
     void Start()
     {
         if (RenderObject == null)
             Debug.Log("ERROR - needs render object (child)");
+
+        ScrollScaleOriginal = RenderObject.transform.localScale;
 
         StartPosition = transform.position;
     }
@@ -48,8 +57,21 @@ public class PickUpObject : MonoBehaviour
                 
                 rigidbody.isKinematic = true;
                 rigidbody.useGravity = false;
+
             }
         }
+    }
+
+    public void PutIntelOnTerminalScreen(bool doingIt, Vector3 pos)
+    {
+        if (doingIt)
+        {
+            isPuttingOnTerminalRightNow = true;
+            terminalPos = pos;
+        }
+        else
+            isPuttingOnTerminalRightNow = false;
+
     }
 
     void Update()
@@ -71,12 +93,24 @@ public class PickUpObject : MonoBehaviour
 
         // follow player
         if (IsPickedUpRightNow && !DroppingRightNow)
-            transform.position = PlayerToFollow.transform.position + Offset;
+        {
+            if (isPuttingOnTerminalRightNow)
+            {
+                transform.position = terminalPos;
+            }
+            else
+            {
+                transform.position = PlayerToFollow.transform.position + PickupOffset;
+                RenderObject.transform.localScale = ScrollScaleSmall;
+            }
+
+        }
         else if (CanBeUsedRightNow && !DroppingRightNow)// standard
         {
             gameObject.collider.isTrigger = false;
             rigidbody.isKinematic = false;
             rigidbody.useGravity = true;
+            RenderObject.transform.localScale = ScrollScaleOriginal;
         }
 
         /*if (Idle)
@@ -89,6 +123,8 @@ public class PickUpObject : MonoBehaviour
 
     IEnumerator SetTriggerToFalseForSomeTime()
     {
+        RenderObject.transform.localScale = ScrollScaleOriginal;
+
         gameObject.collider.enabled = true;
         PlayerToFollow = null;
         IsPickedUpRightNow = false;
@@ -124,17 +160,25 @@ public class PickUpObject : MonoBehaviour
     public void GoToBaseAndStayIdle()
     {
         CanBeUsedRightNow = false;
-        gameObject.collider.enabled = true;
-        gameObject.collider.isTrigger = false;
+        
         PlayerToFollow = null;
         IsPickedUpRightNow = false;
         rigidbody.isKinematic = true;
         rigidbody.useGravity = false;
 
+        StartCoroutine(Wait());
+        
+
+
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2);
         transform.position = StartPosition;
+        gameObject.collider.enabled = true;
+        gameObject.collider.isTrigger = false;
         StartCoroutine(BecomeIdle());
-
-
     }
 
 }

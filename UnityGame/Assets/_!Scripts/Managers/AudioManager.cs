@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -18,10 +20,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] ReadySounds;
     public AudioClip Unready;
 
-    public AudioClip MissionCompletedPink;
+    public AudioClip MissionCompletedRed;
     public AudioClip MissionCompletedBlue;
     public AudioClip MissionCompletedGreen;
-    public AudioClip MissionCompletedOrange;
+    public AudioClip MissionCompletedPink;
     public AudioClip MissionCompletedDefault;
 
     public AudioClip WinRed;
@@ -66,10 +68,57 @@ public class AudioManager : MonoBehaviour
         isPlayingSound = false;
     }
 
+
+    IEnumerator AudioTimerCountdown(float audioLength)
+    {
+        isPlayingSound = true;
+        yield return new WaitForSeconds(audioLength);
+        isPlayingSound = false;
+        
+    }
+
+    IEnumerator PlayAudioWithDelay(AudioClip a, float delayLength)
+    {
+        StartCoroutine(AudioTimerCountdown(a.length));
+        yield return new WaitForSeconds(delayLength);
+        
+        if (delayLength > 0)
+            audio.Stop();
+        
+        audio.PlayOneShot(a);
+
+    }
+
+    IEnumerator PlayAudioWithDelay(AudioClip a, float delayLength, MissionCompletedText m)
+    {
+        StartCoroutine(AudioTimerCountdown(a.length));
+        yield return new WaitForSeconds(delayLength);
+        
+        m.MoveIn();
+
+        audio.PlayOneShot(a);
+
+    }
+
     public void PlaySound(AudioClip a)
     {
         audio.PlayOneShot(a);
     }
+
+    public void PlaySound(AudioClip a, MissionCompletedText m)
+    {
+        if (!isPlayingSound)
+            StartCoroutine(PlayAudioWithDelay(a, 0, m));
+        else
+            StartCoroutine(PlayAudioWithDelay(a, 1f, m));
+
+    }
+
+    public bool AudioIsPlaying()
+    {
+        return audio.isPlaying;
+    }
+
 
     public void StopAllAudio()
     {

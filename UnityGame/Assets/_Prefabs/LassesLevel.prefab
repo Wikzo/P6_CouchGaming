@@ -4022,7 +4022,7 @@ GameObject:
   - 114: {fileID: 11400020}
   - 65: {fileID: 6500062}
   m_Layer: 12
-  m_Name: ZoneOrange
+  m_Name: ZoneRed
   m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13864,7 +13864,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: e50c316b677c4c9499d23d190778e057, type: 2}
+  - {fileID: 2100000, guid: 947fafedd4d9e1e4db089b9bc0589ac1, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -14769,7 +14769,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 947fafedd4d9e1e4db089b9bc0589ac1, type: 2}
+  - {fileID: 2100000, guid: e50c316b677c4c9499d23d190778e057, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -16575,7 +16575,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 6ef4cad54591f08449438eea81f9289c, type: 2}
+  - {fileID: 2100000, guid: 5b1e07ebbb7c1ce479a3f2c74e401d1d, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -19331,7 +19331,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 5b1e07ebbb7c1ce479a3f2c74e401d1d, type: 2}
+  - {fileID: 2100000, guid: 6ef4cad54591f08449438eea81f9289c, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

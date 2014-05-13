@@ -86,7 +86,7 @@ public abstract class MissionBase : MonoBehaviour
         switch (t)
         {
             case TargetIDColorState.RedOne:
-                return AudioManager.Instance.MissionCompletedPink;
+                return AudioManager.Instance.MissionCompletedRed;
                 break;
             case TargetIDColorState.BlueTwo:
                 return AudioManager.Instance.MissionCompletedBlue;
@@ -97,7 +97,7 @@ public abstract class MissionBase : MonoBehaviour
                 break;
 
             case TargetIDColorState.PinkFour:
-                return AudioManager.Instance.MissionCompletedOrange;
+                return AudioManager.Instance.MissionCompletedPink;
 
                 break;
 
@@ -417,7 +417,7 @@ public abstract class MissionBase : MonoBehaviour
         DestroyImmediate(this);
     }
 
-    /*public void OnGUI()
+    public void OnGUI()
     {
         //if (isInstanceMission && GameManager.Instance.PlayingState == PlayingState.PraticeMode && ShowMissionGUI)
         if (isInstanceMission && GameManager.Instance.DebugMode)
@@ -442,7 +442,7 @@ public abstract class MissionBase : MonoBehaviour
 
             GUI.Label(new Rect(point.x + xOffset, Screen.currentResolution.height - point.y - 200 + yOffset, 200, 200), text);
         }
-    }*/
+    }
 
     public abstract bool MissionAccomplished();
 

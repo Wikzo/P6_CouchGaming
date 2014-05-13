@@ -593,7 +593,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPickedUpRightNow: 0
   CanBeUsedRightNow: 1
-  Offset: {x: 0, y: .899999976, z: 0}
   PlayerToFollow: {fileID: 0}
   RenderObject: {fileID: 100028}
 --- !u!114 &11400006

@@ -29,16 +29,29 @@ public class MissionCompletedText : MonoBehaviour
 
         text.color = ColorToUse;
 
+        //MoveIn();
+
+        AudioManager.Instance.PlaySound(SoundToPlay, this);
+
+    }
+
+    IEnumerator PlayAudio() // used to delay if other missions are playing right now
+    {
+        print(AudioManager.Instance.AudioIsPlaying());
+        float time = 0;
+        if (AudioManager.Instance.AudioIsPlaying() == true)
+            time = 2f;
+
+        yield return new WaitForSeconds(time);
+
         MoveIn();
     }
 
-    void MoveIn()
+    public void MoveIn()
     {
         iTween.MoveTo(gameObject, iTween.Hash("position", destMiddle, "oncomplete", "MoveOut", "easeType", iTween.EaseType.easeOutBack));
 
-        AudioManager.Instance.StopAllAudio();
-        
-        AudioManager.Instance.PlaySound(SoundToPlay);
+        //AudioManager.Instance.StopAllAudio();
         
     }
 

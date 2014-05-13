@@ -10,6 +10,7 @@ public class MissionIntel : MissionBase
     // IntelToSteal = prop to steal
 
     public GameObject IntelPropToSteal;
+    PickUpObject pickupObjectScript;
     private PickUpObject PickUpObject;
 
     private float counter;
@@ -33,6 +34,10 @@ public class MissionIntel : MissionBase
         ring.renderer.enabled = false;
         ring.name = "_ring_ "+ this.Player;
         ring.transform.localEulerAngles = new Vector3(90, 180, 0);
+
+        pickupObjectScript = IntelPropToSteal.GetComponent<PickUpObject>();
+        if (pickupObjectScript == null)
+            Debug.Log("ERROR - USB key doesn't have pickup object script");
 
         missionIsDone = false;
     }
@@ -87,11 +92,11 @@ public class MissionIntel : MissionBase
 
     bool CheckPlayerCollidingWithBaseTarget(Transform player, Transform target)
     {
-        bool x1 = player.position.x - player.localScale.x / 2 > target.position.x - target.localScale.x / 2;
-        bool x2 = player.position.x + player.localScale.x / 2 < target.position.x + target.localScale.x / 2;
+        bool x1 = player.position.x - player.localScale.x / 2 > target.position.x - target.localScale.x*3;
+        bool x2 = player.position.x + player.localScale.x / 2 < target.position.x + target.localScale.x*3;
 
-        bool y1 = player.position.y - player.localScale.y / 2 > target.position.y - target.localScale.y / 2 - TargetOffsetY;
-        bool y2 = player.position.y + player.localScale.y / 2 < target.position.y + target.localScale.y / 2 + TargetOffsetY;
+        bool y1 = player.position.y - player.localScale.y / 2 > target.position.y - target.localScale.y*2 - TargetOffsetY;
+        bool y2 = player.position.y + player.localScale.y / 2 < target.position.y + target.localScale.y*2 + TargetOffsetY;
 
         return x1 && x2 && y1 && y2;
 
@@ -111,9 +116,13 @@ public class MissionIntel : MissionBase
             audio.Stop();
             missionIsDone = false;
 
+            //pickupObjectScript.PutIntelOnTerminalScreen(false, this.Target.transform.position);
+
             counter = 0;
             return;
         }
+
+        //pickupObjectScript.PutIntelOnTerminalScreen(true, this.Target.transform.position);
 
         ring.renderer.enabled = true;
 
