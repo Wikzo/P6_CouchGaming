@@ -65,10 +65,10 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D) && !going)
+        if (Input.GetKeyDown(KeyCode.K) && !going)
             StartCoroutine(CloseDoor());
 
-        if (Input.GetKeyDown(KeyCode.U) && !going)
+        if (Input.GetKeyDown(KeyCode.I) && !going)
             StartCoroutine(OpenDoor());
 
     }

@@ -241,7 +241,8 @@ public class GameManager : MonoBehaviour
                         {
                             AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.VibrationExplain);
                             yield return new WaitForSeconds(AudioManager.Instance.VibrationExplain.length - 2.5f);
-                            ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
+                            if (ControllerGUIToRumble.GetComponent<Animator>() != null)
+                                ControllerGUIToRumble.GetComponent<Animator>().enabled = true;
                         }
 
                     }
