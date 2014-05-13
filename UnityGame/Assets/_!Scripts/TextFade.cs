@@ -5,7 +5,7 @@ public class TextFade : MonoBehaviour
 {
 
     string TutorialText = "Calibrating controllers";
-    string PracticeText = "Press START to begin game";
+    string PracticeText = "Practice Mode\nPress START to skip";
     private string GetReadyText = "Receiving missions ...\nUse ↑ and ↓\nY to get ready";
     private string GetReadyWithColors = "Use the D-pad ...\nUse       and                        \nPress <color=yellow>Y </color> to get ready";
     private string PauseText = "*Paused*";
