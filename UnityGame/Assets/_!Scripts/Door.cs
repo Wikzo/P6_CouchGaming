@@ -1,20 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum DoorLocation
+{
+    Upper,
+    Lower
+}
+
 public class Door : MonoBehaviour
 {
     private Vector3 doorOpenScale;
     private Vector3 doorOpenPos;
     private Vector3 doorCloseScale;
 
+    public DoorLocation DoorLocation;
     public float ClosedScaleY = 7;
 
     public float smoothValue = 2f;
 
-
-    private bool doorOpen;
-
     bool going;
+
 
     // Use this for initialization
     void Start()
@@ -24,8 +29,41 @@ public class Door : MonoBehaviour
         doorCloseScale = new Vector3(transform.localScale.x, ClosedScaleY, transform.localScale.z);
     }
 
+    void OnEnable()
+    {
+        if (this.DoorLocation == DoorLocation.Upper)
+            MissionManager.OnMissionCompletedDoorsUpper += DoorGoDown;
+        else if (this.DoorLocation == DoorLocation.Lower)
+            MissionManager.OnMissionCompletedDoorsLower += DoorGoDown;
 
-    void Update()
+    }
+
+    void DoorGoUp()
+    {
+        if (this.DoorLocation == DoorLocation.Upper)
+            MissionManager.OnMissionCompletedDoorsUpper -= DoorGoUp;
+        else if (this.DoorLocation == DoorLocation.Lower)
+            MissionManager.OnMissionCompletedDoorsLower -= DoorGoUp;
+
+        StartCoroutine(OpenDoor());
+    }
+
+    void DoorGoDown()
+    {
+        if (this.DoorLocation == DoorLocation.Upper)
+            MissionManager.OnMissionCompletedDoorsUpper -= DoorGoDown;
+        else if (this.DoorLocation == DoorLocation.Lower)
+            MissionManager.OnMissionCompletedDoorsLower -= DoorGoDown;
+
+        if (this.DoorLocation == DoorLocation.Upper)
+            MissionManager.OnMissionCompletedDoorsUpper += DoorGoUp;
+        else if (this.DoorLocation == DoorLocation.Lower)
+            MissionManager.OnMissionCompletedDoorsLower += DoorGoUp;
+
+        StartCoroutine(CloseDoor());
+    }
+
+    /*void Update()
     {
         if (Input.GetKeyDown(KeyCode.D) && !going)
             StartCoroutine(CloseDoor());
@@ -33,10 +71,12 @@ public class Door : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.U) && !going)
             StartCoroutine(OpenDoor());
 
-    }
+    }*/
 
     IEnumerator CloseDoor()
     {
+        //print("door closing");
+
         while (transform.localScale.y < doorCloseScale.y-0.1f)
         {
             going = true;
@@ -54,6 +94,9 @@ public class Door : MonoBehaviour
 
     IEnumerator OpenDoor()
     {
+
+        //print("door opening");
+
         while (transform.localScale.y > doorOpenScale.y+0.1f)
         {
             going = true;

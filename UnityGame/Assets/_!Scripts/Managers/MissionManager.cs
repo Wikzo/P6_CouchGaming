@@ -31,6 +31,10 @@ public class MissionManager : MonoBehaviour
 
     private bool firstTime;
 
+    public delegate void MissionCompleted();
+    public static event MissionCompleted OnMissionCompletedDoorsUpper;
+    public static event MissionCompleted OnMissionCompletedDoorsLower;
+
     //  public static Instance  
     public static MissionManager Instance
     {
@@ -256,6 +260,7 @@ public class MissionManager : MonoBehaviour
                     t.SoundToPlay = m.ChooseCompletedSound();
                     t.ColorToUse = new Color(m.PlayerScript.PlayerColor.r, m.PlayerScript.PlayerColor.g, m.PlayerScript.PlayerColor.b, 255);
 
+                    OnMissionCompletedDoorsUpper();
                     //Debug.Log(string.Format("Player {0} completed mission {1})", m.Player.ToString(), m.ToString()));
                     m.GivePointsToPlayer();
                 }
