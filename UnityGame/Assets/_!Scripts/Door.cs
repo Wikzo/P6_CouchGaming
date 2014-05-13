@@ -75,6 +75,8 @@ public class Door : MonoBehaviour
 
     IEnumerator CloseDoor()
     {
+        renderer.enabled = true;
+
         //print("door closing");
 
         while (transform.localScale.y < doorCloseScale.y-0.1f)
@@ -94,7 +96,7 @@ public class Door : MonoBehaviour
 
     IEnumerator OpenDoor()
     {
-
+        renderer.enabled = true;
         //print("door opening");
 
         while (transform.localScale.y > doorOpenScale.y+0.1f)
@@ -109,5 +111,6 @@ public class Door : MonoBehaviour
         }
 
         going = false;
+        renderer.enabled = false;
     }
 }
