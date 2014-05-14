@@ -5311,6 +5311,18 @@ Prefab:
       propertyPath: TargetHuds.Array.data[3]
       value: 
       objectReference: {fileID: 1760812341}
+    - target: {fileID: 11400014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: chargeDisc
+      value: 
+      objectReference: {fileID: 8300000, guid: ce4f1c48376defd409aed2ca5c6248c1, type: 3}
+    - target: {fileID: 11400014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: DiscCharge
+      value: 
+      objectReference: {fileID: 8300000, guid: ce4f1c48376defd409aed2ca5c6248c1, type: 3}
+    - target: {fileID: 11400014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: DiscHover
+      value: 
+      objectReference: {fileID: 8300000, guid: 504260f556116b74fb9c1f0a2d8207ed, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
   m_RootGameObject: {fileID: 1360649201}
@@ -6697,6 +6709,8 @@ MonoBehaviour:
   MissionCompletedDefault: {fileID: 8300000, guid: a836651ec4ba7444191a8bb94ba42754,
     type: 3}
   WinRed: {fileID: 8300000, guid: 7d48c70eaa13bef4b9d10a24a40c93e3, type: 3}
+  DiscCharge: {fileID: 8300000, guid: ce4f1c48376defd409aed2ca5c6248c1, type: 3}
+  DiscHover: {fileID: 8300000, guid: 504260f556116b74fb9c1f0a2d8207ed, type: 3}
   MusicPlayer: {fileID: 1951336791}
 --- !u!82 &195710806
 AudioSource:

@@ -28,6 +28,9 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip WinRed;
 
+    public AudioClip DiscCharge;
+    public AudioClip DiscHover;
+
     float timer;
     bool isPlayingSound;
 

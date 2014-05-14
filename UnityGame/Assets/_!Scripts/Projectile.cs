@@ -50,6 +50,8 @@ public class Projectile : MonoBehaviour
 	// Use this for initialization
 	void Start () 	
 	{
+		//AudioManager.Instance.PlaySound(AudioManager.Instance.DiscHover);
+
 		renderer.material.color = PMat.color;
 
 		if(OwnerObject.transform.Find("ForwardCollider") != null)
