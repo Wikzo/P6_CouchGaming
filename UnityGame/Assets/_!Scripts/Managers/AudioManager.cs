@@ -24,9 +24,12 @@ public class AudioManager : MonoBehaviour
     public AudioClip MissionCompletedBlue;
     public AudioClip MissionCompletedGreen;
     public AudioClip MissionCompletedPink;
-    public AudioClip MissionCompletedDefault;
+    public AudioClip MissionCompletedDefault; 
 
     public AudioClip WinRed;
+
+    public AudioClip DiscCharge;
+    public AudioClip DiscHover;
 
     float timer;
     bool isPlayingSound;

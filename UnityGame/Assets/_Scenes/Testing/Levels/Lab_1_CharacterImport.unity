@@ -5315,6 +5315,14 @@ Prefab:
       propertyPath: DebugMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11400014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: DiscHover
+      value: 
+      objectReference: {fileID: 8300000, guid: 0d34723e29f83094a9f9d9b17f18d03b, type: 3}
+    - target: {fileID: 11400014, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: DiscCharge
+      value: 
+      objectReference: {fileID: 8300000, guid: 39c4c57c8b6bd264598ef3692f457e53, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
   m_RootGameObject: {fileID: 1360649201}
@@ -6657,6 +6665,8 @@ MonoBehaviour:
   MissionCompletedDefault: {fileID: 8300000, guid: a836651ec4ba7444191a8bb94ba42754,
     type: 3}
   WinRed: {fileID: 8300000, guid: 7d48c70eaa13bef4b9d10a24a40c93e3, type: 3}
+  DiscCharge: {fileID: 8300000, guid: 39c4c57c8b6bd264598ef3692f457e53, type: 3}
+  DiscHover: {fileID: 8300000, guid: 0d34723e29f83094a9f9d9b17f18d03b, type: 3}
   MusicPlayer: {fileID: 1951336791}
 --- !u!82 &195710806
 AudioSource:

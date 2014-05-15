@@ -50,6 +50,9 @@ public class Projectile : MonoBehaviour
 	// Use this for initialization
 	void Start () 	
 	{
+		audio.clip = AudioManager.Instance.DiscHover;
+		audio.Play();
+
 		renderer.material.color = PMat.color;
 
 		if(OwnerObject.transform.Find("ForwardCollider") != null)
@@ -152,6 +155,10 @@ public class Projectile : MonoBehaviour
 			rigidbody.velocity = Vector3.zero;
       		rigidbody.angularVelocity = Vector3.zero;
       		transform.position = lockPos;
+
+      		audio.Stop();
+      		//audio.clip = AudioManager.Instance.DiscHit;
+      		//audio.Play();
 		}
 	}
 
