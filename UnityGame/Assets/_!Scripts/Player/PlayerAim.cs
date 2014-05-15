@@ -146,7 +146,8 @@ public class PlayerAim : MonoBehaviour
 						if(hasPlayedChargeSound == false)
 						{
 							hasPlayedChargeSound = true;
-							audio.clip = AudioManager.Instance.DiscCharge;
+							audio.loop = true;
+							audio.clip = AudioManager.Instance.DiscCharge[playerScript.Id];
 							audio.Play();
 						}
 						audio.pitch = chargeTimer;
@@ -181,6 +182,11 @@ public class PlayerAim : MonoBehaviour
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
             audio.Stop();
+            audio.loop = false;
+            audio.pitch = 1;
+			audio.clip = AudioManager.Instance.DiscShot;
+			audio.Play();
+
             hasPlayedChargeSound = false;
             // original projectile
             ProjectileOriginalObject = Instantiate(ProjectilePrefab, pTran.position+Vector3.up*2f, Quaternion.identity) as GameObject;

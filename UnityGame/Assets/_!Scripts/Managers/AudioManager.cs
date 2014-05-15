@@ -28,8 +28,11 @@ public class AudioManager : MonoBehaviour
 
     public AudioClip WinRed;
 
-    public AudioClip DiscCharge;
-    public AudioClip DiscHover;
+    public AudioClip[] DiscHover = new AudioClip[4];
+
+    public AudioClip[] DiscCharge = new AudioClip[4];
+    public AudioClip DiscShot;
+    public AudioClip DiscHit;
 
     float timer;
     bool isPlayingSound;

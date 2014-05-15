@@ -50,7 +50,8 @@ public class Projectile : MonoBehaviour
 	// Use this for initialization
 	void Start () 	
 	{
-		audio.clip = AudioManager.Instance.DiscHover;
+		audio.loop = true;
+		audio.clip = AudioManager.Instance.DiscHover[OwnerObject.GetComponent<Player>().Id];
 		audio.Play();
 
 		renderer.material.color = PMat.color;
@@ -138,7 +139,9 @@ public class Projectile : MonoBehaviour
 		lockPos = transform.position;
 
 		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != Owner)
+		{
 			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(Owner);
+		}
 		
 		if(other.gameObject.tag == Owner && OutOfBounds)
 		{
@@ -156,9 +159,7 @@ public class Projectile : MonoBehaviour
       		rigidbody.angularVelocity = Vector3.zero;
       		transform.position = lockPos;
 
-      		audio.Stop();
-      		//audio.clip = AudioManager.Instance.DiscHit;
-      		//audio.Play();
+      		PlayHitSound();
 		}
 	}
 
@@ -174,5 +175,15 @@ public class Projectile : MonoBehaviour
 			playerAim.CurrentShotAmount++;
 		
 		Destroy(gameObject);
+	}
+
+	void PlayHitSound()
+	{
+		audio.Stop();
+      	audio.loop = false;
+      	audio.clip = AudioManager.Instance.DiscHit;
+		audio.Play();
+      	//audio.clip = AudioManager.Instance.DiscHit;
+      	//audio.Play();
 	}
 }
