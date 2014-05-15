@@ -61,12 +61,12 @@ public class MissionDefend : MissionBase
         // check if player is still alive - if dead: mission is done
         if (Target.GetComponent<Player>().PState == PlayerState.Dead)
         {
-            targetHasNotDiedYet = true;
+            targetHasNotDiedYet = false;
             return false;
         }
 
         // reached deadline
-        if (GameManager.Instance.TimeLeft <= deadlineTime)
+        else if (GameManager.Instance.TimeLeft <= deadlineTime)
         {
             if (targetHasNotDiedYet)
             {
@@ -76,7 +76,7 @@ public class MissionDefend : MissionBase
             else
             {
                 this._missionIsActive = false;
-                MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
+                //MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
                 return false;
             }
         }

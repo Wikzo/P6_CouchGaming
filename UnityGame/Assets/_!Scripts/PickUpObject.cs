@@ -76,6 +76,9 @@ public class PickUpObject : MonoBehaviour
 
     void Update()
     {
+
+        if (transform.position.z != StartPosition.z)
+            transform.position = new Vector3(transform.position.x, transform.position.y, StartPosition.z);
         // drop if pressing down
         if (PlayerToFollow != null && PlayerToFollow.GetComponent<PlayerAim>().ShootingRightNow)
         {

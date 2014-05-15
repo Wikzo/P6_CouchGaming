@@ -15,27 +15,20 @@ public class PlayRenderMovie : MonoBehaviour {
     {
         if (PlayMovies)
         {
-            current = PickRandomMovie();
-            renderer.material.mainTexture = current;
-            renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0);
-
-            current.Play();
+            lastPlayed = -1;
+            PickRandomMovie();
         }
     }
 
-    void Update()
+    IEnumerator StartNewMovie(float length)
     {
-        if (!current.isPlaying)
-        {
-            current = PickRandomMovie();
-            renderer.material.mainTexture = current;
-            renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0);
-            
-            current.Play();
-        }
+        yield return new WaitForSeconds(length);
+        current.Stop();
+
+        PickRandomMovie();
     }
 
-    MovieTexture PickRandomMovie()
+    void PickRandomMovie()
     {
         int play = Random.Range(0, Movies.Count);
         int tries = 0;
@@ -47,8 +40,15 @@ public class PlayRenderMovie : MonoBehaviour {
         }
         lastPlayed = play;
 
-        return Movies[play];
-        
+        current = Movies[play];
+        renderer.material.mainTexture = current;
+        renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0);
+
+        current.Play();
+
+        //Debug.Log("Picked " + current);
+
+        StartCoroutine(StartNewMovie(current.duration));
     }
 
     private void OnApplicationQuit()

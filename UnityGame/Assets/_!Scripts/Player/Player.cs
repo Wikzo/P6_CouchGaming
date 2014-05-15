@@ -237,7 +237,7 @@ public class Player : MonoBehaviour
                     break;
 
                 case PlayingState.DisplayingScore:
-                    GameManager.Instance.ResetWholeGame();
+                    Application.LoadLevel(0);
                     break;
 
                 default:
