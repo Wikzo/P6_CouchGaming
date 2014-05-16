@@ -114,12 +114,12 @@ public class Projectile : MonoBehaviour
 
         if (outOfCameraView)
         {
-            print(gameObject.name + " came out of the camera's view and has now been destroyed");
+            //print(gameObject.name + " came out of the camera's view and has now been destroyed");
             DestroyProjectileAndTwin(OwnerObject.GetComponent<PlayerAim>());
         }
         else if (stuckDetector.StuckInObject)
         {
-            print(gameObject.name + " is stuck inside an object and has now been destroyed");
+            //print(gameObject.name + " is stuck inside an object and has now been destroyed");
             DestroyProjectileAndTwin(OwnerObject.GetComponent<PlayerAim>());
         }
     }
@@ -199,7 +199,6 @@ public class Projectile : MonoBehaviour
             if (IsOriginal && hasPlayedHitSound == false)
             {
 
-                print("stuff");
                 hasPlayedHitSound = true;
                 PlayHitSound();
             }

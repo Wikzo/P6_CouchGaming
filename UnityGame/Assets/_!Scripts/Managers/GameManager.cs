@@ -48,10 +48,14 @@ public class GameManager : MonoBehaviour
     public List<int> TargetChosenSoFar = new List<int>();
     public GameObject MissionInitializedParticles;
 
+    public GameObject PlusObject;
+
     private Camera Camera;
     public Camera CameraOrtographic;
 
     public GameObject Congratulations;
+    public GameObject MusicPlayer;
+    bool musicIsPlaying = false;
 
     // Debug stuff
     public bool DebugMode = true;
@@ -361,6 +365,11 @@ public class GameManager : MonoBehaviour
     public void ResetLevel()
     {
 
+        /*if (!musicIsPlaying)
+        {
+            Instantiate(MusicPlayer);
+            musicIsPlaying = true;
+        }*/
         PlayingState = PlayingState.Playing;
 
 

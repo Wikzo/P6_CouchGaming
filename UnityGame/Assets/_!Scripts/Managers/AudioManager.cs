@@ -37,9 +37,9 @@ public class AudioManager : MonoBehaviour
     float timer;
     bool isPlayingSound;
 
-    public GameObject MusicPlayer;
-    AudioLowPassFilter lowPass;
-    bool lowPassIsMuted;
+    //public GameObject MusicPlayer;
+    //AudioLowPassFilter lowPass;
+    //bool lowPassIsMuted;
 
     public delegate void AudioAction();
     public static event AudioAction OnAudio;
@@ -80,12 +80,12 @@ public class AudioManager : MonoBehaviour
         timer = 0;
         isPlayingSound = false;
 
-        lowPass = MusicPlayer.GetComponent<AudioLowPassFilter>();
+        /*lowPass = MusicPlayer.GetComponent<AudioLowPassFilter>();
         if (lowPass == null)
             Debug.Log("ERROR - music player needs to have low pass filter!");
 
         lowPass.enabled = false;
-        lowPassIsMuted = false;
+        lowPassIsMuted = false;*/
     }
 
 

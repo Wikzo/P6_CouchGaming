@@ -19,7 +19,12 @@ public class PickUpObject : MonoBehaviour
     // idle times (when it has been placed and is currently inactive for some seconds)
     private bool Idle = false;
     private float IdleBlinkRate = 0.5f;
-    private float IdleBlinkTimeTotal = 0.5f;
+    private float IdleBlinkTimeTotal = 0.3f;
+
+    private float timeSinceLastBeenPickedUp = 0;
+    bool hasBeenPickedUpOnce = false;
+    private float resetIntervalTime = 20;
+    private bool isIdleBlinkingRightNow;
 
     bool isPuttingOnTerminalRightNow = false;
 
@@ -54,6 +59,7 @@ public class PickUpObject : MonoBehaviour
             if (col.gameObject.GetComponent<Player>().PState == PlayerState.Alive) // only works on living players
             {
                 IsPickedUpRightNow = true;
+                hasBeenPickedUpOnce = true;
                 PlayerToFollow = col.gameObject;
                 
                 gameObject.collider.isTrigger = true;
@@ -79,7 +85,6 @@ public class PickUpObject : MonoBehaviour
 
     void Update()
     {
-
         if (transform.position.z != StartPosition.z)
             transform.position = new Vector3(transform.position.x, transform.position.y, StartPosition.z);
         // drop if pressing down
@@ -97,9 +102,38 @@ public class PickUpObject : MonoBehaviour
             gameObject.collider.isTrigger = false;
         }
 
+        // go back to spawn point if being idle for too long
+        if (!IsPickedUpRightNow && PlayerToFollow == null)
+        {
+            // only activate if has been picked up before
+            if (hasBeenPickedUpOnce == true)
+            {
+                timeSinceLastBeenPickedUp += Time.deltaTime;
+
+                if (timeSinceLastBeenPickedUp > resetIntervalTime)
+                {
+                    hasBeenPickedUpOnce = false;
+                    timeSinceLastBeenPickedUp = 0;
+                    GoToBaseAndStayIdle();
+                }
+
+                // start blinking
+                if (timeSinceLastBeenPickedUp > resetIntervalTime - 5 && !isIdleBlinkingRightNow)
+                {
+                    isIdleBlinkingRightNow = true;
+                    StartCoroutine("BecomeIdle");
+                }
+            }
+            else
+                timeSinceLastBeenPickedUp = 0;
+        }
+
+
         // follow player
         if (IsPickedUpRightNow && !DroppingRightNow)
         {
+            timeSinceLastBeenPickedUp = 0;
+
             if (isPuttingOnTerminalRightNow)
             {
                 transform.position = terminalPos;
@@ -142,30 +176,36 @@ public class PickUpObject : MonoBehaviour
         //rigidbody.isKinematic = false;
         //rigidbody.useGravity = true;
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         DroppingRightNow = false;
         CanBeUsedRightNow = true;
         gameObject.collider.isTrigger = false;
         gameObject.layer = 0; // default
         DroppingRightNow = false;
+
+        isIdleBlinkingRightNow = false;
+        StopCoroutine("BecomeIdle");
+        RenderObject.SetActive(true);       
+
+
     }
     public IEnumerator BecomeIdle()
     {
-        Idle = true;
-        gameObject.collider.isTrigger = true;        
+        print("blinking");
+        RenderObject.SetActive(!RenderObject.active);       
         yield return new WaitForSeconds(IdleBlinkTimeTotal);
-        Idle = false;
 
-        CanBeUsedRightNow = true;
-        gameObject.collider.isTrigger = false;
-        rigidbody.isKinematic = false;
-        rigidbody.useGravity = true;
-        //RenderObject.renderer.material.color = Color.white;
+        if (!IsPickedUpRightNow && isIdleBlinkingRightNow)
+            StartCoroutine("BecomeIdle");
+        else
+            RenderObject.SetActive(true);
+
+        yield return null;
     }
 
     public void GoToBaseAndStayIdle()
     {
-        CanBeUsedRightNow = false;
+        CanBeUsedRightNow = true;
         
         PlayerToFollow = null;
         IsPickedUpRightNow = false;
@@ -173,6 +213,11 @@ public class PickUpObject : MonoBehaviour
         rigidbody.useGravity = false;
 
         StartCoroutine(Wait());
+        StopCoroutine("BecomeIdle");
+        isIdleBlinkingRightNow = false;
+        RenderObject.SetActive(true);       
+
+
         
 
 
@@ -180,11 +225,11 @@ public class PickUpObject : MonoBehaviour
 
     IEnumerator Wait()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0);
         transform.position = StartPosition;
         gameObject.collider.enabled = true;
         gameObject.collider.isTrigger = false;
-        StartCoroutine(BecomeIdle());
+        //StartCoroutine(BecomeIdle());
     }
 
 }

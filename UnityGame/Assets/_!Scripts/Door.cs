@@ -18,7 +18,7 @@ public class Door : MonoBehaviour
 
     public float smoothValue = 2f;
 
-    bool going;
+    bool goingUp, goingDown;
 
 
     // Use this for initialization
@@ -27,6 +27,9 @@ public class Door : MonoBehaviour
         doorOpenPos = transform.position;
         doorOpenScale = transform.localScale;
         doorCloseScale = new Vector3(transform.localScale.x, ClosedScaleY, transform.localScale.z);
+
+        goingUp = false;
+        goingDown = false;
     }
 
     void OnEnable()
@@ -70,10 +73,10 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K) && !going)
+        if (Input.GetKeyDown(KeyCode.K) && !goingDown && !goingDown)
             StartCoroutine(CloseDoor());
 
-        if (Input.GetKeyDown(KeyCode.I) && !going)
+        if (Input.GetKeyDown(KeyCode.I) && !goingDown && !goingDown)
             StartCoroutine(OpenDoor());
 
     }
@@ -87,11 +90,11 @@ public class Door : MonoBehaviour
         /*while (going == true)
             yield return null;*/
 
-        if (!going)
+        if (!goingDown && !goingUp)
         {
             while (transform.localScale.y < doorCloseScale.y - 0.1f)
             {
-                going = true;
+                goingDown = true;
 
                 Vector3 lerp = Vector3.Lerp(transform.localScale, doorCloseScale, smoothValue * Time.deltaTime);
 
@@ -101,7 +104,7 @@ public class Door : MonoBehaviour
                 yield return null;
             }
 
-            going = false;
+            goingDown = false;
         }
     }
 
@@ -113,12 +116,12 @@ public class Door : MonoBehaviour
         /*while (going == true)
             yield return null;*/
 
-        if (!going)
+        if (!goingDown && !goingUp)
         {
 
             while (transform.localScale.y > doorOpenScale.y + 0.1f)
             {
-                going = true;
+                goingUp = true;
                 Vector3 lerp = Vector3.Lerp(transform.localScale, doorOpenScale, smoothValue * Time.deltaTime);
 
                 transform.localScale = new Vector3(transform.localScale.x, lerp.y, transform.localScale.z);
@@ -127,7 +130,7 @@ public class Door : MonoBehaviour
                 yield return null;
             }
 
-            going = false;
+            goingUp = false;
             renderer.enabled = false;
         }
     }

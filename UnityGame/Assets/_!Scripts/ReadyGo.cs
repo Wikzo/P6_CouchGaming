@@ -35,7 +35,8 @@ public class ReadyGo : MonoBehaviour {
             if (fader <= 0)
             {
                 GameManager.Instance.PlayingState = PlayingState.Playing;
-                Destroy(gameObject);
+                Destroy(guiText);
+                Destroy(this);
             }
         }
 

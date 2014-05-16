@@ -405,6 +405,8 @@ public abstract class MissionBase : MonoBehaviour
 
     public void GivePointsToPlayer()
     {
+        Instantiate(GameManager.Instance.PlusObject, this.Player.transform.position + new Vector3(1.5f, 2f, 0), Quaternion.identity);
+
         HasHeardMissionRumble = true;
         this.PlayerScript.Points += this.Points;
 
