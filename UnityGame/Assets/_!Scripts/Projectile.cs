@@ -29,6 +29,8 @@ public class Projectile : MonoBehaviour
 	private bool outOfBounds = false;
 	private bool outOfCameraView = false;
 
+	private bool hasPlayedHitSound = false;
+
 	private int reflectionCount = 0;
 
 	private string owner;
@@ -50,9 +52,12 @@ public class Projectile : MonoBehaviour
 	// Use this for initialization
 	void Start () 	
 	{
-		audio.loop = true;
-		audio.clip = AudioManager.Instance.DiscHover[OwnerObject.GetComponent<Player>().Id];
-		audio.Play();
+		if(IsOriginal)
+		{
+			audio.loop = true;
+			audio.clip = AudioManager.Instance.DiscHover[OwnerObject.GetComponent<Player>().Id];
+			audio.Play();
+		}
 
 		renderer.material.color = PMat.color;
 
@@ -158,8 +163,15 @@ public class Projectile : MonoBehaviour
 			rigidbody.velocity = Vector3.zero;
       		rigidbody.angularVelocity = Vector3.zero;
       		transform.position = lockPos;
+      		
 
-      		PlayHitSound();
+      		if(IsOriginal && hasPlayedHitSound == false)
+      		{
+      			
+      			print("stuff");
+      			hasPlayedHitSound = true;
+      			PlayHitSound();
+      		}
 		}
 	}
 

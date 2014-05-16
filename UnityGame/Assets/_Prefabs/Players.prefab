@@ -13036,7 +13036,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
+  m_Volume: .200000003
   m_Pitch: 0
   Loop: 1
   Mute: 0
@@ -13094,7 +13094,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
+  m_Volume: .200000003
   m_Pitch: 0
   Loop: 1
   Mute: 0
@@ -13152,7 +13152,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
+  m_Volume: .200000003
   m_Pitch: 0
   Loop: 1
   Mute: 0
@@ -13210,7 +13210,7 @@ AudioSource:
   serializedVersion: 3
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: .100000001
+  m_Volume: .200000003
   m_Pitch: 0
   Loop: 1
   Mute: 0

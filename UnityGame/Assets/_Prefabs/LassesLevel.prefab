@@ -27289,7 +27289,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.60000002, y: 1.49000001, z: 1.83000004}
+  m_Size: {x: 1.60000002, y: 1.49000001, z: 1.44000006}
   m_Center: {x: 0, y: .899999976, z: 0}
 --- !u!65 &6500020
 BoxCollider:
@@ -27553,7 +27553,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.60000002, y: 1.49000001, z: 1.83000004}
+  m_Size: {x: 1.60000002, y: 1.49000001, z: 1.44000006}
   m_Center: {x: 0, y: .899999976, z: 0}
 --- !u!65 &6500064
 BoxCollider:
@@ -27565,7 +27565,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.60000002, y: 1.49000001, z: 1.83000004}
+  m_Size: {x: 1.60000002, y: 1.49000001, z: 1.44000006}
   m_Center: {x: 0, y: .899999976, z: 0}
 --- !u!65 &6500066
 BoxCollider:
@@ -27649,7 +27649,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.60000002, y: 1.49000001, z: 1.83000004}
+  m_Size: {x: 1.60000002, y: 1.49000001, z: 1.44000006}
   m_Center: {x: 0, y: .899999976, z: 0}
 --- !u!65 &6500080
 BoxCollider:
@@ -30699,7 +30699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Accomplished: 0
-  AccomplishTime: 5
+  AccomplishTime: 15
   DownSlowFactor: 1
 --- !u!114 &11400008
 MonoBehaviour:
@@ -30787,7 +30787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Accomplished: 0
-  AccomplishTime: 5
+  AccomplishTime: 15
   DownSlowFactor: 1
 --- !u!114 &11400022
 MonoBehaviour:
@@ -30813,7 +30813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Accomplished: 0
-  AccomplishTime: 5
+  AccomplishTime: 15
   DownSlowFactor: 1
 --- !u!114 &11400026
 MonoBehaviour:
@@ -30883,7 +30883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Accomplished: 0
-  AccomplishTime: 5
+  AccomplishTime: 15
   DownSlowFactor: 1
 --- !u!114 &11400036
 MonoBehaviour:

@@ -36,7 +36,7 @@ public class MissionZone : MissionBase
 
     		chooseTarget[i] = ZoneAreas[zoneTarget];
     		chooseTarget[i].SetActive(true);
-    		chooseTarget[i].GetComponent<ZoneTrigger>().RestartZone();
+    		//chooseTarget[i].GetComponent<ZoneTrigger>().RestartZone();
     	}
     }
 }

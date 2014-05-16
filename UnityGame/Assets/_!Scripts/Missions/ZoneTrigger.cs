@@ -5,6 +5,7 @@ public class ZoneTrigger : MonoBehaviour {
 
 	[HideInInspector]
 	public bool Accomplished = false;
+	private bool readyToTrigger = true;
 
 	public float AccomplishTime = 5;
 	public float DownSlowFactor = 1;
@@ -36,19 +37,22 @@ public class ZoneTrigger : MonoBehaviour {
         if (GameManager.Instance.PlayingState != PlayingState.Playing)
             return;
 
-		if(progressBar.localScale.z <= background.localScale.z)
+		if(progressBar.localScale.z <= background.localScale.z && readyToTrigger == true)
 		{
 			if(playersColliding > 0)
 				progressCounter += Time.deltaTime;
-				
-			else if(progressCounter > 0)
-				progressCounter -= Time.deltaTime/DownSlowFactor;
-
-			progressBar.localScale = new Vector3(progressBar.localScale.x, progressBar.localScale.y, progressCounter/AccomplishTime);
-			//progressBar.position = new Vector3(progressBar.position.x, pTran.position.y-pTran.localScale.y/2+progressBar.localScale.y, progressBar.position.z);
 		}
 		else
 			Accomplished = true;
+
+		if(playersColliding == 0 && progressCounter > 0)
+				progressCounter -= Time.deltaTime/DownSlowFactor;
+
+		if(readyToTrigger == false && playersColliding == 0)
+			readyToTrigger = true;
+
+		progressBar.localScale = new Vector3(progressBar.localScale.x, progressBar.localScale.y, progressCounter/AccomplishTime);
+		//progressBar.position = new Vector3(progressBar.position.x, pTran.position.y-pTran.localScale.y/2+progressBar.localScale.y, progressBar.position.z);
 	}
 
 	void OnTriggerEnter(Collider collider)
@@ -66,6 +70,7 @@ public class ZoneTrigger : MonoBehaviour {
 	public void RestartZone()
 	{
 		Accomplished = false;
+		readyToTrigger = false;
 		progressCounter = 0;
 
         // TODO: for BENJAMIN:
