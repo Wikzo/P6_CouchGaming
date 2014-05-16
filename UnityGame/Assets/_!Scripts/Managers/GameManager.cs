@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
     public GameObject MissionInitializedParticles;
 
     public GameObject PlusObject;
+    public GameObject DieParticles;
+    public GameObject SpawnParticles;
 
     private Camera Camera;
     public Camera CameraOrtographic;

@@ -191,7 +191,7 @@ public class PickUpObject : MonoBehaviour
     }
     public IEnumerator BecomeIdle()
     {
-        print("blinking");
+        //print("blinking");
         RenderObject.SetActive(!RenderObject.active);       
         yield return new WaitForSeconds(IdleBlinkTimeTotal);
 

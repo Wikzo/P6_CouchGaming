@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
 	public MeshRenderer[] HelmetRenderers;
 	private Color[] originalHelmetColors;
 
+    Vector3 particleOffset = new Vector3(0, 2f, 0);
+
 	public int Score;
 	public int Id;
 	public int DeathTime = 5;
@@ -309,6 +311,10 @@ public class Player : MonoBehaviour
 
 	public IEnumerator Die()
 	{
+        GameObject particle = (GameObject)Instantiate(GameManager.Instance.DieParticles, transform.position + particleOffset, Quaternion.identity);
+        Color c = new Color(pMat.color.r, pMat.color.g, pMat.color.b, 1);
+        particle.renderer.material.color = c;
+
 		PState = PlayerState.Dead;
 		
 		EnableRenderers(false);
@@ -352,6 +358,10 @@ public class Player : MonoBehaviour
         KilledBy = "";
         IsReadyToBegin = false;
 
+
+        GameObject particle = (GameObject)Instantiate(GameManager.Instance.SpawnParticles, transform.position + particleOffset, Quaternion.identity);
+        Color c = new Color(pMat.color.r, pMat.color.g, pMat.color.b, 1);
+        particle.renderer.material.color = c;
         EnableRenderers(true);
         //if(BodyRenderer != null)
         //	BodyRenderer.enabled = true;
@@ -430,6 +440,8 @@ public class Player : MonoBehaviour
 
 		KilledBy = "";
 
+        
+
 		EnableRenderers(true);
 		
 		//if(BodyRenderer != null)
@@ -446,6 +458,10 @@ public class Player : MonoBehaviour
 	    {
 	        SpawnZone.SetActive(true);
 	    }
+
+        GameObject particle = (GameObject)Instantiate(GameManager.Instance.SpawnParticles, transform.position + particleOffset, Quaternion.identity);
+        Color c = new Color(pMat.color.r, pMat.color.g, pMat.color.b, 1);
+        particle.renderer.material.color = c;
 
 		InvokeRepeating("CheckMovement", 0, 0.01f);
 	}

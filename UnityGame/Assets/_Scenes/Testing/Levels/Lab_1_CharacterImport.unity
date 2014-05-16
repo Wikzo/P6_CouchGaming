@@ -1874,6 +1874,8 @@ MonoBehaviour:
   MissionInitializedParticles: {fileID: 100000, guid: 88bda155ebed0d844aa0c6542ba37af6,
     type: 2}
   PlusObject: {fileID: 100000, guid: a078efe8c86a639438b374703814082e, type: 2}
+  DieParticles: {fileID: 100000, guid: da49aaa1be8c57f45b5b49e2ef2db5c6, type: 2}
+  SpawnParticles: {fileID: 100000, guid: b85c3cab3052b8c46b8bf806558b9daf, type: 2}
   CameraOrtographic: {fileID: 0}
   Congratulations: {fileID: 100000, guid: 26c44a3674df2184382d39033fe5df41, type: 2}
   MusicPlayer: {fileID: 100000, guid: 5fe4a993a925b7845b9d0028c1101141, type: 2}
@@ -2282,7 +2284,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 30, y: 1, z: 1}
-  m_Center: {x: 8, y: 0, z: 0}
+  m_Center: {x: -10, y: 0, z: 0}
 --- !u!33 &80756092
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4685,7 +4687,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 22
-  BoostJumpForce: 25
+  BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &143760517
@@ -8832,7 +8834,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 22
-  BoostJumpForce: 25
+  BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &263807538
@@ -9934,6 +9936,10 @@ Prefab:
       propertyPath: DoorLocation
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d488d4c4aa51afe439500b38cfab8aca, type: 2}
+      propertyPath: m_Center.x
+      value: -10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d488d4c4aa51afe439500b38cfab8aca, type: 2}
   m_RootGameObject: {fileID: 349193690}
@@ -10035,6 +10041,10 @@ Prefab:
     - target: {fileID: 11400000, guid: d488d4c4aa51afe439500b38cfab8aca, type: 2}
       propertyPath: DoorLocation
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d488d4c4aa51afe439500b38cfab8aca, type: 2}
+      propertyPath: m_Center.x
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d488d4c4aa51afe439500b38cfab8aca, type: 2}
@@ -11605,7 +11615,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 30, y: 1, z: 1}
-  m_Center: {x: 8, y: 0, z: 0}
+  m_Center: {x: -10, y: 0, z: 0}
 --- !u!33 &349193694
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -13224,6 +13234,14 @@ Prefab:
       propertyPath: PlusObject
       value: 
       objectReference: {fileID: 100000, guid: a078efe8c86a639438b374703814082e, type: 2}
+    - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: DieParticles
+      value: 
+      objectReference: {fileID: 100000, guid: da49aaa1be8c57f45b5b49e2ef2db5c6, type: 2}
+    - target: {fileID: 11400002, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
+      propertyPath: SpawnParticles
+      value: 
+      objectReference: {fileID: 100000, guid: b85c3cab3052b8c46b8bf806558b9daf, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0e0c6676a7775a4e9091094fbfcf207, type: 2}
   m_RootGameObject: {fileID: 1360649201}
@@ -13622,7 +13640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 22
-  BoostJumpForce: 25
+  BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &404873083
@@ -25091,7 +25109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 22
-  BoostJumpForce: 25
+  BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &794842729
@@ -31471,6 +31489,10 @@ Prefab:
       propertyPath: ClosedScaleY
       value: 8.64999962
       objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d488d4c4aa51afe439500b38cfab8aca, type: 2}
+      propertyPath: m_Center.x
+      value: -10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d488d4c4aa51afe439500b38cfab8aca, type: 2}
   m_RootGameObject: {fileID: 80756088}
@@ -33021,7 +33043,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 30, y: 1, z: 1}
-  m_Center: {x: 8, y: 0, z: 0}
+  m_Center: {x: 10, y: 0, z: 0}
 --- !u!33 &1050977555
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -50186,6 +50208,10 @@ Prefab:
       propertyPath: ClosedScaleY
       value: 8.64999962
       objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: d488d4c4aa51afe439500b38cfab8aca, type: 2}
+      propertyPath: m_Center.x
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d488d4c4aa51afe439500b38cfab8aca, type: 2}
   m_RootGameObject: {fileID: 1050977550}
@@ -66045,7 +66071,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 30, y: 1, z: 1}
-  m_Center: {x: 8, y: 0, z: 0}
+  m_Center: {x: 10, y: 0, z: 0}
 --- !u!33 &2003770037
 MeshFilter:
   m_ObjectHideFlags: 0
