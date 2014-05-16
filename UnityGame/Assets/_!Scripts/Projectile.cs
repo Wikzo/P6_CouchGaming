@@ -32,6 +32,8 @@ public class Projectile : MonoBehaviour
 	private bool outOfBounds = false;
 	private bool outOfCameraView = false;
 
+	private bool hasPlayedHitSound = false;
+
 	private int reflectionCount = 0;
 
 	private string owner;
@@ -53,6 +55,13 @@ public class Projectile : MonoBehaviour
 	// Use this for initialization
 	void Start () 	
 	{
+		if(IsOriginal)
+		{
+			audio.loop = true;
+			audio.clip = AudioManager.Instance.DiscHover[OwnerObject.GetComponent<Player>().Id];
+			audio.Play();
+		}
+
 		renderer.material.color = PMat.color;
 
 		if(OwnerObject.transform.Find("ForwardCollider") != null)
@@ -144,6 +153,7 @@ public class Projectile : MonoBehaviour
 	{
 		lockPos = transform.position;
 
+<<<<<<< HEAD
         if (isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != Owner)
         {
             MissionBase m = OwnerObject.GetComponent<MissionBase>();
@@ -170,6 +180,12 @@ public class Projectile : MonoBehaviour
             //other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(Owner);
             playerDamage.CalculateDeath(Owner);
         }
+=======
+		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != Owner)
+		{
+			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(Owner);
+		}
+>>>>>>> 50ac3e6785c5d188b0a6ef8975a8c9d58107e5d7
 		
 		if(other.gameObject.tag == Owner && OutOfBounds)
 		{
@@ -187,6 +203,15 @@ public class Projectile : MonoBehaviour
 			rigidbody.velocity = Vector3.zero;
       		rigidbody.angularVelocity = Vector3.zero;
       		transform.position = lockPos;
+      		
+
+      		if(IsOriginal && hasPlayedHitSound == false)
+      		{
+      			
+      			print("stuff");
+      			hasPlayedHitSound = true;
+      			PlayHitSound();
+      		}
 		}
 	}
 
@@ -202,5 +227,15 @@ public class Projectile : MonoBehaviour
 			playerAim.CurrentShotAmount++;
 		
 		Destroy(gameObject);
+	}
+
+	void PlayHitSound()
+	{
+		audio.Stop();
+      	audio.loop = false;
+      	audio.clip = AudioManager.Instance.DiscHit;
+		audio.Play();
+      	//audio.clip = AudioManager.Instance.DiscHit;
+      	//audio.Play();
 	}
 }

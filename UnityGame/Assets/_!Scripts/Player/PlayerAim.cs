@@ -41,6 +41,7 @@ public class PlayerAim : MonoBehaviour
 	private Transform chargeBar;
 
 	private Vector3 chargeBarStartPos;
+	private bool hasPlayedChargeSound = false;
 
 	[HideInInspector]
 	public Player playerScript;
@@ -142,12 +143,22 @@ public class PlayerAim : MonoBehaviour
 					//Scale the charge bar with a timer
 					if(chargeTimer < MaxChargeTime)
 					{
+						if(hasPlayedChargeSound == false)
+						{
+							hasPlayedChargeSound = true;
+							audio.loop = true;
+							audio.clip = AudioManager.Instance.DiscCharge[playerScript.Id];
+							audio.Play();
+						}
+						audio.pitch = chargeTimer;
+
 						chargeTimer += Time.deltaTime;
 						chargeBar.localScale = new Vector3(chargeTimer/MaxChargeTime, 1, aimTran.localScale.y*3); //Y is and Z, and Z is Y
 	
 						//Give the position an offset, so the bar is positioned outside of the player and then add its scale to make it charge in one direction.
 						//chargeBar.localPosition = new Vector3(0, 0, chargeBarStartPos.z-chargeBar.localScale.x/2);
 						chargeBar.localPosition = new Vector3(-1f, 0, -0.5f+chargeBar.localScale.x/2); //X is Z, and Z is X
+
 					}
 
 					if(aimCrossesMat != null)
@@ -170,6 +181,13 @@ public class PlayerAim : MonoBehaviour
 		}
 		else if(playerScript.PlayerControllerState.ButtonUpX && CurrentShotAmount > 0 && cancelAim == false || playerScript.Keyboard && Input.GetKeyUp(ShootKey) && CurrentShotAmount > 0 && cancelAim == false)
 		{
+            audio.Stop();
+            audio.loop = false;
+            audio.pitch = 1;
+			audio.clip = AudioManager.Instance.DiscShot;
+			audio.Play();
+
+            hasPlayedChargeSound = false;
             // original projectile
             ProjectileOriginalObject = Instantiate(ProjectilePrefab, pTran.position+Vector3.up*2f, Quaternion.identity) as GameObject;
             Projectile projectileOriginalScript = ProjectileOriginalObject.GetComponent<Projectile>();
@@ -226,6 +244,9 @@ public class PlayerAim : MonoBehaviour
 		aimTran.renderer.enabled = false;
 		chargeBar.renderer.enabled = false;
 		chargeTimer = 0;
+
+		audio.Stop();
+        hasPlayedChargeSound = false;
 	}
 
 	void FixedUpdate()
