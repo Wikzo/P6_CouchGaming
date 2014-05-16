@@ -151,7 +151,7 @@ public class AudioManager : MonoBehaviour
 
     IEnumerator EnableLowPassFilter(float time)
     {
-        if (!lowPassIsMuted)
+        /*if (!lowPassIsMuted)
         {
             lowPass.enabled = true;
             lowPassIsMuted = true;
@@ -160,7 +160,8 @@ public class AudioManager : MonoBehaviour
             
             lowPass.enabled = false;
             lowPassIsMuted = false;
-        }
+        }*/
+        yield return null;
     }
 
     public void PlayAnnouncerVoice(AudioClip audioToPlay)
