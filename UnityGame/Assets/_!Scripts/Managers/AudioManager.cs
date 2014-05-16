@@ -34,6 +34,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip DiscShot;
     public AudioClip DiscHit;
 
+    public AudioClip[] Jump = new AudioClip[4];
+
     float timer;
     bool isPlayingSound;
 
