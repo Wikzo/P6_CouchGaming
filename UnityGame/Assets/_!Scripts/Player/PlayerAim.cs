@@ -183,7 +183,7 @@ public class PlayerAim : MonoBehaviour
 		{
             audio.Stop();
             audio.loop = false;
-            audio.pitch = 1;
+            audio.pitch = audio.pitch+1;
 			audio.clip = AudioManager.Instance.DiscShot;
 			audio.Play();
 

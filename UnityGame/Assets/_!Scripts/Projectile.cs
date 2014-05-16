@@ -7,11 +7,12 @@ public class Projectile : MonoBehaviour
     public bool IsOriginal = true;
 
     public float KillVelocity = 1;
-    public float DeadlyBlinkRate = 0.1f;
     public float DeadlyTimer = 0.5f;
     public float MaxInvisibleTime = 0.1f;
 
     private float visibleTimer = 0;
+
+    public float MaxPitchVelocity = 122;
 
     public int MaxReflections = 2;
     public bool VelocityReflection = false;
@@ -56,7 +57,6 @@ public class Projectile : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
         if (IsOriginal)
         {
             audio.loop = true;
@@ -91,12 +91,19 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(hasPlayedHitSound == false)
+        {
+        	float forwardVel = transform.InverseTransformDirection(rigidbody.velocity).x/MaxPitchVelocity; //122 is the max velocity. THIS MUST BE CHANGED IF PROJECTILE SPEED IS CHANGED!!!
+        	audio.pitch = forwardVel*2.5f;
+        }
+
         isDeadly = true;
 
         if (isDeadly)
         {
-            float lerp = Mathf.PingPong(Time.time, DeadlyBlinkRate) / DeadlyBlinkRate;
-            renderer.material.color = Color.Lerp(PMat.color, Color.white, lerp);
+            float lerp = Mathf.PingPong(Time.time, 0.3f) / 0.3f;
+            Color lerpedColor = Color.Lerp(PMat.color, Color.white, lerp);
+            renderer.material.color = new Color(lerpedColor.r, lerpedColor.g, lerpedColor.b, 0);
         }
         else
             renderer.material.color = PMat.color;
@@ -194,12 +201,8 @@ public class Projectile : MonoBehaviour
         }
         if (!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable" && other.gameObject.tag != gameObject.tag)
         {
-
-
             if (IsOriginal && hasPlayedHitSound == false)
             {
-
-                print("stuff");
                 hasPlayedHitSound = true;
                 PlayHitSound();
             }
@@ -227,6 +230,8 @@ public class Projectile : MonoBehaviour
     void PlayHitSound()
     {
         audio.Stop();
+        audio.volume = 0.05f;
+        audio.pitch = 3.5f-audio.pitch;
         audio.loop = false;
         audio.clip = AudioManager.Instance.DiscHit;
         audio.Play();

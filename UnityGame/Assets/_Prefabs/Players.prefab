@@ -13407,6 +13407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsClone: 1
   OriginalPlayer: {fileID: 100236}
+  playerScript: {fileID: 0}
 --- !u!114 &11400006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13533,6 +13534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsClone: 0
   OriginalPlayer: {fileID: 0}
+  playerScript: {fileID: 0}
 --- !u!114 &11400022
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13751,6 +13753,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsClone: 0
   OriginalPlayer: {fileID: 0}
+  playerScript: {fileID: 0}
 --- !u!114 &11400046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13957,6 +13960,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsClone: 0
   OriginalPlayer: {fileID: 0}
+  playerScript: {fileID: 0}
 --- !u!114 &11400068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14086,6 +14090,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsClone: 1
   OriginalPlayer: {fileID: 100076}
+  playerScript: {fileID: 0}
 --- !u!114 &11400082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14133,6 +14138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsClone: 0
   OriginalPlayer: {fileID: 0}
+  playerScript: {fileID: 0}
 --- !u!114 &11400088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14341,6 +14347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsClone: 1
   OriginalPlayer: {fileID: 100046}
+  playerScript: {fileID: 0}
 --- !u!114 &11400112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14378,6 +14385,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsClone: 1
   OriginalPlayer: {fileID: 100126}
+  playerScript: {fileID: 0}
 --- !u!114 &11400118
 MonoBehaviour:
   m_ObjectHideFlags: 1
