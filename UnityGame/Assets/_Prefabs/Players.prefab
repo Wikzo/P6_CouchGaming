@@ -13577,7 +13577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 22
-  BoostJumpForce: 25
+  BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &11400028
@@ -13795,7 +13795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 22
-  BoostJumpForce: 25
+  BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &11400052
@@ -14001,7 +14001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 22
-  BoostJumpForce: 25
+  BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &11400074
@@ -14177,7 +14177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   JumpForce: 22
-  BoostJumpForce: 25
+  BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
   BoostJumpEffect: {fileID: 100000, guid: 6822788fae136234d9d2f93b0f46e4c5, type: 2}
 --- !u!114 &11400094
