@@ -312,6 +312,8 @@ public class GameManager : MonoBehaviour
                 PlayingState = PlayingState.DisplayingScore;
                 MissionManager.Instance.RemoveAllMissions();
                 GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.8f, 0.8f, 0.8f), GoShakeType.Position);
+                
+                // TODO: who won?
                 AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinRed);
                 Instantiate(Congratulations);
             }

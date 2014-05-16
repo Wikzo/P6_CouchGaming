@@ -8,7 +8,8 @@ public class PlayerDamage : MonoBehaviour
     public GameObject OriginalPlayer;
 
 	//public AudioClip missionSound;
-	private Player playerScript;
+	[HideInInspector]
+    public Player playerScript;
 
 	//Lo-Fi
 	private Transform shield;

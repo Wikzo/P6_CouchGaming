@@ -709,7 +709,7 @@ MonoBehaviour:
     type: 2}
   CameraOrtographic: {fileID: 0}
   Congratulations: {fileID: 100000, guid: 26c44a3674df2184382d39033fe5df41, type: 2}
-  DebugMode: 1
+  DebugMode: 0
   UseAnnouncer: 1
   GUIRumbleCounter: 1
   ControllerGUIToRumble: {fileID: 0}
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissionAccomplishedSound: {fileID: 8300000, guid: 8d2adaaba1248944ead40b5698b0aa52,
     type: 3}
-  IntelKeyboardPressingSound: {fileID: 8300000, guid: d66a5da34297e5e41ab2b9b6082f94c6,
+  IntelKeyboardPressingSound: {fileID: 8300000, guid: 60d90efb08facab4981797b62381f1a1,
     type: 3}
   CalibrationAudio: {fileID: 8300000, guid: 1376de98470c3ff4babbe722de1177fb, type: 3}
   VibrationExplain: {fileID: 8300000, guid: 160b7099d1a62294a95b2705efbe1711, type: 3}
@@ -865,14 +865,14 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1014fa1ed5c6f244182605c7cd55f128, type: 3}
   - {fileID: 8300000, guid: 300f5d6b826c0d242b531b2a664fefbc, type: 3}
   Unready: {fileID: 8300000, guid: c89ac2b2a1341f842ba0c8d97049699c, type: 3}
-  MissionCompletedRed: {fileID: 8300000, guid: cb1fabd153a9f8645a3066c316d14d2a, type: 3}
-  MissionCompletedBlue: {fileID: 8300000, guid: 4abeb75beafd9634d9f604cb8306e59c,
+  MissionCompletedRed: {fileID: 8300000, guid: 43f6d5bf6c1100142b9a01a1d60cc836, type: 3}
+  MissionCompletedBlue: {fileID: 8300000, guid: 43f6d5bf6c1100142b9a01a1d60cc836,
     type: 3}
-  MissionCompletedGreen: {fileID: 8300000, guid: c8d69d681bed40f41808a0a2627e0ca0,
+  MissionCompletedGreen: {fileID: 8300000, guid: 43f6d5bf6c1100142b9a01a1d60cc836,
     type: 3}
-  MissionCompletedPink: {fileID: 8300000, guid: 5a5cd1554d147f74c97dd3b37557c617,
+  MissionCompletedPink: {fileID: 8300000, guid: 43f6d5bf6c1100142b9a01a1d60cc836,
     type: 3}
-  MissionCompletedDefault: {fileID: 8300000, guid: a836651ec4ba7444191a8bb94ba42754,
+  MissionCompletedDefault: {fileID: 8300000, guid: 43f6d5bf6c1100142b9a01a1d60cc836,
     type: 3}
   WinRed: {fileID: 8300000, guid: 7d48c70eaa13bef4b9d10a24a40c93e3, type: 3}
   MusicPlayer: {fileID: 0}

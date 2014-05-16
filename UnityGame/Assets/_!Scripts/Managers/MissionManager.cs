@@ -238,8 +238,26 @@ public class MissionManager : MonoBehaviour
     }
 
 
+    public void DoorGoUpDown()
+    {
+        int random = Random.Range(0, 2);
+
+        switch (random)
+        {
+            case 0:
+                if (OnMissionCompletedDoorsLower != null)
+                    OnMissionCompletedDoorsUpper();
+                break;
+            case 1:
+                if (OnMissionCompletedDoorsLower != null)
+                    OnMissionCompletedDoorsLower();
+                break;
+        }
+    }
+
     void Update()
     {
+
         if (GameManager.Instance.PlayingState != PlayingState.Playing) // only check if game is playing
             return;
 
@@ -260,8 +278,6 @@ public class MissionManager : MonoBehaviour
                     t.SoundToPlay = m.ChooseCompletedSound();
                     t.ColorToUse = new Color(m.PlayerScript.PlayerColor.r, m.PlayerScript.PlayerColor.g, m.PlayerScript.PlayerColor.b, 255);
 
-                    if (OnMissionCompletedDoorsUpper != null)
-                        OnMissionCompletedDoorsUpper();
                     //Debug.Log(string.Format("Player {0} completed mission {1})", m.Player.ToString(), m.ToString()));
                     m.GivePointsToPlayer();
                 }

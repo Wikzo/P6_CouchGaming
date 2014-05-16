@@ -76,7 +76,7 @@ public class MissionDefend : MissionBase
             else
             {
                 this._missionIsActive = false;
-                //MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
+                MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
                 return false;
             }
         }

@@ -45,6 +45,11 @@ public class Door : MonoBehaviour
         else if (this.DoorLocation == DoorLocation.Lower)
             MissionManager.OnMissionCompletedDoorsLower -= DoorGoUp;
 
+        if (this.DoorLocation == DoorLocation.Upper)
+            MissionManager.OnMissionCompletedDoorsUpper += DoorGoDown;
+        else if (this.DoorLocation == DoorLocation.Lower)
+            MissionManager.OnMissionCompletedDoorsLower += DoorGoDown;
+
         StartCoroutine(OpenDoor());
     }
 
@@ -79,19 +84,25 @@ public class Door : MonoBehaviour
 
         //print("door closing");
 
-        while (transform.localScale.y < doorCloseScale.y-0.1f)
+        /*while (going == true)
+            yield return null;*/
+
+        if (!going)
         {
-            going = true;
+            while (transform.localScale.y < doorCloseScale.y - 0.1f)
+            {
+                going = true;
 
-            Vector3 lerp = Vector3.Lerp(transform.localScale, doorCloseScale, smoothValue  * Time.deltaTime);
+                Vector3 lerp = Vector3.Lerp(transform.localScale, doorCloseScale, smoothValue * Time.deltaTime);
 
-            transform.localScale = new Vector3(transform.localScale.x, lerp.y, transform.localScale.z);
-            transform.position = new Vector3(transform.position.x, doorOpenPos.y - transform.localScale.y / 2, transform.position.z);
+                transform.localScale = new Vector3(transform.localScale.x, lerp.y, transform.localScale.z);
+                transform.position = new Vector3(transform.position.x, doorOpenPos.y - transform.localScale.y / 2, transform.position.z);
 
-            yield return null;
+                yield return null;
+            }
+
+            going = false;
         }
-
-        going = false;
     }
 
     IEnumerator OpenDoor()
@@ -99,18 +110,25 @@ public class Door : MonoBehaviour
         renderer.enabled = true;
         //print("door opening");
 
-        while (transform.localScale.y > doorOpenScale.y+0.1f)
+        /*while (going == true)
+            yield return null;*/
+
+        if (!going)
         {
-            going = true;
-            Vector3 lerp = Vector3.Lerp(transform.localScale, doorOpenScale, smoothValue * Time.deltaTime);
 
-            transform.localScale = new Vector3(transform.localScale.x, lerp.y, transform.localScale.z);
-            transform.position = new Vector3(transform.position.x, doorOpenPos.y - transform.localScale.y / 2, transform.position.z);
+            while (transform.localScale.y > doorOpenScale.y + 0.1f)
+            {
+                going = true;
+                Vector3 lerp = Vector3.Lerp(transform.localScale, doorOpenScale, smoothValue * Time.deltaTime);
 
-            yield return null;
+                transform.localScale = new Vector3(transform.localScale.x, lerp.y, transform.localScale.z);
+                transform.position = new Vector3(transform.position.x, doorOpenPos.y - transform.localScale.y / 2, transform.position.z);
+
+                yield return null;
+            }
+
+            going = false;
+            renderer.enabled = false;
         }
-
-        going = false;
-        renderer.enabled = false;
     }
 }

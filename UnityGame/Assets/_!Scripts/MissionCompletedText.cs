@@ -61,8 +61,14 @@ public class MissionCompletedText : MonoBehaviour
         iTween.MoveTo(gameObject, iTween.Hash("position", destOut, "oncomplete", "DestroyMe", "easeType", iTween.EaseType.easeOutBounce, "delay", 1.8));
     }
 
-    //void DestroyMe()
-    //{
-      //  Destroy(gameObject);
-    //}
+    IEnumerator DestroyMeAfterSomeTime()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
+
+    void DestroyMe()
+    {
+        StartCoroutine(DestroyMeAfterSomeTime());
+    }
 }

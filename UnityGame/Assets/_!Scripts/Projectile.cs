@@ -24,6 +24,9 @@ public class Projectile : MonoBehaviour
 
 	private StuckDetector stuckDetector;
 
+    public GameObject MinusObject;
+    bool canGiveMinusPoint = true;
+
 	private bool isDeadly = false;
 	private bool isHittingPlayer = false;
 	private bool outOfBounds = false;
@@ -130,12 +133,43 @@ public class Projectile : MonoBehaviour
 		}
 	}
 
+    IEnumerator MinusPointCoolDown() // used so won't give multiple minus points (e.g. hitting original AND clone should not give 2 minus points)
+    {
+        canGiveMinusPoint = false;
+        yield return new WaitForSeconds(1f);
+        canGiveMinusPoint = true;
+    }
+
 	void OnTriggerEnter(Collider other)
 	{
 		lockPos = transform.position;
 
-		if(isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != Owner)
-			other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(Owner);
+        if (isDeadly && other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != Owner)
+        {
+            MissionBase m = OwnerObject.GetComponent<MissionBase>();
+            PlayerDamage playerDamage = other.gameObject.GetComponent<PlayerDamage>();
+
+
+            // penalty for shooting random people
+            // either (have Mission Kill but didn't hit target) OR (don't have Mission Kill)
+            if ((m.GetType() == typeof(MissionKill) == true && !other.name.Contains(m.Target.name)) || (m.GetType() == typeof(MissionKill) == false))
+            {
+                // minus one point
+                if (canGiveMinusPoint && playerDamage.playerScript.PState == PlayerState.Alive)
+                {
+                    StartCoroutine(MinusPointCoolDown());
+                    OwnerObject.GetComponent<Player>().Points--;
+                    Instantiate(MinusObject, OwnerObject.transform.position + new Vector3(1.5f, 2f, 0), Quaternion.identity);
+
+                    // doors going up/down
+                    MissionManager.Instance.DoorGoUpDown();
+                }
+            }
+
+
+            //other.gameObject.GetComponent<PlayerDamage>().CalculateDeath(Owner);
+            playerDamage.CalculateDeath(Owner);
+        }
 		
 		if(other.gameObject.tag == Owner && OutOfBounds)
 		{
@@ -149,6 +183,7 @@ public class Projectile : MonoBehaviour
 		}
 		if(!other.gameObject.GetComponent<PlayerDamage>() && other.gameObject.tag != "NotCollidable" && other.gameObject.tag != gameObject.tag)
 		{
+
 			rigidbody.velocity = Vector3.zero;
       		rigidbody.angularVelocity = Vector3.zero;
       		transform.position = lockPos;

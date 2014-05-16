@@ -559,11 +559,13 @@ MonoBehaviour:
   KillVelocity: 30
   DeadlyBlinkRate: .200000003
   DeadlyTimer: .100000001
+  MaxInvisibleTime: .100000001
   MaxReflections: 3
   VelocityReflection: 0
   ForceReflection: 0
   PMat: {fileID: 0}
   OwnerObject: {fileID: 0}
+  MinusObject: {fileID: 100000, guid: 199ae14333b2d18468bca96e9bcfb0c6, type: 2}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -575,6 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ccb110bf1d017440a5f2ab5a2e08192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StuckInObject: 0
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

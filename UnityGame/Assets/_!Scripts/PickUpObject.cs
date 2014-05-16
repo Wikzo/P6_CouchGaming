@@ -48,6 +48,9 @@ public class PickUpObject : MonoBehaviour
 
         if (col.gameObject.tag.Contains(tagToLookFor))
         {
+            if (col.gameObject.GetComponent<Player>() == null)
+                return;
+
             if (col.gameObject.GetComponent<Player>().PState == PlayerState.Alive) // only works on living players
             {
                 IsPickedUpRightNow = true;
