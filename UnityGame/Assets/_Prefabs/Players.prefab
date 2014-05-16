@@ -13578,6 +13578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundObject: {fileID: 100000, guid: 9ecfc3f1272a48b4c92dae1f8144793d, type: 2}
   JumpForce: 22
   BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
@@ -13797,6 +13798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundObject: {fileID: 100000, guid: 9ecfc3f1272a48b4c92dae1f8144793d, type: 2}
   JumpForce: 22
   BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
@@ -14004,6 +14006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundObject: {fileID: 100000, guid: 9ecfc3f1272a48b4c92dae1f8144793d, type: 2}
   JumpForce: 22
   BoostJumpForce: 30
   MaxBoostJumpsAmount: 1
@@ -14182,6 +14185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1a7805ac2e6f6245a5a19b70ac866e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SoundObject: {fileID: 100000, guid: 9ecfc3f1272a48b4c92dae1f8144793d, type: 2}
   JumpForce: 22
   BoostJumpForce: 30
   MaxBoostJumpsAmount: 1

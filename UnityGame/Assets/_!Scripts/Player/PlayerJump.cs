@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerJump : MonoBehaviour {
 
+	public GameObject SoundObject;
+	private GameObject soundObject;
 	
 	public int JumpForce = 350;
 	public int BoostJumpForce = 350;
@@ -168,6 +170,17 @@ public class PlayerJump : MonoBehaviour {
 		rigidbody.velocity = new Vector3(0,JumpForce,0);
 
 		DataSaver.Instance.highScores[0].timesJumped++;
+
+		soundObject = Instantiate(SoundObject, pTran.position, Quaternion.identity) as GameObject;
+		if(soundObject.audio != null)
+		{
+			soundObject.audio.clip = AudioManager.Instance.Jump[playerScript.Id];
+			soundObject.audio.Play();
+			soundObject.audio.volume = 0.3f;
+			soundObject.audio.pitch = 1;
+			Destroy(soundObject, AudioManager.Instance.Jump[playerScript.Id].length);
+		}
+
 	}
 	public void BoostJump()
 	{
@@ -182,6 +195,16 @@ public class PlayerJump : MonoBehaviour {
 		rigidbody.velocity = new Vector3(0, BoostJumpForce, 0);
 
 		DataSaver.Instance.highScores[0].timesJumped++;
+
+		soundObject = Instantiate(SoundObject, pTran.position, Quaternion.identity) as GameObject;
+		if(soundObject.audio != null)
+		{
+			soundObject.audio.clip = AudioManager.Instance.Jump[playerScript.Id];
+			soundObject.audio.Play();
+			soundObject.audio.volume = 0.3f;
+			soundObject.audio.pitch = 1.5f;
+			Destroy(soundObject, AudioManager.Instance.Jump[playerScript.Id].length);
+		}
 	}
 
 	void FixedUpdate()
