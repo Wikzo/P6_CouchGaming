@@ -3,6 +3,9 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
+    public GameObject SoundObject;
+	private GameObject soundObject;
+
     public GameObject TwinProjectileToDestroy;
     public bool IsOriginal = true;
 
@@ -196,6 +199,18 @@ public class Projectile : MonoBehaviour
                 if (!IsOriginal)
                     return;
 
+                soundObject = Instantiate(SoundObject, transform.position, Quaternion.identity) as GameObject;
+				if(soundObject.audio != null)
+				{
+					audio.Stop();
+					soundObject.audio.volume = 0.5f;
+					soundObject.audio.pitch = 1;
+					soundObject.audio.clip = AudioManager.Instance.DiscGrab;
+					soundObject.audio.Play();
+					
+					Destroy(soundObject, AudioManager.Instance.DiscGrab.length);
+				}
+
                 DestroyProjectileAndTwin(other.gameObject.GetComponent<PlayerAim>());
             }
         }
@@ -204,7 +219,12 @@ public class Projectile : MonoBehaviour
             if (IsOriginal && hasPlayedHitSound == false)
             {
                 hasPlayedHitSound = true;
-                PlayHitSound();
+                audio.Stop();
+       			audio.volume = 0.05f;
+       			audio.pitch = 3.5f-audio.pitch;
+       			audio.loop = false;
+       			audio.clip = AudioManager.Instance.DiscHit;
+       			audio.Play();
             }
 
             rigidbody.velocity = Vector3.zero;
@@ -225,17 +245,5 @@ public class Projectile : MonoBehaviour
             playerAim.CurrentShotAmount++;
 
         Destroy(gameObject);
-    }
-
-    void PlayHitSound()
-    {
-        audio.Stop();
-        audio.volume = 0.05f;
-        audio.pitch = 3.5f-audio.pitch;
-        audio.loop = false;
-        audio.clip = AudioManager.Instance.DiscHit;
-        audio.Play();
-        //audio.clip = AudioManager.Instance.DiscHit;
-        //audio.Play();
     }
 }

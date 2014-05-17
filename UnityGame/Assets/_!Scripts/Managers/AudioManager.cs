@@ -33,6 +33,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip[] DiscCharge = new AudioClip[4];
     public AudioClip DiscShot;
     public AudioClip DiscHit;
+    public AudioClip DiscGrab;
 
     public AudioClip[] Jump = new AudioClip[4];
 
