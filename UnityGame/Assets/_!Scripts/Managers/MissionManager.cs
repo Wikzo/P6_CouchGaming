@@ -278,7 +278,7 @@ public class MissionManager : MonoBehaviour
                     t.SoundToPlay = m.ChooseCompletedSound();
                     t.ColorToUse = new Color(m.PlayerScript.PlayerColor.r, m.PlayerScript.PlayerColor.g, m.PlayerScript.PlayerColor.b, 255);
                     DoorGoUpDown();
-                    //Debug.Log(string.Format("Player {0} completed mission {1})", m.Player.ToString(), m.ToString()));
+                    Debug.Log(string.Format("Player {0} completed mission {1})", m.Player.ToString(), m.ToString()));
                     m.GivePointsToPlayer();
                 }
             }

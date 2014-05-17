@@ -17,6 +17,8 @@ public class ReadyGo : MonoBehaviour {
 
         transform.position = new Vector3(0.5f, 0.5f, 0);
         guiText.pixelOffset = new Vector2(-236, 0);
+
+        gameObject.name = "Music";
     }
 	
 

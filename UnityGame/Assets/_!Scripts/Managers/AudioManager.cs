@@ -27,6 +27,10 @@ public class AudioManager : MonoBehaviour
     public AudioClip MissionCompletedDefault; 
 
     public AudioClip WinRed;
+    public AudioClip WinBlue;
+    public AudioClip WinGreen;
+    public AudioClip WinPink;
+    public AudioClip WinDraw;
 
     public AudioClip[] DiscHover = new AudioClip[4];
 

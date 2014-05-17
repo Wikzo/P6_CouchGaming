@@ -5,7 +5,7 @@ public class MinusFade : MonoBehaviour
 {
     TextMesh text;
 
-    float time = 1;
+    float time = 1.2f;
 
     // Use this for initialization
     void Start()

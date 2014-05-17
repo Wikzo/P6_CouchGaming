@@ -158,7 +158,10 @@ public class MissionIntel : MissionBase
 
 
         if (IntelPropToSteal == null) // e.g. another player has already solved mission (destroyed intel)
+        {
             _missionIsActive = false;
+            return false;
+        }
         else
             _missionIsActive = true;
 

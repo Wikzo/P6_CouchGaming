@@ -9,6 +9,7 @@ public class TextFade : MonoBehaviour
     private string GetReadyText = "Receiving missions ...\nUse ↑ and ↓\nY to get ready";
     private string GetReadyWithColors = "Use the D-pad ...\nUse       and                        \nPress <color=yellow>Y </color> to get ready";
     private string PauseText = "*Paused*";
+    private string HighScorePressStart = "Press START to play again";
 
     private string[] ScoreText;
     public GUIStyle[] ScoreStylesColor;

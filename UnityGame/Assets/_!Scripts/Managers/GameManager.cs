@@ -324,7 +324,67 @@ public class GameManager : MonoBehaviour
                 GoKitTweenExtensions.shake(Camera.main.transform, 0.5f, new Vector3(0.8f, 0.8f, 0.8f), GoShakeType.Position);
                 
                 // TODO: who won?
-                AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinRed);
+
+                int highestScore = -10000;
+                int numberOfPeopleWithSameHighScore = 0;
+
+                // check highest score
+                TargetIDColorState winningColor = TargetIDColorState.NotAssigned;
+                foreach (GameObject g in Players)
+                {
+                    Player p = g.GetComponent<Player>();
+                    if (p.Points >= highestScore)
+                    {
+                        highestScore = p.Points;
+                        winningColor = g.GetComponent<TargetIDColor>().TargetIDColorState;
+                    }
+                }
+
+                // check if draw
+                foreach (GameObject g in Players)
+                {
+                    Player p = g.GetComponent<Player>();
+
+                    if (p.Points == highestScore)
+                    {
+                        //Debug.Log(p.ToString() + p.Points);
+                        numberOfPeopleWithSameHighScore++;
+                    }
+                }
+
+                if (numberOfPeopleWithSameHighScore > 1) // draw?
+                    winningColor = TargetIDColorState.NotAssigned;
+
+                Destroy(GameObject.Find("Music")); // dont play game music when showing score
+                switch(winningColor)
+                {
+                    case TargetIDColorState.RedOne:
+                        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinRed);
+                        //Debug.Log("Red won");
+                        break;
+
+                    case TargetIDColorState.BlueTwo:
+                        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinBlue);
+                        //Debug.Log("blue won");
+                        break;
+
+                    case TargetIDColorState.GreenThree:
+                        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinGreen);
+                        //Debug.Log("green won");
+                        break;
+
+                    case TargetIDColorState.PinkFour:
+                        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinPink);
+                        //Debug.Log("pink won");
+                        break;
+
+                    case TargetIDColorState.NotAssigned:
+                        AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinDraw);
+                        //Debug.Log("draw won");
+                        break;
+
+
+                }
                 Instantiate(Congratulations);
             }
         }

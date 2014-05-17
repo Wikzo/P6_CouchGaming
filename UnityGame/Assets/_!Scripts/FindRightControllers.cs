@@ -6,7 +6,8 @@ public class FindRightControllers : MonoBehaviour
     // Singleton itself
     private static FindRightControllers _instance;
 
-    public int[] PlayersSlots;
+    [HideInInspector]
+    public int[] PlayerSlotsToRemember;
 
 
     //  public static Instance  

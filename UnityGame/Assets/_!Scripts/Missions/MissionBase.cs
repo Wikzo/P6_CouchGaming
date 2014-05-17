@@ -411,6 +411,13 @@ public abstract class MissionBase : MonoBehaviour
         this.PlayerScript.Points += this.Points;
 
         MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
+        //StartCoroutine(DelayGiveNewMission());
+    }
+
+    IEnumerator DelayGiveNewMission()
+    {
+        yield return new WaitForSeconds(1f);
+        MissionManager.Instance.GetNewMissionToSinglePlayer(this.Player);
     }
 
     public virtual void DestroyMission()
