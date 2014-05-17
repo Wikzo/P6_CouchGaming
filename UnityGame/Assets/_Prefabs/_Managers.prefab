@@ -412,10 +412,15 @@ MonoBehaviour:
   TargetChosenSoFar: 
   MissionInitializedParticles: {fileID: 100000, guid: 88bda155ebed0d844aa0c6542ba37af6,
     type: 2}
+  PlusObject: {fileID: 100000, guid: a078efe8c86a639438b374703814082e, type: 2}
+  DieParticles: {fileID: 100000, guid: da49aaa1be8c57f45b5b49e2ef2db5c6, type: 2}
+  SpawnParticles: {fileID: 100000, guid: b85c3cab3052b8c46b8bf806558b9daf, type: 2}
   CameraOrtographic: {fileID: 0}
   Congratulations: {fileID: 100000, guid: 26c44a3674df2184382d39033fe5df41, type: 2}
+  MusicPlayer: {fileID: 100000, guid: 5fe4a993a925b7845b9d0028c1101141, type: 2}
   DebugMode: 0
   UseAnnouncer: 1
+  readyCounter: -1
   GUIRumbleCounter: 1
   ControllerGUIToRumble: {fileID: 0}
   RumbleStepsGUI:
@@ -474,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9044801350130824ea9344476a716f67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 1
+  Points: 3
   Player: {fileID: 0}
   PlayerScript: {fileID: 0}
   TargetPool: []
@@ -524,7 +529,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68a2f7cf7cd9c484499467f2b9c208e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 1
+  Points: 3
   Player: {fileID: 0}
   PlayerScript: {fileID: 0}
   TargetPool: []
@@ -592,12 +597,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b9feb3ede36fd7b4fa26501b96059f4c, type: 3}
   DiscShot: {fileID: 8300000, guid: 0cc97e896e73294499f003acb1f25ce8, type: 3}
   DiscHit: {fileID: 8300000, guid: 3c175aabdd818794f95ac592fba7b9b7, type: 3}
+  DiscGrab: {fileID: 8300000, guid: b36dc7afe7fbc764da88395ea0e20477, type: 3}
   Jump:
   - {fileID: 8300000, guid: ad3ccaab80cf974499cfda5fa478f136, type: 3}
   - {fileID: 8300000, guid: 7d27a8b7872510247a76e06066fc8fc1, type: 3}
   - {fileID: 8300000, guid: 35421985222a254419ab40679c92eaf8, type: 3}
   - {fileID: 8300000, guid: 661d8f1c652385249b838100dea321fd, type: 3}
-  MusicPlayer: {fileID: 0}
 --- !u!114 &11400018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -609,7 +614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fec3a90ed372322408a035c0482bc495, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 1
+  Points: 3
   Player: {fileID: 0}
   PlayerScript: {fileID: 0}
   TargetPool: []
@@ -646,7 +651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 202eb986c43a6824f99df8b20cbce108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Points: 1
+  Points: 3
   Player: {fileID: 0}
   PlayerScript: {fileID: 0}
   TargetPool: []

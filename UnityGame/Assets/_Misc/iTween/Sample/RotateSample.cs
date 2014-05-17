@@ -189,8 +189,8 @@ public class RotateSample : MonoBehaviour
 
                     CharacterSelect[currentSlots[i]].PlayerChosenSlot = (int)p.Index;
 
-                    selected++;
                     audio.PlayOneShot(SelectSounds[selected]);
+                    selected++;
 
 
 

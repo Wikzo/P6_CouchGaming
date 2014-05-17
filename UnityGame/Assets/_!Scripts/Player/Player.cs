@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 	public bool Keyboard = false;
 
     public Color PlayerColor;
-    static int readyCounter = -1;
+    //static int readyCounter = -1;
 
 	[HideInInspector]
 	public bool IsReadyToBegin = false;
@@ -483,14 +483,14 @@ public class Player : MonoBehaviour
                 c = new Color(pMat.color.r, pMat.color.g, pMat.color.b, 255);
                 
                 
-                readyCounter++;
+                GameManager.Instance.readyCounter++;
 
-                AudioManager.Instance.PlaySound(AudioManager.Instance.ReadySounds[readyCounter]);
+                AudioManager.Instance.PlaySound(AudioManager.Instance.ReadySounds[GameManager.Instance.readyCounter]);
 
             }
             else
             {
-                readyCounter--;
+                GameManager.Instance.readyCounter--;
             }
 
             foreach (MeshRenderer r in renders)

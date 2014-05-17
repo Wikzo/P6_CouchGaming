@@ -41,6 +41,21 @@ public class Door : MonoBehaviour
 
     }
 
+    void OnDisable()
+    {
+        if (this.DoorLocation == DoorLocation.Upper)
+            MissionManager.OnMissionCompletedDoorsUpper -= DoorGoDown;
+        else if (this.DoorLocation == DoorLocation.Lower)
+            MissionManager.OnMissionCompletedDoorsLower -= DoorGoDown;
+
+        if (this.DoorLocation == DoorLocation.Upper)
+            MissionManager.OnMissionCompletedDoorsUpper -= DoorGoUp;
+        else if (this.DoorLocation == DoorLocation.Lower)
+            MissionManager.OnMissionCompletedDoorsLower -= DoorGoUp;
+    }
+
+    // ondisable
+
     void DoorGoUp()
     {
         if (this.DoorLocation == DoorLocation.Upper)

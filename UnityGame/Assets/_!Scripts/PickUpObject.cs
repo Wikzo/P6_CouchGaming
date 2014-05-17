@@ -11,7 +11,7 @@ public class PickUpObject : MonoBehaviour
     Vector3 ScrollScaleOriginal;
     Vector3 ScrollScaleSmall = new Vector3(0.6813736f, 0.7912574f, 0.6813736f);
 
-    Vector3 StartPosition;
+    Vector3 StartPosition = new Vector3(0.01868701f, 9.468602f, 4.621389f); // TODO: set manually
 
     string tagToLookFor = "Player";
     public GameObject RenderObject;

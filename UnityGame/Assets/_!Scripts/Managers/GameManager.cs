@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
     public bool DebugMode = true;
     public bool UseAnnouncer = true;
 
+    public int readyCounter = -1;
+
     [HideInInspector]
     public int GUIRumbleCounter = 1;
 
@@ -115,6 +117,8 @@ public class GameManager : MonoBehaviour
 
         this.PlayingState = PlayingState.TalkingBeforeControllerCalibration;
         ReadyNotYetSpawned = false;
+
+        readyCounter = -1;
     }
 
     void Start()
