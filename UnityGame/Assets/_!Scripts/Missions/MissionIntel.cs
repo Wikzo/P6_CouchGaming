@@ -108,6 +108,7 @@ public class MissionIntel : MissionBase
         {
             counter = 0;
             missionIsDone = false;
+            ring.renderer.enabled = false;
             return;
         }
 
@@ -163,6 +164,7 @@ public class MissionIntel : MissionBase
         if (pickupObjectScript.PlayerToFollow != this.Player) // e.g. another player has already solved mission (destroyed intel)
         {
             //_missionIsActive = false;
+            ring.renderer.enabled = false;
             return false;
         }
         else

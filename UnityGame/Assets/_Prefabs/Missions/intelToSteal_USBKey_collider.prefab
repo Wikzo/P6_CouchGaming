@@ -13,7 +13,7 @@ GameObject:
   - 54: {fileID: 5400000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400000}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: intelToSteal_USBKey_collider
   m_TagString: NotCollidable
   m_Icon: {fileID: 0}
@@ -30,7 +30,7 @@ GameObject:
   - 4: {fileID: 400022}
   - 33: {fileID: 3300018}
   - 23: {fileID: 2300016}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Scroll_Middle_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - 4: {fileID: 400024}
   - 33: {fileID: 3300020}
   - 23: {fileID: 2300018}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Cylinder_2_Color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - 4: {fileID: 400026}
   - 33: {fileID: 3300022}
   - 23: {fileID: 2300020}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Scroll_Middle_P
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   - 4: {fileID: 400028}
   - 95: {fileID: 9500002}
   - 114: {fileID: 11400006}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Scroll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - 4: {fileID: 400030}
   - 33: {fileID: 3300024}
   - 23: {fileID: 2300022}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Scroll_Middle_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   - 4: {fileID: 400032}
   - 33: {fileID: 3300026}
   - 23: {fileID: 2300024}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Cylinder_1_Color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - 4: {fileID: 400034}
   - 33: {fileID: 3300028}
   - 23: {fileID: 2300026}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Scroll_Middle_G
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,7 +149,7 @@ GameObject:
   - 4: {fileID: 400036}
   - 33: {fileID: 3300030}
   - 23: {fileID: 2300028}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Scroll_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   - 4: {fileID: 400038}
   - 33: {fileID: 3300032}
   - 23: {fileID: 2300030}
-  m_Layer: 0
+  m_Layer: 24
   m_Name: Scroll_Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -180,7 +180,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.107479095, y: 10.1749973, z: 4.62138891}
+  m_LocalPosition: {x: .0186870098, y: 9.46860218, z: 4.62138891}
   m_LocalScale: {x: 2.91533566, y: 2.5104754, z: 2.91533566}
   m_Children:
   - {fileID: 400028}

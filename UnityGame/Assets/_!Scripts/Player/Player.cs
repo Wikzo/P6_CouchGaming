@@ -386,8 +386,12 @@ public class Player : MonoBehaviour
         {
             ChooseSpawnPoint();
         }
-        else if (resetCounter == 1) // unique case between PRACTICE and WAIT mode --> don't find new spawn point, just go to existing one
+        // unique case between PRACTICE and WAIT mode --> don't find new spawn point, just go to existing one
+        else if (resetCounter == 1)
+        {
             pTran.position = ChosenSpawn.transform.position;
+            pTran.forward = ChosenSpawn.transform.forward;
+        }
 
         // Gustav: unsure if this should be PracticeMode or ControllerCalibration mode
 	    if (GameManager.Instance.PlayingState != PlayingState.TalkingBeforeControllerCalibration)

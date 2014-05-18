@@ -364,7 +364,7 @@ MonoBehaviour:
   NumberOfRoundsPerGame: 5
   CurrentRound: 0
   WaitForReady: 1
-  TimePerRound: 15
+  TimePerRound: 200
   TimeLeft: 0
   CurrentRoundJustEnded: 0
   PlayingState: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissionAccomplishedSound: {fileID: 8300000, guid: 8d2adaaba1248944ead40b5698b0aa52,
     type: 3}
-  IntelKeyboardPressingSound: {fileID: 8300000, guid: 5e9c7fbfa51a2314bbfad33a5f3e71cb,
+  IntelKeyboardPressingSound: {fileID: 8300000, guid: dd318c5427e3ff44c9aaae2cbea5dc1a,
     type: 3}
   CalibrationAudio: {fileID: 8300000, guid: 1376de98470c3ff4babbe722de1177fb, type: 3}
   VibrationExplain: {fileID: 8300000, guid: 160b7099d1a62294a95b2705efbe1711, type: 3}
@@ -563,6 +563,8 @@ MonoBehaviour:
   DiscShot: {fileID: 8300000, guid: 0cc97e896e73294499f003acb1f25ce8, type: 3}
   DiscHit: {fileID: 8300000, guid: 3c175aabdd818794f95ac592fba7b9b7, type: 3}
   DiscGrab: {fileID: 8300000, guid: b36dc7afe7fbc764da88395ea0e20477, type: 3}
+  AimCross: {fileID: 8300000, guid: 3ad7c0555f235284cb22227bad286101, type: 3}
+  ZoneIncrease: {fileID: 8300000, guid: dfd62a15f136c4e4a922fe0075b9bded, type: 3}
   Jump:
   - {fileID: 8300000, guid: ad3ccaab80cf974499cfda5fa478f136, type: 3}
   - {fileID: 8300000, guid: 7d27a8b7872510247a76e06066fc8fc1, type: 3}

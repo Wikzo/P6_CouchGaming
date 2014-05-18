@@ -313,7 +313,7 @@ public abstract class MissionBase : MonoBehaviour
 
     }
 
-    void WriteLogForTest(bool up)
+    public void WriteLogForTest(bool up)
     {
         string text = "";
 

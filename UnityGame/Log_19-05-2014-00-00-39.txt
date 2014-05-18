@@ -1,0 +1,3 @@
+PlayerID, CurrentMissionType, TotalMissionsPlayerHasHadSoFar, ButtonPressType, ThisButtonPressNumber, TimeSinceReceivedMission
+1, MissionZone, 0, UP, 1, 18.65868
+1, MissionZone, 0, DOWN, 1, 21.34012
