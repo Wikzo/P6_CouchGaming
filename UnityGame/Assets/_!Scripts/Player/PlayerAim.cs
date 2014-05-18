@@ -37,9 +37,12 @@ public class PlayerAim : MonoBehaviour
 
 	private Transform pTran;
 	private Transform aimPivotTran;
-	private Transform aimTran;
-	private Transform chargeBar;
-	private Transform aimCross;
+	[HideInInspector]
+	public Transform aimTran;
+	[HideInInspector]
+	public Transform chargeBar;
+	[HideInInspector]
+	public Transform aimCross;
 
 	private Vector3 aimStartPos;
 	private Quaternion aimStartRot;

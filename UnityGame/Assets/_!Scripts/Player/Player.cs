@@ -507,6 +507,10 @@ public class Player : MonoBehaviour
                 r.material.color = c;
             }
         }
+
+        playerAim.aimTran.renderer.enabled = false;
+        playerAim.chargeBar.renderer.enabled = false;
+        playerAim.aimCross.renderer.enabled = false;
     }
         
 
