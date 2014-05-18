@@ -56,6 +56,9 @@ public class Player : MonoBehaviour
 	[HideInInspector]
 	public PlayerState PState;
 	public string KilledBy;
+
+    [HideInInspector]
+    public int TotalMissionPlayerHasCompleted;
 	
 
 	public PlayerIndex PlayerController;
@@ -174,6 +177,8 @@ public class Player : MonoBehaviour
 	    
         Name = gameObject.name;
 	    Points = 0;
+
+        TotalMissionPlayerHasCompleted = 0;
 	}
 
     void Start()

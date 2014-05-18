@@ -68,6 +68,12 @@ public abstract class MissionBase : MonoBehaviour
     [HideInInspector]
     public bool HasHeardMissionRumble;
 
+    // for logging to test
+    protected int ThisButtonPressNumberUp;
+    protected int ThisButtonPressNumberDown;
+    protected float TimeSinceReceivedMission;
+
+
     protected bool isInstanceMission = false;
 
     public string MissionDescription = "MISSION";
@@ -154,6 +160,10 @@ public abstract class MissionBase : MonoBehaviour
         HasHeardMissionRumble = false;
 
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
+
+        ThisButtonPressNumberUp = 0;
+        ThisButtonPressNumberDown = 0;
+        TimeSinceReceivedMission = 0;
 
         StartCoroutine(WaitForMissionToGetActive());
     }
@@ -303,8 +313,23 @@ public abstract class MissionBase : MonoBehaviour
 
     }
 
+    void WriteLogForTest(bool up)
+    {
+        string text = "";
+
+        if (up)
+            text = string.Format("{0}, {1}, {2}, {3}, {4}, {5}", this.PlayerScript.Id+1, this.ToString(), this.PlayerScript.TotalMissionPlayerHasCompleted, "UP", ThisButtonPressNumberUp, TimeSinceReceivedMission);
+        else if (!up)
+            text = string.Format("{0}, {1}, {2}, {3}, {4}, {5}", this.PlayerScript.Id + 1, this.ToString(), this.PlayerScript.TotalMissionPlayerHasCompleted, "DOWN", ThisButtonPressNumberDown, TimeSinceReceivedMission);
+
+        LoggingManager.AddTextNoTimeStamp(text);
+    }
+
     public void PickMissionRumble() // check if ready to display mission
     {
+        ThisButtonPressNumberUp++;
+        WriteLogForTest(true);
+
         if (isDisplayingMissionOrTargetRumbleRightNow)
             return;
         else
@@ -351,6 +376,9 @@ public abstract class MissionBase : MonoBehaviour
 
     public void PickTargetRumble() // check if ready to display target
     {
+        ThisButtonPressNumberDown++;
+        WriteLogForTest(false);
+
         if (isDisplayingMissionOrTargetRumbleRightNow)
             return;
         else
@@ -394,6 +422,9 @@ public abstract class MissionBase : MonoBehaviour
         if (!_missionIsActive)
             return;
 
+
+        TimeSinceReceivedMission += Time.deltaTime;
+
         UpdateSpecificMissionStuff();
 
         // TODO: only rumble in PRACTICE MODE, GET READY MODE or PLAYING MODE
@@ -416,6 +447,8 @@ public abstract class MissionBase : MonoBehaviour
 
     public void GivePointsToPlayer()
     {
+        this.PlayerScript.TotalMissionPlayerHasCompleted++;
+
         Instantiate(GameManager.Instance.PlusObject, this.Player.transform.position + new Vector3(1.5f, 2f, 0), Quaternion.identity);
 
         HasHeardMissionRumble = true;

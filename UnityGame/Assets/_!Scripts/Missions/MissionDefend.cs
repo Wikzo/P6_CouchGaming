@@ -3,6 +3,7 @@ using System.Collections;
 
 public class MissionDefend : MissionBase
 {
+
     private bool targetWasAliveWhenBegan;
 
     private float deadlineTime;
