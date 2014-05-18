@@ -511,6 +511,7 @@ public class Player : MonoBehaviour
         playerAim.aimTran.renderer.enabled = false;
         playerAim.chargeBar.renderer.enabled = false;
         playerAim.aimCross.renderer.enabled = false;
+        audio.Stop();
     }
         
 

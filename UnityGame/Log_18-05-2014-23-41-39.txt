@@ -1,9 +1,0 @@
-PlayerID, CurrentMissionType, TotalMissionsPlayerHasHadSoFar, ButtonPressType, ThisButtonPressNumber, TimeSinceReceivedMission
-3, MissionZone, 0, UP, 1, 10.5226
-2, MissionIntel, 0, UP, 1, 10.60744
-4, MissionDefend, 0, UP, 1, 10.83121
-1, MissionDefend, 0, UP, 1, 11.7696
-4, MissionDefend, 0, DOWN, 1, 13.54443
-3, MissionZone, 0, DOWN, 1, 14.21413
-1, MissionDefend, 0, DOWN, 1, 14.61756
-2, MissionIntel, 0, DOWN, 1, 14.95044

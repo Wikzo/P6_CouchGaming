@@ -180,7 +180,7 @@ public class PickUpObject : MonoBehaviour
         DroppingRightNow = false;
         CanBeUsedRightNow = true;
         gameObject.collider.isTrigger = false;
-        gameObject.layer = 0; // default
+        gameObject.layer = 24; // Intel
         DroppingRightNow = false;
 
         isIdleBlinkingRightNow = false;
