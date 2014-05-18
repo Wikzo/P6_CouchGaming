@@ -4033,9 +4033,9 @@ GameObject:
   - 33: {fileID: 3300190}
   - 65: {fileID: 6500092}
   - 23: {fileID: 2300190}
-  m_Layer: 12
+  m_Layer: 18
   m_Name: AimCross
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4571,9 +4571,9 @@ GameObject:
   - 33: {fileID: 3300202}
   - 65: {fileID: 6500104}
   - 23: {fileID: 2300202}
-  m_Layer: 12
+  m_Layer: 17
   m_Name: AimCross
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5193,9 +5193,9 @@ GameObject:
   - 33: {fileID: 3300218}
   - 65: {fileID: 6500106}
   - 23: {fileID: 2300218}
-  m_Layer: 12
+  m_Layer: 19
   m_Name: AimCross
-  m_TagString: Untagged
+  m_TagString: NotCollidable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13887,8 +13887,8 @@ MonoBehaviour:
   HelmetRenderers: []
   Score: 0
   Id: 2
-  DeathTime: 2
-  RespawnTime: 3
+  DeathTime: 5
+  RespawnTime: 10
   RespawnBlinkRate: .300000012
   Materials:
   - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
@@ -14107,8 +14107,8 @@ MonoBehaviour:
   HelmetRenderers: []
   Score: 0
   Id: 0
-  DeathTime: 2
-  RespawnTime: 3
+  DeathTime: 5
+  RespawnTime: 10
   RespawnBlinkRate: .300000012
   Materials:
   - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
@@ -14315,8 +14315,8 @@ MonoBehaviour:
   HelmetRenderers: []
   Score: 0
   Id: 1
-  DeathTime: 2
-  RespawnTime: 3
+  DeathTime: 5
+  RespawnTime: 10
   RespawnBlinkRate: .300000012
   Materials:
   - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}
@@ -14494,8 +14494,8 @@ MonoBehaviour:
   HelmetRenderers: []
   Score: 0
   Id: 3
-  DeathTime: 2
-  RespawnTime: 3
+  DeathTime: 5
+  RespawnTime: 10
   RespawnBlinkRate: .300000012
   Materials:
   - {fileID: 2100000, guid: d4180b60988d32c41bf1a779fe67e6ae, type: 2}

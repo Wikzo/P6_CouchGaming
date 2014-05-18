@@ -45,6 +45,9 @@ public class Projectile : MonoBehaviour
 
     private Vector3 lockPos;
 
+    private float returnToOwnerTimer = 0;
+    private float maxReturnToOwnerTimer = 15;
+
     public string Owner
     {
         get { return owner; }
@@ -94,6 +97,10 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        returnToOwnerTimer += Time.deltaTime;
+        if(returnToOwnerTimer >= maxReturnToOwnerTimer)
+            DestroyProjectileAndTwin(OwnerObject.GetComponent<PlayerAim>());
+
         if(hasPlayedHitSound == false)
         {
         	float forwardVel = transform.InverseTransformDirection(rigidbody.velocity).x/MaxPitchVelocity; //122 is the max velocity. THIS MUST BE CHANGED IF PROJECTILE SPEED IS CHANGED!!!
@@ -203,8 +210,8 @@ public class Projectile : MonoBehaviour
 				if(soundObject.audio != null)
 				{
 					audio.Stop();
-					soundObject.audio.volume = 0.5f;
-					soundObject.audio.pitch = 1;
+					soundObject.audio.volume = 0.2f;
+					soundObject.audio.pitch = 0.75f;
 					soundObject.audio.clip = AudioManager.Instance.DiscGrab;
 					soundObject.audio.Play();
 					
@@ -220,7 +227,7 @@ public class Projectile : MonoBehaviour
             {
                 hasPlayedHitSound = true;
                 audio.Stop();
-       			audio.volume = 0.05f;
+       			audio.volume = 0.1f;
        			audio.pitch = 3.5f-audio.pitch;
        			audio.loop = false;
        			audio.clip = AudioManager.Instance.DiscHit;
@@ -241,6 +248,16 @@ public class Projectile : MonoBehaviour
 
     void DestroyProjectileAndTwin(PlayerAim playerAim)
     {
+        soundObject = Instantiate(SoundObject, transform.position, Quaternion.identity) as GameObject;
+        if(soundObject.audio != null)
+        {
+            soundObject.audio.Stop();
+            soundObject.audio.volume = 0.2f;
+            soundObject.audio.pitch = 0.75f;
+            soundObject.audio.clip = AudioManager.Instance.DiscGrab;
+            soundObject.audio.Play();
+        }
+
         if (IsOriginal)
             playerAim.CurrentShotAmount++;
 

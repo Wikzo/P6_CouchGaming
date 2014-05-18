@@ -176,7 +176,7 @@ public class PlayerJump : MonoBehaviour {
 		{
 			soundObject.audio.clip = AudioManager.Instance.Jump[playerScript.Id];
 			soundObject.audio.Play();
-			soundObject.audio.volume = 0.3f;
+			soundObject.audio.volume = 0.5f;
 			soundObject.audio.pitch = 1;
 			Destroy(soundObject, AudioManager.Instance.Jump[playerScript.Id].length);
 		}
@@ -201,7 +201,7 @@ public class PlayerJump : MonoBehaviour {
 		{
 			soundObject.audio.clip = AudioManager.Instance.Jump[playerScript.Id];
 			soundObject.audio.Play();
-			soundObject.audio.volume = 0.3f;
+			soundObject.audio.volume = 0.5f;
 			soundObject.audio.pitch = 1.5f;
 			Destroy(soundObject, AudioManager.Instance.Jump[playerScript.Id].length);
 		}

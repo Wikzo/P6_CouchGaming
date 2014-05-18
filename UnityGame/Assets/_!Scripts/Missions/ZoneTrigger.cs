@@ -45,7 +45,7 @@ public class ZoneTrigger : MonoBehaviour {
 
 				if(hasPlayedSound == false)
 				{
-					audio.volume = 0.5f;
+					audio.volume = 0.4f;
 					audio.Play();
 					hasPlayedSound = true;
 				}
@@ -60,7 +60,7 @@ public class ZoneTrigger : MonoBehaviour {
 
 			if(hasPlayedSound == false)
 			{
-				audio.volume = 0.5f;
+				audio.volume = 0.4f;
 				audio.Play();
 				hasPlayedSound = true;
 			}
