@@ -56,8 +56,13 @@ public class MissionDefend : MissionBase
         base.DestroyMission();
     }
 
+    
+
     public override bool MissionAccomplished()
     {
+        if (!canGo)
+            return false;
+
         // check if player is still alive - if dead: mission is done
         if (Target.GetComponent<Player>().PState == PlayerState.Dead)
         {

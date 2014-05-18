@@ -17,13 +17,14 @@ public class TextFade : MonoBehaviour
     public GUIStyle FadingTextStyle;
     private float FadeTime;
 
-    private Rect TopRect;
     private Rect MidRect;
     private Rect LowerRect;
 
     private bool shouldFade;
 
     public GameObject ReadyImage;
+
+    float w, h;
 
     float alpha;
 
@@ -34,9 +35,15 @@ public class TextFade : MonoBehaviour
         shouldFade = true;
         FadingTextStyle.alignment = TextAnchor.MiddleCenter;
         
-        float w = 0.3f; // proportional width (0..1)
-        float h = 0.2f; // proportional height (0..1)
+        w = 0.3f; // proportional width (0..1)
+        h = 0.2f; // proportional height (0..1)
+
+
+        // used to display text center center
         MidRect = new Rect((Screen.width*(1 - w))/2, (Screen.height*(1 - h))/2, Screen.width*w, Screen.height*h);
+        
+        // used to display text in center buttom
+        LowerRect = new Rect((Screen.width * (1 - w) * 1) / 2, (Screen.height * (1 - h) * 1.98f) / 2, Screen.width * w, Screen.height * h);
 
         ScoreStylesColor = new GUIStyle[4];
         ScoreText = new string[4];
@@ -54,7 +61,10 @@ public class TextFade : MonoBehaviour
     {
         if (GameManager.Instance.PlayingState == PlayingState.DisplayingScore)
         {
-            shouldFade = false;
+            GameManager.Instance.MainLight.enabled = false;
+
+
+            shouldFade = true;
             Player[] players = new Player[4];
 
             for (int i = 0; i < GameManager.Instance.Players.Count; i++)
@@ -123,7 +133,6 @@ public class TextFade : MonoBehaviour
     private void OnGUI()
     {
 
-
         switch (GameManager.Instance.PlayingState)
         {
             case PlayingState.TalkingBeforeControllerCalibration:
@@ -165,6 +174,9 @@ public class TextFade : MonoBehaviour
                         GUI.Label(new Rect(MidRect.x - textDimensions.x / 2, MidRect.y - 200 + 2 + i * 100 + 50, Screen.height, Screen.height), ScoreText[i], ScoreStylesColor[i]);
                     }
                 }
+
+                DrawOutline(LowerRect, HighScorePressStart, FadingTextStyle, Color.black, Color.white);
+
                 break;
 
             default:

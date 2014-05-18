@@ -211,6 +211,19 @@ public class MissionManager : MonoBehaviour
         iTween.PunchScale(MissionManager.Instance.TargetHuds[number], new Vector3(0.05f, 0.05f, 0), 0.5f);
     }
 
+    public void HideControllerGUIs()
+    {
+        if (GameManager.Instance.RumbleStepsGUI == null)
+            return;
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (GameManager.Instance.RumbleStepsGUI[i] != null)
+                GameManager.Instance.RumbleStepsGUI[i].transform.renderer.enabled = false;
+        }
+
+    }
+
     // controller
     public void PracticeControllerRumbleGUI(int number)
     {
@@ -221,7 +234,10 @@ public class MissionManager : MonoBehaviour
         {
             // only do this initially, then stop doing it
             if (GameManager.Instance.ControllerGUIToRumble != null)
-                GameManager.Instance.RumbleStepsGUI[number].transform.renderer.enabled = true;
+            {
+                for (int i = 0; i <= number; i++)
+                    GameManager.Instance.RumbleStepsGUI[i].transform.renderer.enabled = true;
+            }
         }
     }
 
@@ -278,7 +294,7 @@ public class MissionManager : MonoBehaviour
                     t.SoundToPlay = m.ChooseCompletedSound();
                     t.ColorToUse = new Color(m.PlayerScript.PlayerColor.r, m.PlayerScript.PlayerColor.g, m.PlayerScript.PlayerColor.b, 255);
                     DoorGoUpDown();
-                    Debug.Log(string.Format("Player {0} completed mission {1})", m.Player.ToString(), m.ToString()));
+                    //Debug.Log(string.Format("Player {0} completed mission {1})", m.Player.ToString(), m.ToString()));
                     m.GivePointsToPlayer();
                 }
             }
