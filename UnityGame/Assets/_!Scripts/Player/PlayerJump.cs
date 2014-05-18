@@ -169,7 +169,7 @@ public class PlayerJump : MonoBehaviour {
 		//rigidbody.AddForce(Vector3.up*JumpForce, ForceMode.VelocityChange);
 		rigidbody.velocity = new Vector3(0,JumpForce,0);
 
-		DataSaver.Instance.highScores[0].timesJumped++;
+		//DataSaver.Instance.highScores[0].timesJumped++;
 
 		soundObject = Instantiate(SoundObject, pTran.position, Quaternion.identity) as GameObject;
 		if(soundObject.audio != null)
@@ -194,7 +194,7 @@ public class PlayerJump : MonoBehaviour {
 		//rigidbody.AddForce(Vector3.up*BoostJumpForce, ForceMode.VelocityChange);
 		rigidbody.velocity = new Vector3(0, BoostJumpForce, 0);
 
-		DataSaver.Instance.highScores[0].timesJumped++;
+		//DataSaver.Instance.highScores[0].timesJumped++;
 
 		soundObject = Instantiate(SoundObject, pTran.position, Quaternion.identity) as GameObject;
 		if(soundObject.audio != null)

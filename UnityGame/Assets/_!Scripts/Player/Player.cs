@@ -242,9 +242,9 @@ public class Player : MonoBehaviour
                     Application.LoadLevel(0);
                     break;
 
-                default:
+                /*default:
                     GameManager.Instance.Pause();
-                    break;
+                    break;*/
             }
 	    }
 

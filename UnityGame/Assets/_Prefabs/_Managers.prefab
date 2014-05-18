@@ -1,21 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &100000
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400000}
-  - 114: {fileID: 11400000}
-  m_Layer: 0
-  m_Name: DataSaver
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &100002
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,17 +133,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &400000
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.339652836, y: .832332611, z: -5.68143082}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 400006}
 --- !u!4 &400002
 Transform:
   m_ObjectHideFlags: 1
@@ -196,7 +169,6 @@ Transform:
   m_LocalPosition: {x: .339652836, y: -.832332611, z: 5.68143082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 400000}
   - {fileID: 400002}
   - {fileID: 400004}
   - {fileID: 400012}
@@ -372,18 +344,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6748c7f59cb57d648a07b468560cd2b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  highScores: []
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -404,7 +364,7 @@ MonoBehaviour:
   NumberOfRoundsPerGame: 5
   CurrentRound: 0
   WaitForReady: 1
-  TimePerRound: 20
+  TimePerRound: 15
   TimeLeft: 0
   CurrentRoundJustEnded: 0
   PlayingState: 0
@@ -588,6 +548,7 @@ MonoBehaviour:
   WinBlue: {fileID: 8300000, guid: 67d7615faeda1c24e9df97d1adbea952, type: 3}
   WinGreen: {fileID: 8300000, guid: 20ef66b2784ab964db163add5111f858, type: 3}
   WinPink: {fileID: 8300000, guid: e410b44a61bf3ce41a316f933fa716be, type: 3}
+  WinDraw: {fileID: 8300000, guid: e3821824c5ee77940a1ec9f7cc08019d, type: 3}
   DiscHover:
   - {fileID: 8300000, guid: 508d92d67dca463468d8634b83d10496, type: 3}
   - {fileID: 8300000, guid: ff13185bfae8ca240867da67bdf6ec3d, type: 3}

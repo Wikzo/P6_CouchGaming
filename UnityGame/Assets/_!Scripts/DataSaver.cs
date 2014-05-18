@@ -15,17 +15,19 @@ public class DataSaver : MonoBehaviour
     [System.Serializable]
     public class ScoreEntry
     {
-        //Players name
-        public string name;
-        //Score
-        public float score;
-
-        public int timesStarted;
-
-        public int timesJumped;
+        public int RedWins = 0;
+        public int BlueWins = 0;
+        public int GreenWins = 0;
+        public int PinkWins = 0;
     }
 
+    [HideInInspector]
+    public List<ScoreEntry> highScores = new List<ScoreEntry>();
+
     private static DataSaver _instance;
+    bool fileLoadedCorrectly;
+
+    string path = "";
 
 
     //  public static Instance  
@@ -63,15 +65,12 @@ public class DataSaver : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    [HideInInspector]
-    public List<ScoreEntry> highScores = new List<ScoreEntry>();
-
-    void SaveScoresToDataFile()
+    public void SaveScoresToDataFile()
     {
         //Get a binary formatter
         var b = new BinaryFormatter();
         //Create a file
-        var f = File.Create("_SaveData/highscores.dat");
+        var f = File.Create(path);
         //Save the scores
         b.Serialize(f, highScores);
         f.Close();
@@ -81,6 +80,16 @@ public class DataSaver : MonoBehaviour
 
     void Start()
     {
+
+    #if UNITY_EDITOR
+        path = "_SaveData/highscores.dat";
+    #endif
+
+    #if UNITY_STANDALONE_WIN
+        path = "highscores.dat";
+    #endif
+
+        //print(path);
         LoadDataFile();
         //highScores[0].timesStarted++;
 
@@ -91,45 +100,80 @@ public class DataSaver : MonoBehaviour
     {
         //print("file loaded");
         //If not blank then load it
-        if (File.Exists("_SaveData/highscores.dat"))
+        if (!File.Exists(path))
+        {
+            var file = File.Create(path);
+
+            Debug.Log("File created at " + path);
+
+            highScores.Add(new ScoreEntry
+            {
+                RedWins = 1,
+                BlueWins = 1,
+                GreenWins = 1,
+                PinkWins = 1
+            });
+
+            file.Close();
+        }
+
+        else
         {
             //Binary formatter for loading back
             var b = new BinaryFormatter();
             //Get the file
-            var f = File.Open("_SaveData/highscores.dat", FileMode.Open);
+            var f = File.Open(path, FileMode.Open);
             //Load back the scores
             highScores = (List<ScoreEntry>)b.Deserialize(f);
             f.Close();
-
         }
+
+        fileLoadedCorrectly = true;
+
     }
 
     void Update()
     {
+        if (!fileLoadedCorrectly)
+            return;
+
+        /*foreach (var score in highScores)
+        {
+            Debug.Log("red: " + score.RedWins);
+            Debug.Log("blue: " + score.BlueWins);
+            Debug.Log("green: " + score.GreenWins);
+            Debug.Log("pink: " + score.PinkWins);
+        }*/
+
         /*if (Input.GetKeyDown(KeyCode.H))
         {
             print("highscore added");
 
             highScores.Add(new ScoreEntry
             {
-                name = "myName " + DateTime.Now,
-                score = 42,
+                RedWins = 25, BlueWins = 2, GreenWins = 10, PinkWins = 1
             });
-        }*/
+        }
 
-        /*if (Input.GetKeyDown(KeyCode.L))
-            LoadDataFile();*/
-
-        /*if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            print("file deleted");
-            highScores.Clear();
-            if (File.Exists(Application.persistentDataPath + "/highscores.dat"))
-                File.Delete(Application.persistentDataPath + "/highscores.dat");
-        }*/
+            print("file loaded");
+            LoadDataFile();
+        }
 
-        /*if (Input.GetKeyDown(KeyCode.S))
-            SaveScoresToDataFile();*/
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            print("file cleared");
+            highScores.Clear();
+            if (File.Exists(path))
+                File.Delete(path);
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            print("file saved");
+            SaveScoresToDataFile();
+        }*/
 
     }
 
@@ -139,7 +183,7 @@ public class DataSaver : MonoBehaviour
     {
         foreach (var score in highScores)
         {
-            GUI.Label(new Rect(Screen.width/2, Screen.height/2, 100, 100), string.Format("NUMBER OF JUMPS: {0}", score.timesJumped));
+            GUI.Label(new Rect(Screen.width / 2, Screen.height / 2, 100, 100), string.Format("Red wins: {0}\nBluewins: {1}\nGreen wins: {2}\nPink wins: {4}", score.RedWins.ToString(), score.BlueWins.ToString(), score.GreenWins.ToString(), score.PinkWins.ToString()));
         }
 
     }*/

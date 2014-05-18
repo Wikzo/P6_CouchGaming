@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void Pause()
+    /*public void Pause()
     {
         if (PlayingState != PlayingState.Paused)
         {
@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
             MainLight.enabled = true;
 
         }
-    }
+    }*/
 
     IEnumerator StartRumblePractices()
     {
@@ -284,6 +284,9 @@ public class GameManager : MonoBehaviour
 
         }
         yield return new WaitForSeconds(waitTime);
+        MissionManager.Instance.HideControllerGUIs();
+
+        yield return new WaitForSeconds(0.5f);
         if (GUIRumbleCounter < 5)
         {
             GUIRumbleCounter++;
@@ -360,21 +363,41 @@ public class GameManager : MonoBehaviour
                 {
                     case TargetIDColorState.RedOne:
                         AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinRed);
+                        if (DataSaver.Instance != null)
+                        {
+                            foreach (var score in DataSaver.Instance.highScores)
+                                score.RedWins++;
+                        }
                         //Debug.Log("Red won");
                         break;
 
                     case TargetIDColorState.BlueTwo:
                         AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinBlue);
+                        if (DataSaver.Instance != null)
+                        {
+                            foreach (var score in DataSaver.Instance.highScores)
+                                score.BlueWins++;
+                        }
                         //Debug.Log("blue won");
                         break;
 
                     case TargetIDColorState.GreenThree:
                         AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinGreen);
+                        if (DataSaver.Instance != null)
+                        {
+                            foreach (var score in DataSaver.Instance.highScores)
+                                score.GreenWins++;
+                        }
                         //Debug.Log("green won");
                         break;
 
                     case TargetIDColorState.PinkFour:
                         AudioManager.Instance.PlayAnnouncerVoice(AudioManager.Instance.WinPink);
+                        if (DataSaver.Instance != null)
+                        {
+                            foreach (var score in DataSaver.Instance.highScores)
+                                score.PinkWins++;
+                        }
                         //Debug.Log("pink won");
                         break;
 
@@ -386,6 +409,8 @@ public class GameManager : MonoBehaviour
 
                 }
                 Instantiate(Congratulations);
+                if (DataSaver.Instance != null)
+                    DataSaver.Instance.SaveScoresToDataFile();
             }
         }
         /*if (PlayingState == PlayingState.DisplayingScore)
@@ -396,6 +421,20 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
+    }
+
+    void SaveScores()
+    {
+        if (DataSaver.Instance.highScores != null)
+        {
+            foreach (var score in DataSaver.Instance.highScores)
+            {
+                score.RedWins++;
+                score.BlueWins++;
+                score.GreenWins++;
+                score.PinkWins++;
+            }
+        }
     }
 
     public void SkipTutorialAndGoToWait() // used to go directly from "tutorial" to wait for ready

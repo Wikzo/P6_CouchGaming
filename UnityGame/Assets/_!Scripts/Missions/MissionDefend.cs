@@ -43,8 +43,6 @@ public class MissionDefend : MissionBase
             targetHasNotDiedYet = true;
         }
 
-        StartCoroutine(WaitForMissionToGetActive());
-
     }
 
     public override void TemplateSetUp()

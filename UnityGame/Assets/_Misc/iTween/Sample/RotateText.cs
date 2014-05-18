@@ -8,12 +8,14 @@ public class RotateText : MonoBehaviour {
     public bool TextShouldRotate = true;
     TextMesh t;
 
+    public string axis = "y";
+
 
 	// Use this for initialization
 	void Start ()
     {
         if (TextShouldRotate)
-            iTween.RotateBy(gameObject, iTween.Hash("y", 0.01, "easeType", EaseType, "onComplete", "forward", "loopType", iTween.LoopType.none));
+            iTween.RotateBy(gameObject, iTween.Hash(axis, 0.01, "easeType", EaseType, "onComplete", "forward", "loopType", iTween.LoopType.none));
 
         if (TextShouldFade)
             t = GetComponent<TextMesh>();
@@ -21,13 +23,13 @@ public class RotateText : MonoBehaviour {
 
     void backward()
     {
-        iTween.RotateBy(gameObject, iTween.Hash("y", 0.02, "easeType", EaseType, "onComplete", "forward", "loopType", iTween.LoopType.none));
+        iTween.RotateBy(gameObject, iTween.Hash(axis, 0.02, "easeType", EaseType, "onComplete", "forward", "loopType", iTween.LoopType.none));
         
     }
 
     void forward()
     {
-        iTween.RotateBy(gameObject, iTween.Hash("y", -0.02, "easeType", EaseType, "onComplete", "backward", "loopType", iTween.LoopType.none));
+        iTween.RotateBy(gameObject, iTween.Hash(axis, -0.02, "easeType", EaseType, "onComplete", "backward", "loopType", iTween.LoopType.none));
         
     }
 	
