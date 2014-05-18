@@ -36,7 +36,7 @@ public class HighScores : MonoBehaviour
         b.Serialize(f, highScores);
         f.Close();
 
-        print("saved via data file");
+        //print("saved via data file");
     }
 
     void Start()
@@ -49,7 +49,7 @@ public class HighScores : MonoBehaviour
 
     void LoadDataFile()
     {
-        print("file loaded");
+        //print("file loaded");
         //If not blank then load it
         if (File.Exists("_SaveData/highscores.dat"))
         {

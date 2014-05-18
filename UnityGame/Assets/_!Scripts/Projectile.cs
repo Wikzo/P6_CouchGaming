@@ -91,7 +91,7 @@ public class Projectile : MonoBehaviour
         if (transform.Find("StuckDetector") != null)
             stuckDetector = transform.Find("StuckDetector").gameObject.GetComponent<StuckDetector>();
         else
-            print(gameObject.name + " needs its StuckDetector. Please add it to the object");
+            Debug.Log(gameObject.name + " needs its StuckDetector. Please add it to the object");
     }
 
     // Update is called once per frame
@@ -131,12 +131,12 @@ public class Projectile : MonoBehaviour
 
         if (outOfCameraView)
         {
-            print(gameObject.name + " came out of the camera's view and has now been destroyed");
+            Debug.Log(gameObject.name + " came out of the camera's view and has now been destroyed");
             DestroyProjectileAndTwin(OwnerObject.GetComponent<PlayerAim>());
         }
         else if (stuckDetector.StuckInObject)
         {
-            print(gameObject.name + " is stuck inside an object and has now been destroyed");
+            Debug.Log(gameObject.name + " is stuck inside an object and has now been destroyed");
             DestroyProjectileAndTwin(OwnerObject.GetComponent<PlayerAim>());
         }
     }

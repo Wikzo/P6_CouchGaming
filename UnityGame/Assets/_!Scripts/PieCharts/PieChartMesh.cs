@@ -62,7 +62,7 @@ public class PieChartMesh : MonoBehaviour
         //Check data validity for pie chart...
         if (mData == null)
         {
-            print("PieChart: Data null");
+            //print("PieChart: Data null");
             return;
         }
 
@@ -70,7 +70,7 @@ public class PieChartMesh : MonoBehaviour
         {
             if (mData[i] < 0)
             {
-                print("PieChart: Data < 0");
+                //print("PieChart: Data < 0");
                 return;
             }
         }
@@ -83,7 +83,7 @@ public class PieChartMesh : MonoBehaviour
         }
         if (sumOfData <= 0)
         {
-            print("PieChart: Data sum <= 0");
+            //print("PieChart: Data sum <= 0");
             return;
         }
         // Determine how many triangles in slice
@@ -114,7 +114,7 @@ public class PieChartMesh : MonoBehaviour
         // Check validity for pie chart
         if (countedSlices == 0)
         {
-            print("PieChart: Slices == 0");
+            //print("PieChart: Slices == 0");
             return;
         }
 
@@ -124,7 +124,7 @@ public class PieChartMesh : MonoBehaviour
         // Check validity for pie chart data
         if (slice[idxOfLargestSlice] <= 0)
         {
-            print("PieChart: Largest pie <= 0");
+            //print("PieChart: Largest pie <= 0");
             return;
         }
 

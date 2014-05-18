@@ -65,7 +65,7 @@ public class PlayerJump : MonoBehaviour {
 		if(transform.Find("ForwardCollider").GetComponent<CollisionDetect>() != null)
 			downCollider = transform.Find("DownCollider").GetComponent<CollisionDetect>();
 		else
-			print("DownCollider is needed on " + name);
+			Debug.Log("DownCollider is needed on " + name);
 	}
 
 	// Update is called once per frame

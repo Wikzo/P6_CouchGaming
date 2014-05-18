@@ -22,7 +22,7 @@ public static class LoggingManager
 
         using (FileStream fs = File.Create(path))
         {
-            CreateText(fs, "Start----\n");
+            CreateText(fs, "");
             //Debug.Log("text file created");
 
         }

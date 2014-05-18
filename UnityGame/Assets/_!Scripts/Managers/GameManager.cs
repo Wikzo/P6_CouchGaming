@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
     public bool DebugMode = true;
     public bool UseAnnouncer = true;
 
+    public bool LogForTest = false;
+
     public int readyCounter = -1;
 
     [HideInInspector]
@@ -177,6 +179,13 @@ public class GameManager : MonoBehaviour
             StartCoroutine(StartCalibrationVoice());
         else
             StartCoroutine(StartRumblePractices());
+
+        if (LogForTest)
+        {
+            LoggingManager.CreateTextFile();
+            string text = "PlayerID, CurrentMissionType, TotalMissionsPlayerHasHadSoFar, ButtonPressType, ThisButtonPressNumber, TimeSinceReceivedMission";
+            LoggingManager.AddTextNoTimeStamp(text);
+        }
 
 
     }
@@ -421,20 +430,9 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
-    }
+        if (Input.GetKeyDown(KeyCode.R))
+            Application.LoadLevel(0);
 
-    void SaveScores()
-    {
-        if (DataSaver.Instance.highScores != null)
-        {
-            foreach (var score in DataSaver.Instance.highScores)
-            {
-                score.RedWins++;
-                score.BlueWins++;
-                score.GreenWins++;
-                score.PinkWins++;
-            }
-        }
     }
 
     public void SkipTutorialAndGoToWait() // used to go directly from "tutorial" to wait for ready
