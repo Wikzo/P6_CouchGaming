@@ -90,9 +90,9 @@ public class Player : MonoBehaviour
 
         if (FindRightControllers.Instance != null)
         {
-            if (FindRightControllers.Instance.PlayersSlots[Id] != -10)
+            if (FindRightControllers.Instance.PlayerSlotsToRemember[Id] != -10)
             {
-                PlayerController = (PlayerIndex)FindRightControllers.Instance.PlayersSlots[Id];
+                PlayerController = (PlayerIndex)FindRightControllers.Instance.PlayerSlotsToRemember[Id];
                 HasBeenChosen = true;
             }
         }
@@ -482,10 +482,10 @@ public class Player : MonoBehaviour
             {
                 c = new Color(pMat.color.r, pMat.color.g, pMat.color.b, 255);
                 
-                
                 GameManager.Instance.readyCounter++;
 
-                AudioManager.Instance.PlaySound(AudioManager.Instance.ReadySounds[GameManager.Instance.readyCounter]);
+                if (GameManager.Instance.readyCounter < 4)
+                    AudioManager.Instance.PlaySound(AudioManager.Instance.ReadySounds[GameManager.Instance.readyCounter]);
 
             }
             else

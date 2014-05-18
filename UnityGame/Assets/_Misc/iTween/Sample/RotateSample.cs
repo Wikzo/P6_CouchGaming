@@ -45,6 +45,8 @@ public class RotateSample : MonoBehaviour
         playersChosenID = new int[4];
         currentPlayersChosenSlotID = 0;
 
+        selected = 0;
+
         StartGameText.SetActive(false);
         Glitch = gameObject.GetComponent<GlitchEffect>();
         //iTween.RotateTo(gameObject, iTween.Hash("rotation", transform.position, iTween.EaseType.easeInOutSine, "time", 1.3f));
@@ -123,7 +125,7 @@ public class RotateSample : MonoBehaviour
             // go right (character select)
             if (p.LeftStick().x > 0.7 && readyToMoveSlot[i] && MyCharacter[i] == null)
             {
-                if (currentSlots[i] + 1 < 4)
+                if (currentSlots[i] + 1 <= 3)
                     currentSlots[i]++;
                 else
                     currentSlots[i] = 0;
@@ -141,7 +143,7 @@ public class RotateSample : MonoBehaviour
             // go left (character select)
             else if (p.LeftStick().x < -0.7 && readyToMoveSlot[i] && MyCharacter[i] == null)
             {
-                if (currentSlots[i] - 1 > 0)
+                if (currentSlots[i] - 1 >= 0)
                     currentSlots[i]--;
                 else
                     currentSlots[i] = 3;
@@ -293,20 +295,18 @@ public class RotateSample : MonoBehaviour
 
     void StartGameAndFindControllers()
     {
-        GameObject g = (GameObject)Instantiate(RememberControllers);
-        FindRightControllers c = g.GetComponent<FindRightControllers>();
-        c.PlayersSlots = new int[4];
+        FindRightControllers.Instance.PlayerSlotsToRemember = new int[4];
 
         for (int i = 0; i < 4; i++)
         {
-            c.PlayersSlots[i] = -10;
+            FindRightControllers.Instance.PlayerSlotsToRemember[i] = -10;
         }
 
         foreach (RunAnimDummy r in CharacterSelect)
         {
             if (r.PlayerChosenSlot != -10)
             {
-                c.PlayersSlots[r.MyID] = r.PlayerChosenSlot;
+                FindRightControllers.Instance.PlayerSlotsToRemember[r.MyID] = r.PlayerChosenSlot;
             }
         }
 

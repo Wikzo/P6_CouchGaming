@@ -404,7 +404,7 @@ MonoBehaviour:
   NumberOfRoundsPerGame: 5
   CurrentRound: 0
   WaitForReady: 1
-  TimePerRound: 200
+  TimePerRound: 20
   TimeLeft: 0
   CurrentRoundJustEnded: 0
   PlayingState: 0
@@ -585,6 +585,9 @@ MonoBehaviour:
   MissionCompletedDefault: {fileID: 8300000, guid: 43f6d5bf6c1100142b9a01a1d60cc836,
     type: 3}
   WinRed: {fileID: 8300000, guid: 7d48c70eaa13bef4b9d10a24a40c93e3, type: 3}
+  WinBlue: {fileID: 8300000, guid: 67d7615faeda1c24e9df97d1adbea952, type: 3}
+  WinGreen: {fileID: 8300000, guid: 20ef66b2784ab964db163add5111f858, type: 3}
+  WinPink: {fileID: 8300000, guid: e410b44a61bf3ce41a316f933fa716be, type: 3}
   DiscHover:
   - {fileID: 8300000, guid: 508d92d67dca463468d8634b83d10496, type: 3}
   - {fileID: 8300000, guid: ff13185bfae8ca240867da67bdf6ec3d, type: 3}
