@@ -430,20 +430,9 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
-    }
+        if (Input.GetKeyDown(KeyCode.R))
+            Application.LoadLevel(0);
 
-    void SaveScores()
-    {
-        if (DataSaver.Instance.highScores != null)
-        {
-            foreach (var score in DataSaver.Instance.highScores)
-            {
-                score.RedWins++;
-                score.BlueWins++;
-                score.GreenWins++;
-                score.PinkWins++;
-            }
-        }
     }
 
     public void SkipTutorialAndGoToWait() // used to go directly from "tutorial" to wait for ready

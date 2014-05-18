@@ -18,7 +18,7 @@ public class Debug_MissionSpawner : MonoBehaviour
 
         foreach (GameObject g in MissionObjects)
         {
-            print("h");
+            //print("h");
             // soft cast - no exceptions, only null
             IMission mission = g.GetComponent(typeof(IMission)) as IMission;
 

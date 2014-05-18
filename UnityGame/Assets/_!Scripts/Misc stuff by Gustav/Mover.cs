@@ -43,7 +43,7 @@ public class Mover : MonoBehaviour
 
         if (state.Buttons.RightShoulder == ButtonState.Pressed && prevState.Buttons.RightShoulder == ButtonState.Released)
         {
-            print("force");
+            //print("force");
             prevState = state;
 
             // from http://answers.unity3d.com/questions/574864/rigidbody2d-and-forcemodeaddvelocity.html
@@ -59,7 +59,7 @@ public class Mover : MonoBehaviour
             // velocity change
             rigidbody2D.AddForce(v * 50 * rigidbody2D.mass / Time.fixedDeltaTime);
 
-            print(v * 50 * rigidbody2D.mass / Time.fixedDeltaTime);
+            //print(v * 50 * rigidbody2D.mass / Time.fixedDeltaTime);
 
         }
 
@@ -74,7 +74,7 @@ public class Mover : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, -Vector3.up, 0.1f);
 
-        print(hit.transform.name);
+        //print(hit.transform.name);
         if (hit != null && hit.transform.name != "Player1_clone" && hit.transform.name != transform.name)
             return true;
         else

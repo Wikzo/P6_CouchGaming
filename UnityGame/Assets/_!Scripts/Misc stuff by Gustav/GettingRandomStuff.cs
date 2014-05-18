@@ -37,7 +37,7 @@ public class GettingRandomStuff : MonoBehaviour
         setCards = ChooseCardsFromSet(setCards.Length, availableCards);
         foreach (Card card in setCards)
         {
-            print(card.number);
+            //print(card.number);
         }
 
     }

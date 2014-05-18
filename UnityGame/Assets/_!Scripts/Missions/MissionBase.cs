@@ -213,7 +213,7 @@ public abstract class MissionBase : MonoBehaviour
                 break;
 
             default:
-                print("default");
+                //print("default");
                 return null;
                 break;
 
