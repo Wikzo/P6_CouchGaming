@@ -128,14 +128,14 @@ public class DataSaver : MonoBehaviour
             f.Close();
         }
 
-        fileLoadedCorrectly = true;
+        //fileLoadedCorrectly = true;
 
     }
 
-    void Update()
+    /*void Update()
     {
-        if (!fileLoadedCorrectly)
-            return;
+        /*if (!fileLoadedCorrectly)
+            return;*/
 
         /*foreach (var score in highScores)
         {
@@ -175,7 +175,7 @@ public class DataSaver : MonoBehaviour
             SaveScoresToDataFile();
         }*/
 
-    }
+    //}
 
 
 
