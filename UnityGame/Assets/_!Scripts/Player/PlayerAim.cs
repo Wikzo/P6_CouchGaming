@@ -39,14 +39,23 @@ public class PlayerAim : MonoBehaviour
 	private Transform aimPivotTran;
 	private Transform aimTran;
 	private Transform chargeBar;
+	private Transform aimCross;
+
+	private Vector3 aimStartPos;
+	private Quaternion aimStartRot;
+	private Vector3 aimStartScale;
+	private Transform aimTranStart;
 
 	private Vector3 chargeBarStartPos;
 	private bool hasPlayedChargeSound = false;
+	private bool hasPlayedAimCrossSound = false;
 
 	[HideInInspector]
 	public Player playerScript;
 	private PlayerMove playerMove;
 	private PlayerJump playerJump;
+
+	
 
 	// Use this for initialization
 	void Start () 
@@ -55,6 +64,7 @@ public class PlayerAim : MonoBehaviour
 		aimPivotTran = transform.Find("AimPivot");
 		aimTran = aimPivotTran.Find("Aim");
 		chargeBar = aimTran.Find("ChargeBar");
+		aimCross = pTran.Find("AimCross");
 
 		chargeBar.forward = Vector3.forward;
 		
@@ -64,6 +74,11 @@ public class PlayerAim : MonoBehaviour
 		playerScript = GetComponent<Player>();
 		playerMove = GetComponent<PlayerMove>();
 		playerJump = GetComponent<PlayerJump>();
+
+		aimStartPos = aimTran.localPosition;
+		aimStartRot = aimTran.rotation;
+		aimStartScale = aimTran.localScale;
+		aimTranStart = aimTran;
 	}
 	
 	// Update is called once per frame
@@ -140,6 +155,10 @@ public class PlayerAim : MonoBehaviour
 
 				if(CurrentShotAmount > 0)
 				{
+					chargeBar.renderer.enabled = true;
+					aimTran.renderer.enabled = true;
+					aimCross.renderer.enabled = false;
+
 					//Scale the charge bar with a timer
 					if(chargeTimer < MaxChargeTime)
 					{
@@ -157,24 +176,24 @@ public class PlayerAim : MonoBehaviour
 	
 						//Give the position an offset, so the bar is positioned outside of the player and then add its scale to make it charge in one direction.
 						//chargeBar.localPosition = new Vector3(0, 0, chargeBarStartPos.z-chargeBar.localScale.x/2);
-						chargeBar.localPosition = new Vector3(-1f, 0, -0.5f+chargeBar.localScale.x/2); //X is Z, and Z is X
-
-					}
-
-					if(aimCrossesMat != null)
-					{
-						Destroy(aimTran.renderer.material);
-						aimTran.renderer.material = aimMat;
-						chargeBar.renderer.enabled = true;
+						chargeBar.localPosition = new Vector3(-1.6f, 0, -0.5f+chargeBar.localScale.x/2); //X is Z, and Z is X	
 					}
 				}
 				else
 				{
-					if(aimMat != null)
+					chargeBar.renderer.enabled = false;
+					aimTran.renderer.enabled = false;
+					aimCross.renderer.enabled = true;
+					aimCross.position = new Vector3(pTran.position.x, pTran.position.y+1.7f, pTran.position.z-0.7f);
+					if(hasPlayedAimCrossSound == false)
 					{
-						Destroy(aimTran.renderer.material);
-						aimTran.renderer.material = aimCrossesMat;
-						chargeBar.renderer.enabled = false;
+						hasPlayedAimCrossSound = true;
+						audio.Stop();
+						audio.loop = false;
+						audio.pitch = 1;
+						audio.volume = 0.1f;
+						audio.clip = AudioManager.Instance.AimCross;
+						audio.Play();
 					}
 				}
 			}		
@@ -188,6 +207,7 @@ public class PlayerAim : MonoBehaviour
 			audio.Play();
 
             hasPlayedChargeSound = false;
+
             // original projectile
             ProjectileOriginalObject = Instantiate(ProjectilePrefab, pTran.position+Vector3.up*2f, Quaternion.identity) as GameObject;
             Projectile projectileOriginalScript = ProjectileOriginalObject.GetComponent<Projectile>();
@@ -230,9 +250,12 @@ public class PlayerAim : MonoBehaviour
 			aimPivotTran.forward = pTran.forward;
 			aimTran.renderer.enabled = false;
 			chargeBar.renderer.enabled = false;
+			aimCross.renderer.enabled = false;
 
 			playerMove.CanMove = true;
 			cancelAim = false;
+
+			hasPlayedAimCrossSound = false;
 		}
 	}
 
@@ -243,10 +266,12 @@ public class PlayerAim : MonoBehaviour
 
 		aimTran.renderer.enabled = false;
 		chargeBar.renderer.enabled = false;
+		aimCross.renderer.enabled = false;
 		chargeTimer = 0;
 
 		audio.Stop();
         hasPlayedChargeSound = false;
+        hasPlayedAimCrossSound = false;
 	}
 
 	void FixedUpdate()

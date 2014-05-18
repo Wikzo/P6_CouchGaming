@@ -38,6 +38,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip DiscShot;
     public AudioClip DiscHit;
     public AudioClip DiscGrab;
+    public AudioClip AimCross;
+
+    public AudioClip ZoneIncrease;
 
     public AudioClip[] Jump = new AudioClip[4];
 
