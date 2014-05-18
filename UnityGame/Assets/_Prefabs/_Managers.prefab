@@ -522,7 +522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissionAccomplishedSound: {fileID: 8300000, guid: 8d2adaaba1248944ead40b5698b0aa52,
     type: 3}
-  IntelKeyboardPressingSound: {fileID: 8300000, guid: 60d90efb08facab4981797b62381f1a1,
+  IntelKeyboardPressingSound: {fileID: 8300000, guid: 5e9c7fbfa51a2314bbfad33a5f3e71cb,
     type: 3}
   CalibrationAudio: {fileID: 8300000, guid: 1376de98470c3ff4babbe722de1177fb, type: 3}
   VibrationExplain: {fileID: 8300000, guid: 160b7099d1a62294a95b2705efbe1711, type: 3}
