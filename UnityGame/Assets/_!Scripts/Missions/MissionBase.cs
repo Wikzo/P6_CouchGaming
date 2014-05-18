@@ -63,6 +63,8 @@ public abstract class MissionBase : MonoBehaviour
     private bool PunchTweenHUDInControllerTutorial = false; // used so only one player makes the tween
     private bool PracticeHUDRumble = false;
 
+    protected bool canGo; // for delay getting mission
+
     [HideInInspector]
     public bool HasHeardMissionRumble;
 
@@ -152,6 +154,15 @@ public abstract class MissionBase : MonoBehaviour
         HasHeardMissionRumble = false;
 
         //Debug.Log(string.Format("Mission {0} initialized for Player {1} with Target {2}", this, this.Player, this.Target.transform.name));
+
+        StartCoroutine(WaitForMissionToGetActive());
+    }
+
+    public IEnumerator WaitForMissionToGetActive() // wait 1 second (just to be sure you don't beat defend mission multip
+    {
+        this.canGo = false;
+        yield return new WaitForSeconds(1f);
+        this.canGo = true;
     }
 
     public virtual void UpdateSpecificMissionStuff() {}

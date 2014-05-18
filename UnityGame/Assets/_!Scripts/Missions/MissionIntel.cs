@@ -14,7 +14,7 @@ public class MissionIntel : MissionBase
     private PickUpObject PickUpObject;
 
     private float counter;
-    private float goalTime = 5f;
+    private float goalTime = 2.5f;
 
     GameObject ring;
     bool missionIsDone;
@@ -104,9 +104,10 @@ public class MissionIntel : MissionBase
 
     void CheckOnTriggerStayViaPlayer()
     {
-        if (!PickUpObject.PlayerToFollow == Player) // only if holding USB intel right now
+        if (PickUpObject.PlayerToFollow != Player) // only if holding USB intel right now
         {
             counter = 0;
+            missionIsDone = false;
             return;
         }
 
@@ -156,10 +157,12 @@ public class MissionIntel : MissionBase
 
         //print("last hit: " + collisionDetect.LastTriggerStayName + "; myTarget: " + this.Target.name);
 
+        if (!canGo)
+            return false;
 
-        if (IntelPropToSteal == null) // e.g. another player has already solved mission (destroyed intel)
+        if (pickupObjectScript.PlayerToFollow != this.Player) // e.g. another player has already solved mission (destroyed intel)
         {
-            _missionIsActive = false;
+            //_missionIsActive = false;
             return false;
         }
         else

@@ -9,9 +9,11 @@ public class MissionZone : MissionBase
 
     private static List<int> ZonesUsed = new List<int>();
 
-
     public override bool MissionAccomplished()
     {
+        if (!canGo)
+            return false;
+
         if(this.Target.GetComponent<ZoneTrigger>().Accomplished)
         {
         	this._missionIsActive = false;

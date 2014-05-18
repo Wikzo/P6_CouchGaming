@@ -43,6 +43,8 @@ public class MissionDefend : MissionBase
             targetHasNotDiedYet = true;
         }
 
+        StartCoroutine(WaitForMissionToGetActive());
+
     }
 
     public override void TemplateSetUp()
@@ -56,8 +58,13 @@ public class MissionDefend : MissionBase
         base.DestroyMission();
     }
 
+    
+
     public override bool MissionAccomplished()
     {
+        if (!canGo)
+            return false;
+
         // check if player is still alive - if dead: mission is done
         if (Target.GetComponent<Player>().PState == PlayerState.Dead)
         {
