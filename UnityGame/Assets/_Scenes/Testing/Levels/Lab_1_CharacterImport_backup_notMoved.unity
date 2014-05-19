@@ -3276,10 +3276,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 91457565}
   - 54: {fileID: 91457578}
-  - 65: {fileID: 91457577}
   - 114: {fileID: 91457576}
   - 114: {fileID: 91457570}
   - 95: {fileID: 91457566}
+  - 136: {fileID: 91457567}
   m_Layer: 19
   m_Name: P4_Clone
   m_TagString: Player4
@@ -3317,6 +3317,20 @@ Animator:
   m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!136 &91457567
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 13600008, guid: 24cdb78850703c44894237125cdafada,
+    type: 2}
+  m_PrefabInternal: {fileID: 2005921398}
+  m_GameObject: {fileID: 91457564}
+  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.36999989
+  m_Height: 9.02000046
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.19999981, z: 0}
 --- !u!114 &91457570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3345,19 +3359,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetIDColorState: 4
---- !u!65 &91457577
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500004, guid: 24cdb78850703c44894237125cdafada,
-    type: 2}
-  m_PrefabInternal: {fileID: 2005921398}
-  m_GameObject: {fileID: 91457564}
-  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.39999962, y: 8.64000034, z: 2.5}
-  m_Center: {x: 0, y: 4.19999981, z: .300000012}
 --- !u!54 &91457578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4870,7 +4871,6 @@ GameObject:
   - 4: {fileID: 143760508}
   - 95: {fileID: 143760522}
   - 54: {fileID: 143760521}
-  - 65: {fileID: 143760520}
   - 114: {fileID: 143760519}
   - 114: {fileID: 143760518}
   - 114: {fileID: 143760517}
@@ -4883,6 +4883,7 @@ GameObject:
   - 114: {fileID: 143760510}
   - 114: {fileID: 143760509}
   - 82: {fileID: 143760523}
+  - 136: {fileID: 143760520}
   m_Layer: 18
   m_Name: P3
   m_TagString: Player3
@@ -5036,6 +5037,9 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 100000, guid: 993d474b2bfb13c419aff1a7d35a6e26, type: 2}
   aimMat: {fileID: 2100000, guid: 3b16fc15c086c6a43bc8b8795f606552, type: 2}
   aimCrossesMat: {fileID: 2100000, guid: d55dadfc12ec3ff44830c7d7dfb21467, type: 2}
+  aimTran: {fileID: 0}
+  chargeBar: {fileID: 0}
+  aimCross: {fileID: 0}
   playerScript: {fileID: 0}
 --- !u!114 &143760516
 MonoBehaviour:
@@ -5127,19 +5131,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetIDColorState: 3
---- !u!65 &143760520
-BoxCollider:
+--- !u!136 &143760520
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500010, guid: 24cdb78850703c44894237125cdafada,
+  m_PrefabParentObject: {fileID: 13600006, guid: 24cdb78850703c44894237125cdafada,
     type: 2}
   m_PrefabInternal: {fileID: 2005921398}
   m_GameObject: {fileID: 143760507}
   m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.39999962, y: 8.64000034, z: 2.5}
-  m_Center: {x: 0, y: 4.19999981, z: .300000012}
+  m_Radius: 2.36999989
+  m_Height: 9.02000046
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.19999981, z: 0}
 --- !u!54 &143760521
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9000,6 +9005,9 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 100000, guid: 1a41cc082fc35af408482493c02cc951, type: 2}
   aimMat: {fileID: 0}
   aimCrossesMat: {fileID: 0}
+  aimTran: {fileID: 0}
+  chargeBar: {fileID: 0}
+  aimCross: {fileID: 0}
   playerScript: {fileID: 0}
 --- !u!114 &258189785
 MonoBehaviour:
@@ -9297,7 +9305,6 @@ GameObject:
   - 4: {fileID: 263807529}
   - 95: {fileID: 263807543}
   - 54: {fileID: 263807542}
-  - 65: {fileID: 263807541}
   - 114: {fileID: 263807540}
   - 114: {fileID: 263807539}
   - 114: {fileID: 263807538}
@@ -9310,6 +9317,7 @@ GameObject:
   - 114: {fileID: 263807531}
   - 114: {fileID: 263807530}
   - 82: {fileID: 263807544}
+  - 136: {fileID: 263807541}
   m_Layer: 16
   m_Name: P1
   m_TagString: Player1
@@ -9463,6 +9471,9 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   aimMat: {fileID: 2100000, guid: 3b16fc15c086c6a43bc8b8795f606552, type: 2}
   aimCrossesMat: {fileID: 2100000, guid: 19a5b3795ab331a4b9cfccf5e5eb26f4, type: 2}
+  aimTran: {fileID: 0}
+  chargeBar: {fileID: 0}
+  aimCross: {fileID: 0}
   playerScript: {fileID: 0}
 --- !u!114 &263807537
 MonoBehaviour:
@@ -9554,19 +9565,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetIDColorState: 1
---- !u!65 &263807541
-BoxCollider:
+--- !u!136 &263807541
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500018, guid: 24cdb78850703c44894237125cdafada,
+  m_PrefabParentObject: {fileID: 13600014, guid: 24cdb78850703c44894237125cdafada,
     type: 2}
   m_PrefabInternal: {fileID: 2005921398}
   m_GameObject: {fileID: 263807528}
   m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.39999962, y: 8.64000034, z: 2.5}
-  m_Center: {x: 0, y: 4.19999981, z: .300000012}
+  m_Radius: 2.36999989
+  m_Height: 9.02000046
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.19999981, z: 0}
 --- !u!54 &263807542
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14258,7 +14270,6 @@ GameObject:
   - 4: {fileID: 404873074}
   - 95: {fileID: 404873088}
   - 54: {fileID: 404873087}
-  - 65: {fileID: 404873086}
   - 114: {fileID: 404873085}
   - 114: {fileID: 404873084}
   - 114: {fileID: 404873083}
@@ -14271,6 +14282,7 @@ GameObject:
   - 114: {fileID: 404873076}
   - 114: {fileID: 404873075}
   - 82: {fileID: 404873089}
+  - 136: {fileID: 404873086}
   m_Layer: 17
   m_Name: P2
   m_TagString: Player2
@@ -14424,6 +14436,9 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 100000, guid: 1a41cc082fc35af408482493c02cc951, type: 2}
   aimMat: {fileID: 2100000, guid: 3b16fc15c086c6a43bc8b8795f606552, type: 2}
   aimCrossesMat: {fileID: 2100000, guid: d55dadfc12ec3ff44830c7d7dfb21467, type: 2}
+  aimTran: {fileID: 0}
+  chargeBar: {fileID: 0}
+  aimCross: {fileID: 0}
   playerScript: {fileID: 0}
 --- !u!114 &404873082
 MonoBehaviour:
@@ -14515,19 +14530,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetIDColorState: 2
---- !u!65 &404873086
-BoxCollider:
+--- !u!136 &404873086
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500022, guid: 24cdb78850703c44894237125cdafada,
+  m_PrefabParentObject: {fileID: 13600010, guid: 24cdb78850703c44894237125cdafada,
     type: 2}
   m_PrefabInternal: {fileID: 2005921398}
   m_GameObject: {fileID: 404873073}
   m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.39999962, y: 8.64000034, z: 2.5}
-  m_Center: {x: 0, y: 4.19999981, z: .300000012}
+  m_Radius: 2.36999989
+  m_Height: 9.02000046
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.19999981, z: 0}
 --- !u!54 &404873087
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16524,10 +16540,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 469119822}
   - 54: {fileID: 469119835}
-  - 65: {fileID: 469119834}
   - 114: {fileID: 469119833}
   - 114: {fileID: 469119827}
   - 95: {fileID: 469119823}
+  - 136: {fileID: 469119824}
   m_Layer: 16
   m_Name: P1_Clone
   m_TagString: Player1
@@ -16565,6 +16581,20 @@ Animator:
   m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!136 &469119824
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 13600012, guid: 24cdb78850703c44894237125cdafada,
+    type: 2}
+  m_PrefabInternal: {fileID: 2005921398}
+  m_GameObject: {fileID: 469119821}
+  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.36999989
+  m_Height: 9.02000046
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.19999981, z: 0}
 --- !u!114 &469119827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16593,19 +16623,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetIDColorState: 1
---- !u!65 &469119834
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500024, guid: 24cdb78850703c44894237125cdafada,
-    type: 2}
-  m_PrefabInternal: {fileID: 2005921398}
-  m_GameObject: {fileID: 469119821}
-  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.39999962, y: 8.64000034, z: 2.5}
-  m_Center: {x: 0, y: 4.19999981, z: .300000012}
 --- !u!54 &469119835
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -19708,6 +19725,9 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 100000, guid: 6dae4c0f3d973a849b2ed874609c745e, type: 2}
   aimMat: {fileID: 0}
   aimCrossesMat: {fileID: 0}
+  aimTran: {fileID: 0}
+  chargeBar: {fileID: 0}
+  aimCross: {fileID: 0}
   playerScript: {fileID: 0}
 --- !u!114 &574215421
 MonoBehaviour:
@@ -28368,7 +28388,6 @@ GameObject:
   - 4: {fileID: 794842720}
   - 95: {fileID: 794842722}
   - 54: {fileID: 794842721}
-  - 65: {fileID: 794842723}
   - 114: {fileID: 794842731}
   - 114: {fileID: 794842730}
   - 114: {fileID: 794842729}
@@ -28381,6 +28400,7 @@ GameObject:
   - 114: {fileID: 794842733}
   - 114: {fileID: 794842732}
   - 82: {fileID: 794842735}
+  - 136: {fileID: 794842723}
   m_Layer: 19
   m_Name: P4
   m_TagString: Player4
@@ -28436,19 +28456,20 @@ Animator:
   m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
---- !u!65 &794842723
-BoxCollider:
+--- !u!136 &794842723
+CapsuleCollider:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500036, guid: 24cdb78850703c44894237125cdafada,
+  m_PrefabParentObject: {fileID: 13600004, guid: 24cdb78850703c44894237125cdafada,
     type: 2}
   m_PrefabInternal: {fileID: 2005921398}
   m_GameObject: {fileID: 794842719}
   m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.39999962, y: 8.64000034, z: 2.5}
-  m_Center: {x: 0, y: 4.19999981, z: .300000012}
+  m_Radius: 2.36999989
+  m_Height: 9.02000046
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.19999981, z: 0}
 --- !u!114 &794842724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28520,6 +28541,9 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 100000, guid: 6dae4c0f3d973a849b2ed874609c745e, type: 2}
   aimMat: {fileID: 2100000, guid: 3b16fc15c086c6a43bc8b8795f606552, type: 2}
   aimCrossesMat: {fileID: 2100000, guid: d55dadfc12ec3ff44830c7d7dfb21467, type: 2}
+  aimTran: {fileID: 0}
+  chargeBar: {fileID: 0}
+  aimCross: {fileID: 0}
   playerScript: {fileID: 0}
 --- !u!114 &794842728
 MonoBehaviour:
@@ -37594,10 +37618,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 1056955423}
   - 54: {fileID: 1056955436}
-  - 65: {fileID: 1056955435}
   - 114: {fileID: 1056955434}
   - 114: {fileID: 1056955428}
   - 95: {fileID: 1056955424}
+  - 136: {fileID: 1056955425}
   m_Layer: 18
   m_Name: P3_Clone
   m_TagString: Player3
@@ -37635,6 +37659,20 @@ Animator:
   m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!136 &1056955425
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 13600002, guid: 24cdb78850703c44894237125cdafada,
+    type: 2}
+  m_PrefabInternal: {fileID: 2005921398}
+  m_GameObject: {fileID: 1056955422}
+  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.36999989
+  m_Height: 9.02000046
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.19999981, z: 0}
 --- !u!114 &1056955428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37663,19 +37701,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetIDColorState: 3
---- !u!65 &1056955435
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500052, guid: 24cdb78850703c44894237125cdafada,
-    type: 2}
-  m_PrefabInternal: {fileID: 2005921398}
-  m_GameObject: {fileID: 1056955422}
-  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.39999962, y: 8.64000034, z: 2.5}
-  m_Center: {x: 0, y: 4.19999981, z: .300000012}
 --- !u!54 &1056955436
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -49079,6 +49104,9 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 100000, guid: 17e3ddb09bd9bde49a993a9c4a3712e0, type: 2}
   aimMat: {fileID: 0}
   aimCrossesMat: {fileID: 0}
+  aimTran: {fileID: 0}
+  chargeBar: {fileID: 0}
+  aimCross: {fileID: 0}
   playerScript: {fileID: 0}
 --- !u!114 &1333197874
 MonoBehaviour:
@@ -49470,10 +49498,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 1338182800}
   - 54: {fileID: 1338182813}
-  - 65: {fileID: 1338182812}
   - 114: {fileID: 1338182811}
   - 114: {fileID: 1338182805}
   - 95: {fileID: 1338182801}
+  - 136: {fileID: 1338182802}
   m_Layer: 17
   m_Name: P2_Clone
   m_TagString: Player2
@@ -49511,6 +49539,20 @@ Animator:
   m_ApplyRootMotion: 0
   m_AnimatePhysics: 0
   m_HasTransformHierarchy: 1
+--- !u!136 &1338182802
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 13600000, guid: 24cdb78850703c44894237125cdafada,
+    type: 2}
+  m_PrefabInternal: {fileID: 2005921398}
+  m_GameObject: {fileID: 1338182799}
+  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.36999989
+  m_Height: 9.02000046
+  m_Direction: 1
+  m_Center: {x: 0, y: 4.19999981, z: 0}
 --- !u!114 &1338182805
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49539,19 +49581,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TargetIDColorState: 2
---- !u!65 &1338182812
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 6500068, guid: 24cdb78850703c44894237125cdafada,
-    type: 2}
-  m_PrefabInternal: {fileID: 2005921398}
-  m_GameObject: {fileID: 1338182799}
-  m_Material: {fileID: 13400000, guid: e5e25c6a923640d4b9ac1943daf535ff, type: 2}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8.39999962, y: 8.64000034, z: 2.5}
-  m_Center: {x: 0, y: 4.19999981, z: .300000012}
 --- !u!54 &1338182813
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -71709,6 +71738,9 @@ MonoBehaviour:
   ProjectilePrefab: {fileID: 100000, guid: 993d474b2bfb13c419aff1a7d35a6e26, type: 2}
   aimMat: {fileID: 0}
   aimCrossesMat: {fileID: 0}
+  aimTran: {fileID: 0}
+  chargeBar: {fileID: 0}
+  aimCross: {fileID: 0}
   playerScript: {fileID: 0}
 --- !u!114 &1898107644
 MonoBehaviour:
