@@ -14,6 +14,9 @@ public class MissionZone : MissionBase
         if (!canGo)
             return false;
 
+        if (!HasHeardMissionAtLeastOneTime)
+            return false;
+
         if(this.Target.GetComponent<ZoneTrigger>().Accomplished)
         {
         	this._missionIsActive = false;

@@ -161,6 +161,9 @@ public class MissionIntel : MissionBase
         if (!canGo)
             return false;
 
+        if (!HasHeardMissionAtLeastOneTime)
+            return false;
+
         if (pickupObjectScript.PlayerToFollow != this.Player) // e.g. another player has already solved mission (destroyed intel)
         {
             //_missionIsActive = false;

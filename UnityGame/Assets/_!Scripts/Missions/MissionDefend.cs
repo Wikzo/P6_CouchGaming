@@ -64,6 +64,9 @@ public class MissionDefend : MissionBase
         if (!canGo)
             return false;
 
+        if (!HasHeardMissionAtLeastOneTime)
+            return false;
+
         // check if player is still alive - if dead: mission is done
         if (Target.GetComponent<Player>().PState == PlayerState.Dead)
         {

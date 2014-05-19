@@ -63,6 +63,8 @@ public abstract class MissionBase : MonoBehaviour
     private bool PunchTweenHUDInControllerTutorial = false; // used so only one player makes the tween
     private bool PracticeHUDRumble = false;
 
+    protected bool HasHeardMissionAtLeastOneTime;
+
     protected bool canGo; // for delay getting mission
 
     [HideInInspector]
@@ -164,6 +166,8 @@ public abstract class MissionBase : MonoBehaviour
         ThisButtonPressNumberUp = 0;
         ThisButtonPressNumberDown = 0;
         TimeSinceReceivedMission = 0;
+
+        HasHeardMissionAtLeastOneTime = false;
 
         StartCoroutine(WaitForMissionToGetActive());
     }
@@ -327,8 +331,11 @@ public abstract class MissionBase : MonoBehaviour
 
     public void PickMissionRumble() // check if ready to display mission
     {
-        ThisButtonPressNumberUp++;
-        WriteLogForTest(true);
+        if (GameManager.Instance.PlayingState == PlayingState.Playing)
+        {
+            ThisButtonPressNumberUp++;
+            WriteLogForTest(true);
+        }
 
         if (isDisplayingMissionOrTargetRumbleRightNow)
             return;
@@ -376,8 +383,11 @@ public abstract class MissionBase : MonoBehaviour
 
     public void PickTargetRumble() // check if ready to display target
     {
-        ThisButtonPressNumberDown++;
-        WriteLogForTest(false);
+        if (GameManager.Instance.PlayingState == PlayingState.Playing)
+        {
+            ThisButtonPressNumberDown++;
+            WriteLogForTest(false);
+        }
 
         if (isDisplayingMissionOrTargetRumbleRightNow)
             return;
@@ -431,11 +441,18 @@ public abstract class MissionBase : MonoBehaviour
 
         if (!RumblePractice)
         {
-            if (PlayerScript.PlayerControllerState.ButtonDownDPadUp && !isDisplayingMissionOrTargetRumbleRightNow)
+            if (PlayerScript.PlayerControllerState.ButtonDownDPadUp)
+            {
+                HasHeardMissionAtLeastOneTime = true;
                 PickMissionRumble();
 
-            if (PlayerScript.PlayerControllerState.ButtonDownDPadDown && !isDisplayingMissionOrTargetRumbleRightNow)
+            }
+
+            if (PlayerScript.PlayerControllerState.ButtonDownDPadDown)
+            {
+                HasHeardMissionAtLeastOneTime = true;
                 PickTargetRumble();
+            }
         }
 
         if (missionRumbleCounter > 0)

@@ -19,6 +19,9 @@ public class MissionKill : MissionBase
         if (!canGo)
             return false;
 
+        if (!HasHeardMissionAtLeastOneTime)
+            return false;
+
         if(this.Player.tag == this.Target.GetComponent<Player>().KilledBy)
         {
            this._missionIsActive = false;
