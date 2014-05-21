@@ -331,7 +331,7 @@ public abstract class MissionBase : MonoBehaviour
 
     public void PickMissionRumble() // check if ready to display mission
     {
-        if (GameManager.Instance.PlayingState == PlayingState.Playing)
+        if (GameManager.Instance.LogForTest && GameManager.Instance.PlayingState == PlayingState.Playing)
         {
             ThisButtonPressNumberUp++;
             WriteLogForTest(true);
@@ -383,7 +383,7 @@ public abstract class MissionBase : MonoBehaviour
 
     public void PickTargetRumble() // check if ready to display target
     {
-        if (GameManager.Instance.PlayingState == PlayingState.Playing)
+        if (GameManager.Instance.LogForTest && GameManager.Instance.PlayingState == PlayingState.Playing)
         {
             ThisButtonPressNumberDown++;
             WriteLogForTest(false);

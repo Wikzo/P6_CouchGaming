@@ -380,7 +380,7 @@ MonoBehaviour:
   MusicPlayer: {fileID: 100000, guid: 5fe4a993a925b7845b9d0028c1101141, type: 2}
   DebugMode: 0
   UseAnnouncer: 1
-  LogForTest: 1
+  LogForTest: 0
   readyCounter: -1
   GUIRumbleCounter: 1
   ControllerGUIToRumble: {fileID: 0}

@@ -1,2 +1,0 @@
-PlayerID, CurrentMissionType, TotalMissionsPlayerHasHadSoFar, ButtonPressType, ThisButtonPressNumber, TimeSinceReceivedMission
-2, MissionKill, 0, UP, 1, 12.98218

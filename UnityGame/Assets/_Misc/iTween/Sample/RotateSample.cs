@@ -270,8 +270,11 @@ public class RotateSample : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+
         foreach (ControllerPlayer p in ControllerPlayers)
-        p.previousState = p.state;
+            p.previousState = p.state;
 
     }
 

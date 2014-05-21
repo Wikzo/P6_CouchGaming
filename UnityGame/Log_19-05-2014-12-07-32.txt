@@ -1,1 +1,0 @@
-PlayerID, CurrentMissionType, TotalMissionsPlayerHasHadSoFar, ButtonPressType, ThisButtonPressNumber, TimeSinceReceivedMission
