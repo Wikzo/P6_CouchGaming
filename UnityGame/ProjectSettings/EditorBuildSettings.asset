@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/JW2_Lo-Fi/JW2_Lo-Fi_Modalities.unity
   - enabled: 0
     path: Assets/_Scenes/Testing/ControllerTest.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/IntroMenu.unity
   - enabled: 0
     path: Assets/_Scenes/Testing/Levels/Lab_1_CharacterImport.unity
@@ -25,5 +25,9 @@ EditorBuildSettings:
     path: Assets/noWrap.unity
   - enabled: 0
     path: Assets/_Scenes/Testing/Voicer.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Testing/Levels/Lab_1_CharacterImport_backup_notMoved.unity
+  - enabled: 0
+    path: Assets/_Scenes/glitch_logo.unity
+  - enabled: 1
+    path: Assets/_Scenes/intro_for_logoAV.unity

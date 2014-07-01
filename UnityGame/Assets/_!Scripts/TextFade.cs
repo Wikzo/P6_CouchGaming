@@ -139,10 +139,11 @@ public class TextFade : MonoBehaviour
                     //GUI.Label(MidRect, TutorialText, FadingTextStyle);
                     DrawOutline(MidRect, TutorialText, FadingTextStyle, Color.white, Color.black);
                     break;
-            case PlayingState.PraticeMode:
+            // moved for AV
+            /*case PlayingState.PraticeMode:
                     //GUI.Label(MidRect, PracticeText, FadingTextStyle);
                     DrawOutline(MidRect, PracticeText, FadingTextStyle, Color.white, Color.black);
-                    break;
+                    break;*/
 
             /*case PlayingState.WaitingForEverbodyToGetReady:
                 if (!GameManager.Instance.ReadyNotYetSpawned)
